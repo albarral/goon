@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>src/goon/utils/angle.cpp</itemPath>
+        <itemPath>src/goon/utils/angle.h</itemPath>
+        <itemPath>src/goon/utils/area.cpp</itemPath>
+        <itemPath>src/goon/utils/area.h</itemPath>
+        <itemPath>src/goon/utils/average.cpp</itemPath>
+        <itemPath>src/goon/utils/average.h</itemPath>
+        <itemPath>src/goon/utils/distance.cpp</itemPath>
+        <itemPath>src/goon/utils/distance.h</itemPath>
+        <itemPath>src/goon/utils/hsv_color.cpp</itemPath>
+        <itemPath>src/goon/utils/hsv_color.h</itemPath>
+        <itemPath>src/goon/utils/rgb_color.cpp</itemPath>
+        <itemPath>src/goon/utils/rgb_color.h</itemPath>
+        <itemPath>src/goon/utils/shape.cpp</itemPath>
+        <itemPath>src/goon/utils/shape.h</itemPath>
+        <itemPath>src/goon/utils/trigger.cpp</itemPath>
+        <itemPath>src/goon/utils/trigger.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>src/goon/utils</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <incDir>
+            <pElem>src</pElem>
+            <pElem>/usr/include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT}</output>
+          <linkerLibItems>
+            <linkerLibLibItem>opencv_core</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="src/goon/utils/angle.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/angle.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/area.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/area.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/average.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/average.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/distance.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/distance.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/hsv_color.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/hsv_color.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/rgb_color.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/rgb_color.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/shape.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/shape.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/trigger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/trigger.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="src/goon/utils/angle.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/angle.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/area.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/area.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/average.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/average.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/distance.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/distance.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/hsv_color.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/hsv_color.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/rgb_color.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/rgb_color.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/shape.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/shape.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/trigger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/trigger.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
