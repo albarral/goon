@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="data" displayName="data" projectFiles="true">
+        <logicalFolder name="aux" displayName="aux" projectFiles="true">
+          <itemPath>src/goon/data/aux/Body.cpp</itemPath>
+          <itemPath>src/goon/data/aux/Body.h</itemPath>
+          <itemPath>src/goon/data/aux/Identity.cpp</itemPath>
+          <itemPath>src/goon/data/aux/Identity.h</itemPath>
+          <itemPath>src/goon/data/aux/Record.cpp</itemPath>
+          <itemPath>src/goon/data/aux/Record.h</itemPath>
+          <itemPath>src/goon/data/aux/VisualElement.cpp</itemPath>
+          <itemPath>src/goon/data/aux/VisualElement.h</itemPath>
+          <itemPath>src/goon/data/aux/vColor.h</itemPath>
+          <itemPath>src/goon/data/aux/vMotion.cpp</itemPath>
+          <itemPath>src/goon/data/aux/vMotion.h</itemPath>
+          <itemPath>src/goon/data/aux/vNature.h</itemPath>
+          <itemPath>src/goon/data/aux/vShape.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="base" displayName="base" projectFiles="true">
+          <itemPath>src/goon/data/base/blob.cpp</itemPath>
+          <itemPath>src/goon/data/base/blob.h</itemPath>
+          <itemPath>src/goon/data/base/motion.cpp</itemPath>
+          <itemPath>src/goon/data/base/motion.h</itemPath>
+          <itemPath>src/goon/data/base/region.cpp</itemPath>
+          <itemPath>src/goon/data/base/region.h</itemPath>
+          <itemPath>src/goon/data/base/roi.cpp</itemPath>
+          <itemPath>src/goon/data/base/roi.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="elements" displayName="elements" projectFiles="true">
+          <itemPath>src/goon/data/elements/Model.cpp</itemPath>
+          <itemPath>src/goon/data/elements/Model.h</itemPath>
+          <itemPath>src/goon/data/elements/ModelView.cpp</itemPath>
+          <itemPath>src/goon/data/elements/ModelView.h</itemPath>
+          <itemPath>src/goon/data/elements/Object.cpp</itemPath>
+          <itemPath>src/goon/data/elements/Object.h</itemPath>
+          <itemPath>src/goon/data/elements/Scene.cpp</itemPath>
+          <itemPath>src/goon/data/elements/Scene.h</itemPath>
+        </logicalFolder>
+        <itemPath>src/goon/data/retina.cpp</itemPath>
+        <itemPath>src/goon/data/retina.h</itemPath>
+        <itemPath>src/goon/data/rois.cpp</itemPath>
+        <itemPath>src/goon/data/rois.h</itemPath>
+        <itemPath>src/goon/data/visual_data.cpp</itemPath>
+        <itemPath>src/goon/data/visual_data.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>src/goon/data</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <incDir>
+            <pElem>src</pElem>
+            <pElem>../vision_utils/src</pElem>
+            <pElem>/usr/include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}</output>
+          <linkerLibItems>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../vision_utils"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../vision_utils"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibLibItem>opencv_core</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="src/goon/data/aux/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Identity.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Identity.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Record.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Record.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/VisualElement.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/VisualElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vColor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vMotion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vMotion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vNature.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vShape.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/motion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/motion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/region.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/region.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/roi.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/roi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Model.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Model.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/ModelView.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/ModelView.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Object.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Scene.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Scene.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/retina.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/rois.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/rois.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/visual_data.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/visual_data.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="src/goon/data/aux/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Identity.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Identity.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Record.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/Record.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/VisualElement.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/VisualElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vColor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vMotion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vMotion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vNature.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/aux/vShape.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/motion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/motion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/region.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/region.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/roi.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/roi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Model.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Model.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/ModelView.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/ModelView.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Object.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Scene.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/elements/Scene.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/retina.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/rois.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/rois.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/visual_data.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/visual_data.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
