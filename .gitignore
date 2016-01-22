@@ -1,0 +1,10 @@
+# Ignore these Netbeans files and folders when using git.
+
+# Ignore build and private Netbeans folders ...
+build/
+dist/
+private/
+# Ignore Qt generated files ...
+qt-Debug.mk
+moc_*.cpp
+ui_*.h
