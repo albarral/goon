@@ -26,8 +26,6 @@
           <itemPath>src/goon/retinal/merge.h</itemPath>
           <itemPath>src/goon/retinal/retinal_vision.cpp</itemPath>
           <itemPath>src/goon/retinal/retinal_vision.h</itemPath>
-          <itemPath>src/goon/retinal/sdebug.cpp</itemPath>
-          <itemPath>src/goon/retinal/sdebug.h</itemPath>
           <itemPath>src/goon/retinal/segmentation3.cpp</itemPath>
           <itemPath>src/goon/retinal/segmentation3.h</itemPath>
         </logicalFolder>
@@ -126,10 +124,6 @@
       </item>
       <item path="src/goon/retinal/retinal_vision.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/retinal/sdebug.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/sdebug.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/retinal/segmentation3.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/segmentation3.h" ex="false" tool="3" flavor2="0">
@@ -181,10 +175,6 @@
             flavor2="0">
       </item>
       <item path="src/goon/retinal/retinal_vision.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/sdebug.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/sdebug.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/segmentation3.cpp" ex="false" tool="1" flavor2="0">
       </item>

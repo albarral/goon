@@ -41,7 +41,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/retinal/HSVEssence.o \
 	${OBJECTDIR}/src/goon/retinal/merge.o \
 	${OBJECTDIR}/src/goon/retinal/retinal_vision.o \
-	${OBJECTDIR}/src/goon/retinal/sdebug.o \
 	${OBJECTDIR}/src/goon/retinal/segmentation3.o
 
 
@@ -98,11 +97,6 @@ ${OBJECTDIR}/src/goon/retinal/retinal_vision.o: src/goon/retinal/retinal_vision.
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/retinal_vision.o src/goon/retinal/retinal_vision.cpp
-
-${OBJECTDIR}/src/goon/retinal/sdebug.o: src/goon/retinal/sdebug.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/sdebug.o src/goon/retinal/sdebug.cpp
 
 ${OBJECTDIR}/src/goon/retinal/segmentation3.o: src/goon/retinal/segmentation3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
