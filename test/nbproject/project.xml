@@ -13,6 +13,7 @@
                 <make-dep-project>../peripheral_vision</make-dep-project>
                 <make-dep-project>../show</make-dep-project>
                 <make-dep-project>../vision_data</make-dep-project>
+                <make-dep-project>../monitor</make-dep-project>
                 <make-dep-project>../vision_utils</make-dep-project>
                 <make-dep-project>../retinal_vision</make-dep-project>
             </make-dep-projects>

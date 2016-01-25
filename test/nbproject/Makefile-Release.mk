@@ -35,8 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/test/Module.o \
 	${OBJECTDIR}/src/goon/test/camera_factory.o \
-	${OBJECTDIR}/src/goon/test/main.o
+	${OBJECTDIR}/src/goon/test/main.o \
+	${OBJECTDIR}/src/goon/test/modules/Grabber.o \
+	${OBJECTDIR}/src/goon/test/modules/See.o
 
 
 # C Compiler Flags
@@ -63,6 +66,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/src/goon/test/Module.o: src/goon/test/Module.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/Module.o src/goon/test/Module.cpp
+
 ${OBJECTDIR}/src/goon/test/camera_factory.o: src/goon/test/camera_factory.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test
 	${RM} "$@.d"
@@ -72,6 +80,16 @@ ${OBJECTDIR}/src/goon/test/main.o: src/goon/test/main.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/main.o src/goon/test/main.cpp
+
+${OBJECTDIR}/src/goon/test/modules/Grabber.o: src/goon/test/modules/Grabber.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/test/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/modules/Grabber.o src/goon/test/modules/Grabber.cpp
+
+${OBJECTDIR}/src/goon/test/modules/See.o: src/goon/test/modules/See.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/test/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/modules/See.o src/goon/test/modules/See.cpp
 
 # Subprojects
 .build-subprojects:
