@@ -21,17 +21,25 @@ VisualData::~VisualData ()
 {
 }
 
-void VisualData::newFrame(cv::Mat image)
+void VisualData::newFrame(cv::Mat& image)
 {
     std::lock_guard<std::mutex> lock(mutex_img);
-    image_cam = image;
+    // takes a copy of the given image
+    image.copyTo(imageCam);
     frame_num++;
 }
 
 cv::Mat& VisualData::getImageCam()
 {
     std::lock_guard<std::mutex> lock(mutex_img);
-    return image_cam;    
+    return imageCam;    
+}
+
+void VisualData::getCopyImageCam(cv::Mat& imageOut)
+{
+    std::lock_guard<std::mutex> lock(mutex_img);
+    // takes a copy of the given image
+    imageCam.copyTo(imageOut);    
 }
 
 int VisualData::getFrameNum()

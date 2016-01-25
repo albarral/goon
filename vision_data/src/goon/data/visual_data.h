@@ -17,9 +17,9 @@ namespace goon
 class VisualData
 {
     private:
-        cv::Mat image_cam;
-        int frame_num;
         std::mutex mutex_img;
+        cv::Mat imageCam;       // image from camera
+        int frame_num;             // frame number  
         Retina oRetina;
         Rois oROIs;        
         
@@ -27,9 +27,12 @@ class VisualData
         VisualData();
         ~VisualData();
                 
-        void newFrame(cv::Mat image);
+        // updates the imageCam and frame number (making a copy of the given image)
+        void newFrame(cv::Mat& image);
         
         cv::Mat& getImageCam();
+        
+        void getCopyImageCam(cv::Mat& imageOut);
         
         int getFrameNum();
         
