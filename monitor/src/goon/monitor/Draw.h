@@ -1,5 +1,5 @@
-#ifndef __GOON_UTILS_DRAW_H
-#define __GOON_UTILS_DRAW_H
+#ifndef __GOON_MONITOR_DRAW_H
+#define __GOON_MONITOR_DRAW_H
 
 /***************************************************************************
  *   Copyright (C) 2014 by Migtron Robotics   *

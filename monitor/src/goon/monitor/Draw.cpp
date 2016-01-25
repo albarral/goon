@@ -6,16 +6,16 @@
 #include <iostream>
 #include <string>
 
-#include "draw.h"
+#include "goon/monitor/Draw.h"
 
-using namespace cv;
+//using namespace cv;
 
 namespace goon
 {
 // Constructor
 Draw::Draw ()
 {    
-    color = Scalar(255, 255, 255);  // white
+    color = cv::Scalar(255, 255, 255);  // white
     bsized = false;
 }
 
@@ -44,17 +44,17 @@ void Draw::clearBackGround()
         return;
     }
         
-    image_draw.setTo(Scalar(0));
+    image_draw.setTo(cv::Scalar(0));
 }
 
 
-void Draw::setExactColor(Vec3f& rgb_color)
+void Draw::setExactColor(cv::Vec3f& rgb_color)
 {
-    color = Scalar(rgb_color[2], rgb_color[1], rgb_color[0]);      // BGR
+    color = cv::Scalar(rgb_color[2], rgb_color[1], rgb_color[0]);      // BGR
 }
 
 
-void Draw::drawMask(Mat& mask)
+void Draw::drawMask(cv::Mat& mask)
 {                
     if (!bsized)
     {
@@ -66,7 +66,7 @@ void Draw::drawMask(Mat& mask)
 }
 
 
-void Draw::drawMask(Mat& mask, Rect& window)
+void Draw::drawMask(cv::Mat& mask, cv::Rect& window)
 {
     if (!bsized)
     {
@@ -74,12 +74,12 @@ void Draw::drawMask(Mat& mask, Rect& window)
         return;
     }
 
-    Mat image_roi = image_draw(window);
+    cv::Mat image_roi = image_draw(window);
     image_roi.setTo(color, mask);
 }
 
 
-void Draw::drawPoint(Point& point, int def_color, int radius)
+void Draw::drawPoint(cv::Point& point, int def_color, int radius)
 {
     if (!bsized)
     {
@@ -88,11 +88,11 @@ void Draw::drawPoint(Point& point, int def_color, int radius)
     }
 
     setDefaultColor (def_color);    
-    circle(image_draw, point, radius, color, -1);
+    cv::circle(image_draw, point, radius, color, -1);
 }
 
 
-void Draw::drawEllipse(Point& center, int width, int height, int orientation)
+void Draw::drawEllipse(cv::Point& center, int width, int height, int orientation)
 {
     if (!bsized)
     {
@@ -101,7 +101,7 @@ void Draw::drawEllipse(Point& center, int width, int height, int orientation)
     }
     
     setDefaultColor (eYELLOW);       
-    ellipse (image_draw, center, Size(width, height), orientation, 0, 360, color, 3);
+    cv::ellipse (image_draw, center, cv::Size(width, height), orientation, 0, 360, color, 3);
 }
 
 
@@ -113,9 +113,9 @@ void Draw::drawHLine(int row)
         return;
     }
 
-    Point pt1(0, row);
-    Point pt2(image_draw.cols-1, row);
-    line(image_draw, pt1, pt2, color);    
+    cv::Point pt1(0, row);
+    cv::Point pt2(image_draw.cols-1, row);
+    cv::line(image_draw, pt1, pt2, color);    
 }
 
         
@@ -127,9 +127,9 @@ void Draw::drawVLine(int col)
         return;
     }
 
-    Point pt1(col, 0);
-    Point pt2(col, image_draw.rows-1);
-    line(image_draw, pt1, pt2, color);    
+    cv::Point pt1(col, 0);
+    cv::Point pt2(col, image_draw.rows-1);
+    cv::line(image_draw, pt1, pt2, color);    
 }
 
 
@@ -140,7 +140,7 @@ void Draw::drawNumber(int num, cv::Point& point)
         std::cout << "Draw error: image_draw still not created" << std::endl;
         return;
     }
-    putText(image_draw, std::to_string(num), point, FONT_HERSHEY_SIMPLEX, 1.0, color);
+    cv::putText(image_draw, std::to_string(num), point, cv::FONT_HERSHEY_SIMPLEX, 1.0, color);
 }
 
 
@@ -150,22 +150,22 @@ void Draw::setDefaultColor(int value)
     switch (value)
     {
         case eRED:
-            color = Scalar(0, 0, 255);
+            color = cv::Scalar(0, 0, 255);
             break;            
         case eGREEN:
-            color = Scalar(0, 255, 0);
+            color = cv::Scalar(0, 255, 0);
             break;
         case eBLUE:
-            color = Scalar(255, 0, 0);
+            color = cv::Scalar(255, 0, 0);
             break;            
         case eYELLOW:
-            color = Scalar(0, 255, 255);
+            color = cv::Scalar(0, 255, 255);
             break;
         case eWHITE:
-            color = Scalar(255, 255, 255);
+            color = cv::Scalar(255, 255, 255);
             break;
         case eBLACK:
-            color = Scalar(0, 0, 0);
+            color = cv::Scalar(0, 0, 0);
             break;
     }
 }

@@ -19,8 +19,8 @@ Camera::Camera ()
 }
 
 
-void Camera::getCaptureCopy(cv::Mat* image_dest)
+void Camera::getCaptureCopy(cv::Mat& image_dest)
 {
-    image.copyTo(*image_dest);
+    image.copyTo(image_dest);
 }
 }

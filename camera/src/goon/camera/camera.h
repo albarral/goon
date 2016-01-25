@@ -35,7 +35,7 @@ public:
     // Gets pointer to captured image
     cv::Mat& getCapture() {return image;};
     // Gets a copy of the captured image
-    void getCaptureCopy (cv::Mat* image_dest);    
+    void getCaptureCopy (cv::Mat& image_dest);    
     
     int getImgWidth() {return img_w;};
     int getImgHeight() {return img_h;};
