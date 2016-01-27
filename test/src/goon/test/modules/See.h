@@ -6,6 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <mutex>
 #include <string>
 #include <log4cxx/logger.h>
 #include <opencv2/opencv.hpp>
@@ -14,6 +15,7 @@
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/peripheral_vision.h"
 #include "goon/data/visual_data.h"
+#include "goon/data/retina.h"
 
 namespace goon
 {    
@@ -34,8 +36,11 @@ private:
     RetinalVision* oRetinalVision;
     PeripheralVision* oPeripheralVision;
     VisualData* pVisualData;        // shared data
-    int frameNum;                   // number of camera captured frame
     cv::Mat imageCam;
+    // for debug
+    std::mutex mutex;
+    int counter;
+    Retina oRetina2;
 
 public:
     See();
@@ -43,6 +48,9 @@ public:
     
     // initializes the module 
     void init(VisualData& oVisualData);   
+    
+    int getCounter();
+    Retina& getRetina2();    
        
 private:
     // first action after thread begins 

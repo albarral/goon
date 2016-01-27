@@ -5,14 +5,15 @@
 
 #include "goon/monitor/RetinaMonitor.h"
 
+using namespace log4cxx;
+
 namespace goon 
 {
-using namespace log4cxx;
-LoggerPtr RetinaMonitor::logger(Logger::getLogger("goon.vision.monitor"));
-
+LoggerPtr RetinaMonitor::logger(Logger::getLogger("goon.monitor"));
 
 void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::vector<Region>& listRegions)
 {    
+    LOG4CXX_DEBUG(logger, "draw regions = " << listRegions.size());
     std::vector<Region>::iterator it_region = listRegions.begin();
     std::vector<Region>::iterator it_end = listRegions.end();
 

@@ -6,11 +6,11 @@
 #include "goon/monitor/ROIsMonitor.h"
 #include <goon/utils/shape.h>
 
+using namespace log4cxx;
+
 namespace goon 
 {
-using namespace log4cxx;
 LoggerPtr ROIsMonitor::logger(Logger::getLogger("goon.monitor"));
-
 
 // Shows an image with the ROIs obtained by the peripheral vision process.
 void ROIsMonitor::draw(cv::Mat& image_cam, std::vector<ROI>& listROIs)

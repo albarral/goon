@@ -60,10 +60,10 @@ void PeripheralVision::update ()
     oUnitsDetection.prepareUnits();    
 
     std::vector<int>::iterator it_regID;
-    std::vector<int>::iterator it_end = mRetina.getFinalRegions().end();
+    std::vector<int>::iterator it_end = mRetina.getListFinalIDs().end();
         
     // walk the list of final retinal regions
-    for (it_regID = mRetina.getFinalRegions().begin(); it_regID != it_end; it_regID++)
+    for (it_regID = mRetina.getListFinalIDs().begin(); it_regID != it_end; it_regID++)
     {
         Region& oRegion = mRetina.getRegion(*it_regID);        
         oUnitsDetection.respond2Region(oRegion);
@@ -79,7 +79,7 @@ void PeripheralVision::update ()
     num_rois = mROIs.getNumROIs();
     LOG4CXX_DEBUG(logger, "rois = " << num_rois << ", merged = " << merged_rois << ", eliminated = " << eliminated_rois);
 
-    storage[0] += mRetina.getNumFinalRegions();
+    storage[0] += mRetina.getNumFinalIDs();
     storage[1] += num_rois;
     storage[2] += merged_rois;
     storage[3] += eliminated_rois;

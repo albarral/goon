@@ -18,6 +18,7 @@ See::See()
     binitialized = false;
     oRetinalVision = 0;
     oPeripheralVision = 0;
+    counter = 0;
 }
 
 See::~See()
@@ -35,7 +36,6 @@ void See::init(VisualData& oVisualData)
     pVisualData = &oVisualData;  
     oRetinalVision = new RetinalVision(oVisualData.getRetina());
     oPeripheralVision = new PeripheralVision(oVisualData.getRetina(), oVisualData.getROIs());
-    frameNum = oVisualData.getFrameNum();
     
     binitialized = true;  
     LOG4CXX_INFO(logger, "See initialized");             
@@ -75,11 +75,18 @@ void See::loop()
 {   
     // get copy of last camera image
     pVisualData->getCopyImageCam(imageCam);
+    // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision->update(imageCam);    
     oRetinalVision->computeCovariances();         
     LOG4CXX_DEBUG(logger, "peripheral ... ");
     oPeripheralVision->update();    
+    
+    // stores retina info for debugging purpose
+    std::lock_guard<std::mutex> locker(mutex);
+    LOG4CXX_TRACE(logger, "clone retina ... ");
+    pVisualData->getRetina().cloneTo(oRetina2);
+    counter++;
 }
 
 void See::wait4ValidImage()
@@ -89,5 +96,17 @@ void See::wait4ValidImage()
     while (pVisualData->getFrameNum() == 0)            
         usleep(50000);
 }
+
+int See::getCounter()
+{
+    std::lock_guard<std::mutex> locker(mutex);
+    return counter;   
+}
+
+Retina& See::getRetina2()
+{
+    std::lock_guard<std::mutex> locker(mutex);
+    return oRetina2;    
+}  
 
 }

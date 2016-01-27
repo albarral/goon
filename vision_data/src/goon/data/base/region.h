@@ -55,10 +55,13 @@ public:
     // clears the region's features (mask, grid, window)
     void clear();
 
-    // sets the region's mask and window (cloned matrix)
-    void setMask (cv::Mat& rmask, cv::Rect& rwindow);
+    // creates the region mask from a given mask and window (cloned matrix)
+    void createMask (cv::Mat& mask, cv::Rect& window);
 
-    // sets the region's grid (cloned matrix)
+    // sets the region's mask (new cloned matrix)
+    void setMask (cv::Mat& mask);
+
+    // sets the region's grid (new cloned matrix)
     void setGrid (cv::Mat& grid_samples);
         
     // grows this region by absorbing a new one 
@@ -66,6 +69,12 @@ public:
 
     // support function to sort regions by ID
     static bool sortBySize (const Region& oRegion1, const Region& oRegion2);    
+    
+    // clones this region into the given one
+    void cloneTo(Region& oRegion);    
+    
+    // creates a dummy red rectangular region of size 200 x 100
+    void createDummy();
  };
  }
 

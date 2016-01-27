@@ -57,9 +57,9 @@ void RetinalVision::update (cv::Mat& image_cam)
 
     //oMerge.doMerge(mRetina);
 
-    mRetina.checkFinalRegions();
+    mRetina.buildListFinalIDs();
 
-    LOG4CXX_DEBUG(logger, "regions = " << mRetina.getNumFinalRegions());
+    LOG4CXX_DEBUG(logger, "regions = " << mRetina.getNumFinalIDs());
     LOG4CXX_TRACE(logger, "update - end");
 }
 
@@ -68,8 +68,8 @@ void RetinalVision::computeCovariances()
 {    
     LOG4CXX_TRACE(logger, "compute shapes");
 
-    std::vector<int>::iterator it_region = mRetina.getFinalRegions().begin();
-    std::vector<int>::iterator it_end = mRetina.getFinalRegions().end();
+    std::vector<int>::iterator it_region = mRetina.getListFinalIDs().begin();
+    std::vector<int>::iterator it_end = mRetina.getListFinalIDs().end();
     // walk the list of final regions
     while (it_region != it_end)
     {

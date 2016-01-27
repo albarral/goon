@@ -13,9 +13,9 @@ namespace goon
 Blob::Blob ()
 {
     mass = 0;
+    pos[0] = pos[1] = 0;
     covs[0] = covs[1] = covs[2] = 0.0;
-    window.width = 0;
-    window.height = 0;
+    window = cv::Rect (0,0,0,0);
 }
 
 //Blob::~Blob() {};

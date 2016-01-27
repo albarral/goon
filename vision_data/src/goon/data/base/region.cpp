@@ -12,6 +12,7 @@ namespace goon
 Region::Region ()
 {
     // blob constructor ... 
+    type = Region::eREG_SIMPLE;
     bmerge = false;
 }
 
@@ -32,15 +33,19 @@ void Region::clear()
     }    
 }
 
-
 // The given mask is roied and cloned.
-void Region::setMask(cv::Mat& rmask, cv::Rect& rwindow)
+void Region::createMask(cv::Mat& mask, cv::Rect& window)
 {
-    cv::Mat mask_roi = rmask(rwindow);   
-    mask = mask_roi.clone();
+    cv::Mat roiMask = mask(window);   
+    setMask(roiMask);
     
     // the region's window is also set
-    setWindow(rwindow);
+    setWindow(window);
+}
+
+void Region::setMask(cv::Mat& mask)
+{
+    this->mask = mask.clone();    
 }
 
 // The given grid is cloned.
@@ -48,7 +53,6 @@ void Region::setGrid(cv::Mat& grid_samples)
 {
     grid = grid_samples.clone();
 }
-
 
 void Region::growRegion(Region& oRegion2)
 {
@@ -80,4 +84,25 @@ bool Region::sortBySize(const Region& oRegion1, const Region& oRegion2)
     return (oRegion1.mass < oRegion2.mass);
 }
 
+void Region::cloneTo(Region& oRegion)
+{
+    oRegion = *this;    
+    oRegion.setMask(mask);  // mask is cloned, not just assigned
+    oRegion.setGrid(grid);     // grid is cloned, not just assigned
+}
+
+void Region::createDummy()
+{
+    // red
+    cv::Vec3f color = {255.0, 0.0, 0.0};
+    // create rectangular region w x h
+    int w = 200;
+    int h = 100;    
+    cv::Mat mask = cv::Mat::ones(h, w, CV_8UC1);
+    cv::Rect rect = cv::Rect(0, 0, w,h);
+    
+    setRGB(color);
+    createMask(mask, rect);
+    setPos(w/2, h/2);
+}
 }

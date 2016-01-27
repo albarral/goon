@@ -101,7 +101,7 @@ int Segmentation::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv, Retina
                 // build the region (type, mass, mask, window, grid, color and position)
                 oRegion.setType(Region::eREG_SIMPLE); 
                 oRegion.setMass(region_size);
-                oRegion.setMask(oExploration.getRegionMask(), oExploration.getWindow());
+                oRegion.createMask(oExploration.getRegionMask(), oExploration.getWindow());
                 //oRegion.setGrid(oColorGrid.getSamplesGrid());
                 oColorGrid.computeMeanColor(oExploration.getWindow());    
                 oRegion.setRGB(oColorGrid.getColorMean());	

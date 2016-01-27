@@ -23,7 +23,6 @@
 #include "goon/show/DualWindow.h"
 //#include "goon/show/ImageSave.h"
 
-
 static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.test"));
 
 int testVision();
@@ -51,42 +50,48 @@ int testVision()
        
     // VISION modules
     goon::VisualData oVisualData;    
-    // grabber module (grabs image from camera & passes them to the vision system)
+    // grabber module (grabs image from camera)
     goon::Grabber oGrabber;
     oGrabber.init(oVisualData, workingCamera);
     oGrabber.setFrequency(30.0);
-    // see module (performs retinal & peripheral vision)
+    // see module (retinal & peripheral vision)
     goon::See oSee;
     oSee.init(oVisualData);
-    oSee.setFrequency(20.0);
-
+    oSee.setFrequency(20.0);    // to just wait 50ms among loops
     // launch modules
     oGrabber.on();
     oSee.on();
+    
     sleep(1);
     if (oGrabber.isOff() || oSee.isOff())
     {      
         LOG4CXX_ERROR(logger, "Test failed!");
         return -1;
     }
-
+    
     // VISION MONITORING
+    cv::Mat imageCam;
+    cv::Mat imageRetina;
+    cv::Mat imageROIs;
     goon::RetinaMonitor oRetinaMonitor;
     goon::ROIsMonitor oROIsMonitor;
     goon::DualWindow oDualWindow; 
     //oDualWindow.reSize(320, 240);     // makes it crash
     cv::namedWindow("Vision");         
-
+           
     //goon::ImageSave oImageSave;
     //oImageSave.setPath("/home/albarral/TESTS/VISION");
     //oImageSave.setVideo(true);    
-            
-    cv::Mat imageCam;
-    cv::Mat imageRetina;
-    cv::Mat imageROIs;
+
+    // done here to avoid problems (due to undefined imageRetina on first show)
+    oVisualData.getCopyImageCam(imageCam);
+    oRetinaMonitor.drawRegions(imageCam, oSee.getRetina2().getListRegions());               
+    imageRetina = oRetinaMonitor.getOutput();                
+
     int i= 0;
     int frameNum = oVisualData.getFrameNum();
-    while (i < 200)
+    int counter = oSee.getCounter();
+    while (i<150)
     {        
         //LOG4CXX_DEBUG(logger, "iteration " << i);        
         
@@ -99,16 +104,21 @@ int testVision()
         
         // show processed image
         if (bmonitor)
-        {
-            // IMPORTANT: A copy of the regions & rois SHOULD be used in order to avoid parallel thread undesired effects!!!
-            oRetinaMonitor.drawRegions(imageCam, oVisualData.getRetina().getListRegions());
-            oROIsMonitor.draw(imageCam, oVisualData.getROIs().getList());
-            imageRetina = oRetinaMonitor.getOutput();
-            imageROIs = oROIsMonitor.getOutput();
+        {            
+            // after each See loop the monitor shows the new updated retina 
+            if (oSee.getCounter() > counter)
+            {
+                counter = oSee.getCounter();       
+                // a stable copy of the retina is used (instead of the original dynamic one)
+                oRetinaMonitor.drawRegions(imageCam, oSee.getRetina2().getListRegions());            
+                imageRetina = oRetinaMonitor.getOutput();
+            }
+            
+            //oROIsMonitor.draw(imageCam, oVisualData.getROIs().getList());                
+            //imageROIs = oROIsMonitor.getOutput();
 
             oDualWindow.setImageLeft(imageCam);
-            oDualWindow.setImageRight(imageROIs);
-//            oDualWindow.setImageRight(imageRetina);
+            oDualWindow.setImageRight(imageRetina);
             cv::imshow("Vision", oDualWindow.getImage());   
             //oImageSave.save(oDualWindow.getImage());
         }
