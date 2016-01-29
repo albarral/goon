@@ -21,7 +21,7 @@ The set of libraries offered by the API are:
 - libgoon_binding.so
 - libgoon_recognition.so
 
-By now (january 2016) the goon project is in early developmental stage.
+The goon project is in developmental stage.
 
 JL Albarral
 
