@@ -33,8 +33,9 @@ public:
     ColorGrid();
     ~ColorGrid();
 
+    void setGridStep(int grid_step);    
     // resizes the grid
-    void resize (int img_w, int img_h, int grid_step);    
+    void resize(int img_w, int img_h);    
     
     // clears all grid nodes
     void clear();

@@ -26,17 +26,15 @@ RetinalVision::~RetinalVision()
 {
 }
 
-
-void RetinalVision::resize(int img_w, int img_h)
+void RetinalVision::init(int img_w, int img_h)
 {
-    oSegmentation.setSizes (img_w, img_h);
+    oSegmentation4.init(img_w, img_h);
 }
-
 
 // This function changes main parameters of the retinal vision system.
 void RetinalVision::setParameters (int retinal_samples, int same_RGB, int similar_RGB)
 {
-    oSegmentation.setNumSamples(retinal_samples);
+    oSegmentation4.setNumSamples(retinal_samples);
     RGBColor::setTolerances(same_RGB, similar_RGB);
 }
 
@@ -53,7 +51,7 @@ void RetinalVision::update (cv::Mat& image_cam)
     cv::Mat image_hsv;        
     cv::cvtColor(image_cam, image_hsv, CV_BGR2HSV);
 
-    oSegmentation.extractRegions(image_cam, image_hsv, mRetina);
+    oSegmentation4.extractRegions(image_cam, image_hsv, mRetina);
 
     //oMerge.doMerge(mRetina);
 

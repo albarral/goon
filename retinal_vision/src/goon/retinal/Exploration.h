@@ -66,7 +66,9 @@ public:
     void resize(int img_w, int img_h);
     
     // Provides new inputs and clears the exploration mask
-    void init(cv::Mat& image_cam, cv::Mat& imageHSV, cv::Mat& mask_segmented);
+    void prepare(cv::Mat& image_cam, cv::Mat& imageHSV);
+
+    void setForbiddenMask(cv::Mat& mask_segmented);
     
     // Inits the exploration window with the specified point.
     void firstWindow (cv::Point& point);    

@@ -28,14 +28,13 @@ void Exploration::resize(int img_w, int img_h)
 }
 
 // Must be called at the beginning of each exploration process.
-void Exploration::init(cv::Mat& image_cam, cv::Mat& imageHSV, cv::Mat& mask_segmented)
+void Exploration::prepare(cv::Mat& image_cam, cv::Mat& imageHSV)
 {
     cv::Mat mask_roi;
     
     // get new inputs
     image_bgr = image_cam;
     image_hsv = imageHSV;
-    mask_forbiden =  mask_segmented;
     
     // reset masks (with roi window)
     if (window.width > 0 && window.height > 0)
@@ -47,6 +46,10 @@ void Exploration::init(cv::Mat& image_cam, cv::Mat& imageHSV, cv::Mat& mask_segm
     }    
 }
 
+void Exploration::setForbiddenMask(cv::Mat& mask_segmented)
+{
+    mask_forbiden =  mask_segmented;    
+}
 
 void Exploration::firstWindow(cv::Point& point)
 {        

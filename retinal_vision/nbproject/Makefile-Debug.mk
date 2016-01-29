@@ -37,10 +37,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/retinal/ColorGrid.o \
 	${OBJECTDIR}/src/goon/retinal/ColorNode.o \
+	${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o \
 	${OBJECTDIR}/src/goon/retinal/Exploration.o \
+	${OBJECTDIR}/src/goon/retinal/Floodfiller.o \
 	${OBJECTDIR}/src/goon/retinal/HSVEssence.o \
 	${OBJECTDIR}/src/goon/retinal/merge.o \
 	${OBJECTDIR}/src/goon/retinal/retinal_vision.o \
+	${OBJECTDIR}/src/goon/retinal/segmentation.o \
 	${OBJECTDIR}/src/goon/retinal/segmentation3.o
 
 
@@ -82,10 +85,20 @@ ${OBJECTDIR}/src/goon/retinal/ColorNode.o: src/goon/retinal/ColorNode.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I../vision_utils/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ColorNode.o src/goon/retinal/ColorNode.cpp
 
+${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o: src/goon/retinal/ConfigRetinal.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I../vision_utils/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o src/goon/retinal/ConfigRetinal.cpp
+
 ${OBJECTDIR}/src/goon/retinal/Exploration.o: src/goon/retinal/Exploration.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I../vision_utils/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Exploration.o src/goon/retinal/Exploration.cpp
+
+${OBJECTDIR}/src/goon/retinal/Floodfiller.o: src/goon/retinal/Floodfiller.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I../vision_utils/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Floodfiller.o src/goon/retinal/Floodfiller.cpp
 
 ${OBJECTDIR}/src/goon/retinal/HSVEssence.o: src/goon/retinal/HSVEssence.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
@@ -101,6 +114,11 @@ ${OBJECTDIR}/src/goon/retinal/retinal_vision.o: src/goon/retinal/retinal_vision.
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I../vision_utils/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/retinal_vision.o src/goon/retinal/retinal_vision.cpp
+
+${OBJECTDIR}/src/goon/retinal/segmentation.o: src/goon/retinal/segmentation.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I../vision_utils/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/segmentation.o src/goon/retinal/segmentation.cpp
 
 ${OBJECTDIR}/src/goon/retinal/segmentation3.o: src/goon/retinal/segmentation3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal

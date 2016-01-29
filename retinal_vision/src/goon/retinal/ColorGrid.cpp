@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "goon/retinal/ColorGrid.h"
+#include "goon/retinal/ConfigRetinal.h"
 #include <goon/utils/average.h>
 #include <goon/utils/angle.h>
 
@@ -15,8 +16,10 @@ namespace goon
 // constructor
 ColorGrid::ColorGrid ()
 {        
+    ConfigRetinal oConfigRetinal;
+
     rows = cols = 0;    
-    GRID_STEP = 1;
+    GRID_STEP = oConfigRetinal.getColorGridStep();
 }
 
 // destructor
@@ -24,11 +27,14 @@ ColorGrid::~ColorGrid()
 {
 }
 
+void ColorGrid::setGridStep(int grid_step)
+{
+    GRID_STEP = grid_step;    
+}
 
-void ColorGrid::resize (int img_w, int img_h, int grid_step)
+void ColorGrid::resize (int img_w, int img_h)
 {
     int row, col;
-    GRID_STEP = grid_step;
     rows = img_h/GRID_STEP + 1;	// (+ 1) because the grid must cover the image's borders
     cols = img_w/GRID_STEP + 1;
     

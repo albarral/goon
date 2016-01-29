@@ -18,14 +18,20 @@
           <itemPath>src/goon/retinal/ColorGrid.h</itemPath>
           <itemPath>src/goon/retinal/ColorNode.cpp</itemPath>
           <itemPath>src/goon/retinal/ColorNode.h</itemPath>
+          <itemPath>src/goon/retinal/ConfigRetinal.cpp</itemPath>
+          <itemPath>src/goon/retinal/ConfigRetinal.h</itemPath>
           <itemPath>src/goon/retinal/Exploration.cpp</itemPath>
           <itemPath>src/goon/retinal/Exploration.h</itemPath>
+          <itemPath>src/goon/retinal/Floodfiller.cpp</itemPath>
+          <itemPath>src/goon/retinal/Floodfiller.h</itemPath>
           <itemPath>src/goon/retinal/HSVEssence.cpp</itemPath>
           <itemPath>src/goon/retinal/HSVEssence.h</itemPath>
           <itemPath>src/goon/retinal/merge.cpp</itemPath>
           <itemPath>src/goon/retinal/merge.h</itemPath>
           <itemPath>src/goon/retinal/retinal_vision.cpp</itemPath>
           <itemPath>src/goon/retinal/retinal_vision.h</itemPath>
+          <itemPath>src/goon/retinal/segmentation.cpp</itemPath>
+          <itemPath>src/goon/retinal/segmentation.h</itemPath>
           <itemPath>src/goon/retinal/segmentation3.cpp</itemPath>
           <itemPath>src/goon/retinal/segmentation3.h</itemPath>
         </logicalFolder>
@@ -105,9 +111,17 @@
       </item>
       <item path="src/goon/retinal/ColorNode.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/retinal/ConfigRetinal.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/ConfigRetinal.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/retinal/Exploration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/Exploration.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/Floodfiller.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/Floodfiller.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/HSVEssence.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -123,6 +137,10 @@
             flavor2="0">
       </item>
       <item path="src/goon/retinal/retinal_vision.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/segmentation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/segmentation.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/segmentation3.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -157,9 +175,17 @@
       </item>
       <item path="src/goon/retinal/ColorNode.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/retinal/ConfigRetinal.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/ConfigRetinal.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/retinal/Exploration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/Exploration.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/Floodfiller.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/Floodfiller.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/HSVEssence.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -175,6 +201,10 @@
             flavor2="0">
       </item>
       <item path="src/goon/retinal/retinal_vision.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/segmentation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/retinal/segmentation.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/segmentation3.cpp" ex="false" tool="1" flavor2="0">
       </item>

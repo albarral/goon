@@ -10,7 +10,8 @@
 #include <log4cxx/logger.h>
 
 #include <goon/data/retina.h>
-#include "goon/retinal/segmentation3.h"
+//#include "goon/retinal/segmentation3.h"
+#include "goon/retinal/segmentation.h"
 #include "goon/retinal/merge.h"
 
 namespace goon
@@ -20,15 +21,16 @@ class RetinalVision
 private:
         static log4cxx::LoggerPtr logger;
         Retina& mRetina;
-        Segmentation oSegmentation;
+//        Segmentation oSegmentation;
+        Segmentation4 oSegmentation4;
         Merge oMerge;
 
 public:
     RetinalVision (Retina& oRetina);
     ~RetinalVision ();
 
-    // Adapts to changes in the image size
-    void resize(int img_w, int img_h);
+    /// Initializes the module adapting it to the image size
+    void init(int img_w, int img_h);
     
     // Changes the main parameters of the retinal vision system.
     void setParameters(int retinal_samples, int same_RGB, int similar_RGB);

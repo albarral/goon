@@ -50,7 +50,7 @@ void Segmentation::setSizes(int img_w, int img_h)
 void Segmentation::setGridStep(int grid_step)
 {        
     GRID_STEP = grid_step;
-    oColorGrid.resize (IMG_W, IMG_H, grid_step);
+    oColorGrid.resize (IMG_W, IMG_H);
 }
 
 void Segmentation::setMinDetail (float value) {MIN_DETAIL = value;}
@@ -64,7 +64,7 @@ void Segmentation::resize()
 
     mask_segmented = cv::Mat::zeros(IMG_H, IMG_W, CV_8UC1);    
     oExploration.resize(IMG_W, IMG_H);        
-    oColorGrid.resize (IMG_W, IMG_H, GRID_STEP);
+    oColorGrid.resize (IMG_W, IMG_H);
 
     buildRandomSeeds();    
 }
@@ -154,7 +154,8 @@ int Segmentation::floodFill(cv::Mat& image_cam, cv::Mat& image_hsv, cv::Point& s
 //        oDebug.resetCounter();
     
     // init support classes
-    oExploration.init(image_cam, image_hsv, mask_segmented);    
+    oExploration.prepare(image_cam, image_hsv);    
+    oExploration.setForbiddenMask(mask_segmented);    
     oColorGrid.clear();
     oHSVEssence.reset();
     oSizeTrigger.reset();
