@@ -56,7 +56,7 @@ void See::first()
         wait4ValidImage();
         pVisualData->getCopyImageCam(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
-        oRetinalVision->resize(imageCam.cols, imageCam.rows); // w, h
+        oRetinalVision->init(imageCam.cols, imageCam.rows); // w, h
     }
     // if not initialized -> OFF
     else
