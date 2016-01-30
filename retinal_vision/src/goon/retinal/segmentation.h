@@ -27,7 +27,8 @@ private:
     float MIN_DETAIL;      // minimum area of details allowed for detection (fraction of image area)
     int NUM_SAMPLES;    // number of seeds used to extract regions
     std::vector<cv::Point> vec_seeds;
-    Floodfiller oFloodfiller;       // class to perform region extractions
+    Floodfiller oFloodfiller;       // classes to perform region extractions
+    Floodfiller oFloodfiller2;      
     cv::Mat mask_segmented;
 
 public:
@@ -50,10 +51,14 @@ public:
 
 private:                
     // Builds the seeds vector (a randomly ordered sequence of image pixels)
-    void buildRandomSeeds();
-    
+    void buildRandomSeeds();    
     // Returns a random index of the seeds vector.
     int getRandomIndex();
+    
+    /// Checks for available Floodfillers and launches a new one.
+    bool launchNewFloodfill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv);
+    
+    Floodfiller* check4FinishedFloodfills();
     
     // shows the present state of the segmentation process in an image for debugging (segmented pixels, computed colors ...)  
     void showProgress();

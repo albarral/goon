@@ -69,6 +69,8 @@ public:
     void init(cv::Mat& mask_segmented);
     // run a region extraction from the given seed
     int run(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv);
+    // Mark Floodfiller object as used. That is, set its state to READY.
+    void used();
 
     // checks for different module states (thread safe)
     bool isReady();

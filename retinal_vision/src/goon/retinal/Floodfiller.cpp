@@ -76,6 +76,12 @@ int Floodfiller::run(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv)
     }
 }
 
+void Floodfiller::used()
+{
+    // put the state to READY (if not ON at this moment)
+    if (!isOn())
+        setState(Floodfiller::eFF_READY);    
+}
 
 // This function obtains homogeneous regions by expanding from an initial seed pixel to all connected pixels with similar color.
 void Floodfiller::floodFill() 

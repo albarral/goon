@@ -44,6 +44,7 @@ void Segmentation4::init(int img_w, int img_h)
     IMG_H = img_h;    
     mask_segmented = cv::Mat::zeros(IMG_H, IMG_W, CV_8UC1); 
     oFloodfiller.init(mask_segmented);
+    oFloodfiller2.init(mask_segmented);
     buildRandomSeeds();    
 }
 
@@ -59,6 +60,7 @@ int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv, Retin
     int num_floodfills = 0;  
     int region_size;
     int min_region_size = IMG_W * IMG_H * MIN_DETAIL;   // recomputes to allow changes in minimum detail size
+    bool bnextSeed = false;
 
 //    if (bdebug)    
 //        oDebug.setBase(image_cam);
@@ -69,61 +71,98 @@ int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv, Retin
     // start getting seeds from a random position in the vector
     std::vector<cv::Point>::iterator it_seed = vec_seeds.begin();
     std::advance(it_seed, getRandomIndex());
-
     while (num_seeds < NUM_SAMPLES)
-    {
+    {        
         // if seed not segmented, expand from it a new region 		
         if (mask_segmented.at<ushort>(it_seed->y, it_seed->x) == 0)
         {		
-            oFloodfiller.run(*it_seed, image_cam, image_hsv);
+            // keep the seed if no floodfiller available
+            bnextSeed = launchNewFloodfill(*it_seed, image_cam, image_hsv);
             
-            // wait for thread to finish
-            while (!oFloodfiller.isFinished())
-            {
-                usleep (10);   // 100 us
-            }
+            Floodfiller* pFloodfiller = check4FinishedFloodfills();
             
-            num_floodfills++;
-            region_size = oFloodfiller.getRegionArea();
-
-            // if the region is big enough, accept it 
-            if (region_size > min_region_size)
+            if (pFloodfiller != 0)
             {
-                // build the region (type, mass, mask, window, grid, color and position)
-                oRegion.setType(Region::eREG_SIMPLE); 
-                oRegion.setMass(region_size);
-                oRegion.createMask(oFloodfiller.getRegionMask(), oFloodfiller.getRegionWindow());
-                //oRegion.setGrid(oColorGrid.getSamplesGrid());
-                oRegion.setRGB(oFloodfiller.getRegionColor());	
-                RGBColor::toHSV(oRegion.getRGB(), oRegion.getHSV());
-                oRegion.setSeed(*it_seed);
+                num_floodfills++;
+                region_size = pFloodfiller->getRegionArea();
 
-                // and add it to the retina (ID assigned there)
-                oRetina.addRegion(oRegion);
+                // if the region is big enough, accept it 
+                if (region_size > min_region_size)
+                {
+                    // build the region (type, mass, mask, window, grid, color and position)
+                    oRegion.setType(Region::eREG_SIMPLE); 
+                    oRegion.setMass(region_size);
+                    oRegion.createMask(pFloodfiller->getRegionMask(), pFloodfiller->getRegionWindow());
+                    //oRegion.setGrid(oColorGrid.getSamplesGrid());
+                    oRegion.setRGB(pFloodfiller->getRegionColor());	
+                    RGBColor::toHSV(oRegion.getRGB(), oRegion.getHSV());
+                    oRegion.setSeed(*it_seed);
 
-                LOG4CXX_TRACE(logger, "-> region " << oRegion.getID());
-                //LOG4CXX_TRACE(logger, "mass =" << oRegion.getMass());
-                //cv::Vec3f hsv = oHSVEssence.getMainColor();
-                //LOG4CXX_TRACE(logger, "hsv color = " << (int)hsv[0] << ", " << (int)hsv[1]*100/255 << ", " << (int)hsv[2]*100/255); 
-                                                                 
-//                if (bdebug)                            
-//                    showProgress();
-            }
-            else
-                LOG4CXX_TRACE(logger, "-> region ignored");
+                    // and add it to the retina (ID assigned there)
+                    oRetina.addRegion(oRegion);
+                    
+                    LOG4CXX_TRACE(logger, "-> region " << oRegion.getID());
+                    //LOG4CXX_TRACE(logger, "mass =" << oRegion.getMass());
+                    //cv::Vec3f hsv = oHSVEssence.getMainColor();
+                    //LOG4CXX_TRACE(logger, "hsv color = " << (int)hsv[0] << ", " << (int)hsv[1]*100/255 << ", " << (int)hsv[2]*100/255); 
+    //                if (bdebug)                            
+    //                    showProgress();
+                }
+                else
+                    LOG4CXX_TRACE(logger, "-> region ignored");
                 
-        }        
-        num_seeds++;
-        
-        // get next seed (if end of vector reached, follow at the beginning)
-        it_seed++;
-        if (it_seed == vec_seeds.end())
-            it_seed = vec_seeds.begin();
+                // used FF is ready again
+                pFloodfiller->used();
+            }                
+        }      
+        else
+            bnextSeed = true;
+            
+        // new seed to be used
+        if (bnextSeed)
+        {
+            num_seeds++;        
+            // get next seed (if end of vector reached, follow at the beginning)
+            it_seed++;
+            if (it_seed == vec_seeds.end())
+                it_seed = vec_seeds.begin();            
+        }
     } // end while    
     
     LOG4CXX_TRACE(logger, "extracted regions = " << oRetina.getNumRegions() << " - num floodfills = " << num_floodfills);
 }
   
+
+bool Segmentation4::launchNewFloodfill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv)
+{
+    Floodfiller* pFloodfiller = 0;
+    
+    if (oFloodfiller.isReady())
+        pFloodfiller = &oFloodfiller;
+    else if (oFloodfiller2.isReady())
+        pFloodfiller = &oFloodfiller2;
+
+    if (pFloodfiller != 0)
+    {
+        pFloodfiller->run(seed, image_cam, image_hsv);    
+        return true;
+    }
+    else 
+        return false;    
+}
+
+
+Floodfiller* Segmentation4::check4FinishedFloodfills()
+{
+    Floodfiller* pFloodfiller = 0;
+    
+    if (oFloodfiller.isFinished())
+        pFloodfiller = &oFloodfiller;
+    else if (oFloodfiller2.isFinished())
+        pFloodfiller = &oFloodfiller2;
+    
+    return pFloodfiller;    
+}
 
 void Segmentation4::buildRandomSeeds()
 {
