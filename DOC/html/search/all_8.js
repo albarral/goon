@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['height',['height',['../classgoon_1_1Camera.html#ad6e93120d5632620e404e62f762f665b',1,'goon::Camera::height()'],['../classgoon_1_1Shape.html#ae2073db1e9f1ec4aa66216b9ae5f8963',1,'goon::Shape::height()']]],
+  ['hsv',['hsv',['../classgoon_1_1vColor.html#a53f1f104f909d53bfaf5965f52187cba',1,'goon::vColor']]],
+  ['hsv_5fcolor',['hsv_color',['../classgoon_1_1Blob.html#a31c3e06d46cc62a0601e7200579c1d42',1,'goon::Blob']]],
+  ['hsv_5fcolor_2ecpp',['hsv_color.cpp',['../hsv__color_8cpp.html',1,'']]],
+  ['hsv_5fcolor_2eh',['hsv_color.h',['../hsv__color_8h.html',1,'']]],
+  ['hsv_5fdev',['hsv_dev',['../classgoon_1_1HSVEssence.html#a1bb763e8c00a951af9e3fde59308492a',1,'goon::HSVEssence::hsv_dev()'],['../classgoon_1_1vColor.html#ac6882d61672984bc96288705cde35ec1',1,'goon::vColor::hsv_dev()']]],
+  ['hsv_5fmain',['hsv_main',['../classgoon_1_1HSVEssence.html#ae73d137f564391277e80a9703e160f4c',1,'goon::HSVEssence']]],
+  ['hsvcolor',['HSVColor',['../classgoon_1_1HSVColor.html',1,'goon']]],
+  ['hsvcolor',['HSVColor',['../classgoon_1_1HSVColor.html#a340aa118af42e738d06c52e2703c255a',1,'goon::HSVColor']]],
+  ['hsvessence',['HSVEssence',['../classgoon_1_1HSVEssence.html',1,'goon']]],
+  ['hsvessence',['HSVEssence',['../classgoon_1_1HSVEssence.html#a3120b58785003b7d74506341fb266af4',1,'goon::HSVEssence']]],
+  ['hsvessence_2ecpp',['HSVEssence.cpp',['../HSVEssence_8cpp.html',1,'']]],
+  ['hsvessence_2eh',['HSVEssence.h',['../HSVEssence_8h.html',1,'']]],
+  ['hue_5fdisc',['HUE_DISC',['../classgoon_1_1HSVEssence.html#a86218732e9c99c80c4314d59ca55354a',1,'goon::HSVEssence']]],
+  ['hue_5frange',['HUE_RANGE',['../hsv__color_8h.html#a4c072ba11a57ca2f7e6969c7c9873bc9',1,'hsv_color.h']]],
+  ['hue_5fstep',['HUE_STEP',['../classgoon_1_1HSVColor.html#aa00487cc2758035c750b69a9f7ccc85a',1,'goon::HSVColor']]],
+  ['hueperceptualdistance',['HuePerceptualDistance',['../classgoon_1_1HSVColor.html#a126bacce85a134ad505dd4ca125f548f',1,'goon::HSVColor']]]
+];
