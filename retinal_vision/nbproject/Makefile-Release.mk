@@ -43,8 +43,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/retinal/HSVEssence.o \
 	${OBJECTDIR}/src/goon/retinal/merge.o \
 	${OBJECTDIR}/src/goon/retinal/retinal_vision.o \
-	${OBJECTDIR}/src/goon/retinal/segmentation.o \
-	${OBJECTDIR}/src/goon/retinal/segmentation3.o
+	${OBJECTDIR}/src/goon/retinal/segmentation.o
 
 
 # C Compiler Flags
@@ -115,11 +114,6 @@ ${OBJECTDIR}/src/goon/retinal/segmentation.o: src/goon/retinal/segmentation.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/segmentation.o src/goon/retinal/segmentation.cpp
-
-${OBJECTDIR}/src/goon/retinal/segmentation3.o: src/goon/retinal/segmentation3.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/segmentation3.o src/goon/retinal/segmentation3.cpp
 
 # Subprojects
 .build-subprojects:

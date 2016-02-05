@@ -32,8 +32,6 @@
           <itemPath>src/goon/retinal/retinal_vision.h</itemPath>
           <itemPath>src/goon/retinal/segmentation.cpp</itemPath>
           <itemPath>src/goon/retinal/segmentation.h</itemPath>
-          <itemPath>src/goon/retinal/segmentation3.cpp</itemPath>
-          <itemPath>src/goon/retinal/segmentation3.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -142,10 +140,6 @@
       </item>
       <item path="src/goon/retinal/segmentation.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/retinal/segmentation3.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/segmentation3.h" ex="false" tool="3" flavor2="0">
-      </item>
     </conf>
     <conf name="Release" type="2">
       <toolsSet>
@@ -205,10 +199,6 @@
       <item path="src/goon/retinal/segmentation.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/segmentation.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/segmentation3.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/segmentation3.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
