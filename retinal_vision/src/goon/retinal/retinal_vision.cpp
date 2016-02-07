@@ -28,7 +28,7 @@ RetinalVision::~RetinalVision()
 
 void RetinalVision::init(int img_w, int img_h)
 {
-    oSegmentation4.init(img_w, img_h);
+    oSegmentation4.init(mRetina, img_w, img_h);
 }
 
 // This function changes main parameters of the retinal vision system.
@@ -51,7 +51,7 @@ void RetinalVision::update (cv::Mat& image_cam)
     cv::Mat image_hsv;        
     cv::cvtColor(image_cam, image_hsv, CV_BGR2HSV);
 
-    oSegmentation4.extractRegions(image_cam, image_hsv, mRetina);
+    oSegmentation4.extractRegions(image_cam, image_hsv);
 
     //oMerge.doMerge(mRetina);
 

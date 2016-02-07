@@ -11,7 +11,7 @@
 #include <log4cxx/logger.h>
 
 #include <goon/data/retina.h>
-#include "goon/retinal/Floodfiller.h"
+#include "goon/retinal/Segmenter.h"
 
 // This class implements the segmentation of an image into color homogeneous regions.
 // MULTITHREADED
@@ -22,13 +22,17 @@ class Segmentation4
 {
 private:
     static log4cxx::LoggerPtr logger;
+    // params
     int IMG_W;            // image width 
     int IMG_H;             // image height
     float MIN_DETAIL;      // minimum area of details allowed for detection (fraction of image area)
     int NUM_SAMPLES;    // number of seeds used to extract regions
+    // shared data
+    Retina* pRetina;                    // pointer to shared retina
+    // logic
     std::vector<cv::Point> vec_seeds;
-    Floodfiller oFloodfiller;       // classes to perform region extractions
-    Floodfiller oFloodfiller2;      
+    Segmenter oSegmenter;       // classes to perform region extractions
+    //Segmenter oSegmenter2;      
     cv::Mat mask_segmented;
 
 public:
@@ -37,28 +41,29 @@ public:
     ~Segmentation4();
 
     // Resizes all masks, grids and seeds vector
-    void init(int img_w, int img_h);
+    void init(Retina& oRetina, int img_w, int img_h);
 
     // change of parameters
     void setGridStep(int grid_step);
     void setMinDetail(float value);
     void setNumSamples(int value);
 
-    int extractRegions(cv::Mat& image_cam, cv::Mat& image_hsv, Retina& oRetina);
+    int extractRegions(cv::Mat& image_cam, cv::Mat& image_hsv);
 
     // Returns the segmentation mask.
     cv::Mat& getSegmentedMask() {return mask_segmented;};
 
 private:                
     // Builds the seeds vector (a randomly ordered sequence of image pixels)
-    void buildRandomSeeds();    
+    void buildRandomSeeds(int img_w, int img_h);    
     // Returns a random index of the seeds vector.
     int getRandomIndex();
     
-    /// Checks for available Floodfillers and launches a new one.
-    bool launchNewFloodfill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv);
+    /// send request to all Segmenters. If not ready, false is returned
+    bool launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv);
     
-    Floodfiller* check4FinishedFloodfills();
+    // wait for them to finish
+    void wait4Segmenters();
     
     // shows the present state of the segmentation process in an image for debugging (segmented pixels, computed colors ...)  
     void showProgress();

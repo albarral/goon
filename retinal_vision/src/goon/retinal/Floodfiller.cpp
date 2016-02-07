@@ -21,8 +21,6 @@ Floodfiller::Floodfiller ()
 {
     ConfigRetinal oConfigRetinal;
 
-    state = Floodfiller::eFF_OFF;
-        
     // trigger used to update the region's central color 
     oSizeTrigger.setParams(oConfigRetinal.getColorEssenceUpdateChangeFactor(), oConfigRetinal.getColorEssenceUpdateMinChange());  
     SAME_RGB_LOCAL = RGBColor::getSqrSameDist();
@@ -44,47 +42,10 @@ void Floodfiller::init(cv::Mat& mask_segmented)
     oExploration.setForbiddenMask(mask_segmented);    
     oExploration.resize(w, h);        
     oColorGrid.resize (w, h);
-    // ready for use
-    setState(Floodfiller::eFF_READY);
-}
-
-void Floodfiller::setState(int value)
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    state = value;    
-}
-
-// runs a region extraction from the given seed (launching an own thread)   
-int Floodfiller::run(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv)
-{
-    // launch thread only if not running already
-    if (isReady() || isFinished())
-    {
-        this->seed = seed;
-        this->image_cam = image_cam;
-        this->image_hsv = image_hsv;        
-        setState(Floodfiller::eFF_ON);
-        t = std::thread(&Floodfiller::floodFill, this);    
-        // detach the thread if the thread object is to be reused
-        t.detach();
-        return 0;
-    }
-    else 
-    {
-        LOG4CXX_ERROR(logger, "Floodfiller run failed!");
-        return -1;
-    }
-}
-
-void Floodfiller::used()
-{
-    // put the state to READY (if not ON at this moment)
-    if (!isOn())
-        setState(Floodfiller::eFF_READY);    
 }
 
 // This function obtains homogeneous regions by expanding from an initial seed pixel to all connected pixels with similar color.
-void Floodfiller::floodFill() 
+void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv) 
 {
     int right_border, bottom_border;
     cv::Vec3b pixel_rgb, seed_rgb;
@@ -188,27 +149,6 @@ void Floodfiller::floodFill()
     oExploration.computeWindow();
     
     LOG4CXX_TRACE(logger, "floodfill end (" << num_pixels << " pixels)");
-
-    // set to finished
-    setState(Floodfiller::eFF_FINISHED);    
-}
-
-bool Floodfiller::isReady()
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    return (state == Floodfiller::eFF_READY);  
-}
-
-bool Floodfiller::isOn()
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    return (state == Floodfiller::eFF_ON);  
-}
-
-bool Floodfiller::isFinished()
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    return (state == Floodfiller::eFF_FINISHED);  
 }
 
 int Floodfiller::getRegionArea()

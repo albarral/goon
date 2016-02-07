@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/utils/Module.o \
 	${OBJECTDIR}/src/goon/utils/angle.o \
 	${OBJECTDIR}/src/goon/utils/area.o \
 	${OBJECTDIR}/src/goon/utils/average.o \
@@ -68,6 +69,11 @@ LDLIBSOPTIONS=-lopencv_core
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/goon/utils/Module.o: src/goon/utils/Module.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/Module.o src/goon/utils/Module.cpp
 
 ${OBJECTDIR}/src/goon/utils/angle.o: src/goon/utils/angle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
