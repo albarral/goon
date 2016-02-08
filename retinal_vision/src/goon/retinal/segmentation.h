@@ -31,9 +31,9 @@ private:
     Retina* pRetina;                    // pointer to shared retina
     // logic
     std::vector<cv::Point> vec_seeds;
-    Segmenter oSegmenter;       // classes to perform region extractions
-    //Segmenter oSegmenter2;      
     cv::Mat mask_segmented;
+    Segmenter oSegmenters[4];   // array of segmenters, objects for region extractions
+    int numSegmenters;
 
 public:
 
@@ -59,12 +59,13 @@ private:
     // Returns a random index of the seeds vector.
     int getRandomIndex();
     
-    /// send request to all Segmenters. If not ready, false is returned
-    bool launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv);
-    
-    // wait for them to finish
-    void wait4Segmenters();
-    
+    // initializes the segmenter objects
+    void initSegmenters(Retina& oRetina);    
+    /// send request to all Segmenters
+    void launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv);    
+    // gets the number of working segmenters
+    int getWorkingSegmenters();
+        
     // shows the present state of the segmentation process in an image for debugging (segmented pixels, computed colors ...)  
     void showProgress();
 };

@@ -76,6 +76,7 @@ void Segmenter::loop()
     // if new processing requested
     if (isProcessingRequested())
     {
+        LOG4CXX_DEBUG(logger, "processing");  
         // set state WORKING
         setState(Segmenter::eSEG_WORKING);
         // do the job

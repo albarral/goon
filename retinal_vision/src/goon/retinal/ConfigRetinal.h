@@ -15,6 +15,7 @@ private:
     // segmentation 
     float SEGMENTATION_MIN_DETAIL;      // minimum area of details allowed for detection (fraction of image area)
     int SEGMENTATION_NUM_SAMPLES;    // number of seeds used to extract regions
+    int SEGMENTATION_NUMTHEADS;         // number of threads used for segmentation
     // color grid 
     int COLORGRID_STEP;        // pixel size of nodes in color grid 
     // floodfill
@@ -30,6 +31,7 @@ public:
     // segmentation 
     float getSegmentationMinDetail() {return SEGMENTATION_MIN_DETAIL;}
     int getSegmentationNumSamples() {return SEGMENTATION_NUM_SAMPLES;}
+    int getSegmentationNumThreads() {return SEGMENTATION_NUMTHEADS;}
     // color grid 
     int getColorGridStep() {return COLORGRID_STEP;}
     // floodfiller

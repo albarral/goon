@@ -13,6 +13,7 @@ ConfigRetinal::ConfigRetinal()
     // segmentation 
     SEGMENTATION_MIN_DETAIL = 0.001;        // regions accepted from at least 0.1% of image area
     SEGMENTATION_NUM_SAMPLES = 2000;   // 2000 samples per iteration          
+    SEGMENTATION_NUMTHEADS = 4;             // 4 threads for segmentation
     // color grid       
     COLORGRID_STEP = 10;        // pixel size of nodes in color grid 
     // floodfill

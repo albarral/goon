@@ -25,15 +25,21 @@ Segmentation4::Segmentation4 ()
     ConfigRetinal oConfigRetinal;
     MIN_DETAIL = oConfigRetinal.getSegmentationMinDetail();        // regions accepted from at least 0.1% of image area
     NUM_SAMPLES = oConfigRetinal.getSegmentationNumSamples();   // 2000 samples per iteration          
+    numSegmenters = oConfigRetinal.getSegmentationNumThreads();
     pRetina = 0;
-    //bdebug = false;
+    //bdebug = false;    
 }
 
 // destructor
 Segmentation4::~Segmentation4()
 {
-    oSegmenter.off();
-    oSegmenter.wait();
+    // request segmenter threads to stop
+    for (int i=0; i<numSegmenters; i++)        
+        oSegmenters[i].off();
+  
+    // wait for them to finish
+    for (int i=0; i<numSegmenters; i++)        
+        oSegmenters[i].wait();
 }
 
 void Segmentation4::init(Retina& oRetina, int img_w, int img_h)
@@ -45,26 +51,54 @@ void Segmentation4::init(Retina& oRetina, int img_w, int img_h)
     pRetina = &oRetina;    
     IMG_W = img_w;
     IMG_H = img_h;    
-    // compute minimum detail size
-    int minRegionSize = img_w * img_h * MIN_DETAIL;   
+    
     // build the list of seeds
     buildRandomSeeds(img_w, img_h);    
-//    int seeds4each = vec_seeds.size()/2;
-//    std::vector<cv::Point> vec_seeds1(vec_seeds.begin(), vec_seeds.begin() + seeds4each);
-//    std::vector<cv::Point> vec_seeds2(vec_seeds.begin() + seeds4each, vec_seeds.begin() + 2*seeds4each);
     // create the segmentation mask (to be shared by all segmenters)
     mask_segmented = cv::Mat::zeros(IMG_H, IMG_W, CV_8UC1); 
+    
     // init the segmenters
-    oSegmenter.setID(1);
-    oSegmenter.init(oRetina, mask_segmented);
-    oSegmenter.config(vec_seeds, NUM_SAMPLES, minRegionSize);
-    oSegmenter.setFrequency(20);
-    oSegmenter.on();
+    initSegmenters(oRetina);
 }
 
 void Segmentation4::setMinDetail (float value) {MIN_DETAIL = value;}
 
 void Segmentation4::setNumSamples (int value) {NUM_SAMPLES = value;}
+
+void Segmentation4::initSegmenters(Retina& oRetina)
+{           
+    // compute minimum detail size
+    int minDetailSize = IMG_W * IMG_H * MIN_DETAIL;   
+
+    // seeds will be equally distributed among segmenters
+    int seeds4each = vec_seeds.size()/numSegmenters;
+    int samples = NUM_SAMPLES/numSegmenters;
+    std::vector<cv::Point>::iterator it_firstSeed;
+    std::vector<cv::Point>::iterator it_lastSeed;
+    it_lastSeed = vec_seeds.begin();
+        
+    // creation of each individual segmenter
+    for (int i=0; i<numSegmenters; i++)
+    {
+        //create segmenter
+        Segmenter& oSegmenter = oSegmenters[i];
+
+        // create its list of seeds
+        it_firstSeed = it_lastSeed;
+        it_lastSeed = it_firstSeed + seeds4each;
+        std::vector<cv::Point> listSeeds(it_firstSeed, it_lastSeed);
+
+        // configurate it 
+        oSegmenter.setID(i+1);
+        oSegmenter.init(oRetina, mask_segmented);
+        oSegmenter.config(listSeeds, samples, minDetailSize);
+        oSegmenter.setFrequency(100);   // to wait small delays
+    }
+
+    // start all segmenter threads
+    for (int i=0; i<numSegmenters; i++)
+        oSegmenters[i].on();
+}
 
 // This function performs floodfills from random seeds to segment homogeneous color regions from the image.
 int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv)
@@ -74,41 +108,41 @@ int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv)
     
     // Reset segmentation mask 
     mask_segmented.setTo(0);
-    
+        
     launchSegmenters(image_cam, image_hsv);
     
-    wait4Segmenters();
-        
+    // wait for all segmenters to start working
+    while (getWorkingSegmenters() < numSegmenters)
+        usleep(10000); // 10ms
+
+    // can do other things ...
+
+    // wait for all segmenter to end their job
+    while (getWorkingSegmenters() > 0)
+        usleep(10000); // 10ms
+    
     //LOG4CXX_TRACE(logger, "extracted regions = " << pRetina->getNumRegions());
 }
   
 
-bool Segmentation4::launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv)
+void Segmentation4::launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv)
 {
-    if (oSegmenter.isReady())
-    {
-        oSegmenter.newRequest(image_cam, image_hsv);
-        // wait for it to start working
-        while (!oSegmenter.isWorking())
-            usleep(10000); // 10ms
-        return true;
-    }
-    else 
-        return false;    
+    for (int i=0; i<numSegmenters; i++)
+        oSegmenters[i].newRequest(image_cam, image_hsv);
 }
 
-void Segmentation4::wait4Segmenters()
+int Segmentation4::getWorkingSegmenters()
 {
-    int numSegmenters = 1;
-    int numFinished = 0;
-    while (numFinished < numSegmenters)
-    {
-        if (oSegmenter.isReady())
-            numFinished++;
-        usleep(10000); // 10ms
-    }
-}
+    int num = 0;
 
+    for (int i=0; i<numSegmenters; i++)
+    {
+        if (oSegmenters[i].isWorking())            
+            num++;        
+    }
+    
+    return num;
+}
 
 void Segmentation4::buildRandomSeeds(int img_w, int img_h)
 {
