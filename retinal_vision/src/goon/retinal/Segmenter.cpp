@@ -76,7 +76,7 @@ void Segmenter::loop()
     // if new processing requested
     if (isProcessingRequested())
     {
-        LOG4CXX_DEBUG(logger, "processing");  
+        LOG4CXX_TRACE(logger, "processing");  
         // set state WORKING
         setState(Segmenter::eSEG_WORKING);
         // do the job
@@ -96,7 +96,7 @@ bool Segmenter::newRequest(cv::Mat& image_cam, cv::Mat& image_hsv)
     // accept request if module is READY
     if (isReady())
     {
-        LOG4CXX_DEBUG(logger, "segment requested" << ID);  
+        LOG4CXX_TRACE(logger, "segment requested" << ID);  
         bnewRequest = true;
         imageCam = image_cam;
         imageHSV = image_hsv;

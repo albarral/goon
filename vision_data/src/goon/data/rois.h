@@ -21,6 +21,9 @@ public:
     Rois ();
     ~Rois();
 
+    // sets the ROIs list
+    void setListROIs(std::vector<ROI>& listROIs);
+    
     // Returns the list of rois
     std::vector<ROI>& getList () {return vec_rois;};
 
@@ -30,10 +33,10 @@ public:
     void clear();
     
     // adds a new roi to the list
-    void addROI (ROI& oRoi);
+    void addROI(ROI& oRoi);
 
     // Checks if the specified roi is still active.
-    bool isROIStillActive (int roiID);   
+    bool isROIStillActive(int roiID);   
 };
 
 }	

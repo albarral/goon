@@ -91,7 +91,7 @@ int testVision()
     int i= 0;
     int frameNum = oVisualData.getFrameNum();
     int counter = oSee.getCounter();
-    while (i<150)
+    while (i<250)
     {        
         //LOG4CXX_DEBUG(logger, "iteration " << i);        
         

@@ -16,6 +16,31 @@ Region::Region ()
     bmerge = false;
 }
 
+// copy constructor (needed for vectors)    
+Region::Region(const Region& oRegion) 
+    : Blob(oRegion) // dispatch to base copy constructor
+{
+    ID = oRegion.ID;
+    type = oRegion.type;
+    setMask(oRegion.mask); // mask is cloned, not just assigned
+    setGrid(oRegion.grid);   // grid is cloned, not just assigned
+    bmerge = oRegion.bmerge;
+    seed = oRegion.seed;
+}  
+
+// assignment operator
+Region& Region::operator=(const Region& oRegion)
+{
+    Blob::operator=(oRegion);   // blob part copied
+    ID = oRegion.ID;
+    type = oRegion.type;
+    setMask(oRegion.mask); // mask is cloned, not just assigned
+    setGrid(oRegion.grid);   // grid is cloned, not just assigned
+    bmerge = oRegion.bmerge;
+    seed = oRegion.seed;
+    return *this;    
+}
+    
 void Region::setID(int value) {ID = value;}
 void Region::setType(int value) {type = value;}
 void Region::setMerge (bool bvalue) {bmerge = bvalue;}
@@ -43,13 +68,13 @@ void Region::createMask(cv::Mat& mask, cv::Rect& window)
     setWindow(window);
 }
 
-void Region::setMask(cv::Mat& mask)
+void Region::setMask(const cv::Mat& mask)
 {
     this->mask = mask.clone();    
 }
 
 // The given grid is cloned.
-void Region::setGrid(cv::Mat& grid_samples)
+void Region::setGrid(const cv::Mat& grid_samples)
 {
     grid = grid_samples.clone();
 }
@@ -84,12 +109,12 @@ bool Region::sortBySize(const Region& oRegion1, const Region& oRegion2)
     return (oRegion1.mass < oRegion2.mass);
 }
 
-void Region::cloneTo(Region& oRegion)
-{
-    oRegion = *this;    
-    oRegion.setMask(mask);  // mask is cloned, not just assigned
-    oRegion.setGrid(grid);     // grid is cloned, not just assigned
-}
+//void Region::cloneTo(Region& oRegion)
+//{
+//    oRegion = *this;    
+//    oRegion.setMask(mask);  // mask is cloned, not just assigned
+//    oRegion.setGrid(grid);     // grid is cloned, not just assigned
+//}
 
 void Region::createDummy()
 {

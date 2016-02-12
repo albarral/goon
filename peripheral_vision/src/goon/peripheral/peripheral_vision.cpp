@@ -121,7 +121,7 @@ void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
     oROI.setAge(oUnit.getAge());
     oROI.setStability(oUnit.getStability());
     
-    oROI.reBlob(oUnit);
+    oROI.updateBlob(oUnit);
 
     // check roi speed (pixels/second)
     translation = oUnit.getTranslation();    

@@ -34,8 +34,12 @@ private:
     cv::Point seed;                 // first point of the region 
 
 public:
-    Region ();
+    Region();
     //~Region();
+    // copy constructor (needed for vectors)
+    Region(const Region& oRegion);  
+    // assignment operator
+    Region& operator=(const Region& oRegion);
         
     int getID() {return ID;}
     int getType() {return type;}
@@ -59,10 +63,10 @@ public:
     void createMask (cv::Mat& mask, cv::Rect& window);
 
     // sets the region's mask (new cloned matrix)
-    void setMask (cv::Mat& mask);
+    void setMask (const cv::Mat& mask);
 
     // sets the region's grid (new cloned matrix)
-    void setGrid (cv::Mat& grid_samples);
+    void setGrid (const cv::Mat& grid_samples);
         
     // grows this region by absorbing a new one 
     void growRegion(Region& oRegion2);
@@ -71,7 +75,7 @@ public:
     static bool sortBySize (const Region& oRegion1, const Region& oRegion2);    
     
     // clones this region into the given one
-    void cloneTo(Region& oRegion);    
+    //void cloneTo(Region& oRegion);    
     
     // creates a dummy red rectangular region of size 200 x 100
     void createDummy();

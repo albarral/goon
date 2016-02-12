@@ -44,8 +44,9 @@ void Unit::prepare()
 // Initializes the unit with its first region (Blob)
 void Unit::initialize (int regionID, Blob& oBlob)
 {    
-    reBlob(oBlob);        
-    oTracker.reBlob(oBlob);  
+    updateBlob(oBlob);        
+    
+    oTracker = oBlob;
     vec_regions.push_back(regionID);  
     
     age = 0;
@@ -59,8 +60,8 @@ void Unit::initialize (int regionID, Blob& oBlob)
 void Unit::addRegion (int regionID, Blob& oBlob)
 {    
     // if first region, init tracker with the region's values
-    if (vec_regions.empty())        
-        oTracker.reBlob(oBlob);
+    if (vec_regions.empty()) 
+        oTracker = oBlob;
     // otherwise, merge the region into the tracker
     else
         oTracker.merge(oBlob);
@@ -90,7 +91,7 @@ void Unit::update ()
         if (age < 10000)
             age++;
         
-        reBlob(oTracker);
+        updateBlob(oTracker);
         
         // check how the unit has evolved (not for new units)
         if (age > 1)

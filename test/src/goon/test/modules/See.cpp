@@ -85,7 +85,7 @@ void See::loop()
     // stores retina info for debugging purpose
     std::lock_guard<std::mutex> locker(mutex);
     LOG4CXX_TRACE(logger, "clone retina ... ");
-    pVisualData->getRetina().cloneTo(oRetina2);
+    oRetina2 = pVisualData->getRetina();
     counter++;
 }
 

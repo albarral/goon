@@ -18,7 +18,30 @@ Blob::Blob ()
     window = cv::Rect (0,0,0,0);
 }
 
-//Blob::~Blob() {};
+// copy constructor (needed for vectors)
+Blob::Blob(const Blob& oBlob)    
+{
+    mass = oBlob.mass;
+    pos[0] = oBlob.pos[0];
+    pos[1] = oBlob.pos[1];    
+    covs = oBlob.covs;
+    rgb_color = oBlob.rgb_color;
+    hsv_color = oBlob.hsv_color;        	
+    window = oBlob.window;
+}
+
+// assignment operator
+Blob& Blob::operator=(const Blob& oBlob)
+{
+    mass = oBlob.mass;
+    pos[0] = oBlob.pos[0];
+    pos[1] = oBlob.pos[1];    
+    covs = oBlob.covs;
+    rgb_color = oBlob.rgb_color;
+    hsv_color = oBlob.hsv_color;        	
+    window = oBlob.window;
+    return *this;
+}
 
 void Blob::setMass (int value) {mass = value;}
 
@@ -41,7 +64,7 @@ void Blob::setHSV (cv::Vec3f& color)
 }
 
 
-void Blob::setWindow (cv::Rect& rwindow) {window = rwindow;}
+void Blob::setWindow(cv::Rect& rwindow) {window = rwindow;}
 
 
 void Blob::merge(Blob& oBlob2)
@@ -56,22 +79,8 @@ void Blob::merge(Blob& oBlob2)
     mass += oBlob2.mass;
 }
 
-
-void Blob::reBlob(Blob& oBlob2)
+void Blob::updateBlob(Blob& oBlob2)
 {
-    mass = oBlob2.mass;
-
-    pos[0] = oBlob2.pos[0];
-    pos[1] = oBlob2.pos[1];
-    
-    for (int i=0; i<3; i++)
-    {
-        covs[i] = oBlob2.covs[i];
-        rgb_color[i] = oBlob2.rgb_color[i];
-        hsv_color[i] = oBlob2.hsv_color[i];        
-    }
-	
-    window = oBlob2.window;
+    *this = oBlob2;
 }
-
 }

@@ -26,6 +26,9 @@ private:
 public:
         Retina();
         ~Retina();
+                    
+        // assignment operator
+        Retina& operator= (const Retina& oRetina);
 
         int getID();
         void setID(int id);
@@ -53,9 +56,9 @@ public:
                 
         // returns the region with the specified ID
         Region& getRegion (int ID);         
-        
+                
         // clones this retina into the given one   
-        void cloneTo(Retina& oRetina2);    
+        //void cloneTo(Retina& oRetina2);    
 };
 
 }

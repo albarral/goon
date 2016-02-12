@@ -23,8 +23,11 @@ protected:
     cv::Rect window;
 
 public:
-    Blob ();
-    //~Blob();
+    Blob();
+    // copy constructor (needed for vectors)
+    Blob(const Blob& oBlob);  
+    // assignment operator
+    Blob& operator=(const Blob& oBlob);
     
     int getMass() {return mass;};
     int* getPos() {return pos;};
@@ -44,7 +47,7 @@ public:
     // merges another blob with this one
     void merge (Blob& oBlob2);
     // updates all blob values with those of another blob
-    void reBlob(Blob& oBlob2);
+    void updateBlob(Blob& oBlob2);
  }; 
 }
 

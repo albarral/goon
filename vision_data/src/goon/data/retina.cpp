@@ -16,7 +16,15 @@ Retina::~Retina()
 {
     clear();
 }
-        
+
+// assignment operator
+Retina& Retina::operator= (const Retina& oRetina)
+{
+    ID = oRetina.ID;
+    listRegions = oRetina.listRegions;
+    listFinalIDs = oRetina.listFinalIDs;
+}
+
 int Retina::getID()
 {
     std::lock_guard<std::mutex> locker(mutex);
@@ -96,25 +104,25 @@ Region& Retina::getRegion(int ID)
     std::lock_guard<std::mutex> locker(mutex);
     return listRegions.at(ID);    
 }
-        
+
 // clones this retina into the given one   
-void Retina::cloneTo(Retina& oRetina2)
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    // clear the destination retina
-    oRetina2.clear();
-
-    Region oRegion2;
-    // clones all regions and adds them to the destination retina
-    for (Region& oRegion: listRegions) 
-    {
-        oRegion.cloneTo(oRegion2);
-        oRetina2.addRegion(oRegion2);
-    }
-
-    // copies the IDs list
-    oRetina2.setListFinalIDs(listFinalIDs);
-    oRetina2.setID(ID);    
-}
+//void Retina::cloneTo(Retina& oRetina2)
+//{
+//    std::lock_guard<std::mutex> locker(mutex);
+//    // clear the destination retina
+//    oRetina2.clear();
+//
+//    Region oRegion2;
+//    // clones all regions and adds them to the destination retina
+//    for (Region& oRegion: listRegions) 
+//    {
+//        oRegion.cloneTo(oRegion2);
+//        oRetina2.addRegion(oRegion2);
+//    }
+//
+//    // copies the IDs list
+//    oRetina2.setListFinalIDs(listFinalIDs);
+//    oRetina2.setID(ID);    
+//}
 
 }
