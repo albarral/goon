@@ -56,9 +56,6 @@ public:
                 
         // returns the region with the specified ID
         Region& getRegion (int ID);         
-                
-        // clones this retina into the given one   
-        //void cloneTo(Retina& oRetina2);    
 };
 
 }

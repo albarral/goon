@@ -21,10 +21,10 @@ Rois::~Rois ()
 {
 }
 
-void Rois::setListROIs(std::vector<ROI>& listROIs)
-{
-    vec_rois = listROIs;    
-}
+//void Rois::setListROIs(std::vector<ROI>& listROIs)
+//{
+//    vec_rois = listROIs;    
+//}
 
 void Rois::clear()
 {

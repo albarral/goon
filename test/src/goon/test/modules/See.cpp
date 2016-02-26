@@ -57,6 +57,7 @@ void See::first()
         pVisualData->getCopyImageCam(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
         oRetinalVision->init(imageCam.cols, imageCam.rows); // w, h
+        oClick.start();
     }
     // if not initialized -> OFF
     else
@@ -85,8 +86,14 @@ void See::loop()
     // stores retina info for debugging purpose
     std::lock_guard<std::mutex> locker(mutex);
     LOG4CXX_TRACE(logger, "clone retina ... ");
-    oRetina2 = pVisualData->getRetina();
+    oRetina2 = pVisualData->getRetina();    
+    LOG4CXX_TRACE(logger, "clone ROIS ... ");
+    oROIs2 = pVisualData->getROIs();
     counter++;
+    // measure processing speed
+    oClick.read();    
+    oClick.start();
+    fps = 1000.0/oClick.getMillis();
 }
 
 void See::wait4ValidImage()
@@ -108,5 +115,17 @@ Retina& See::getRetina2()
     std::lock_guard<std::mutex> locker(mutex);
     return oRetina2;    
 }  
+
+Rois& See::getROIs2()
+{
+    std::lock_guard<std::mutex> locker(mutex);
+    return oROIs2;    
+}
+
+float See::getFps()
+{
+    std::lock_guard<std::mutex> locker(mutex);
+    return fps;    
+}
 
 }

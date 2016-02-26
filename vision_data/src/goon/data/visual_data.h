@@ -20,7 +20,8 @@ class VisualData
         std::mutex mutex_img;
         cv::Mat imageCam;       // image from camera
         int frame_num;             // frame number  
-        Retina oRetina;
+        Retina oRetina;             // dynamic retina   
+        //Retina oRetina2;          // static retina
         Rois oROIs;        
         
     public:

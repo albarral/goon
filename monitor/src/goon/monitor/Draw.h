@@ -54,7 +54,7 @@ public:
     void drawMask (cv::Mat& mask, cv::Rect& window);
 
     // Draws a point in the image with the specified color and radius (default green and 3 pixels)
-    void drawPoint (cv::Point& point, int def_color = eGREEN, int radius = 3);
+    void drawPoint (cv::Point& point, int def_color = Draw::eGREEN, int radius = 3);
 
     // Draws an ellipse in the image
     void drawEllipse (cv::Point& center, int width, int height, int orientation);
@@ -67,7 +67,7 @@ public:
 
     // Draws a number in the image at the specified point. 
     void drawNumber (int num, cv::Point& point);
-    
+    void drawFloatNumber(float num, cv::Point& point);
     // Sets a predefined value for the color
     void setDefaultColor (int value);    
 };

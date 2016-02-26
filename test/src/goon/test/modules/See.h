@@ -15,7 +15,9 @@
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/peripheral_vision.h"
 #include "goon/data/visual_data.h"
-#include "goon/data/retina.h"
+#include "goon/data/retina.h"   // for debug
+#include "goon/data/rois.h"     // for debug
+#include "goon/utils/Click.h"
 
 namespace goon
 {    
@@ -37,10 +39,14 @@ private:
     PeripheralVision* oPeripheralVision;
     VisualData* pVisualData;        // shared data
     cv::Mat imageCam;
+     // processing speed
+    float fps;     
+    utils::Click oClick;
     // for debug
     std::mutex mutex;
     int counter;
-    Retina oRetina2;
+    Retina oRetina2;            
+    Rois oROIs2;        
 
 public:
     See();
@@ -49,8 +55,11 @@ public:
     // initializes the module 
     void init(VisualData& oVisualData);   
     
+    // all mutex protected
     int getCounter();
     Retina& getRetina2();    
+    Rois& getROIs2();
+    float getFps();
        
 private:
     // first action after thread begins 

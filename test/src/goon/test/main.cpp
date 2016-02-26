@@ -33,7 +33,7 @@ int main(int argc, char** argv)
     log4cxx::NDC::push("main");    
 
     testVision(); 
-    
+   
     return 0;
 }
 
@@ -87,11 +87,13 @@ int testVision()
     oVisualData.getCopyImageCam(imageCam);
     oRetinaMonitor.drawRegions(imageCam, oSee.getRetina2().getListRegions());               
     imageRetina = oRetinaMonitor.getOutput();                
+    oROIsMonitor.drawRois(imageCam, oSee.getROIs2().getList());                
+    imageROIs = oROIsMonitor.getOutput();                                
 
     int i= 0;
     int frameNum = oVisualData.getFrameNum();
     int counter = oSee.getCounter();
-    while (i<250)
+    while (i<100)
     {        
         //LOG4CXX_DEBUG(logger, "iteration " << i);        
         
@@ -109,15 +111,17 @@ int testVision()
             if (oSee.getCounter() > counter)
             {
                 counter = oSee.getCounter();       
-                // a stable copy of the retina is used (instead of the original dynamic one)
+                // draw regions obtained by the retinal vision system (from a copy of the retina)
                 oRetinaMonitor.drawRegions(imageCam, oSee.getRetina2().getListRegions());            
                 imageRetina = oRetinaMonitor.getOutput();
-            }
-            
-            //oROIsMonitor.draw(imageCam, oVisualData.getROIs().getList());                
-            //imageROIs = oROIsMonitor.getOutput();
+                // draw ROIs obtained by the peripheral vision system (from a copy of the ROIs) )
+                oROIsMonitor.drawRois(imageCam, oSee.getROIs2().getList());                
+                oROIsMonitor.drawFPS(oSee.getFps());
+                imageROIs = oROIsMonitor.getOutput();                                
+            }            
 
-            oDualWindow.setImageLeft(imageCam);
+            //oDualWindow.setImageLeft(imageCam);
+            oDualWindow.setImageLeft(imageROIs);
             oDualWindow.setImageRight(imageRetina);
             cv::imshow("Vision", oDualWindow.getImage());   
             //oImageSave.save(oDualWindow.getImage());

@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/utils/Click.o \
 	${OBJECTDIR}/src/goon/utils/Module.o \
 	${OBJECTDIR}/src/goon/utils/angle.o \
 	${OBJECTDIR}/src/goon/utils/area.o \
@@ -69,6 +70,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_utils.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_utils.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/goon/utils/Click.o: src/goon/utils/Click.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/Click.o src/goon/utils/Click.cpp
 
 ${OBJECTDIR}/src/goon/utils/Module.o: src/goon/utils/Module.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils

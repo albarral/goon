@@ -22,7 +22,7 @@ public:
     ~Rois();
 
     // sets the ROIs list
-    void setListROIs(std::vector<ROI>& listROIs);
+    //void setListROIs(std::vector<ROI>& listROIs);
     
     // Returns the list of rois
     std::vector<ROI>& getList () {return vec_rois;};

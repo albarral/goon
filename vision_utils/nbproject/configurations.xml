@@ -13,6 +13,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>src/goon/utils/Click.cpp</itemPath>
+        <itemPath>src/goon/utils/Click.h</itemPath>
         <itemPath>src/goon/utils/Module.cpp</itemPath>
         <itemPath>src/goon/utils/Module.h</itemPath>
         <itemPath>src/goon/utils/angle.cpp</itemPath>
@@ -71,6 +73,10 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="src/goon/utils/Click.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/Click.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/utils/Module.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/utils/Module.h" ex="false" tool="3" flavor2="0">
@@ -128,6 +134,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="src/goon/utils/Click.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/Click.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/utils/Module.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/utils/Module.h" ex="false" tool="3" flavor2="0">

@@ -87,7 +87,7 @@ void Draw::drawPoint(cv::Point& point, int def_color, int radius)
         return;
     }
 
-    setDefaultColor (def_color);    
+    setDefaultColor(def_color);    
     cv::circle(image_draw, point, radius, color, -1);
 }
 
@@ -100,7 +100,7 @@ void Draw::drawEllipse(cv::Point& center, int width, int height, int orientation
         return;
     }
     
-    setDefaultColor (eYELLOW);       
+    setDefaultColor(Draw::eYELLOW);       
     cv::ellipse (image_draw, center, cv::Size(width, height), orientation, 0, 360, color, 3);
 }
 
@@ -143,6 +143,18 @@ void Draw::drawNumber(int num, cv::Point& point)
     cv::putText(image_draw, std::to_string(num), point, cv::FONT_HERSHEY_SIMPLEX, 1.0, color);
 }
 
+void Draw::drawFloatNumber(float num, cv::Point& point)
+{
+    if (!bsized)
+    {
+        std::cout << "Draw error: image_draw still not created" << std::endl;
+        return;
+    }
+    // just show one decimal digit
+    std::string text = std::to_string(num);
+    text = text.substr(0,3);
+    cv::putText(image_draw, text, point, cv::FONT_HERSHEY_SIMPLEX, 1.0, color, 2);
+}
 
 void Draw::setDefaultColor(int value)
 {

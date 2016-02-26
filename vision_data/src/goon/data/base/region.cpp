@@ -17,8 +17,7 @@ Region::Region ()
 }
 
 // copy constructor (needed for vectors)    
-Region::Region(const Region& oRegion) 
-    : Blob(oRegion) // dispatch to base copy constructor
+Region::Region(const Region& oRegion) : Blob(oRegion) // dispatch to base copy constructor
 {
     ID = oRegion.ID;
     type = oRegion.type;

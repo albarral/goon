@@ -27,7 +27,7 @@ public:
 //    RetinaMonitor();
 //    ~RetinaMonitor();
     
-    // Draws an image with the regions obtained by the retinal vision module.
+    // Draws an image with the given list of regions 
     void drawRegions (cv::Mat& image_cam, std::vector<Region>& listRegions);
     
     cv::Mat& getOutput() {return (oDraw.getOutput());};    

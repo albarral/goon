@@ -24,10 +24,6 @@ protected:
 
 public:
     Blob();
-    // copy constructor (needed for vectors)
-    Blob(const Blob& oBlob);  
-    // assignment operator
-    Blob& operator=(const Blob& oBlob);
     
     int getMass() {return mass;};
     int* getPos() {return pos;};
@@ -36,13 +32,13 @@ public:
     cv::Vec3f& getHSV() {return hsv_color;};
     cv::Rect& getWindow() {return window;};
     
-    void setMass (int value);
-    void setPos (int x, int y);
+    void setMass (int value) {mass = value;};
+    void setPos (int x, int y) {pos[0] = x; pos[1] = y;};
     // (xx, yy, xy)
     void setCovariances (float covx, float covy, float covxy);
-    void setRGB (cv::Vec3f& color);
-    void setHSV (cv::Vec3f& color);
-    void setWindow (cv::Rect& rwindow);
+    void setRGB (cv::Vec3f& color) {rgb_color = color;};
+    void setHSV (cv::Vec3f& color) {hsv_color = color;};
+    void setWindow (cv::Rect& rwindow) {window = rwindow;};
    	        
     // merges another blob with this one
     void merge (Blob& oBlob2);

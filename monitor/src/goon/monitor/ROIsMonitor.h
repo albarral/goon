@@ -27,9 +27,12 @@ public:
 //    ROIsMonitor();
 //    ~ROIsMonitor();
     
-    // Shows an image with the ROIs obtained by the peripheral vision process.
-    void draw (cv::Mat& image_cam, std::vector<ROI>& listROIs);
+    // Draws an image with the given list of ROI's.
+    void drawRois(cv::Mat& image_cam, std::vector<ROI>& listROIs);
 
+    // draws the given fps value
+    void drawFPS(float fps);
+    
     cv::Mat& getOutput() {return (oDraw.getOutput());};        
 };
 }    

@@ -13,7 +13,7 @@ namespace goon
 LoggerPtr ROIsMonitor::logger(Logger::getLogger("goon.monitor"));
 
 // Shows an image with the ROIs obtained by the peripheral vision process.
-void ROIsMonitor::draw(cv::Mat& image_cam, std::vector<ROI>& listROIs)
+void ROIsMonitor::drawRois(cv::Mat& image_cam, std::vector<ROI>& listROIs)
 {
     float roi_w, roi_h, roi_angle;      // ellipse values
     cv::Vec3f covs;
@@ -35,10 +35,17 @@ void ROIsMonitor::draw(cv::Mat& image_cam, std::vector<ROI>& listROIs)
         LOG4CXX_TRACE(logger, "roi " << it_roi->getID());        
         LOG4CXX_TRACE(logger, "(w, h, angle) = " << roi_w << ", " << roi_h << ", " << roi_angle);        
         oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle);
+        oDraw.drawPoint(centroid, Draw::eYELLOW, it_roi->getStability());
         //oDrawPer.drawNumber(it_roi->getID(), centroid);                        
         
         it_roi++;
     }    
 }
 
+void ROIsMonitor::drawFPS(float fps)
+{
+    cv::Point point(10, 20);
+    oDraw.setDefaultColor(Draw::eGREEN);    
+    oDraw.drawFloatNumber(fps, point);     
+}
 }
