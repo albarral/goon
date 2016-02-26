@@ -1,0 +1,15 @@
+
+February 2016
+
+I'm working in the peripheral vision system now.
+
+It's being redesigned to use it for movement perception. 
+
+It relies on the following assumption:
+- changes in the real world are continuous 
+- that's because object movements are also continuous
+- so, if frames are processed fast enough, extracted regions will keep similar color, shape and position in consecutive frames
+
+Tasks:
+
+- monitor old peripheral vision system 
