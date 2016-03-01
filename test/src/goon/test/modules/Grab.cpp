@@ -6,7 +6,6 @@
 #include "log4cxx/ndc.h"
 
 #include "goon/test/modules/Grab.h"
-#include "goon/test/camera_factory.h"
 
 namespace goon
 {    
