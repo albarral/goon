@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #include "goon/peripheral/peripheral_vision.h"
+#include <goon/data/goon_version.h>
 #include <goon/utils/shape.h>
 #include <goon/utils/rgb_color.h>
 
@@ -19,6 +20,8 @@ LoggerPtr PeripheralVision::logger(Logger::getLogger("goon.peripheral"));
 // constructor
 PeripheralVision::PeripheralVision (Retina& oRetina, Rois& oROIs) : mRetina(oRetina), mROIs(oROIs)
 {
+    LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Peripheral vision");
+
     oUnitsDetection.setSizeReceptiveFields(8);          // this value produces receptive fields with double the area of their underlying objects.
     counter = 0;
 	

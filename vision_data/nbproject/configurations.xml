@@ -55,6 +55,7 @@
         <itemPath>src/goon/data/visual_data.cpp</itemPath>
         <itemPath>src/goon/data/visual_data.h</itemPath>
       </logicalFolder>
+      <itemPath>src/goon/data/goon_version.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -171,6 +172,8 @@
       </item>
       <item path="src/goon/data/elements/Scene.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/retina.h" ex="false" tool="3" flavor2="0">
@@ -267,6 +270,8 @@
       <item path="src/goon/data/elements/Scene.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/elements/Scene.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
       </item>
