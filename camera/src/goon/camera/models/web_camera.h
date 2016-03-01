@@ -7,7 +7,6 @@
  ***************************************************************************/
 
 #include <opencv2/highgui/highgui.hpp>            
-#include <log4cxx/logger.h>
 
 #include "goon/camera/camera.h"
 
@@ -18,7 +17,6 @@ namespace goon
 class WebCamera : public Camera
 {
 private:
-    static log4cxx::LoggerPtr logger;
     cv::VideoCapture vCapture;
     int device_id;
 
@@ -27,11 +25,10 @@ public:
     WebCamera (int index = 0);
     ~WebCamera();
 
-    // connects to the camera 
-    int connect();
-
+    // connect to camera 
+    virtual bool connect();
     // capture new frame
-    int grab();    
+    virtual bool grab();
 };
 }
 	

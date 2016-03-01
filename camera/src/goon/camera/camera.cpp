@@ -10,12 +10,10 @@ namespace goon
 Camera::Camera ()
 {
    address = "";    
-   bconnected = false;
    visualField = 0;
    img_w = 0;
    img_h = 0;
    height = 0;
-   counter = 0;
 }
 
 

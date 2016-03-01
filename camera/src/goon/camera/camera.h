@@ -14,13 +14,22 @@ namespace goon
 // Base class for camera
 class Camera
 {
+public:
+    enum eCamTypes
+    {
+        eCAM_WEBCAM,
+        eCAM_IPCAM,
+        eCAM_VIDEO,
+        eCAM_IMAGE,
+        eCAM_UNKNOWN
+    };
+    
 protected:
+    int type;               // type of camera
     std::string address;
-    bool bconnected;
     cv::Mat image;
     int img_w;         // width of camera image (in pixels)
     int img_h;         // height of camera image (in pixels)
-    int counter;        // frame counter
     float visualField;      // camera's horizontal visual field (in degrees)
     int height;              // vertical distance between the camera and the floor (in centimeters)
 
@@ -28,10 +37,10 @@ public:
     Camera ();
     //~Camera();
     
+    int getCamType() {return type;}
+    
     std::string getAddress() {return address;}
     
-    bool isConnected() {return bconnected;}
-
     // Gets pointer to captured image
     cv::Mat& getCapture() {return image;};
     // Gets a copy of the captured image
@@ -39,7 +48,6 @@ public:
     
     int getImgWidth() {return img_w;};
     int getImgHeight() {return img_h;};
-    int getCounter (){return counter;};
 
     void setVisualField (float value) {visualField = value;};
     float getVisualField () {return visualField;};
@@ -48,9 +56,9 @@ public:
     int getCamHeight () {return (height);};
 
     // connect to camera 
-    virtual int connect() = 0;
+    virtual bool connect() = 0;
     // capture new frame
-    virtual int grab() = 0;
+    virtual bool grab() = 0;
 };
 }
 	

@@ -6,14 +6,11 @@
 
 #include "goon/camera/models/ip_camera.h"
 
-using namespace log4cxx;
-
 namespace goon 
 {
-LoggerPtr ipCamera::logger(Logger::getLogger("goon.camera"));
-
 ipCamera::ipCamera (std::string saddress)
 {
+    type = Camera::eCAM_IPCAM;
    address = saddress;    
 }
 
@@ -23,53 +20,27 @@ ipCamera::~ipCamera()
 }
 
 
-int ipCamera::connect() 
+bool ipCamera::connect() 
 {
-    int ret = 0;
-    
-    LOG4CXX_INFO(logger, "connect to camera ... " << address);
-    
     //open the video stream and make sure it's opened
     if (vCapture.open(address))         
     {        
-        bconnected = true;
-        LOG4CXX_INFO(logger, "connected");
-
         if (vCapture.read(image))
         {
             img_w = image.cols;
             img_h = image.rows;            
         }
-        LOG4CXX_INFO(logger, "capture size = " << img_w << "x" << img_h);
-        
         //flush(time_connect);
+        return true;        
     }
     else
-    {
-        ret = -1;
-        LOG4CXX_ERROR(logger, "connection failed - " << address);
-    }
-
-    return ret;
+        return false;
 }
 
 
-int ipCamera::grab() 
+bool ipCamera::grab() 
 {
-    int ret = 0;
-
-    if (vCapture.read(image)) 
-    {
-        LOG4CXX_INFO(logger, "frame " << counter);
-    }
-    else 
-    {
-        ret = -1;
-        LOG4CXX_ERROR(logger, "grab error!");
-    }
-        
-    counter ++;
-    return ret;
+    return (vCapture.read(image));
 }
 
 /*

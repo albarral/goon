@@ -13,9 +13,9 @@
 #include "log4cxx/ndc.h"
 #include <log4cxx/xml/domconfigurator.h>
 
-#include "goon/test/camera_factory.h"
+#include "goon/data/capture.h"
 #include "goon/data/visual_data.h"
-#include "goon/test/modules/Grabber.h"
+#include "goon/test/modules/Grab.h"
 #include "goon/test/modules/See.h"
 
 #include "goon/monitor/RetinaMonitor.h"
@@ -43,27 +43,29 @@ int testVision()
     LOG4CXX_INFO(logger, "\n\nTESTING goon VISION ...\n");
     bool bmonitor = true;       // monitor vision
 
-    int workingCamera = goon::CameraFactory::eCAM_WEBCAM;        
-//    int workingCamera = goon::CameraFactory::eCAM_IPCAM;
-//    int workingCamera = goon::CameraFactory::eVIDEO_CAMPUS_HALL;
-//    int workingCamera = goon::CameraFactory::eIMAGE_CAMPUS_HALL1;
+    int workingCamera = goon::Grab::eCAM_WEBCAM;        
+//    int workingCamera = goon::Grab::eCAM_IPCAM;
+//    int workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
+//    int workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
        
-    // VISION modules
+    // shared data for VISION modules
     goon::VisualData oVisualData;    
-    // grabber module (grabs image from camera)
-    goon::Grabber oGrabber;
-    oGrabber.init(oVisualData, workingCamera);
-    oGrabber.setFrequency(30.0);
+    goon::Capture oCapture;
+    
+    // grab module (grabs images from camera)
+    goon::Grab oGrab;
+    oGrab.init(oCapture, workingCamera);
+    oGrab.setFrequency(30.0);
     // see module (retinal & peripheral vision)
     goon::See oSee;
-    oSee.init(oVisualData);
+    oSee.init(oCapture, oVisualData);
     oSee.setFrequency(20.0);    // to just wait 50ms among loops
     // launch modules
-    oGrabber.on();
+    oGrab.on();
     oSee.on();
     
     sleep(1);
-    if (oGrabber.isOff() || oSee.isOff())
+    if (oGrab.isOff() || oSee.isOff())
     {      
         LOG4CXX_ERROR(logger, "Test failed!");
         return -1;
@@ -84,25 +86,25 @@ int testVision()
     //oImageSave.setVideo(true);    
 
     // done here to avoid problems (due to undefined imageRetina on first show)
-    oVisualData.getCopyImageCam(imageCam);
+    oCapture.getImageCopy(imageCam);
     oRetinaMonitor.drawRegions(imageCam, oSee.getRetina2().getListRegions());               
     imageRetina = oRetinaMonitor.getOutput();                
     oROIsMonitor.drawRois(imageCam, oSee.getROIs2().getList());                
     imageROIs = oROIsMonitor.getOutput();                                
 
     int i= 0;
-    int frameNum = oVisualData.getFrameNum();
+    int frameNum = oCapture.getFrameNum();
     int counter = oSee.getCounter();
     while (i<100)
     {        
         //LOG4CXX_DEBUG(logger, "iteration " << i);        
         
         // wait for new grabbed frame
-        while (oVisualData.getFrameNum() == frameNum)            
+        while (oCapture.getFrameNum() == frameNum)            
             usleep(50000);
         
-        frameNum = oVisualData.getFrameNum();
-        oVisualData.getCopyImageCam(imageCam);
+        frameNum = oCapture.getFrameNum();
+        oCapture.getImageCopy(imageCam);
         
         // show processed image
         if (bmonitor)
@@ -135,8 +137,8 @@ int testVision()
     oSee.off();
     oSee.wait();
     
-    oGrabber.off();
-    oGrabber.wait();
+    oGrab.off();
+    oGrab.wait();
     
     LOG4CXX_INFO(logger, "END of test ...");
     return 0;

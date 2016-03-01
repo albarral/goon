@@ -6,8 +6,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <log4cxx/logger.h>
-
 #include "goon/camera/camera.h"
 
 namespace goon 
@@ -17,7 +15,6 @@ namespace goon
 class ImageFlow : public Camera
 {
     private:
-        static log4cxx::LoggerPtr logger;
         bool bread;     // indicates if the image has been read
         
 public:
@@ -25,10 +22,9 @@ public:
     ~ImageFlow();
 
     // emulates connection by checking the address exists
-    int connect();
-
+    virtual bool connect();
     // capture new frame
-    int grab();
+    virtual bool grab();
 
 };
 }

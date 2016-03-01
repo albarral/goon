@@ -7,7 +7,6 @@
  ***************************************************************************/
 
 #include <opencv2/highgui/highgui.hpp>            
-#include <log4cxx/logger.h>
 
 #include "goon/camera/camera.h"
 
@@ -18,18 +17,16 @@ namespace goon
 class ipCamera : public Camera
 {
 private:
-    static log4cxx::LoggerPtr logger;
     cv::VideoCapture vCapture;
 
 public:
     ipCamera (std::string saddress);
     ~ipCamera();
 
-    // connects to the camera 
-    virtual int connect();
-
+    // connect to camera 
+    virtual bool connect();
     // capture new frame
-    virtual int grab();
+    virtual bool grab();
     
     private:
         // empties the video capture buffer that was filled during the specified connecting time (in ms)

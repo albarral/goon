@@ -5,14 +5,11 @@
 
 #include "goon/camera/models/video_flow.h"
 
-using namespace log4cxx;
-
 namespace goon 
 {
-LoggerPtr VideoFlow::logger(Logger::getLogger("goon.camera"));
-
 VideoFlow::VideoFlow (std::string path)
-{
+{       
+    type = Camera::eCAM_VIDEO;
    address = path;    
 }
 
@@ -21,48 +18,26 @@ VideoFlow::~VideoFlow()
 }
 
 
-int VideoFlow::connect() 
+bool VideoFlow::connect() 
 {
-    int ret = 0;
-    
     //open the video stream and make sure it's opened
     if (vCapture.open(address))         
     {
-        bconnected = true;                
-        LOG4CXX_INFO(logger, "connection ok - " << address);
-                
         if (vCapture.read(image))
         {
             img_w = image.cols;
             img_h = image.rows;            
         }
-        LOG4CXX_INFO(logger, "capture size = " << img_w << "x" << img_h);
+        return true;
     }
     else
-    {
-        ret = -1;
-        LOG4CXX_ERROR(logger, "connection failed - " << address);
-    }
-
-    return ret;
+        return false;
 }
 
 
-int VideoFlow::grab() 
+bool VideoFlow::grab() 
 {
-    int ret = 0;
-    
-    if (vCapture.read(image)) 
-    {
-        LOG4CXX_TRACE(logger, "frame " << counter);
-    }
-    else 
-    {
-        ret = -1;
-        LOG4CXX_ERROR(logger, "grab error!");
-    }
-        
-    counter ++;
-    return ret;
+    return (vCapture.read(image));
 }
+
 }

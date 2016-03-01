@@ -36,9 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/test/Module.o \
-	${OBJECTDIR}/src/goon/test/camera_factory.o \
 	${OBJECTDIR}/src/goon/test/main.o \
-	${OBJECTDIR}/src/goon/test/modules/Grabber.o \
+	${OBJECTDIR}/src/goon/test/modules/Grab.o \
 	${OBJECTDIR}/src/goon/test/modules/See.o
 
 
@@ -85,20 +84,15 @@ ${OBJECTDIR}/src/goon/test/Module.o: src/goon/test/Module.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/Module.o src/goon/test/Module.cpp
 
-${OBJECTDIR}/src/goon/test/camera_factory.o: src/goon/test/camera_factory.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/test
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/camera_factory.o src/goon/test/camera_factory.cpp
-
 ${OBJECTDIR}/src/goon/test/main.o: src/goon/test/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/main.o src/goon/test/main.cpp
 
-${OBJECTDIR}/src/goon/test/modules/Grabber.o: src/goon/test/modules/Grabber.cpp 
+${OBJECTDIR}/src/goon/test/modules/Grab.o: src/goon/test/modules/Grab.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test/modules
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/modules/Grabber.o src/goon/test/modules/Grabber.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/modules/Grab.o src/goon/test/modules/Grab.cpp
 
 ${OBJECTDIR}/src/goon/test/modules/See.o: src/goon/test/modules/See.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test/modules

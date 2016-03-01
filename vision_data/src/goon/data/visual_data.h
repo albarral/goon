@@ -6,8 +6,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <mutex>
-
 #include "opencv2/core/core.hpp"
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
@@ -17,26 +15,14 @@ namespace goon
 class VisualData
 {
     private:
-        std::mutex mutex_img;
-        cv::Mat imageCam;       // image from camera
-        int frame_num;             // frame number  
         Retina oRetina;             // dynamic retina   
         //Retina oRetina2;          // static retina
-        Rois oROIs;        
+        Rois oROIs;                   // regions of interest (output of peripheral vision module)
         
     public:
         VisualData();
         ~VisualData();
                 
-        // updates the imageCam and frame number (making a copy of the given image)
-        void newFrame(cv::Mat& image);
-        
-        cv::Mat& getImageCam();
-        
-        void getCopyImageCam(cv::Mat& imageOut);
-        
-        int getFrameNum();
-        
         Retina& getRetina() {return oRetina;};
 
         Rois& getROIs() {return oROIs;};          

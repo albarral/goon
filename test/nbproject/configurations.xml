@@ -14,15 +14,13 @@
                    projectFiles="true">
       <logicalFolder name="test" displayName="test" projectFiles="true">
         <logicalFolder name="modules" displayName="modules" projectFiles="true">
-          <itemPath>src/goon/test/modules/Grabber.cpp</itemPath>
-          <itemPath>src/goon/test/modules/Grabber.h</itemPath>
+          <itemPath>src/goon/test/modules/Grab.cpp</itemPath>
+          <itemPath>src/goon/test/modules/Grab.h</itemPath>
           <itemPath>src/goon/test/modules/See.cpp</itemPath>
           <itemPath>src/goon/test/modules/See.h</itemPath>
         </logicalFolder>
         <itemPath>src/goon/test/Module.cpp</itemPath>
         <itemPath>src/goon/test/Module.h</itemPath>
-        <itemPath>src/goon/test/camera_factory.cpp</itemPath>
-        <itemPath>src/goon/test/camera_factory.h</itemPath>
         <itemPath>src/goon/test/main.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
@@ -163,15 +161,11 @@
       </item>
       <item path="src/goon/test/Module.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/test/camera_factory.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/test/camera_factory.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/test/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/test/modules/Grabber.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/test/modules/Grab.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/test/modules/Grabber.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/test/modules/Grab.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/test/modules/See.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -202,15 +196,11 @@
       </item>
       <item path="src/goon/test/Module.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/test/camera_factory.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/test/camera_factory.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/test/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/test/modules/Grabber.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/test/modules/Grab.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/test/modules/Grabber.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/test/modules/Grab.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/test/modules/See.cpp" ex="false" tool="1" flavor2="0">
       </item>

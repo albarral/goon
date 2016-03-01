@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/camera/Grabber.o \
 	${OBJECTDIR}/src/goon/camera/camera.o \
 	${OBJECTDIR}/src/goon/camera/models/image_flow.o \
 	${OBJECTDIR}/src/goon/camera/models/ip_camera.o \
@@ -56,43 +57,51 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lopencv_core -lopencv_highgui -llog4cxx
+LDLIBSOPTIONS=-Wl,-rpath,../vision_data/dist/Debug/GNU-Linux -L../vision_data/dist/Debug/GNU-Linux -lgoon_data -lopencv_core -lopencv_highgui -llog4cxx
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_camera.${CND_DLIB_EXT}
 
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_camera.${CND_DLIB_EXT}: ../vision_data/dist/Debug/GNU-Linux/libgoon_data.so
+
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_camera.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_camera.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
+${OBJECTDIR}/src/goon/camera/Grabber.o: src/goon/camera/Grabber.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/camera
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/Grabber.o src/goon/camera/Grabber.cpp
+
 ${OBJECTDIR}/src/goon/camera/camera.o: src/goon/camera/camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/camera
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/camera.o src/goon/camera/camera.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/camera.o src/goon/camera/camera.cpp
 
 ${OBJECTDIR}/src/goon/camera/models/image_flow.o: src/goon/camera/models/image_flow.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/camera/models
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/image_flow.o src/goon/camera/models/image_flow.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/image_flow.o src/goon/camera/models/image_flow.cpp
 
 ${OBJECTDIR}/src/goon/camera/models/ip_camera.o: src/goon/camera/models/ip_camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/camera/models
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/ip_camera.o src/goon/camera/models/ip_camera.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/ip_camera.o src/goon/camera/models/ip_camera.cpp
 
 ${OBJECTDIR}/src/goon/camera/models/video_flow.o: src/goon/camera/models/video_flow.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/camera/models
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/video_flow.o src/goon/camera/models/video_flow.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/video_flow.o src/goon/camera/models/video_flow.cpp
 
 ${OBJECTDIR}/src/goon/camera/models/web_camera.o: src/goon/camera/models/web_camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/camera/models
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/web_camera.o src/goon/camera/models/web_camera.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/models/web_camera.o src/goon/camera/models/web_camera.cpp
 
 # Subprojects
 .build-subprojects:
+	cd ../vision_data && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -101,6 +110,7 @@ ${OBJECTDIR}/src/goon/camera/models/web_camera.o: src/goon/camera/models/web_cam
 
 # Subprojects
 .clean-subprojects:
+	cd ../vision_data && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

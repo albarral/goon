@@ -30,9 +30,9 @@ See::~See()
         delete(oPeripheralVision);    
 }
   
-void See::init(VisualData& oVisualData)
+void See::init(Capture& oCapture, VisualData& oVisualData)
 {
-    // get shared visual data
+    pCapture = &oCapture;
     pVisualData = &oVisualData;  
     oRetinalVision = new RetinalVision(oVisualData.getRetina());
     oPeripheralVision = new PeripheralVision(oVisualData.getRetina(), oVisualData.getROIs());
@@ -54,7 +54,7 @@ void See::first()
         
         // set sizes for retinal vision
         wait4ValidImage();
-        pVisualData->getCopyImageCam(imageCam);
+        pCapture->getImageCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
         oRetinalVision->init(imageCam.cols, imageCam.rows); // w, h
         oClick.start();
@@ -75,7 +75,7 @@ void See::bye()
 void See::loop()
 {   
     // get copy of last camera image
-    pVisualData->getCopyImageCam(imageCam);
+    pCapture->getImageCopy(imageCam);            
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision->update(imageCam);    
@@ -100,7 +100,7 @@ void See::wait4ValidImage()
 {
     LOG4CXX_INFO(logger, "waiting for first image");     
     // wait for new grabbed frame (50ms waits)
-    while (pVisualData->getFrameNum() == 0)            
+    while (pCapture->getFrameNum() == 0)            
         usleep(50000);
 }
 

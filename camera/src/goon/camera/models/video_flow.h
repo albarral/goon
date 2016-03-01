@@ -7,7 +7,6 @@
  ***************************************************************************/
 
 #include <opencv2/opencv.hpp>
-#include <log4cxx/logger.h>
 
 #include "goon/camera/camera.h"
 
@@ -18,18 +17,16 @@ namespace goon
 class VideoFlow : public Camera
 {
 private:
-    static log4cxx::LoggerPtr logger;
     cv::VideoCapture vCapture;
 
 public:
     VideoFlow (std::string path);
     ~VideoFlow();
 
-    // connects to the video file
-    int connect();
-
+    // connect to camera 
+    virtual bool connect();
     // capture new frame
-    int grab();
+    virtual bool grab();
 };
 }	
 #endif

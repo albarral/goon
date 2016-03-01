@@ -14,6 +14,7 @@
 #include "goon/test/Module.h"
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/peripheral_vision.h"
+#include "goon/data/capture.h"
 #include "goon/data/visual_data.h"
 #include "goon/data/retina.h"   // for debug
 #include "goon/data/rois.h"     // for debug
@@ -37,6 +38,7 @@ private:
     bool binitialized;
     RetinalVision* oRetinalVision;
     PeripheralVision* oPeripheralVision;
+    Capture* pCapture;              // shared data
     VisualData* pVisualData;        // shared data
     cv::Mat imageCam;
      // processing speed
@@ -53,7 +55,7 @@ public:
     ~See();
     
     // initializes the module 
-    void init(VisualData& oVisualData);   
+    void init(Capture& oCapture, VisualData& oVisualData);   
     
     // all mutex protected
     int getCounter();

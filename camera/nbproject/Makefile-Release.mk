@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/camera/Grabber.o \
 	${OBJECTDIR}/src/goon/camera/camera.o \
 	${OBJECTDIR}/src/goon/camera/models/image_flow.o \
 	${OBJECTDIR}/src/goon/camera/models/ip_camera.o \
@@ -65,6 +66,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libcamera.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libcamera.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/goon/camera/Grabber.o: src/goon/camera/Grabber.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/camera
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/camera/Grabber.o src/goon/camera/Grabber.cpp
 
 ${OBJECTDIR}/src/goon/camera/camera.o: src/goon/camera/camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/camera

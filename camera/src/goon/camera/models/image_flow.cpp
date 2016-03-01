@@ -7,14 +7,11 @@
 
 #include "goon/camera/models/image_flow.h"
 
-using namespace log4cxx;
-
 namespace goon 
 {
-LoggerPtr ImageFlow::logger(Logger::getLogger("goon.camera"));
-
 ImageFlow::ImageFlow (std::string path)
-{        
+{                
+    type = Camera::eCAM_IMAGE;
     address = path;    
     bread = false;
 }
@@ -24,46 +21,29 @@ ImageFlow::~ImageFlow()
 }
 
 
-int ImageFlow::connect() 
+bool ImageFlow::connect() 
 {
-    int ret = 0;
-
     image = cv::imread(address);
 
     if (image.data != NULL) 
     {
-        bconnected = true;
         bread = true;
         img_w = image.cols;       
         img_h = image.rows;            
-        LOG4CXX_INFO(logger, "connection ok - " << address);
-        LOG4CXX_INFO(logger, "capture size = " << img_w << "x" << img_h);
+        return true;
     }
     else
-    {
-        ret = -1;
-        LOG4CXX_ERROR(logger, "connection failed - " << address);
-    }
-    
-    return ret;
+        return false;
 }
 
 
-int ImageFlow::grab() 
+bool ImageFlow::grab() 
 {
-    int ret = 0;
-        
     // just need to read it once, in connect function
     if (!bread) 
     {
-        ret = connect();
+        image = cv::imread(address);
     }
-    else 
-    {
-        LOG4CXX_TRACE(logger, "frame " << counter);
-    }
-
-    counter ++;
-    return ret;
+    return true;
 }
 }
