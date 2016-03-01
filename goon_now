@@ -1,15 +1,21 @@
 
 February 2016
 
-I'm working in the peripheral vision system now.
+> Present task: new merge (retinal vision)
 
-It's being redesigned to use it for movement perception. 
+The multi-threaded segmentation produces image oversegmentation. 
+
+Therefore, the merge stage has to be recovered (was disabled long time ago).
+
+Merge to be updated and tested.
+
+
+> Next task: new peripheral vision
+
+Redesigned to use it for movement perception. 
 
 It relies on the following assumption:
-- changes in the real world are continuous 
-- that's because object movements are also continuous
-- so, if frames are processed fast enough, extracted regions will keep similar color, shape and position in consecutive frames
+- changes in the real world are continuous because object movements are continuous
+- if frames processed fast enough, regions will keep similar color, shape and position in consecutive frames
 
-Tasks:
 
-- monitor old peripheral vision system 
