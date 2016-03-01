@@ -60,6 +60,10 @@ public:
     cv::Rect& getRegionWindow();
     cv::Vec3f& getRegionColor();
     
+    // gets region grid from color grid
+    cv::Mat getRegionGrid();
+
+    
 private:
     // shows the present state of the segmentation process in an image for debugging (segmented pixels, computed colors ...)  
     //void showProgress();

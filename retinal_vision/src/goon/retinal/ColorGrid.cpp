@@ -248,4 +248,10 @@ int ColorGrid::checkType(int row, int col)
     return type;
 }
 
+cv::Mat ColorGrid::getSamplesGrid()
+{
+    cv::Mat planes[2];
+    cv::split(grid_data, planes);  
+    return planes[0];
+}
 }

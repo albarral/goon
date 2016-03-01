@@ -18,17 +18,18 @@ class Merge
 {
 private:
         static log4cxx::LoggerPtr logger;
-        int GAP;                // maximum separation (pixels) between regions to allow them merging
-        cv::Mat mat_proximity;
-        std::set<int> set_regions;   // set of regions to form a collection (automatically avoids duplications)
+        int proximityGAP;                // maximum separation (pixels) between regions to allow them merging
+        cv::Mat maskCollection;     // mask used to build collections
+        cv::Mat mat_proximity;       // matrix used to associate regions to be merged   
+        std::set<int> setCollectionRegions;   // set of regions to form a collection (automatically avoids duplications)
 
 public:
     Merge ();
     ~Merge ();
 
     // change of parameters
-    void setSizes (int img_w, int img_h);
-    void setGap(int value) {GAP = value;};
+    void init (int img_w, int img_h);
+    void setGap(int value);;
     
     int doMerge (Retina& oRetina);
     // This function merges all adjacent regions with similar color.
@@ -50,6 +51,9 @@ private:
         
     // (Recurrent function) Iteratively builds the list of regions that are to be merged with the specified one.
     void checkRegions2Merge (int regionID);
+    
+    // updates the collection mask with the specified region
+    void updateCollectionMask(Region& oRegion);
 };
   		  	     
 }  

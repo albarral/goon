@@ -57,6 +57,8 @@ public:
     cv::Mat& getLocalGrid() {return grid_local_rgb;}    
     cv::Mat& getMaskSamples() {return mask_samples;}
        
+    // extracts samples channel from grid_data
+    cv::Mat getSamplesGrid();
         
 private:
     // Notifies the neighbour nodes about a local color change.

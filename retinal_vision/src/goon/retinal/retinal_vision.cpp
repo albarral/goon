@@ -7,6 +7,7 @@
 #include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
 
 #include "goon/retinal/retinal_vision.h"
+#include <goon/data/goon_version.h>
 #include <goon/data/base/region.h>
 #include <goon/utils/rgb_color.h>
 #include <goon/utils/shape.h>
@@ -19,7 +20,8 @@ LoggerPtr RetinalVision::logger(Logger::getLogger("goon.retinal"));
 
 
 RetinalVision::RetinalVision (Retina& oRetina) : mRetina(oRetina)
-{
+{        
+    LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Retinal vision");
 }
 
 RetinalVision::~RetinalVision()
@@ -29,6 +31,7 @@ RetinalVision::~RetinalVision()
 void RetinalVision::init(int img_w, int img_h)
 {
     oSegmentation4.init(mRetina, img_w, img_h);
+    oMerge.init(img_w, img_h);
 }
 
 // This function changes main parameters of the retinal vision system.
@@ -72,6 +75,7 @@ void RetinalVision::computeCovariances()
     while (it_region != it_end)
     {
         Region& oRegion = mRetina.getRegion(*it_region);               
+        //LOG4CXX_DEBUG(logger, "region = " << oRegion.toString());
         
         Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
 

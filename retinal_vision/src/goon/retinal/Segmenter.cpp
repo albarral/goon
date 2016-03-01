@@ -41,7 +41,7 @@ void Segmenter::init(Retina& oRetina, cv::Mat& mask_segmented)
 {            
     LOG4CXX_INFO(logger, "init Segmenter " << ID);
     pRetina = &oRetina;    
-    mask_segmented2 = mask_segmented;
+    mask_segmented2 = mask_segmented; // shallow copy, as all segmenters need access to shared mask segmented
     oFloodfiller.init(mask_segmented);
     binitialized = true;
 }
@@ -159,7 +159,7 @@ void Segmenter::extractRegions ()
                 oRegion.setType(Region::eREG_SIMPLE); 
                 oRegion.setMass(region_size);
                 oRegion.createMask(oFloodfiller.getRegionMask(), oFloodfiller.getRegionWindow());
-                //oRegion.setGrid(oColorGrid.getSamplesGrid());
+                oRegion.setGrid(oFloodfiller.getRegionGrid());
                 oRegion.setRGB(oFloodfiller.getRegionColor());	
                 RGBColor::toHSV(oRegion.getRGB(), oRegion.getHSV());
                 oRegion.setSeed(*it_seed);

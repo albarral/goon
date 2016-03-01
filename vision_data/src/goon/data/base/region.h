@@ -6,6 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <string>
 #include "opencv2/core/core.hpp"
 
 #include "goon/data/base/blob.h"
@@ -70,7 +71,7 @@ public:
         
     // grows this region by absorbing a new one 
     void growRegion(Region& oRegion2);
-
+    
     // support function to sort regions by ID
     static bool sortBySize (const Region& oRegion1, const Region& oRegion2);    
     
@@ -79,6 +80,11 @@ public:
     
     // creates a dummy red rectangular region of size 200 x 100
     void createDummy();
+
+    // returns all region values in string form
+    virtual std::string toString();    
+    // returns name of region type
+    std::string getTypeName();  
  };
  }
 

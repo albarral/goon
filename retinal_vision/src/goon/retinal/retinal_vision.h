@@ -10,7 +10,6 @@
 #include <log4cxx/logger.h>
 
 #include <goon/data/retina.h>
-//#include "goon/retinal/segmentation3.h"
 #include "goon/retinal/segmentation.h"
 #include "goon/retinal/merge.h"
 
@@ -21,7 +20,6 @@ class RetinalVision
 private:
         static log4cxx::LoggerPtr logger;
         Retina& mRetina;
-//        Segmentation oSegmentation;
         Segmentation4 oSegmentation4;
         Merge oMerge;
 

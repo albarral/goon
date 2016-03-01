@@ -172,6 +172,11 @@ cv::Vec3f& Floodfiller::getRegionColor()
     return (oColorGrid.getColorMean());	
 }
 
+cv::Mat Floodfiller::getRegionGrid()
+{
+    return oColorGrid.getSamplesGrid();    
+}
+
 //void Floodfiller::showProgress()
 //{
 //    // compute present mask, window and color

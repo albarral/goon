@@ -6,6 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <string>
 #include <opencv2/core/core.hpp>
 
 namespace goon 
@@ -44,6 +45,8 @@ public:
     void merge (Blob& oBlob2);
     // updates all blob values with those of another blob
     void updateBlob(Blob& oBlob2);
+    // returns all blob values in string form
+    virtual std::string toString();
  }; 
 }
 

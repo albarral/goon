@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "goon/retinal/merge.h"
+#include "goon/retinal/ConfigRetinal.h"
 #include <goon/data/base/region.h>
 #include "goon/utils/rgb_color.h"
 #include <goon/utils/distance.h>
@@ -19,7 +20,8 @@ LoggerPtr Merge::logger(Logger::getLogger("goon.retinal"));
 // Constructor
 Merge::Merge()
 {        
-    GAP = 10;   // default gap = 10 pixels
+    ConfigRetinal oConfigRetinal;
+    proximityGAP = oConfigRetinal.getMergeProximityGap();   // default gap = 10 pixels
 }
 
 
@@ -28,6 +30,13 @@ Merge::~Merge()
 {
 }
 
+void Merge::init(int img_w, int img_h)
+{        
+    LOG4CXX_DEBUG(logger, "init ...");
+
+    // create the collection mask 
+    maskCollection = cv::Mat::zeros(img_h, img_w, CV_8UC1); 
+}
 
 // This function merges all adjacent regions with similar color.
 int Merge::doMerge (Retina& oRetina)
@@ -35,10 +44,10 @@ int Merge::doMerge (Retina& oRetina)
     int created_regions;
 	
     // check which regions can be merged
-    checkProximityMerge (oRetina);
+    checkProximityMerge(oRetina);
 
     // Merge all mergeable regions by proximity
-    created_regions = mergeRegions (oRetina);
+    created_regions = mergeRegions(oRetina);
 
     LOG4CXX_INFO(logger, "Created regions = " << created_regions);
 
@@ -51,14 +60,13 @@ int Merge::doMerge (Retina& oRetina)
 // This function checks if there are nearby regions with similar color that can be merged. 
 void Merge::checkProximityMerge (Retina& oRetina)
 {
-    cv::Rect window1_exp;       // expanded window of region 1
-    cv::Rect window2_exp;       // expanded window of region 2
-    cv::Rect window_int;          // intersection window
+    cv::Rect window1;       // expanded window of region 1
+    cv::Rect window2;       // expanded window of region 2
+    cv::Rect wintersection;          // intersection window
     cv::Size2i expansion;
-    int row, col;
     float SQR_SAME = RGBColor::getSqrSameDist();
     
-    expansion.width = expansion.height = GAP;    
+    expansion.width = expansion.height = proximityGAP;    
     
     int num_regions = oRetina.getNumRegions();
     mat_proximity = cv::Mat::zeros(num_regions, num_regions, CV_8UC1);    
@@ -70,7 +78,7 @@ void Merge::checkProximityMerge (Retina& oRetina)
     while (it_region1 != list_end)
     {
         // expand region1's window
-        window1_exp = it_region1->getWindow() + expansion;
+        window1 = it_region1->getWindow() + expansion;
 
         // check against the rest of regions
         std::vector<Region>::iterator it_region2 = it_region1;
@@ -78,23 +86,22 @@ void Merge::checkProximityMerge (Retina& oRetina)
         while (it_region2 != list_end)
         {		
             // expand region2's window
-            window2_exp = it_region2->getWindow() + expansion;
-
+            window2 = it_region2->getWindow() + expansion;
             // compute intersection of both windows
-            window_int = window1_exp & window2_exp;
+            wintersection = window1 & window2;
 
             // if windows overlap
-            if (window_int.width != 0  &&  window_int.height != 0)
+            if (wintersection.width != 0  &&  wintersection.height != 0)
             {
                 // and region grids overlap ...
-                if (checkGridsOverlap (it_region1->getGrid(), it_region2->getGrid()))
-                {	
+                if (checkGridsOverlap(it_region1->getGrid(), it_region2->getGrid()))
+                {
                     // and color is the same -> mark regions for merging
                     if (Distance::getEuclidean3s(it_region1->getRGB(), it_region2->getRGB()) < SQR_SAME) 
                     {
                         it_region1->setMerge(true);
                         it_region2->setMerge(true);
-
+                        
                         // make a cross in the proximity matrix (with symmetry)
                         mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
                         mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;
@@ -145,22 +152,17 @@ int Merge::mergeRegions (Retina& oRetina)
 {
     int num_collections = 0;
 
-    std::vector<Region>::iterator it_region = oRetina.getListRegions().begin();
-    std::vector<Region>::iterator list_end = oRetina.getListRegions().end();
-
    // for each region in the list
-    while (it_region != list_end)
+    for (Region& oRegion: oRetina.getListRegions()) 
     {
         // if region is to be merged & has simple type (not absorbed by other collection)
-        if (it_region->is2Merge() && it_region->getType() == Region::eREG_SIMPLE)
+        if (oRegion.is2Merge() && oRegion.getType() == Region::eREG_SIMPLE)
         {		
             // create a new collection
-            createCollection(*it_region, oRetina);            
+            createCollection(oRegion, oRetina);            
             
             num_collections++;            
         } 
-        
-        it_region++;
     } 
 
     return(num_collections);  
@@ -169,57 +171,70 @@ int Merge::mergeRegions (Retina& oRetina)
 
 // Creates a collection by merging a set of regions into the specified base region.
 void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
-{    
-    // The base region becomes a collection
+{  
+    LOG4CXX_DEBUG(logger, "new collection " << oBaseRegion.getID());
+    
+    // reset collection mask and list
+    maskCollection.setTo(0);
+    setCollectionRegions.clear();
+    
+    // the base region becomes a collection
     oBaseRegion.setType(Region::eREG_COLLECTION);
 
-    // init the list of regions to merge (with the base region)
-    set_regions.clear();
-    set_regions.insert(oBaseRegion.getID());
-
+    // start collection with the base region
+    setCollectionRegions.insert(oBaseRegion.getID()); // otherwise will be reflexively included
+    updateCollectionMask(oBaseRegion);
+            
     // expand the list with more regions
     checkRegions2Merge(oBaseRegion.getID());
 
    // for each region in the list
-    std::set<int>::iterator it_mergeID = set_regions.begin();
-    while (it_mergeID != set_regions.end())
+    for (int regionID: setCollectionRegions) 
     {
-        Region& oRegion = oRetina.getRegion(*it_mergeID);               
+        Region& oRegion = oRetina.getRegion(regionID);               
         
         // add a new region to the collection (avoid self merging)
         if (oRegion.getID() != oBaseRegion.getID())
         {		
-            oBaseRegion.growRegion(oRegion);
-                    
+            LOG4CXX_DEBUG(logger, "add region " << oRegion.getID());
+            // merge blob info (color, covs, window, mass))
+            oBaseRegion.merge(oRegion);
+            // grow collection mask (with original window)
+            updateCollectionMask(oRegion);                    
             // and mark it as merged
             oRegion.setType(Region::eREG_MERGED);
         }
-        
-        it_mergeID++;
-    } 
-                    
-    // set the collection's final HSV color & position
-    RGBColor::toHSV(oBaseRegion.getRGB(), oBaseRegion.getHSV());
+    }
+    
+    oBaseRegion.createMask(maskCollection, oBaseRegion.getWindow());
 }
 
 
-void Merge::checkRegions2Merge (int baseID)
+void Merge::checkRegions2Merge(int baseID)
 {      
-    std::pair<std::set<int>::iterator, bool> result;
-    int cols = mat_proximity.cols;
-
-    uchar* Row = mat_proximity.ptr(baseID);
+    int presize;
+    cv::Mat matRow = mat_proximity.row(baseID);      
+    
     // check which regions are to be merged with the base one
-    for (int regionID=0; regionID<cols; regionID++)
+    for (int j=0; j<mat_proximity.cols; j++)
     {
-        if (regionID != baseID && Row[regionID] == 1)
+        if (matRow.at<uchar>(j) == 1)
         {
-            result = set_regions.insert(regionID);
-            // recall this function for each region to merge
-            if (result.second == true)
-                checkRegions2Merge(regionID);
+            presize = setCollectionRegions.size();
+            setCollectionRegions.insert(j);
+            // if region added to collection (not rejected for repeated) recall this function for each region to merge
+            if (setCollectionRegions.size() > presize)
+                checkRegions2Merge(j);
         }
     }	
+}
+
+void Merge::updateCollectionMask(Region& oRegion)
+{
+    cv::Mat roiCollection;
+    // set roi and copy data
+    roiCollection = maskCollection(oRegion.getWindow());
+    roiCollection = oRegion.getMask();    
 }
 
 }

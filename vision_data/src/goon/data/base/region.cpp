@@ -102,7 +102,6 @@ void Region::growRegion(Region& oRegion2)
     mass += oRegion2.mass;
 }
 
-
 bool Region::sortBySize(const Region& oRegion1, const Region& oRegion2) 
 {
     return (oRegion1.mass < oRegion2.mass);
@@ -128,5 +127,35 @@ void Region::createDummy()
     setRGB(color);
     createMask(mask, rect);
     setPos(w/2, h/2);
+}
+
+std::string Region::toString()
+{
+    std::string desc = "Region [ID = " + std::to_string(ID) +
+            ", type = " + getTypeName() +
+            ", mask = " + std::to_string(mask.cols) + "x" + std::to_string(mask.rows) +
+            ", grid = " + std::to_string(grid.cols) + "x" + std::to_string(grid.rows) +
+            ", merge = " + (bmerge ? "1":"0") + 
+            "]" + "\n" +
+            Blob::toString();
+    return desc;
+}
+
+std::string Region::getTypeName()
+{
+    std::string name;
+    switch (type)
+    {
+        case Region::eREG_SIMPLE:
+            name = "simple";
+            break;
+        case Region::eREG_MERGED:
+            name = "merged";
+            break;
+        case Region::eREG_COLLECTION:
+            name = "collection";
+            break;
+    }
+    return name;
 }
 }
