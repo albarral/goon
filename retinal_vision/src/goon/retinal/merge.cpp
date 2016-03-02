@@ -41,17 +41,17 @@ void Merge::init(int img_w, int img_h)
 // This function merges all adjacent regions with similar color.
 int Merge::doMerge (Retina& oRetina)
 {
-    int created_regions;
+    int collections;
 	
     // check which regions can be merged
     checkProximityMerge(oRetina);
 
     // Merge all mergeable regions by proximity
-    created_regions = mergeRegions(oRetina);
+    collections = mergeRegions(oRetina);
 
-    LOG4CXX_INFO(logger, "Created regions = " << created_regions);
+    LOG4CXX_DEBUG(logger, "collections = " << collections);
 
-    return(created_regions);
+    return(collections);
 }
 					
 
@@ -172,7 +172,7 @@ int Merge::mergeRegions (Retina& oRetina)
 // Creates a collection by merging a set of regions into the specified base region.
 void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
 {  
-    LOG4CXX_DEBUG(logger, "new collection " << oBaseRegion.getID());
+    LOG4CXX_TRACE(logger, "new collection " << oBaseRegion.getID());
     
     // reset collection mask and list
     maskCollection.setTo(0);
@@ -196,7 +196,7 @@ void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
         // add a new region to the collection (avoid self merging)
         if (oRegion.getID() != oBaseRegion.getID())
         {		
-            LOG4CXX_DEBUG(logger, "add region " << oRegion.getID());
+            LOG4CXX_TRACE(logger, "add region " << oRegion.getID());
             // merge blob info (color, covs, window, mass))
             oBaseRegion.merge(oRegion);
             // grow collection mask (with original window)
@@ -206,7 +206,8 @@ void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
         }
     }
     
-    oBaseRegion.createMask(maskCollection, oBaseRegion.getWindow());
+    oBaseRegion.createMask(maskCollection, oBaseRegion.getWindow());           
+    //LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
 }
 
 

@@ -56,18 +56,19 @@ void RetinalVision::update (cv::Mat& image_cam)
 
     oSegmentation4.extractRegions(image_cam, image_hsv);
 
-    //oMerge.doMerge(mRetina);
+    oMerge.doMerge(mRetina);
 
     mRetina.buildListFinalIDs();
 
-    LOG4CXX_DEBUG(logger, "regions = " << mRetina.getNumFinalIDs());
+    LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
+    describeRegions();
     LOG4CXX_TRACE(logger, "update - end");
 }
 
 
 void RetinalVision::computeCovariances()
 {    
-    LOG4CXX_TRACE(logger, "compute shapes");
+    LOG4CXX_DEBUG(logger, "compute shapes ...");
 
     std::vector<int>::iterator it_region = mRetina.getListFinalIDs().begin();
     std::vector<int>::iterator it_end = mRetina.getListFinalIDs().end();
@@ -75,12 +76,21 @@ void RetinalVision::computeCovariances()
     while (it_region != it_end)
     {
         Region& oRegion = mRetina.getRegion(*it_region);               
-        //LOG4CXX_DEBUG(logger, "region = " << oRegion.toString());
+        LOG4CXX_DEBUG(logger, "region = " << oRegion.toString());
         
         Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
 
         it_region++;
     }    
+}
+
+void RetinalVision::describeRegions()
+{
+    LOG4CXX_DEBUG(logger, "regions description ...");
+    for (Region& oRegion: mRetina.getListRegions()) 
+    {
+        LOG4CXX_DEBUG(logger, oRegion.shortDesc());
+    } 
 }
 
 }

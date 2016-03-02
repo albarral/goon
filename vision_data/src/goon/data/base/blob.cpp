@@ -45,7 +45,7 @@ std::string Blob::toString()
             ", covs = (" + std::to_string((int)covs[0]) + "," + std::to_string((int)covs[1]) + "," + std::to_string((int)covs[2]) + ")" +
             ", rgb = (" + std::to_string((int)rgb_color[0]) + "," + std::to_string((int)rgb_color[1]) + "," + std::to_string((int)rgb_color[2]) + ")" +
             ", hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ")" +
-            ", window = (" + std::to_string(window.x) + "," + std::to_string(window.x) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ")" +
+            ", window = (" + std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ")" +
             "]";
     return desc;
 }

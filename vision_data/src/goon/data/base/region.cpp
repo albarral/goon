@@ -141,6 +141,13 @@ std::string Region::toString()
     return desc;
 }
 
+std::string Region::shortDesc()
+{
+    return (std::to_string(ID) + ": " + std::to_string(mass) + " " + 
+            std::to_string(mask.cols) + "x" + std::to_string(mask.rows) + 
+             " \t\t hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ") - " + getTypeName() );
+}
+
 std::string Region::getTypeName()
 {
     std::string name;

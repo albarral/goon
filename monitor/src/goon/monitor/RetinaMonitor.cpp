@@ -25,6 +25,7 @@ void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::vector<Region>& listRe
     {
         // ignore merged regions
         if (it_region->getType() != Region::eREG_MERGED) 
+        //if (it_region->getType() == Region::eREG_COLLECTION) 
         {  
             // draw masks
             oDraw.setExactColor(it_region->getRGB());
@@ -32,7 +33,10 @@ void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::vector<Region>& listRe
             // draw centroids
             int* pos = it_region->getPos();
             cv::Point centroid(pos[0], pos[1]);            
-            oDraw.drawPoint(centroid);
+            if (it_region->is2Merge())
+                oDraw.drawPoint(centroid, Draw::eRED, 3);
+            else
+                oDraw.drawPoint(centroid);
             // draw ID's
 //            int ID = it_region->getID();
 //            oDrawRet.drawNumber(ID, centroid);                        

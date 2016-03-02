@@ -79,9 +79,9 @@ void See::loop()
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision->update(imageCam);    
-    oRetinalVision->computeCovariances();         
-    LOG4CXX_DEBUG(logger, "peripheral ... ");
-    oPeripheralVision->update();    
+    //oRetinalVision->computeCovariances();         
+    //LOG4CXX_DEBUG(logger, "peripheral ... ");
+    //oPeripheralVision->update();    
     
     // stores retina info for debugging purpose
     std::lock_guard<std::mutex> locker(mutex);
@@ -126,6 +126,14 @@ float See::getFps()
 {
     std::lock_guard<std::mutex> locker(mutex);
     return fps;    
+}
+
+// just one loop exectution (for testing)
+void See::oneShot()
+{
+    LOG4CXX_INFO(logger, "See - one shot");     
+    first();
+    loop();
 }
 
 }

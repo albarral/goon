@@ -62,7 +62,10 @@ public:
     Retina& getRetina2();    
     Rois& getROIs2();
     float getFps();
-       
+
+    // just one loop exectution (for testing)
+    void oneShot();       
+
 private:
     // first action after thread begins 
     virtual void first();

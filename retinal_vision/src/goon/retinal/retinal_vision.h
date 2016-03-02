@@ -35,15 +35,14 @@ public:
 
     void update(cv::Mat& image_cam);
     // This function performs the retinal vision process.
-    // 	It detects homogenous color regions in the captured image which will be later used by higher vision processes.
-    // The function returns the number of detected regions.
+    // It detects homogenous color regions in the captured image which will be later used by higher vision processes.
 
     // computes the covariances of the final retinal regions
     void computeCovariances();
 
-    void drawRegions (IplImage* image);
-  // This function saves an image of each segmented retinal region.
-
+private:    
+    // logs a short description of all extracted regions
+    void describeRegions ();
 };
 
 }  

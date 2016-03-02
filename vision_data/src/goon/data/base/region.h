@@ -83,6 +83,8 @@ public:
 
     // returns all region values in string form
     virtual std::string toString();    
+    // returns short region description
+    std::string shortDesc();    
     // returns name of region type
     std::string getTypeName();  
  };

@@ -20,8 +20,11 @@
 
 #include "goon/monitor/RetinaMonitor.h"
 #include "goon/monitor/ROIsMonitor.h"
+#include "goon/monitor/RetinaSaver.h"
 #include "goon/show/DualWindow.h"
 //#include "goon/show/ImageSave.h"
+
+#define ONE_SHOT_TEST
 
 static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.test"));
 
@@ -42,11 +45,12 @@ int testVision()
 {        
     LOG4CXX_INFO(logger, "\n\nTESTING goon VISION ...\n");
     bool bmonitor = true;       // monitor vision
+    bool btestOneShow = true;   // test one show See
 
-    int workingCamera = goon::Grab::eCAM_WEBCAM;        
+//    int workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    int workingCamera = goon::Grab::eCAM_IPCAM;
 //    int workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-//    int workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
+    int workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
        
     // shared data for VISION modules
     goon::VisualData oVisualData;    
@@ -62,14 +66,24 @@ int testVision()
     oSee.setFrequency(20.0);    // to just wait 50ms among loops
     // launch modules
     oGrab.on();
+#ifndef ONE_SHOT_TEST
     oSee.on();
+#endif
     
     sleep(1);
+#ifndef ONE_SHOT_TEST
     if (oGrab.isOff() || oSee.isOff())
+#else
+        if (oGrab.isOff())
+#endif            
     {      
         LOG4CXX_ERROR(logger, "Test failed!");
         return -1;
     }
+    
+#ifdef ONE_SHOT_TEST
+    oSee.oneShot();
+#endif    
     
     // VISION MONITORING
     cv::Mat imageCam;
@@ -78,6 +92,8 @@ int testVision()
     goon::RetinaMonitor oRetinaMonitor;
     goon::ROIsMonitor oROIsMonitor;
     goon::DualWindow oDualWindow; 
+    goon::RetinaSaver oRetinaSaver;
+    oRetinaSaver.setDestinationFolder("/home/albarral/TESTS/VISION");
     //oDualWindow.reSize(320, 240);     // makes it crash
     cv::namedWindow("Vision");         
            
@@ -90,12 +106,15 @@ int testVision()
     oRetinaMonitor.drawRegions(imageCam, oSee.getRetina2().getListRegions());               
     imageRetina = oRetinaMonitor.getOutput();                
     oROIsMonitor.drawRois(imageCam, oSee.getROIs2().getList());                
-    imageROIs = oROIsMonitor.getOutput();                                
+    imageROIs = oROIsMonitor.getOutput();                 
+#ifdef ONE_SHOT_TEST
+    oRetinaSaver.saveRegions(imageCam, oSee.getRetina2().getListRegions());
+#endif    
 
-    int i= 0;
+    int i=1;
     int frameNum = oCapture.getFrameNum();
     int counter = oSee.getCounter();
-    while (i<100)
+    while (i<2)
     {        
         //LOG4CXX_DEBUG(logger, "iteration " << i);        
         
@@ -129,13 +148,16 @@ int testVision()
             //oImageSave.save(oDualWindow.getImage());
         }
 
-        cv::waitKey(10);         
+//        cv::waitKey(10);         
+        cv::waitKey(0);         
         i++;        
     }
  
+#ifndef ONE_SHOT_TEST
     // stop modules
     oSee.off();
     oSee.wait();
+#endif    
     
     oGrab.off();
     oGrab.wait();

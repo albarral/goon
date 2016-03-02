@@ -37,7 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/monitor/Draw.o \
 	${OBJECTDIR}/src/goon/monitor/ROIsMonitor.o \
-	${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o
+	${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o \
+	${OBJECTDIR}/src/goon/monitor/RetinaSaver.o
 
 
 # C Compiler Flags
@@ -54,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../vision_utils/dist/Debug/GNU-Linux -L../vision_utils/dist/Debug/GNU-Linux -lgoon_utils -Wl,-rpath,../vision_data/dist/Debug/GNU-Linux -L../vision_data/dist/Debug/GNU-Linux -lgoon_data -llog4cxx -lopencv_core
+LDLIBSOPTIONS=-Wl,-rpath,../vision_utils/dist/Debug/GNU-Linux -L../vision_utils/dist/Debug/GNU-Linux -lgoon_utils -Wl,-rpath,../vision_data/dist/Debug/GNU-Linux -L../vision_data/dist/Debug/GNU-Linux -lgoon_data -llog4cxx -lopencv_core -lopencv_highgui
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -82,6 +83,11 @@ ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o: src/goon/monitor/RetinaMonitor.cp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o src/goon/monitor/RetinaMonitor.cpp
+
+${OBJECTDIR}/src/goon/monitor/RetinaSaver.o: src/goon/monitor/RetinaSaver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaSaver.o src/goon/monitor/RetinaSaver.cpp
 
 # Subprojects
 .build-subprojects:

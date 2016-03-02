@@ -37,7 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/monitor/Draw.o \
 	${OBJECTDIR}/src/goon/monitor/ROIsMonitor.o \
-	${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o
+	${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o \
+	${OBJECTDIR}/src/goon/monitor/RetinaSaver.o
 
 
 # C Compiler Flags
@@ -78,6 +79,11 @@ ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o: src/goon/monitor/RetinaMonitor.cp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o src/goon/monitor/RetinaMonitor.cpp
+
+${OBJECTDIR}/src/goon/monitor/RetinaSaver.o: src/goon/monitor/RetinaSaver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaSaver.o src/goon/monitor/RetinaSaver.cpp
 
 # Subprojects
 .build-subprojects:
