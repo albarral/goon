@@ -60,8 +60,8 @@ void RetinalVision::update (cv::Mat& image_cam)
 
     mRetina.buildListFinalIDs();
 
-    LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
-    describeRegions();
+    //LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
+    //describeRegions();
     LOG4CXX_TRACE(logger, "update - end");
 }
 
@@ -76,7 +76,7 @@ void RetinalVision::computeCovariances()
     while (it_region != it_end)
     {
         Region& oRegion = mRetina.getRegion(*it_region);               
-        LOG4CXX_DEBUG(logger, "region = " << oRegion.toString());
+        LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
         
         Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
 

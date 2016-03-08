@@ -4,6 +4,7 @@
  ***************************************************************************/
 
 #include "goon/retinal/Exploration.h"
+#include "goon/retinal/ConfigRetinal.h"
 
 namespace goon
 {
@@ -83,7 +84,7 @@ int Exploration::checkAdjacent(int location)
                 // not explored
                 if (*pexplored_pixel == 0)
                 {
-                    *pexplored_pixel = 255;
+                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
                     pforbiden_pixel = pforbiden_seed + 1;
                     pixel.x++;
                     if (pixel.x > xmax)                    
@@ -107,7 +108,7 @@ int Exploration::checkAdjacent(int location)
                 // not explored
                 if (*pexplored_pixel == 0)
                 {
-                    *pexplored_pixel = 255;
+                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
                     pforbiden_pixel = pforbiden_seed + row_step; 						
                     pixel.y++;
                     if (pixel.y > ymax)                            
@@ -131,7 +132,7 @@ int Exploration::checkAdjacent(int location)
                 // not explored
                 if (*pexplored_pixel == 0)
                 {
-                    *pexplored_pixel = 255;
+                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
                     pforbiden_pixel = pforbiden_seed - 1; 						
                     pixel.x--;
                     if (pixel.x < xmin)                            
@@ -155,7 +156,7 @@ int Exploration::checkAdjacent(int location)
                 // not explored
                 if (*pexplored_pixel == 0)
                 {
-                    *pexplored_pixel = 255;
+                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
                     pforbiden_pixel = pforbiden_seed - row_step; 	
                     pixel.y--;
                     if (pixel.y < ymin)                            
@@ -220,12 +221,12 @@ void Exploration::markPixel(bool baccepted)
     // pixel accepted -> marked as region and forbidden
      if (baccepted)
     {
-         *pregion_pixel = 255;														
-         *pforbiden_pixel = 255;
+         *pregion_pixel = ConfigRetinal::BODY_VALUE;														
+         *pforbiden_pixel = ConfigRetinal::BODY_VALUE;
      }
      // pixel rejected -> marked as border (used by later merge process)
      else
-         *pregion_pixel = 1;														             
+         *pregion_pixel = ConfigRetinal::BORDER_VALUE;														             
 }
 
 // Must be called at the end of each exploration process.

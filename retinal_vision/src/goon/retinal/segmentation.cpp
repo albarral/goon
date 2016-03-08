@@ -121,7 +121,7 @@ int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv)
     while (getWorkingSegmenters() > 0)
         usleep(10000); // 10ms
     
-    //LOG4CXX_TRACE(logger, "extracted regions = " << pRetina->getNumRegions());
+    LOG4CXX_DEBUG(logger, "extracted regions = " << pRetina->getNumRegions());
 }
   
 

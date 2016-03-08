@@ -233,9 +233,9 @@ void Merge::checkRegions2Merge(int baseID)
 void Merge::updateCollectionMask(Region& oRegion)
 {
     cv::Mat roiCollection;
-    // set roi and copy data
+    // set roi and fill mask (not copy, to avoid clearing already filled parts)
     roiCollection = maskCollection(oRegion.getWindow());
-    roiCollection = oRegion.getMask();    
+    roiCollection.setTo(ConfigRetinal::BODY_VALUE, oRegion.getMask());
 }
 
 }
