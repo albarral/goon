@@ -7,12 +7,12 @@
  ***************************************************************************/
 
 #define GOON_VERSION "0.1"  
-#define GOON_DESC "goon: fast retinal (oversegmented) without movement/binding/recognitionion"  
-// feb 2016
+#define GOON_DESC "goon: multi-threaded retinal vision"  
+// march 2016
 // features: fast vision (5fps)
-// drawbacks: over segmented, no movement perception
+// drawbacks: no movement perception
 // modules ...
-// retinal: multi-threaded segmentation (4 threads), no merge
+// retinal: multi-threaded segmentation (4 threads) + merge
 // peripheral: rois detection, no movement perception
 // binding: no
 // recognition: no
