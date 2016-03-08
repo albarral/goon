@@ -25,13 +25,18 @@ void RetinaSaver::saveRegions (cv::Mat& image_cam, std::vector<Region>& listRegi
 {    
     oDraw.setSize(image_cam);
     
-    // walk the list of regions (merged ones are invalid)
+    // draw each segmented region in a separate file
     for (Region& oRegion: listRegions) 
     {
+        // skip simple regions
+        if (oRegion.getType() == Region::eREG_SIMPLE)
+            continue;
+        
         oDraw.clearBackGround();
         // draw masks
         oDraw.setExactColor(oRegion.getRGB());
         oDraw.drawMask (oRegion.getMask(), oRegion.getWindow());
+        oDraw.drawWindow (oRegion.getWindow());
 
         // draw centroids
         int* pos = oRegion.getPos();

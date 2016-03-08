@@ -24,7 +24,7 @@
 #include "goon/show/DualWindow.h"
 //#include "goon/show/ImageSave.h"
 
-#define ONE_SHOT_TEST
+//#define ONE_SHOT_TEST
 
 static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.test"));
 
@@ -45,12 +45,11 @@ int testVision()
 {        
     LOG4CXX_INFO(logger, "\n\nTESTING goon VISION ...\n");
     bool bmonitor = true;       // monitor vision
-    bool btestOneShow = true;   // test one show See
 
-//    int workingCamera = goon::Grab::eCAM_WEBCAM;        
+    int workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    int workingCamera = goon::Grab::eCAM_IPCAM;
 //    int workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-    int workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
+//    int workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
        
     // shared data for VISION modules
     goon::VisualData oVisualData;    
@@ -114,7 +113,7 @@ int testVision()
     int i=1;
     int frameNum = oCapture.getFrameNum();
     int counter = oSee.getCounter();
-    while (i<2)
+    while (i<200)
     {        
         //LOG4CXX_DEBUG(logger, "iteration " << i);        
         
@@ -148,8 +147,7 @@ int testVision()
             //oImageSave.save(oDualWindow.getImage());
         }
 
-//        cv::waitKey(10);         
-        cv::waitKey(0);         
+        cv::waitKey(10);         
         i++;        
     }
  

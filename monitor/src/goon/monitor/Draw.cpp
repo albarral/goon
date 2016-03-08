@@ -105,6 +105,18 @@ void Draw::drawEllipse(cv::Point& center, int width, int height, int orientation
 }
 
 
+void Draw::drawWindow(cv::Rect& window)
+{
+    if (!bsized)
+    {
+        std::cout << "Draw error: image_draw still not created" << std::endl;
+        return;
+    }
+    
+    cv::rectangle(image_draw, window, color);
+}
+
+
 void Draw::drawHLine(int row)
 {
     if (!bsized)

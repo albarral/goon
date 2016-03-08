@@ -59,6 +59,9 @@ public:
     // Draws an ellipse in the image
     void drawEllipse (cv::Point& center, int width, int height, int orientation);
 
+    // Draws a window in the image
+    void drawWindow (cv::Rect& window);
+
     // Draws an horizontal line in the image
     void drawHLine (int row);
 

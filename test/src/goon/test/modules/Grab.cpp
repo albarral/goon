@@ -44,7 +44,7 @@ void Grab::init(Capture& oCapture, int sourceCamera)
 
 void Grab::first()
 {    
-    log4cxx::NDC::push("grabber");   	
+    log4cxx::NDC::push("Grab");   	
     
     if (binitialized)
     {
