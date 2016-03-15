@@ -42,7 +42,7 @@ void Unit::prepare()
 
 
 // Initializes the unit with its first region (Blob)
-void Unit::initialize (int regionID, Blob& oBlob)
+void Unit::initialize (int regionID, Blob& oBlob, std::chrono::steady_clock::time_point& t)
 {    
     updateBlob(oBlob);        
     
@@ -50,6 +50,7 @@ void Unit::initialize (int regionID, Blob& oBlob)
     vec_regions.push_back(regionID);  
     
     age = 0;
+    oTransMove.start(oBlob.getPos(), t);
     translation[0] = translation[1] = 0;
     growth = 0;
     stability = 0; 
@@ -83,7 +84,7 @@ void Unit::absorb (Unit& oUnit)
 
 
 // updates the Unit with data from its Tracker and recomputes some features (stability, traslation)
-void Unit::update ()
+void Unit::update (std::chrono::steady_clock::time_point& t)
 {    
     if (oTracker.getMass() > 0)
     {
@@ -92,6 +93,9 @@ void Unit::update ()
             age++;
         
         updateBlob(oTracker);
+        
+        // update movement
+        oTransMove.update(pos, t);
         
         // check how the unit has evolved (not for new units)
         if (age > 1)

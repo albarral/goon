@@ -31,8 +31,6 @@
         <logicalFolder name="base" displayName="base" projectFiles="true">
           <itemPath>src/goon/data/base/blob.cpp</itemPath>
           <itemPath>src/goon/data/base/blob.h</itemPath>
-          <itemPath>src/goon/data/base/motion.cpp</itemPath>
-          <itemPath>src/goon/data/base/motion.h</itemPath>
           <itemPath>src/goon/data/base/region.cpp</itemPath>
           <itemPath>src/goon/data/base/region.h</itemPath>
           <itemPath>src/goon/data/base/roi.cpp</itemPath>
@@ -143,10 +141,6 @@
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/data/base/motion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/motion.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/region.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/region.h" ex="false" tool="3" flavor2="0">
@@ -245,10 +239,6 @@
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/motion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/motion.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/base/region.cpp" ex="false" tool="1" flavor2="0">
       </item>

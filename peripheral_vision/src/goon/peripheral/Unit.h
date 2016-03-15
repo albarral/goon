@@ -7,7 +7,9 @@
  ***************************************************************************/
 
 #include <vector>
+#include <chrono>
 #include <goon/data/base/blob.h>
+#include "goon/features/motion/Move2D.h"
 
 namespace goon
 {
@@ -25,6 +27,7 @@ private:
     int translation[2];          // change of position (in pixels)
     float growth;               // change of area
     int stability;
+    features::Move2D oTransMove;    // translation 2D movement
     static int MAX_STABILITY;
     static float STABLE_SIZE;
 
@@ -40,7 +43,10 @@ public:
         int* getTranslation() {return translation;};
         float getGrowth() {return growth;};
         int getStability() {return stability;};
+        features::Move2D& getTransMove() {return oTransMove;}
+        
         static int getMaxStability() {return MAX_STABILITY;};        
+        
         
         void setID (int value);
         // clears the unit, making it inactive 
@@ -48,13 +54,13 @@ public:
         // prepares an active unit for a new sampling
         void prepare();
         // Initializes the unit with its first region (Blob)
-        void initialize (int regionID, Blob& oBlob);
+        void initialize (int regionID, Blob& oBlob, std::chrono::steady_clock::time_point& t);
         // adds a new region to the Unit's tracker
         void addRegion (int regionID, Blob& oBlob);
         // absorbs another Unit
         void absorb (Unit& oUnit);
         // updates the Unit with data from its Tracker
-        void update();
+        void update(std::chrono::steady_clock::time_point& t);
         
         // computes the distance (Mahalanobis) to the specified (x, y) position
         void computeDistance (int* posxy);

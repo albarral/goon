@@ -41,7 +41,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/aux/VisualElement.o \
 	${OBJECTDIR}/src/goon/data/aux/vMotion.o \
 	${OBJECTDIR}/src/goon/data/base/blob.o \
-	${OBJECTDIR}/src/goon/data/base/motion.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
 	${OBJECTDIR}/src/goon/data/capture.o \
@@ -107,11 +106,6 @@ ${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
-
-${OBJECTDIR}/src/goon/data/base/motion.o: src/goon/data/base/motion.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/motion.o src/goon/data/base/motion.cpp
 
 ${OBJECTDIR}/src/goon/data/base/region.o: src/goon/data/base/region.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base

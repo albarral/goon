@@ -116,8 +116,6 @@ void PeripheralVision::computeROIs ()
 // Transforms a Unit into a fully featured ROI (with motion info).
 void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
 {
-    int *translation;
-
     LOG4CXX_TRACE(logger, "update ROI " << oUnit.getID());
     
     oROI.setID(oUnit.getID());
@@ -126,9 +124,8 @@ void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
     
     oROI.updateBlob(oUnit);
 
-    // check roi speed (pixels/second)
-    translation = oUnit.getTranslation();    
-//    oROI.setSpeed(translation[0]*1000/loop_time, translation[1]*1000/loop_time);           
+    // update roi speed (pixels/millisecond)
+    oROI.setSpeed(oUnit.getTransMove().getXSpeed(), oUnit.getTransMove().getYSpeed());           
     
     LOG4CXX_TRACE(logger, "age = " << oROI.getAge() << ", stability = " << oROI.getStability());
 }

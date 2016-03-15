@@ -37,6 +37,8 @@ void UnitsDetection::prepareUnits ()
 {	
     LOG4CXX_TRACE(logger, "prepare units ...");
     
+    time = std::chrono::steady_clock::now();
+    
     std::list<Unit>::iterator it_Unit;
     for (it_Unit = list_units.begin(); it_Unit != list_units.end(); it_Unit++)
         it_Unit->prepare();
@@ -127,7 +129,7 @@ void UnitsDetection::updateUnits ()
     while (it_Unit != list_units.end())
     {
         LOG4CXX_TRACE(logger, "update unit " << it_Unit->getID());
-        it_Unit->update();
+        it_Unit->update(time);
         
         // if unit obsolete, remove it from list
         if (it_Unit->getMass() == 0)
@@ -168,7 +170,7 @@ void UnitsDetection::generateNewUnit (Region& oRegion)
 
         Unit oUnit; // new unit created
         oUnit.setID(ID);
-        oUnit.initialize(oRegion.getID(), oRegion);
+        oUnit.initialize(oRegion.getID(), oRegion, time);
         
         list_units.push_back(oUnit);
     }
