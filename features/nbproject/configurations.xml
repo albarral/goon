@@ -14,6 +14,8 @@
                    projectFiles="true">
       <logicalFolder name="features" displayName="features" projectFiles="true">
         <logicalFolder name="motion" displayName="motion" projectFiles="true">
+          <itemPath>src/goon/features/motion/Motion.cpp</itemPath>
+          <itemPath>src/goon/features/motion/Motion.h</itemPath>
           <itemPath>src/goon/features/motion/Move.cpp</itemPath>
           <itemPath>src/goon/features/motion/Move.h</itemPath>
           <itemPath>src/goon/features/motion/Move2D.cpp</itemPath>
@@ -61,6 +63,13 @@
       </item>
       <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/features/motion/Motion.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/motion/Motion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/features/motion/Move.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/motion/Move.h" ex="false" tool="3" flavor2="0">
@@ -96,6 +105,13 @@
       <item path="src/goon/features/Time.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/motion/Motion.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/motion/Motion.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/motion/Move.cpp" ex="false" tool="1" flavor2="0">
       </item>

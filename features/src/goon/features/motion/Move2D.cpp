@@ -18,9 +18,9 @@ Move2D::Move2D ()
     speed[1] = 0.0;
 }
 
-void Move2D::start(int value[2], std::chrono::steady_clock::time_point& t)
+void Move2D::init(int value[2], std::chrono::steady_clock::time_point& t)
 {
-    Move::start(t);
+    Move::init(t);
     this->value[0] = value[0];
     this->value[1] = value[1];
 }

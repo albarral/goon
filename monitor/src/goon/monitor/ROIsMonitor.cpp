@@ -5,6 +5,7 @@
 
 #include "goon/monitor/ROIsMonitor.h"
 #include <goon/utils/shape.h>
+#include <goon/utils/Coordinates.h>
 
 using namespace log4cxx;
 
@@ -35,7 +36,17 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::vector<ROI>& listROIs)
         LOG4CXX_TRACE(logger, "roi " << it_roi->getID());        
         LOG4CXX_TRACE(logger, "(w, h, angle) = " << roi_w << ", " << roi_h << ", " << roi_angle);        
         oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle);
-        oDraw.drawPoint(centroid, Draw::eYELLOW, it_roi->getStability());
+        int color = Draw::eYELLOW;
+        
+        float* speed = it_roi->getMotion().getAverageSpeed();
+        float absSpeed, angle;
+        Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
+        // speed > 0.1 pixels/ms (100 pixels/s))
+        if (absSpeed > 0.01)
+        {
+            color = Draw::eRED;            
+        }
+        oDraw.drawPoint(centroid, color, it_roi->getStability());
         //oDrawPer.drawNumber(it_roi->getID(), centroid);                        
         
         it_roi++;

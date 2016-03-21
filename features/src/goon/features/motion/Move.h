@@ -25,7 +25,7 @@ public:
     
  protected:
     int type;
-    bool bstarted;        // indicates that movement is being measured (starting point is stored)
+    bool bstarted;        // indicates that movement is being measured (initial point stored)
     std::chrono::steady_clock::time_point t1;   // starting point of the time interval
     int millis;     // measured interval (milliseconds)
 
@@ -36,8 +36,10 @@ public:
      void setType(int type) {this->type = type;}
      int getType() {return type;}
 
-     // start measuring the movement (stores subject position))
-     void start(std::chrono::steady_clock::time_point& t);
+     std::chrono::steady_clock::time_point getTimeStamp() {return t1;}
+     
+     // start measuring the movement (stores initial position)
+     void init(std::chrono::steady_clock::time_point& t);
      // updates the subject's position and performs the measure. Returns true if measure done ok.
      bool update(std::chrono::steady_clock::time_point& t);     
 };

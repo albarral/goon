@@ -7,20 +7,19 @@
  ***************************************************************************/
 
 #include "goon/data/base/blob.h"
-#include "goon/data/base/motion.h"
+#include "goon/features/motion/Motion.h"
 
 namespace goon 
 {
 // This class represents a ROI (region of interest) which is the main output of the peripheral vision system.
-// It extends from Blob and Motion classes.
-//class ROI : public Blob, public Motion
+// It extends from Blob.
 class ROI : public Blob
 {
     private:
         int ID;
         int age;
         int stability;
-        int speed[2];   // (vx, vy) in pixels/second
+        features::Motion oMotion;
 
 public:
         ROI();
@@ -29,13 +28,14 @@ public:
         int getID() {return ID;};
         int getAge() {return age;};
         int getStability() {return stability;};
-        int* getSpeed() {return speed;}
                 
         void setID (int value);
         void setAge (int value);
         void setStability (int value);
-        void setSpeed (int vx, int vy);
 
+        features::Motion& getMotion() {return oMotion;};
+        void updateMotion(features::Move2D& oTransMove);
+        
         // support function to sort ROIs by ID
         static bool sortByID (const ROI& oROI1, const ROI& oROI2);        
 };

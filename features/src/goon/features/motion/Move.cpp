@@ -14,12 +14,14 @@ Move::Move ()
 {
     type = Move::eTYPE_IMAGE;   // default type is image move
     bstarted = false;
+    millis = 0;
 }
 
-void Move::start(std::chrono::steady_clock::time_point& t)
+void Move::init(std::chrono::steady_clock::time_point& t)
 {
-    t1 = t;
     bstarted = true;
+    t1 = t;
+    millis = 0;
 }
 
 bool Move::update(std::chrono::steady_clock::time_point& t)

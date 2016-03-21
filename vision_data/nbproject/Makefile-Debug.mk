@@ -67,13 +67,15 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../vision_utils/dist/Debug/GNU-Linux -L../vision_utils/dist/Debug/GNU-Linux -lgoon_utils -lopencv_core
+LDLIBSOPTIONS=-Wl,-rpath,../vision_utils/dist/Debug/GNU-Linux -L../vision_utils/dist/Debug/GNU-Linux -lgoon_utils -Wl,-rpath,../features/dist/Debug/GNU-Linux -L../features/dist/Debug/GNU-Linux -lgoon_features -lopencv_core
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ../vision_utils/dist/Debug/GNU-Linux/libgoon_utils.so
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ../features/dist/Debug/GNU-Linux/libgoon_features.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -82,86 +84,87 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ${OBJEC
 ${OBJECTDIR}/src/goon/data/aux/Body.o: src/goon/data/aux/Body.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Body.o src/goon/data/aux/Body.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Body.o src/goon/data/aux/Body.cpp
 
 ${OBJECTDIR}/src/goon/data/aux/Identity.o: src/goon/data/aux/Identity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Identity.o src/goon/data/aux/Identity.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Identity.o src/goon/data/aux/Identity.cpp
 
 ${OBJECTDIR}/src/goon/data/aux/Record.o: src/goon/data/aux/Record.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Record.o src/goon/data/aux/Record.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Record.o src/goon/data/aux/Record.cpp
 
 ${OBJECTDIR}/src/goon/data/aux/VisualElement.o: src/goon/data/aux/VisualElement.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/VisualElement.o src/goon/data/aux/VisualElement.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/VisualElement.o src/goon/data/aux/VisualElement.cpp
 
 ${OBJECTDIR}/src/goon/data/aux/vMotion.o: src/goon/data/aux/vMotion.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/vMotion.o src/goon/data/aux/vMotion.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/vMotion.o src/goon/data/aux/vMotion.cpp
 
 ${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
 
 ${OBJECTDIR}/src/goon/data/base/region.o: src/goon/data/base/region.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/region.o src/goon/data/base/region.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/region.o src/goon/data/base/region.cpp
 
 ${OBJECTDIR}/src/goon/data/base/roi.o: src/goon/data/base/roi.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
 
 ${OBJECTDIR}/src/goon/data/capture.o: src/goon/data/capture.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/capture.o src/goon/data/capture.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/capture.o src/goon/data/capture.cpp
 
 ${OBJECTDIR}/src/goon/data/elements/Model.o: src/goon/data/elements/Model.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Model.o src/goon/data/elements/Model.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Model.o src/goon/data/elements/Model.cpp
 
 ${OBJECTDIR}/src/goon/data/elements/ModelView.o: src/goon/data/elements/ModelView.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/ModelView.o src/goon/data/elements/ModelView.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/ModelView.o src/goon/data/elements/ModelView.cpp
 
 ${OBJECTDIR}/src/goon/data/elements/Object.o: src/goon/data/elements/Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Object.o src/goon/data/elements/Object.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Object.o src/goon/data/elements/Object.cpp
 
 ${OBJECTDIR}/src/goon/data/elements/Scene.o: src/goon/data/elements/Scene.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Scene.o src/goon/data/elements/Scene.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Scene.o src/goon/data/elements/Scene.cpp
 
 ${OBJECTDIR}/src/goon/data/retina.o: src/goon/data/retina.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/retina.o src/goon/data/retina.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/retina.o src/goon/data/retina.cpp
 
 ${OBJECTDIR}/src/goon/data/rois.o: src/goon/data/rois.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/rois.o src/goon/data/rois.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/rois.o src/goon/data/rois.cpp
 
 ${OBJECTDIR}/src/goon/data/visual_data.o: src/goon/data/visual_data.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/visual_data.o src/goon/data/visual_data.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/visual_data.o src/goon/data/visual_data.cpp
 
 # Subprojects
 .build-subprojects:
 	cd ../vision_utils && ${MAKE}  -f Makefile CONF=Debug
+	cd ../features && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -171,6 +174,7 @@ ${OBJECTDIR}/src/goon/data/visual_data.o: src/goon/data/visual_data.cpp
 # Subprojects
 .clean-subprojects:
 	cd ../vision_utils && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../features && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

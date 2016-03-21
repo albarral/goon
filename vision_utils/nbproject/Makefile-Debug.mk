@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/utils/Click.o \
+	${OBJECTDIR}/src/goon/utils/Coordinates.o \
 	${OBJECTDIR}/src/goon/utils/Module.o \
 	${OBJECTDIR}/src/goon/utils/angle.o \
 	${OBJECTDIR}/src/goon/utils/area.o \
@@ -75,6 +76,11 @@ ${OBJECTDIR}/src/goon/utils/Click.o: src/goon/utils/Click.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/Click.o src/goon/utils/Click.cpp
+
+${OBJECTDIR}/src/goon/utils/Coordinates.o: src/goon/utils/Coordinates.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/Coordinates.o src/goon/utils/Coordinates.cpp
 
 ${OBJECTDIR}/src/goon/utils/Module.o: src/goon/utils/Module.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils

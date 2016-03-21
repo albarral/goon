@@ -22,9 +22,7 @@ private:
     float distance;         // distance to sampled region
     std::vector<int> vec_regions; 
     Blob oTracker;
-    int prev_pos[2];
-    int prev_mass;
-    int translation[2];          // change of position (in pixels)
+    Blob preBlob;          // previous blob info
     float growth;               // change of area
     int stability;
     features::Move2D oTransMove;    // translation 2D movement
@@ -40,7 +38,6 @@ public:
         float getDistance() {return distance;};
         std::vector<int>& getListRegions() {return vec_regions;};
         Blob& getTracker() {return oTracker;};
-        int* getTranslation() {return translation;};
         float getGrowth() {return growth;};
         int getStability() {return stability;};
         features::Move2D& getTransMove() {return oTransMove;}

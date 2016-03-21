@@ -23,7 +23,12 @@ void ROI::setAge(int value) {age = value;}
 
 void ROI::setStability(int value) {stability = value;}
 
-void ROI::setSpeed(int vx, int vy) {speed[0] = vx; speed[1] = vy;}
+void ROI::updateMotion(features::Move2D& oTransMove)
+{
+    oMotion.update(oTransMove);
+}
+
+//void ROI::setSpeed(int vx, int vy) {speed[0] = vx; speed[1] = vy;}
 
 bool ROI::sortByID (const ROI& oROI1, const ROI& oROI2)
 {

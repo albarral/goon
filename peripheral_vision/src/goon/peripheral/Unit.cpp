@@ -34,12 +34,9 @@ void Unit::prepare()
 {
     oTracker.setMass(0);
     vec_regions.clear();
-    // set markers
-    prev_pos[0] = pos[0];
-    prev_pos[1] = pos[1];
-    prev_mass = mass;
+    // store present blob data
+    preBlob = *this;
 }
-
 
 // Initializes the unit with its first region (Blob)
 void Unit::initialize (int regionID, Blob& oBlob, std::chrono::steady_clock::time_point& t)
@@ -50,10 +47,9 @@ void Unit::initialize (int regionID, Blob& oBlob, std::chrono::steady_clock::tim
     vec_regions.push_back(regionID);  
     
     age = 0;
-    oTransMove.start(oBlob.getPos(), t);
-    translation[0] = translation[1] = 0;
     growth = 0;
     stability = 0; 
+    oTransMove.init(oBlob.getPos(), t);    
 }
 
 
@@ -83,7 +79,7 @@ void Unit::absorb (Unit& oUnit)
 }
 
 
-// updates the Unit with data from its Tracker and recomputes some features (stability, traslation)
+// updates the Unit with data from its Tracker and recomputes some features (stability, translation)
 void Unit::update (std::chrono::steady_clock::time_point& t)
 {    
     if (oTracker.getMass() > 0)
@@ -94,12 +90,11 @@ void Unit::update (std::chrono::steady_clock::time_point& t)
         
         updateBlob(oTracker);
         
-        // update movement
+        // update movement info
         oTransMove.update(pos, t);
         
         // check how the unit has evolved (not for new units)
-        if (age > 1)
-            checkEvolution();
+        checkEvolution();
     }
     else
         clear();
@@ -117,9 +112,11 @@ void Unit::checkEvolution ()
 {
     float size_sim;	
 
-    translation[0] = pos[0] - prev_pos[0];
-    translation[1] = pos[1] - prev_pos[1];
-    growth = (float)mass / prev_mass;
+    // ignore new units
+    if (age <= 1)
+        return;
+
+    growth = (float)mass / preBlob.getMass();
 
     if (growth > 1.0)
             size_sim = sqrt(1.0/growth);

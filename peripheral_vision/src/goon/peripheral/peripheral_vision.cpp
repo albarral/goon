@@ -123,9 +123,8 @@ void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
     oROI.setStability(oUnit.getStability());
     
     oROI.updateBlob(oUnit);
-
-    // update roi speed (pixels/millisecond)
-    oROI.setSpeed(oUnit.getTransMove().getXSpeed(), oUnit.getTransMove().getYSpeed());           
+    // update roi translation motion
+    oROI.updateMotion(oUnit.getTransMove());
     
     LOG4CXX_TRACE(logger, "age = " << oROI.getAge() << ", stability = " << oROI.getStability());
 }
