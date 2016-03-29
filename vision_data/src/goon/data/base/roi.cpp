@@ -28,11 +28,14 @@ void ROI::updateMotion(features::Move2D& oTransMove)
     oMotion.update(oTransMove);
 }
 
-//void ROI::setSpeed(int vx, int vy) {speed[0] = vx; speed[1] = vy;}
-
 bool ROI::sortByID (const ROI& oROI1, const ROI& oROI2)
 {
     return (oROI1.ID < oROI2.ID);
+}
+
+std::string ROI::shortDesc()
+{
+    return (std::to_string(ID) + ": age = " + std::to_string(age) + ", stability = " + std::to_string(stability) + "\n" + oMotion.toString());
 }
 
 }

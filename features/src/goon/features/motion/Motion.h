@@ -7,6 +7,7 @@
  ***************************************************************************/
 
 #include <deque>
+#include <string>
 
 #include "goon/features/motion/Move2D.h"
 
@@ -31,17 +32,20 @@ namespace features
      // clears the list of moves
      void clear();
      // adds a new move to the list
-     void update(features::Move2D& oTransMove);
+     void update(Move2D& oTransMove);
        
      // gets the computed average speed (cartesian coordinates)
      float* getAverageSpeed() {return avgSpeed;};
      // gets the computed average acceleration (cartesian coordinates)
      float* getAverageAcceleration() {return avgAccel;};
      
+     std::string toString(); 
+     
  private: 
     // computes motion features (average speed & acceleration ...) 
      void compute();
 };  
+
 }
 }  
 #endif

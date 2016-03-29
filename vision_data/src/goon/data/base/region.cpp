@@ -17,11 +17,10 @@ Region::Region ()
 }
 
 // copy constructor (needed for vectors)    
-Region::Region(const Region& oRegion) : Blob(oRegion) // dispatch to base copy constructor
+Region::Region(const Region& oRegion) : Blob(oRegion), features::Mask(oRegion) // dispatch to base copy constructor
 {
     ID = oRegion.ID;
     type = oRegion.type;
-    setMask(oRegion.mask); // mask is cloned, not just assigned
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
     seed = oRegion.seed;
@@ -31,9 +30,9 @@ Region::Region(const Region& oRegion) : Blob(oRegion) // dispatch to base copy c
 Region& Region::operator=(const Region& oRegion)
 {
     Blob::operator=(oRegion);   // blob part copied
+    features::Mask::operator=(oRegion); // mask part copied
     ID = oRegion.ID;
     type = oRegion.type;
-    setMask(oRegion.mask); // mask is cloned, not just assigned
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
     seed = oRegion.seed;
@@ -45,32 +44,32 @@ void Region::setType(int value) {type = value;}
 void Region::setMerge (bool bvalue) {bmerge = bvalue;}
 void Region::setSeed(cv::Point& seed_point) {seed = seed_point;}
 
-void Region::clear()
-{
-    if (mass > 0)
-    {
-        mass = 0;
-        window = cv::Rect (0,0,0,0);
-        type = Region::eREG_SIMPLE;
-        // mask and grid are newly set on segmentation
-        bmerge = false;
-    }    
-}
+//void Region::clear()
+//{
+//    if (mass > 0)
+//    {
+//        mass = 0;
+//        window = cv::Rect (0,0,0,0);
+//        type = Region::eREG_SIMPLE;
+//        // mask and grid are newly set on segmentation
+//        bmerge = false;
+//    }    
+//}
 
 // The given mask is roied and cloned.
-void Region::createMask(cv::Mat& mask, cv::Rect& window)
-{
-    cv::Mat roiMask = mask(window);   
-    setMask(roiMask);
-    
-    // the region's window is also set
-    setWindow(window);
-}
+//void Region::createMask(cv::Mat& mask, cv::Rect& window)
+//{
+//    cv::Mat roiMask = mask(window);   
+//    setMask(roiMask);
+//    
+//    // the region's window is also set
+//    setWindow(window);
+//}
 
-void Region::setMask(const cv::Mat& mask)
-{
-    this->mask = mask.clone();    
-}
+//void Region::setMask(const cv::Mat& mask)
+//{
+//    this->mask = mask.clone();    
+//}
 
 // The given grid is cloned.
 void Region::setGrid(const cv::Mat& grid_samples)
@@ -78,29 +77,29 @@ void Region::setGrid(const cv::Mat& grid_samples)
     grid = grid_samples.clone();
 }
 
-void Region::growRegion(Region& oRegion2)
-{
-    // create a new window & mask
-    cv::Rect new_window = window | oRegion2.window;    
-    cv::Point origin (new_window.x, new_window.y);    
-    cv::Mat new_mask = cv::Mat::zeros(new_window.width, new_window.height, CV_8UC1);
-
-    // set rois to the new mask
-    cv::Mat roi1 = new_mask(window - origin);
-    cv::Mat roi2 = new_mask(oRegion2.window - origin);
-
-    // join both region masks into the new mask
-    mask.copyTo(roi1);
-    roi2 = roi2 + oRegion2.getMask();
-
-    // store new values
-    mask = new_mask;
-    window = new_window;
-    // merge colors
-    RGBColor::mergeValues(rgb_color, oRegion2.rgb_color, mass, oRegion2.mass);            
-    // add mass
-    mass += oRegion2.mass;
-}
+//void Region::growRegion(Region& oRegion2)
+//{
+//    // create a new window & mask
+//    cv::Rect new_window = window | oRegion2.window;    
+//    cv::Point origin (new_window.x, new_window.y);    
+//    cv::Mat new_mask = cv::Mat::zeros(new_window.width, new_window.height, CV_8UC1);
+//
+//    // set rois to the new mask
+//    cv::Mat roi1 = new_mask(window - origin);
+//    cv::Mat roi2 = new_mask(oRegion2.window - origin);
+//
+//    // join both region masks into the new mask
+//    mask.copyTo(roi1);
+//    roi2 = roi2 + oRegion2.getMask();
+//
+//    // store new values
+//    mask = new_mask;
+//    window = new_window;
+//    // merge colors
+//    RGBColor::mergeValues(rgb_color, oRegion2.rgb_color, mass, oRegion2.mass);            
+//    // add mass
+//    mass += oRegion2.mass;
+//}
 
 bool Region::sortBySize(const Region& oRegion1, const Region& oRegion2) 
 {
@@ -125,7 +124,7 @@ void Region::createDummy()
     cv::Rect rect = cv::Rect(0, 0, w,h);
     
     setRGB(color);
-    createMask(mask, rect);
+    setMask(mask, rect);
     setPos(w/2, h/2);
 }
 
@@ -133,18 +132,18 @@ std::string Region::toString()
 {
     std::string desc = "Region [ID = " + std::to_string(ID) +
             ", type = " + getTypeName() +
-            ", mask = " + std::to_string(mask.cols) + "x" + std::to_string(mask.rows) +
+            ", mask = " + std::to_string(getMat().cols) + "x" + std::to_string(getMat().rows) +
             ", grid = " + std::to_string(grid.cols) + "x" + std::to_string(grid.rows) +
             ", merge = " + (bmerge ? "1":"0") + 
             "]" + "\n" +
-            Blob::toString();
+            Blob::toString() + "\n" + features::Mask::toString();
     return desc;
 }
 
 std::string Region::shortDesc()
 {
     return (std::to_string(ID) + ": " + std::to_string(mass) + " " + 
-            std::to_string(mask.cols) + "x" + std::to_string(mask.rows) + 
+            std::to_string(getMat().cols) + "x" + std::to_string(getMat().rows) + 
              " \t\t hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ") - " + getTypeName() );
 }
 

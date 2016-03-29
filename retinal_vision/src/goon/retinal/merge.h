@@ -19,7 +19,8 @@ class Merge
 private:
         static log4cxx::LoggerPtr logger;
         int proximityGAP;                // maximum separation (pixels) between regions to allow them merging
-        cv::Mat maskCollection;     // mask used to build collections
+        cv::Mat maskCollection;     // mask used to build collections             
+        cv::Rect windowCollection;
         cv::Mat mat_proximity;       // matrix used to associate regions to be merged   
         std::set<int> setCollectionRegions;   // set of regions to form a collection (automatically avoids duplications)
 

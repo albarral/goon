@@ -13,6 +13,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="features" displayName="features" projectFiles="true">
+        <logicalFolder name="f1" displayName="mask" projectFiles="true">
+          <itemPath>src/goon/features/mask/Mask.cpp</itemPath>
+          <itemPath>src/goon/features/mask/Mask.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="motion" displayName="motion" projectFiles="true">
           <itemPath>src/goon/features/motion/Motion.cpp</itemPath>
           <itemPath>src/goon/features/motion/Motion.h</itemPath>
@@ -63,6 +67,10 @@
       </item>
       <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/features/mask/Mask.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/mask/Mask.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/features/motion/Motion.cpp"
             ex="false"
             tool="1"
@@ -105,6 +113,10 @@
       <item path="src/goon/features/Time.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/mask/Mask.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/mask/Mask.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/motion/Motion.cpp"
             ex="false"

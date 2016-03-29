@@ -129,6 +129,15 @@ void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
     LOG4CXX_TRACE(logger, "age = " << oROI.getAge() << ", stability = " << oROI.getStability());
 }
 
+void PeripheralVision::describeROIs()
+{
+    LOG4CXX_DEBUG(logger, "ROIs description ...");
+    for (ROI& oROI: mROIs.getList()) 
+    {
+        LOG4CXX_DEBUG(logger, oROI.toString());
+    } 
+}
+
 
 }
 

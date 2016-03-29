@@ -3,6 +3,8 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <iostream>
+
 #include "goon/features/motion/Move2D.h"  
 
 namespace goon 
@@ -32,9 +34,13 @@ bool Move2D::update(int value[2], std::chrono::steady_clock::time_point& t)
     {
         change[0] = value[0] - this->value[0];
         change[1] = value[1] - this->value[1];
-        // protect against time intervals under the millisecond (extremely rare)
+        // update frequencies in the order of 1 to 100 Hz 
+        // milliseconds can never be zero 
         if (millis == 0)
+        {
             millis = 1;
+            std::cout << "Error using goon::features::Move2D. Updated in less than 1 millisecond" << std::endl;
+        }
         speed[0] = (float)change[0]/millis;
         speed[1] = (float)change[1]/millis;
         // and store position for next iteration 
@@ -46,6 +52,14 @@ bool Move2D::update(int value[2], std::chrono::steady_clock::time_point& t)
         return false;
 }
 
+std::string Move2D::toString()
+{
+    std::string desc = "Move2D: change=(" + std::to_string(change[0]) + ", " + std::to_string(change[1]) + 
+            ") speed=(" + std::to_string(speed[0]) + ", " + std::to_string(speed[1]) + ") \n";
+
+    return desc;
+}
+        
 }
 }
 							 

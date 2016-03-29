@@ -29,7 +29,7 @@ void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::vector<Region>& listRe
         {  
             // draw masks
             oDraw.setExactColor(it_region->getRGB());
-            oDraw.drawMask (it_region->getMask(), it_region->getWindow());
+            oDraw.drawMask (it_region->getMat(), it_region->getWindow2());
             // draw centroids
             int* pos = it_region->getPos();
             cv::Point centroid(pos[0], pos[1]);            

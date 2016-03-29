@@ -21,7 +21,7 @@ protected:
     cv::Vec3f covs;             // cx, cy, cxy	
     cv::Vec3f  rgb_color;     // color in RGB space
     cv::Vec3f  hsv_color;     // color in HSV space
-    cv::Rect window;
+    //cv::Rect window;
 
 public:
     Blob();
@@ -31,7 +31,7 @@ public:
     cv::Vec3f& getCovariances() {return covs;};
     cv::Vec3f& getRGB() {return rgb_color;};
     cv::Vec3f& getHSV() {return hsv_color;};
-    cv::Rect& getWindow() {return window;};
+    //cv::Rect& getWindow() {return window;};
     
     void setMass (int value) {mass = value;};
     void setPos (int x, int y) {pos[0] = x; pos[1] = y;};
@@ -39,7 +39,7 @@ public:
     void setCovariances (float covx, float covy, float covxy);
     void setRGB (cv::Vec3f& color) {rgb_color = color;};
     void setHSV (cv::Vec3f& color) {hsv_color = color;};
-    void setWindow (cv::Rect& rwindow) {window = rwindow;};
+    //void setWindow (cv::Rect& rwindow) {window = rwindow;};
    	        
     // merges another blob with this one
     void merge (Blob& oBlob2);

@@ -78,7 +78,7 @@ void RetinalVision::computeCovariances()
         Region& oRegion = mRetina.getRegion(*it_region);               
         LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
         
-        Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
+        Shape::computeCovariances(oRegion.getMat(), oRegion.getWindow2(), oRegion.getPos(), oRegion.getCovariances());
 
         it_region++;
     }    

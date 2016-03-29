@@ -6,6 +6,8 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <string>
+
 #include "goon/features/motion/Move.h"
 
 namespace goon 
@@ -35,6 +37,8 @@ class Move2D : public Move
      int getChangeY() {return change[1];} 
      float getSpeedX() {return speed[0];}
      float getSpeedY() {return speed[1];}
+     
+     std::string toString();
 };
 
 }

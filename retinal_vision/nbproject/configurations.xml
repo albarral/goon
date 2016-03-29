@@ -67,6 +67,7 @@
             <pElem>src</pElem>
             <pElem>../vision_data/src</pElem>
             <pElem>../vision_utils/src</pElem>
+            <pElem>../features/src</pElem>
             <pElem>/usr/include</pElem>
             <pElem>../show/src</pElem>
           </incDir>
@@ -100,6 +101,18 @@
             </linkerLibProjectItem>
             <linkerLibLibItem>opencv_core</linkerLibLibItem>
             <linkerLibLibItem>opencv_imgproc</linkerLibLibItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../features"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../features"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

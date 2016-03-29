@@ -6,6 +6,8 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <string>
+
 #include "goon/data/base/blob.h"
 #include "goon/features/motion/Motion.h"
 
@@ -15,29 +17,32 @@ namespace goon
 // It extends from Blob.
 class ROI : public Blob
 {
-    private:
-        int ID;
-        int age;
-        int stability;
-        features::Motion oMotion;
+private:
+    int ID;
+    int age;
+    int stability;
+    features::Motion oMotion;
 
-public:
-        ROI();
-        ~ROI();
-        
-        int getID() {return ID;};
-        int getAge() {return age;};
-        int getStability() {return stability;};
-                
-        void setID (int value);
-        void setAge (int value);
-        void setStability (int value);
+public:    
+    ROI();
+    ~ROI();
 
-        features::Motion& getMotion() {return oMotion;};
-        void updateMotion(features::Move2D& oTransMove);
-        
-        // support function to sort ROIs by ID
-        static bool sortByID (const ROI& oROI1, const ROI& oROI2);        
+    int getID() {return ID;};
+    int getAge() {return age;};
+    int getStability() {return stability;};
+
+    void setID (int value);
+    void setAge (int value);
+    void setStability (int value);
+
+    features::Motion& getMotion() {return oMotion;};
+    void updateMotion(features::Move2D& oTransMove);
+
+    // support function to sort ROIs by ID
+    static bool sortByID (const ROI& oROI1, const ROI& oROI2);        
+
+    // returns short ROI description
+    std::string shortDesc();    
 };
 }
    

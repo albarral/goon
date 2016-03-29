@@ -36,6 +36,9 @@ public:
     // It samples the retinal map to discover and track regions of interest in the visual scene.
     void update ();
        
+    // logs a description of the computed ROIs
+    void describeROIs();
+    
 private:
     // Rebuilds the list of ROIS
     void computeROIs();

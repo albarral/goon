@@ -78,7 +78,7 @@ void Merge::checkProximityMerge (Retina& oRetina)
     while (it_region1 != list_end)
     {
         // expand region1's window
-        window1 = it_region1->getWindow() + expansion;
+        window1 = it_region1->getWindow2() + expansion;
 
         // check against the rest of regions
         std::vector<Region>::iterator it_region2 = it_region1;
@@ -86,7 +86,7 @@ void Merge::checkProximityMerge (Retina& oRetina)
         while (it_region2 != list_end)
         {		
             // expand region2's window
-            window2 = it_region2->getWindow() + expansion;
+            window2 = it_region2->getWindow2() + expansion;
             // compute intersection of both windows
             wintersection = window1 & window2;
 
@@ -176,6 +176,7 @@ void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
     
     // reset collection mask and list
     maskCollection.setTo(0);
+    windowCollection = cv::Rect(0,0,0,0);
     setCollectionRegions.clear();
     
     // the base region becomes a collection
@@ -183,6 +184,7 @@ void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
 
     // start collection with the base region
     setCollectionRegions.insert(oBaseRegion.getID()); // otherwise will be reflexively included
+    windowCollection = oBaseRegion.getWindow2();
     updateCollectionMask(oBaseRegion);
             
     // expand the list with more regions
@@ -206,7 +208,7 @@ void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
         }
     }
     
-    oBaseRegion.createMask(maskCollection, oBaseRegion.getWindow());           
+    oBaseRegion.setMask(maskCollection, windowCollection);           
     //LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
 }
 
@@ -234,8 +236,10 @@ void Merge::updateCollectionMask(Region& oRegion)
 {
     cv::Mat roiCollection;
     // set roi and fill mask (not copy, to avoid clearing already filled parts)
-    roiCollection = maskCollection(oRegion.getWindow());
-    roiCollection.setTo(ConfigRetinal::BODY_VALUE, oRegion.getMask());
+    roiCollection = maskCollection(oRegion.getWindow2());
+    roiCollection.setTo(ConfigRetinal::BODY_VALUE, oRegion.getMat());
+    // union of windows
+    windowCollection = windowCollection | oRegion.getWindow2();    
 }
 
 }
