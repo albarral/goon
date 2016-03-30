@@ -13,21 +13,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="data" displayName="data" projectFiles="true">
-        <logicalFolder name="aux" displayName="aux" projectFiles="true">
-          <itemPath>src/goon/data/aux/Body.cpp</itemPath>
-          <itemPath>src/goon/data/aux/Body.h</itemPath>
-          <itemPath>src/goon/data/aux/Identity.cpp</itemPath>
-          <itemPath>src/goon/data/aux/Identity.h</itemPath>
-          <itemPath>src/goon/data/aux/Record.cpp</itemPath>
-          <itemPath>src/goon/data/aux/Record.h</itemPath>
-          <itemPath>src/goon/data/aux/VisualElement.cpp</itemPath>
-          <itemPath>src/goon/data/aux/VisualElement.h</itemPath>
-          <itemPath>src/goon/data/aux/vColor.h</itemPath>
-          <itemPath>src/goon/data/aux/vMotion.cpp</itemPath>
-          <itemPath>src/goon/data/aux/vMotion.h</itemPath>
-          <itemPath>src/goon/data/aux/vNature.h</itemPath>
-          <itemPath>src/goon/data/aux/vShape.h</itemPath>
-        </logicalFolder>
         <logicalFolder name="base" displayName="base" projectFiles="true">
           <itemPath>src/goon/data/base/blob.cpp</itemPath>
           <itemPath>src/goon/data/base/blob.h</itemPath>
@@ -35,16 +20,6 @@
           <itemPath>src/goon/data/base/region.h</itemPath>
           <itemPath>src/goon/data/base/roi.cpp</itemPath>
           <itemPath>src/goon/data/base/roi.h</itemPath>
-        </logicalFolder>
-        <logicalFolder name="elements" displayName="elements" projectFiles="true">
-          <itemPath>src/goon/data/elements/Model.cpp</itemPath>
-          <itemPath>src/goon/data/elements/Model.h</itemPath>
-          <itemPath>src/goon/data/elements/ModelView.cpp</itemPath>
-          <itemPath>src/goon/data/elements/ModelView.h</itemPath>
-          <itemPath>src/goon/data/elements/Object.cpp</itemPath>
-          <itemPath>src/goon/data/elements/Object.h</itemPath>
-          <itemPath>src/goon/data/elements/Scene.cpp</itemPath>
-          <itemPath>src/goon/data/elements/Scene.h</itemPath>
         </logicalFolder>
         <itemPath>src/goon/data/capture.cpp</itemPath>
         <itemPath>src/goon/data/capture.h</itemPath>
@@ -121,35 +96,6 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/data/aux/Body.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Body.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Identity.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Identity.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Record.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Record.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/VisualElement.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/VisualElement.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vColor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vMotion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vMotion.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vNature.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vShape.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -165,25 +111,6 @@
       <item path="src/goon/data/capture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/capture.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Model.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Model.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/ModelView.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/ModelView.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Object.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Object.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Scene.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Scene.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -220,35 +147,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/data/aux/Body.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Body.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Identity.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Identity.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Record.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/Record.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/VisualElement.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/VisualElement.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vColor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vMotion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vMotion.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vNature.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/aux/vShape.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -264,25 +162,6 @@
       <item path="src/goon/data/capture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/capture.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Model.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Model.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/ModelView.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/ModelView.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Object.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Object.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Scene.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/elements/Scene.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -35,8 +35,8 @@ void RetinaSaver::saveRegions (cv::Mat& image_cam, std::vector<Region>& listRegi
         oDraw.clearBackGround();
         // draw masks
         oDraw.setExactColor(oRegion.getRGB());
-        oDraw.drawMask (oRegion.getMat(), oRegion.getWindow2());
-        oDraw.drawWindow (oRegion.getWindow2());
+        oDraw.drawMask (oRegion.getMask(), oRegion.getWindow());
+        oDraw.drawWindow (oRegion.getWindow());
 
         // draw centroids
         int* pos = oRegion.getPos();

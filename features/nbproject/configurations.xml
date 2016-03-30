@@ -13,9 +13,11 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="features" displayName="features" projectFiles="true">
-        <logicalFolder name="f1" displayName="mask" projectFiles="true">
-          <itemPath>src/goon/features/mask/Mask.cpp</itemPath>
-          <itemPath>src/goon/features/mask/Mask.h</itemPath>
+        <logicalFolder name="f1" displayName="body" projectFiles="true">
+          <itemPath>src/goon/features/body/Body.cpp</itemPath>
+          <itemPath>src/goon/features/body/Body.h</itemPath>
+          <itemPath>src/goon/features/body/BodyUtils.cpp</itemPath>
+          <itemPath>src/goon/features/body/BodyUtils.h</itemPath>
         </logicalFolder>
         <logicalFolder name="motion" displayName="motion" projectFiles="true">
           <itemPath>src/goon/features/motion/Motion.cpp</itemPath>
@@ -67,9 +69,16 @@
       </item>
       <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/features/mask/Mask.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/body/Body.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/mask/Mask.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/body/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/body/BodyUtils.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/body/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/motion/Motion.cpp"
             ex="false"
@@ -114,9 +123,16 @@
       </item>
       <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/features/mask/Mask.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/body/Body.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/mask/Mask.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/body/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/body/BodyUtils.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/body/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/motion/Motion.cpp"
             ex="false"

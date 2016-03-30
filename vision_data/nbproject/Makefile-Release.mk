@@ -35,19 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/data/aux/Body.o \
-	${OBJECTDIR}/src/goon/data/aux/Identity.o \
-	${OBJECTDIR}/src/goon/data/aux/Record.o \
-	${OBJECTDIR}/src/goon/data/aux/VisualElement.o \
-	${OBJECTDIR}/src/goon/data/aux/vMotion.o \
 	${OBJECTDIR}/src/goon/data/base/blob.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
 	${OBJECTDIR}/src/goon/data/capture.o \
-	${OBJECTDIR}/src/goon/data/elements/Model.o \
-	${OBJECTDIR}/src/goon/data/elements/ModelView.o \
-	${OBJECTDIR}/src/goon/data/elements/Object.o \
-	${OBJECTDIR}/src/goon/data/elements/Scene.o \
 	${OBJECTDIR}/src/goon/data/retina.o \
 	${OBJECTDIR}/src/goon/data/rois.o \
 	${OBJECTDIR}/src/goon/data/visual_data.o
@@ -77,31 +68,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_data.${CND_DLIB_EXT}: ${OBJ
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_data.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
-${OBJECTDIR}/src/goon/data/aux/Body.o: src/goon/data/aux/Body.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Body.o src/goon/data/aux/Body.cpp
-
-${OBJECTDIR}/src/goon/data/aux/Identity.o: src/goon/data/aux/Identity.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Identity.o src/goon/data/aux/Identity.cpp
-
-${OBJECTDIR}/src/goon/data/aux/Record.o: src/goon/data/aux/Record.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/Record.o src/goon/data/aux/Record.cpp
-
-${OBJECTDIR}/src/goon/data/aux/VisualElement.o: src/goon/data/aux/VisualElement.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/VisualElement.o src/goon/data/aux/VisualElement.cpp
-
-${OBJECTDIR}/src/goon/data/aux/vMotion.o: src/goon/data/aux/vMotion.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/aux
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/aux/vMotion.o src/goon/data/aux/vMotion.cpp
-
 ${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
@@ -121,26 +87,6 @@ ${OBJECTDIR}/src/goon/data/capture.o: src/goon/data/capture.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/capture.o src/goon/data/capture.cpp
-
-${OBJECTDIR}/src/goon/data/elements/Model.o: src/goon/data/elements/Model.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Model.o src/goon/data/elements/Model.cpp
-
-${OBJECTDIR}/src/goon/data/elements/ModelView.o: src/goon/data/elements/ModelView.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/ModelView.o src/goon/data/elements/ModelView.cpp
-
-${OBJECTDIR}/src/goon/data/elements/Object.o: src/goon/data/elements/Object.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Object.o src/goon/data/elements/Object.cpp
-
-${OBJECTDIR}/src/goon/data/elements/Scene.o: src/goon/data/elements/Scene.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/elements
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/elements/Scene.o src/goon/data/elements/Scene.cpp
 
 ${OBJECTDIR}/src/goon/data/retina.o: src/goon/data/retina.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data

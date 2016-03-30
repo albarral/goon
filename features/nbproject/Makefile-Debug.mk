@@ -36,7 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Time.o \
-	${OBJECTDIR}/src/goon/features/mask/Mask.o \
+	${OBJECTDIR}/src/goon/features/body/Body.o \
+	${OBJECTDIR}/src/goon/features/body/BodyUtils.o \
 	${OBJECTDIR}/src/goon/features/motion/Motion.o \
 	${OBJECTDIR}/src/goon/features/motion/Move.o \
 	${OBJECTDIR}/src/goon/features/motion/Move2D.o
@@ -71,10 +72,15 @@ ${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
 
-${OBJECTDIR}/src/goon/features/mask/Mask.o: src/goon/features/mask/Mask.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/mask
+${OBJECTDIR}/src/goon/features/body/Body.o: src/goon/features/body/Body.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/mask/Mask.o src/goon/features/mask/Mask.cpp
+	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/Body.o src/goon/features/body/Body.cpp
+
+${OBJECTDIR}/src/goon/features/body/BodyUtils.o: src/goon/features/body/BodyUtils.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/BodyUtils.o src/goon/features/body/BodyUtils.cpp
 
 ${OBJECTDIR}/src/goon/features/motion/Motion.o: src/goon/features/motion/Motion.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
