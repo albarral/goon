@@ -6,7 +6,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <utility>
 #include <vector>
 #include "opencv2/core/core.hpp"
 
@@ -14,21 +13,17 @@
 
 namespace goon 
 {
-namespace features
-{     
 // Utility class for body related computations.
  class BodyUtils
 {
  private:
-     cv::Mat matOverlaps;               // matrix where the overlap fractions are stored (num bodies 1 x num bodies 2))
-     std::vector<std::pair<int,int>> listOverlaps;  // list indicating the matrix nodes with have positive values
+     cv::Mat matOverlaps;     // CV_32FC2 matrix with overlap fractions among bodies (rows: bodies1, columns: bodies2, values: point2f's with (fraction12, fraction21))
 
  public:
     BodyUtils();
     ~BodyUtils();
 
     cv::Mat getMatOverlaps() {return matOverlaps;};
-    std::vector<std::pair<int,int>>& getListOverlaps() {return listOverlaps;};
 
     // Computes the overlaps between the two lists of Bodies.
     // It leaves the overlap fraction values in matOverlaps, and indicates the filled positions in listOverlaps
@@ -36,6 +31,5 @@ namespace features
     
 };  
 
-}
 }  
 #endif

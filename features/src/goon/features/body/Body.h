@@ -11,8 +11,6 @@
 
 namespace goon 
 {
-namespace features
-{     
 // This class represents a 2D body. 
 // It is represented by the following elements: 
 // a mask
@@ -55,6 +53,5 @@ namespace features
      
 };  
 
-}
 }  
 #endif

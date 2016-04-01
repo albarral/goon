@@ -16,7 +16,7 @@ namespace goon
 {
 // This class represents a region, the basic element in the retinal vision process.
 // It extends from Blob and Body.
-class Region : public Blob, public features::Body
+class Region : public Blob, public Body
 {
  public:
     enum eTypes

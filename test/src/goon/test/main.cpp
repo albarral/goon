@@ -3,11 +3,13 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <iostream> // for test2()
 #include <unistd.h>
+#include <utility>      // for test2()
+#include <vector>   // for test2()
 #include <string>
 
 #include <opencv2/opencv.hpp>
-#include <opencv2/highgui/highgui.hpp>
 
 #include <log4cxx/logger.h>
 #include "log4cxx/ndc.h"
@@ -24,10 +26,16 @@
 #include "goon/show/DualWindow.h"
 //#include "goon/show/ImageSave.h"
 
+// for test
+#include "goon/features/body/Body.h"
+#include "goon/features/body/BodyUtils.h"
+
+
 static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.test"));
 
 int testVision();
 int oneShotTest();
+int test2();
 
 int main(int argc, char** argv) 
 {
@@ -36,6 +44,7 @@ int main(int argc, char** argv)
 
     testVision(); 
     //oneShotTest();
+    // test2();
    
     return 0;
 }
@@ -207,3 +216,93 @@ int oneShotTest()
     return 0;
 }
 
+int test2() 
+{        
+    LOG4CXX_INFO(logger, "\n\nTEST 2...\n");
+    
+    // test overlap computation of two masks (200 x 100) half filled
+
+    // masks
+    int w = 200;
+    int h = 100;
+    cv::Mat mask1 = cv::Mat::zeros (h, w, CV_8U);
+    cv::Mat mask2 = mask1.clone();
+    cv::Mat mask3 = mask1.clone();
+    cv::Mat mask4 = mask1.clone();
+    cv::Mat mask5 = mask1.clone();
+    cv::Mat mask6 = mask1.clone();
+    cv::Rect window = cv::Rect (0, 0, w, h);
+    
+    // windows
+    int base = w/4; // 50
+    int alt = h/2;     // 50
+    cv::Rect window1 = cv::Rect (0, 0, base, alt);
+    cv::Rect window2 = cv::Rect (base, 0, base, alt);
+    cv::Rect window3 = cv::Rect (2*base, 0, 2*base, alt);
+    int disp = alt/4;
+    cv::Rect window4 = cv::Rect (0, disp, base, alt);
+    cv::Rect window5 = cv::Rect (base, 3*disp, base, alt);
+    cv::Rect window6 = cv::Rect (2*base, 2*disp, 2*base, alt);
+        
+    // pait rectangles
+    cv::Scalar color = cv::Scalar(255, 255, 255);  // white
+    cv::rectangle(mask1, window1, color, -1);
+    cv::rectangle(mask2, window2, color, -1);
+    cv::rectangle(mask3, window3, color, -1);
+    cv::rectangle(mask4, window4, color, -1);
+    cv::rectangle(mask5, window5, color, -1);
+    cv::rectangle(mask6, window6, color, -1);
+    
+    // create bodies
+    goon::Body oBody1, oBody2, oBody3, oBody4, oBody5, oBody6;
+    oBody1.setMask(mask1, window);
+    oBody2.setMask(mask2, window);
+    oBody3.setMask(mask3, window);
+    oBody4.setMask(mask4, window);
+    oBody5.setMask(mask5, window);
+    oBody6.setMask(mask6, window);
+
+    std::vector<goon::Body> listBodies1;
+    listBodies1.push_back(oBody1);
+    listBodies1.push_back(oBody2);
+    listBodies1.push_back(oBody3);
+    std::vector<goon::Body> listBodies2;
+    listBodies2.push_back(oBody5);
+    listBodies2.push_back(oBody6);
+    listBodies2.push_back(oBody4);
+           
+    goon::BodyUtils oBodyUtils;
+    oBodyUtils.computeOverlaps(listBodies1, listBodies2);
+
+
+    cv::Mat matOverlaps = oBodyUtils.getMatOverlaps(); 
+    std::cout << matOverlaps << std::endl;
+    
+    std::cout << "list1 ..." << std::endl;
+    for (int i=0; i<matOverlaps.rows; i++)
+    {
+        for (int j=0; j<matOverlaps.cols; j++)
+        {
+            cv::Point2f& overlaps = matOverlaps.at<cv::Point2f>(i,j);
+            if (overlaps.x > 0.0)
+                std::cout << "body " << i << " vs body " << j << ": " << overlaps << std::endl;
+        }    
+    }
+
+    /*
+    cv::namedWindow("mask1");         
+    cv::namedWindow("mask2");         
+    cv::namedWindow("mask3");         
+    cv::namedWindow("mask4");         
+    cv::namedWindow("mask5");         
+    cv::namedWindow("mask6");         
+    cv::imshow("mask1", mask1);           
+    cv::imshow("mask2", mask2);           
+    cv::imshow("mask3", mask3);           
+    cv::imshow("mask4", mask4);           
+    cv::imshow("mask5", mask5);           
+    cv::imshow("mask6", mask6);           
+    cv::waitKey(0); // wait for keyb interaction
+     */
+    
+}

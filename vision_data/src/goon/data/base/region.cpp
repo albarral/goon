@@ -17,7 +17,7 @@ Region::Region ()
 }
 
 // copy constructor (needed for vectors)    
-Region::Region(const Region& oRegion) : Blob(oRegion), features::Body(oRegion) // dispatch to base copy constructor
+Region::Region(const Region& oRegion) : Blob(oRegion), Body(oRegion) // dispatch to base copy constructor
 {
     ID = oRegion.ID;
     type = oRegion.type;
@@ -30,7 +30,7 @@ Region::Region(const Region& oRegion) : Blob(oRegion), features::Body(oRegion) /
 Region& Region::operator=(const Region& oRegion)
 {
     Blob::operator=(oRegion);   // blob part copied
-    features::Body::operator=(oRegion); // body part copied
+    Body::operator=(oRegion); // body part copied
     ID = oRegion.ID;
     type = oRegion.type;
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
@@ -78,7 +78,7 @@ std::string Region::toString()
             ", grid = " + std::to_string(grid.cols) + "x" + std::to_string(grid.rows) +
             ", merge = " + (bmerge ? "1":"0") + 
             "]" + "\n" +
-            Blob::toString() + "\n" + features::Body::toString();
+            Blob::toString() + "\n" + Body::toString();
     return desc;
 }
 

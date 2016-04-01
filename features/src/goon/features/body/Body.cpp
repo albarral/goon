@@ -7,8 +7,6 @@
 
 namespace goon 
 {
-namespace features
-{     
 // Constructor
 Body::Body ()
 {
@@ -104,6 +102,5 @@ std::string Body::toString()
     return desc;
 }
 
-}
 }
 							 

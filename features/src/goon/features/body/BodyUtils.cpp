@@ -7,8 +7,6 @@
 
 namespace goon 
 {
-namespace features
-{     
 // Constructor
 BodyUtils::BodyUtils ()
 {    
@@ -22,8 +20,6 @@ BodyUtils::~BodyUtils ()
  // It leaves the overlap fraction values in matOverlaps, and indicates the filled positions in listOverlaps
 void BodyUtils::computeOverlaps(std::vector<Body> listBodies1, std::vector<Body> listBodies2)
 {
-    listOverlaps.clear();
-    
     int rows = listBodies1.size();
     int cols = listBodies2.size();
     
@@ -31,7 +27,7 @@ void BodyUtils::computeOverlaps(std::vector<Body> listBodies1, std::vector<Body>
     {
         float overlap1, overlap2;
         // reset overlap matrix
-        matOverlaps = cv::Mat::zeros(rows, cols, CV_32F);
+        matOverlaps = cv::Mat::zeros(rows, cols, CV_32FC2);
         
         int n1=0;
         for (Body& oBody1 : listBodies1)
@@ -42,9 +38,8 @@ void BodyUtils::computeOverlaps(std::vector<Body> listBodies1, std::vector<Body>
                 // if bodies overlap, store overlap fractions and add node to overlaps list
                 if (oBody1.checkBodyOverlap(oBody2, overlap1, overlap2))
                 {
-                    matOverlaps.at<float>(n1,n2) = overlap1;
-                    matOverlaps.at<float>(n2,n1) = overlap2;
-                    listOverlaps.push_back(std::make_pair(n1,n2));
+                    cv::Point2f overlap(overlap1, overlap2);
+                    matOverlaps.at<cv::Point2f>(n1,n2) = overlap;
                 }
                 n2++;
             }            
@@ -53,7 +48,5 @@ void BodyUtils::computeOverlaps(std::vector<Body> listBodies1, std::vector<Body>
     }
 }  
 
-
-}
 }
 							 
