@@ -42,9 +42,9 @@ int main(int argc, char** argv)
     log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
     log4cxx::NDC::push("main");    
 
-    testVision(); 
+    //testVision(); 
     //oneShotTest();
-    // test2();
+    test2();
    
     return 0;
 }
@@ -262,34 +262,19 @@ int test2()
     oBody5.setMask(mask5, window);
     oBody6.setMask(mask6, window);
 
-    std::vector<goon::Body> listBodies1;
-    listBodies1.push_back(oBody1);
-    listBodies1.push_back(oBody2);
-    listBodies1.push_back(oBody3);
-    std::vector<goon::Body> listBodies2;
-    listBodies2.push_back(oBody5);
-    listBodies2.push_back(oBody6);
-    listBodies2.push_back(oBody4);
+    std::vector<goon::Body> listBodies;
+    listBodies.push_back(oBody1);
+    listBodies.push_back(oBody2);
+    //listBodies.push_back(oBody3);
+    listBodies.push_back(oBody4);
+    listBodies.push_back(oBody5);
+    listBodies.push_back(oBody6);
            
-    goon::BodyUtils oBodyUtils;
-    oBodyUtils.computeOverlaps(listBodies1, listBodies2);
+    goon::st_bodyOverlap bestOverlap = goon::BodyUtils::getBestOverlap(oBody3, listBodies);
 
-
-    cv::Mat matOverlaps = oBodyUtils.getMatOverlaps(); 
-    std::cout << matOverlaps << std::endl;
+    std::cout << bestOverlap.body2 << " - " << bestOverlap.mutualOverlap << std::endl;
     
-    std::cout << "list1 ..." << std::endl;
-    for (int i=0; i<matOverlaps.rows; i++)
-    {
-        for (int j=0; j<matOverlaps.cols; j++)
-        {
-            cv::Point2f& overlaps = matOverlaps.at<cv::Point2f>(i,j);
-            if (overlaps.x > 0.0)
-                std::cout << "body " << i << " vs body " << j << ": " << overlaps << std::endl;
-        }    
-    }
-
-    /*
+//    /*
     cv::namedWindow("mask1");         
     cv::namedWindow("mask2");         
     cv::namedWindow("mask3");         
@@ -303,6 +288,6 @@ int test2()
     cv::imshow("mask5", mask5);           
     cv::imshow("mask6", mask6);           
     cv::waitKey(0); // wait for keyb interaction
-     */
+ //    */
     
 }

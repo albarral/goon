@@ -24,7 +24,6 @@ namespace goon
 
  public:
     Body();
-    ~Body();
 
     // copy constructor (needed for vectors)
     Body(const Body& oBody);  

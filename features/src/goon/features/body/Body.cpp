@@ -14,10 +14,6 @@ Body::Body ()
     area = 0;
 }
 
-Body::~Body ()
-{
-}
-
 // copy constructor (needed for vectors)    
 Body::Body(const Body& oBody) 
 {
@@ -63,15 +59,13 @@ void Body::clearBody()
 // The overlapped area fractions are returned (own overlapped area, other's overlapped area) 
 bool Body::checkBodyOverlap(Body& oBody, float& overlapFraction, float& overlapFraction2)
 {
-    bool boverlap;
+    bool boverlap = false;
+    
     // check intersection of windows
     cv::Rect intersectionWindow = window & oBody.window;     
     // if no intersection, no overlap
-    if (intersectionWindow.width == 0)
-    {
-        boverlap = false;
-        overlapFraction = overlapFraction2 = 0.0;
-    }
+    if (intersectionWindow.width == 0)  
+        return false;
     // if intersection, compare masks
     else
     {
@@ -84,11 +78,6 @@ bool Body::checkBodyOverlap(Body& oBody, float& overlapFraction, float& overlapF
             overlapFraction = (float)overlapArea / area;
             overlapFraction2 = (float)overlapArea / oBody.area;
         }
-        else
-        {
-            boverlap = false;
-            overlapFraction = overlapFraction2 = 0.0;        
-        }        
     }
     
     return boverlap;

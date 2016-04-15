@@ -37,6 +37,7 @@ private:
 public:
     Region();
     //~Region();
+    
     // copy constructor (needed for vectors)
     Region(const Region& oRegion);  
     // assignment operator

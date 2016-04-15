@@ -9,13 +9,14 @@
 #include <string>
 
 #include "goon/data/base/blob.h"
+#include "goon/features/body/Body.h"
 #include "goon/features/motion/Motion.h"
 
 namespace goon 
 {
 // This class represents a ROI (region of interest) which is the main output of the peripheral vision system.
-// It extends from Blob.
-class ROI : public Blob
+// It extends from Blob and Body..
+class ROI : public Blob, public Body
 {
 private:
     int ID;
@@ -25,7 +26,7 @@ private:
 
 public:    
     ROI();
-    ~ROI();
+    //~ROI();
 
     int getID() {return ID;};
     int getAge() {return age;};
@@ -41,6 +42,8 @@ public:
     // support function to sort ROIs by ID
     static bool sortByID (const ROI& oROI1, const ROI& oROI2);        
 
+    virtual std::string toString();    
+    
     // returns short ROI description
     std::string shortDesc();    
 };

@@ -7,28 +7,29 @@
  ***************************************************************************/
 
 #include <vector>
-#include "opencv2/core/core.hpp"
 
 #include "goon/features/body/Body.h"
 
 namespace goon 
 {
+struct st_bodyOverlap
+{
+    int body2;            // body 
+    float overlap1;     // overlapped fraction of 1st body 
+    float overlap2;     // overlapped fraction of 2nd body 
+    float mutualOverlap;     // mutual overlap (product of overlaps)
+};
+
 // Utility class for body related computations.
  class BodyUtils
 {
- private:
-     cv::Mat matOverlaps;     // CV_32FC2 matrix with overlap fractions among bodies (rows: bodies1, columns: bodies2, values: point2f's with (fraction12, fraction21))
-
  public:
-    BodyUtils();
-    ~BodyUtils();
+    // Computes the overlap between a given body and a list of bodies.
+    // The list of positive overlaps is returned.
+    static std::vector<st_bodyOverlap> computeOverlaps(Body oBody, std::vector<Body> listBodies);
 
-    cv::Mat getMatOverlaps() {return matOverlaps;};
-
-    // Computes the overlaps between the two lists of Bodies.
-    // It leaves the overlap fraction values in matOverlaps, and indicates the filled positions in listOverlaps
-    void computeOverlaps(std::vector<Body> listBodies1, std::vector<Body> listBodies2);     
-    
+    // gets the best overlap between a given body and a list of bodies.
+    static st_bodyOverlap getBestOverlap(Body oBody, std::vector<Body> listBodies);    
 };  
 
 }  
