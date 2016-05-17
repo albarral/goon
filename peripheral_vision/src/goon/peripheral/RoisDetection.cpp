@@ -3,11 +3,9 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <stdio.h> 				 
+#include <stdio.h> 		
 
 #include "goon/peripheral/RoisDetection.h"
-#include "goon/utils/rgb_color.h"
-#include <goon/utils/distance.h>
 
 using namespace log4cxx;
 
@@ -15,14 +13,10 @@ namespace goon
 {
 LoggerPtr RoisDetection::logger(Logger::getLogger("goon.peripheral"));
 
-const int RoisDetection::MAX_ID = 500;
-
 // constructor
 RoisDetection::RoisDetection ()
-{          
-    // intialize list of available IDs (first ID = 1)
-    for (int i=1; i<=MAX_ID; i++) 
-        seq_available_ids.push(i);
+{              
+    minOverlapFraction = 0.10;     // 10% of ROI overlap required
 }
 
 
@@ -32,184 +26,207 @@ RoisDetection::~RoisDetection ()
 }
 
 
-// This function prepares all active units for a new sampling process
-void RoisDetection::prepareUnits ()
-{	
-    LOG4CXX_TRACE(logger, "prepare units ...");
+void RoisDetection::detectROIs(std::vector<Region>& listRegions)
+{
+    LOG4CXX_INFO(logger, "detect ROIs");
+        
+    // if ROIs & regions exist, try matching them
+    if (listROIs.size()>0 && listRegions.size()>0)
+    {
+        matchRois2Regions(listRegions);
+    }    
+    else
+        LOG4CXX_WARN(logger, "Skipped matching! No ROIs or no regions");
+            
+    // create new ROIs for orphan regions
+    handleOrphanRegions(listRegions);
     
-    time = std::chrono::steady_clock::now();
-    
-    std::list<Unit>::iterator it_Unit;
-    for (it_Unit = list_units.begin(); it_Unit != list_units.end(); it_Unit++)
-        it_Unit->prepare();
-
-    merges = 0;
-    eliminations = 0;
+    // remove obsolete ROIs
+    removeObsoleteRois();
 }
 
 
-// Implement a competition among the reception units to respond to the sampled region
-void RoisDetection::respond2Region (Region& oRegion)
+// try to match ROIs and regions (based on color & overlap)
+void RoisDetection::matchRois2Regions(std::vector<Region>& listRegions)
+{
+    int totalTouches = 0;
+    
+    LOG4CXX_DEBUG(logger, "try matching ROIs and regions");
+        
+    // create overlap matrix
+    matOverlaps = cv::Mat_<int>(listROIs.size(), listRegions.size());  
+    matOverlaps.setTo(0);           
+
+    // for each ROI
+    int numRoi = 0;
+    for (ROI& oROI : listROIs)
+    {              
+        // reset ROI's matching info
+        oROI.clearMatchingInfo();
+
+        // check the regions to which the ROI responds
+        int numTouched = compareRoi2Regions(numRoi, oROI, listRegions);
+
+        if (numTouched > 0)
+        {
+            oROI.setTouchedRegions(numTouched);                
+            totalTouches += numTouched;
+        }
+        numRoi++;
+
+        LOG4CXX_DEBUG(logger, "ROI " << oROI.getID() << ": " << numTouched << " touches");
+    }
+
+    // compute correspondences between ROIs and regions
+    if (totalTouches > 0)
+        findBestMatches(listRegions);
+}
+
+// Checks how the given ROI responds to regions. 
+// A ROI responds to a region if it has its same color and its mask is overlapped by the region (minimum of 10% required)
+// The number of positive responses is returned.
+int RoisDetection::compareRoi2Regions(int row, ROI& oROI, std::vector<Region>& listRegions)
 {
     float HSV_SAME = oHSVColor.getDistSameColor();
-    float RGB_SIMILAR = RGBColor::getSqrSimilarDist();
+    int overlapArea = 0;
+    int numMatches = 0;
+    int minOverlapArea = minOverlapFraction * oROI.getArea();
 
-    LOG4CXX_TRACE(logger, "check region " << oRegion.getID());
-    
-    std::list<Unit>::iterator it_Unit;
-    it_Winner = list_units.end();
-    it_Second = list_units.end();
+    LOG4CXX_DEBUG(logger, "matchRoi2Regions ... ROI " << oROI.getID());
+           
+    cv::Mat matRow = matOverlaps.row(row);                
 
-    // check the response of all units to the sampled region
-    for (it_Unit = list_units.begin(); it_Unit != list_units.end(); it_Unit++)
+    int numReg = 0;
+    // compare with each region
+    for (Region& oRegion : listRegions)    
     {
-        it_Unit->computeDistance(oRegion.getPos());
-
-        // if unit responds spatially -> check if it also responds to color
-        if (it_Unit->getDistance() < MAXDISTXY_SQR)
+        // if region and ROI have same color
+        if (oHSVColor.getDistance(oROI.getHSV(), oRegion.getHSV(), HSVColor::eSAME_COLOR) < HSV_SAME)
         {
-            if (oHSVColor.getDistance (oRegion.getHSV(), it_Unit->getHSV(), HSVColor::eSAME_COLOR) < HSV_SAME)
-            {
-                LOG4CXX_TRACE(logger, "touched unit " << it_Unit->getID());
-                // track the two nearest responding units 
-                trackWinner (it_Unit);
+            // checks overlap ROI-region
+            overlapArea = oROI.computeOverlap(oRegion);
+            if (overlapArea > minOverlapArea)
+            {                
+                matRow.at<int>(numReg) = overlapArea;
+                LOG4CXX_DEBUG(logger, "touched region " << oRegion.getID() << " - overlap area = " << overlapArea);
+                numMatches++;
             }
         }
+        numReg++;
     }
-        
-    // update the WINNER unit, and merge it with the second if necessary
-    if (it_Winner != list_units.end())
-    {
-        LOG4CXX_TRACE(logger, "winner = " << it_Winner->getID());
-
-        // Merge two units if one of them responds to the other in xy_space and color_space
-        if (it_Second != list_units.end())
-        {			
-            if (Distance::getEuclidean3s (it_Winner->getRGB(), it_Second->getRGB()) < RGB_SIMILAR)
-            {
-                mergeUnits();
-            }
-        }
-
-        // update the winner unit with the sampled region
-        it_Winner->addRegion(oRegion.getID(), oRegion);
-    }      
-    // or CREATE a new unit if no winner was found
-    else 
-    {
-        LOG4CXX_TRACE(logger, "no response");
-        generateNewUnit (oRegion);
-    }
-}
-													  
-
-void RoisDetection::trackWinner(std::list<Unit>::iterator it_Unit)
-{
-    // if no previous winner OR smallest distance -> new winner
-    if (it_Winner == list_units.end() || it_Unit->getDistance() < it_Winner->getDistance())
-    {
-        it_Second = it_Winner;
-        it_Winner = it_Unit;
-    }
-    // if no previous second OR second smallest distance -> new second
-    else if (it_Second == list_units.end() || it_Unit->getDistance() < it_Second->getDistance())                             
-        it_Second = it_Unit;   
+    
+    return numMatches;
 }
 
+// Establishes correspondences between ROIs and regions
+// Iteratively searches for the maximum overlaps, each of them yielding a new correspondence
+void RoisDetection::findBestMatches(std::vector<Region>& listRegions)
+{    
+    double maxVal; 
+    cv::Point maxLoc;
+    int row, col;
+    std::list<ROI>::iterator it_ROI;
+    bool bsearch = true;
 
-// This function updates the active units using their response to the last frame sampling.
-// Those units that have not responded to any sample during the last frame are eliminated.
-// The function returns the number of active units.
-void RoisDetection::updateUnits ()
-{
-    LOG4CXX_TRACE(logger, "update units ...");
-    
-    std::list<Unit>::iterator it_Unit = list_units.begin();
-    
-    while (it_Unit != list_units.end())
+    LOG4CXX_DEBUG(logger, "findBestMatches ,,,");
+
+    // iterate for each correspondence
+    while (bsearch)
     {
-        LOG4CXX_TRACE(logger, "update unit " << it_Unit->getID());
-        it_Unit->update(time);
+        // find maximum overlap
+        cv::minMaxLoc(matOverlaps, NULL, &maxVal, NULL, &maxLoc);
         
-        // if unit obsolete, remove it from list
-        if (it_Unit->getMass() == 0)
-        {       
-            LOG4CXX_TRACE(logger, "eliminate !!!" << it_Unit->getID());
-            // its id is available again
-            seq_available_ids.push(it_Unit->getID());
-            // erase function returns the next item in the list
-            it_Unit = list_units.erase(it_Unit);
+        // if new maximum found, set correspondence
+        if (maxVal > 0)
+        {
+            row = maxLoc.y;     // rows are ROIs
+            col = maxLoc.x;      // columns are regions               
             
-            eliminations++;
-        }
-        else             
-            it_Unit++;        
-    }
-}
-
-
-void RoisDetection::getNumbers (int* merged_units, int* eliminated_units)
-{
-    *merged_units = merges;
-    *eliminated_units = eliminations;
-}
-
-
-// This function creates a new unit with the given sampled region.
-void RoisDetection::generateNewUnit (Region& oRegion)
-{
-    int ID; 
-    
-    // if IDs available, create a new unit
-    if (!seq_available_ids.empty())				
-    {
-        ID = seq_available_ids.front();
-        seq_available_ids.pop();
+            // mark correspondence
+            it_ROI = listROIs.begin(); 
+            std::advance(it_ROI, row);  // access element in std::list
+            it_ROI->setCapturedRegion(col);
+            Region& oRegion = listRegions.at(col);
+            oRegion.setCaptured(true);            
             
-        LOG4CXX_TRACE(logger, "new unit > " << ID);
-
-        Unit oUnit; // new unit created
-        oUnit.setID(ID);
-        oUnit.initialize(oRegion.getID(), oRegion, time);
-        
-        list_units.push_back(oUnit);
+            LOG4CXX_DEBUG(logger, "ROI " << it_ROI->getID() << " captured region " << col);
+            
+            // eliminate references to this ROI and region in matOverlaps
+            cv::Mat matRow = matOverlaps.row(row);                
+            cv::Mat matCol = matOverlaps.col(col);                
+            matRow.setTo(0);
+            matCol.setTo(0);            
+        }                
+        // if nothing found, finish search
+        else
+            bsearch = false;
     }
-    else
-        LOG4CXX_WARN (logger, "Unit creation ignored -> no IDs available");		
 }
 
 
-void RoisDetection::mergeUnits ()
+// create new ROIs for uncaptured regions    
+void RoisDetection::handleOrphanRegions(std::vector<Region>& listRegions)
 {
-    int predator, prey;
-   
-    // second is absorbed (and deleted from list)
-    if (it_Winner->getMass() >= it_Second->getMass())
+    int n=0;
+    for (Region& oRegion : listRegions)    
     {
-        predator = it_Winner->getID();
-        prey = it_Second->getID();
-                
-        it_Winner->absorb(*it_Second);
-        list_units.erase(it_Second);        
+        if (!oRegion.isCaptured())
+        {
+            // generate new ROI
+            int ID = oIDPool.takeOne();
+            ROI oROI;
+            oROI.setID(ID);
+            // set the blob part
+            oROI Blob::operator= oRegion;
+            //oROI Blob::operator= (Blob)oRegion;
+            // set the body part
+            //oROI Body::operator=(oRegion); 
+            oROI = (Body)oRegion; 
+            // mark as matched    
+            oROI.setCapturedRegion(n);
+            // mark region as captured
+            oRegion.setCaptured(true);
+
+            // and add it to the list of ROIs
+            listROIs.push_back(oROI);
+            LOG4CXX_DEBUG(logger, "New ROI " << oROI.getID() << " for region " << oRegion.getID());          
+        }
+        n++;
     }
-    // winner is absorbed (and deleted from list)
-    else
-    {		
-        prey = it_Winner->getID();
-        predator = it_Second->getID();
-
-        it_Second->absorb(*it_Winner);
-        list_units.erase(it_Winner);
-        // second becomes winner (for later update)
-        it_Winner = it_Second;
-    }
-
-    LOG4CXX_TRACE(logger, prey << " absorbed -> " << predator);
-    // the absorbed id is available again
-    seq_available_ids.push(prey);
-
-    merges++;
 }
+    
+// Eliminate obsolete ROIs    
+void RoisDetection::removeObsoleteRois()
+{
+    std::list<ROI>::iterator it_ROI = listROIs.begin();
+    // walk list of ROIs
+    while (it_ROI != listROIs.end())
+    {
+        // if ROI has no capture, it's obsolete
+        if (it_ROI->getCapturedRegion() == -1)
+        {
+            // make ROI ID available again
+            int ID = it_ROI->getID();
+            oIDPool.freeOne(ID);
+            // remove the ROI from list
+            it_ROI = listROIs.erase(it_ROI);
+
+            LOG4CXX_TRACE(logger, "eliminate !!!" << ID);
+        }
+        else
+            it_ROI++;
+    }                  
+}
+
+
+//void RoisDetection::getNumbers (int* merged_units, int* eliminated_units)
+//{
+//    *merged_units = merges;
+//    *eliminated_units = eliminations;
+//}
+
+
+
 
 }
 

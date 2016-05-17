@@ -7,67 +7,66 @@
  ***************************************************************************/
 
 #include <list>
-#include <queue>
-#include <chrono>
+#include <vector>
 #include <log4cxx/logger.h>
 #include "opencv2/core/core.hpp"
 
-#include "goon/peripheral/Unit.h"
+#include "goon/peripheral/IDPool.h"
+#include <goon/data/base/roi.h>
 #include <goon/data/base/region.h>
 #include "goon/utils/hsv_color.h"
 
 
 namespace goon
 {
+// Module for the detection of ROIs, regions of interest that represent physical regions in the scene.
+// ROIS are associated to segmented regions, but are living entities with an own history and movement.
 class RoisDetection
 {
 private:
     static log4cxx::LoggerPtr logger;
-    static const int MAX_ID;    
-    float MAXDISTXY_SQR;                        // size of the units' receptive fields 
-    std::list<Unit> list_units;                 // list of active units
-    std::queue<int> seq_available_ids;  // sequence of available IDs (FIFO queue)
-    std::list<Unit>::iterator it_Winner;        // iterator to winner unit (in response to a sampled region)
-    std::list<Unit>::iterator it_Second;       // iterator to second unit (in response to a sampled region)
-    std::chrono::steady_clock::time_point time;   // time point used to compute units movements
-    int merges;
+    // param
+    float minOverlapFraction; // minimum ROI overlap (fraction) required to consider a positive matching
+    // vars
+    std::list<ROI> listROIs;      // list of ROIS 
     int eliminations;
     HSVColor oHSVColor;
+    IDPool oIDPool;             // pool of IDs for the ROIs
+    cv::Mat matOverlaps;      // matrix of ROI overlaps (pixels) by regions (rows are ROIs, columns are Regions, CV_32SC1)
+
 
 public:
     RoisDetection();
     ~RoisDetection ();
-    
-    void setSizeReceptiveFields(float value) {MAXDISTXY_SQR = value;};
 
-    // This function prepares all active units for a new sampling process    
-    void prepareUnits ();
+    // returns a reference to the list of ROIs
+    std::list<ROI>& getListROIs () {return listROIs;};
+
+    void detectROIs (std::vector<Region>& listRegions);
     
-    // Implement a competition among the reception units to respond to the sampled region
-    void respond2Region (Region& oRegion);
-    
-    // This function updates the active units using their response to the last frame sampling.
-    // Those units that have not responded to any sample during the last frame are eliminated.
-    void updateUnits ();
-    
-    // Returns a reference to the list of units
-    std::list<Unit>& getListUnits () {return list_units;};
-        
-    void getNumbers (int* merged_units, int* eliminated_units);
+    void setMinOverlapFraction(float value) {minOverlapFraction = value;};
+
+//    void getNumbers (int* merged_units, int* eliminated_units);
 
 private:
-    // Checks among the touched units the two nearest to the sampled region that respond to its color													  
-    void checkWinners (cv::Vec3f& region_color, int& winner, int& second);
+    // try to match ROIs and regions (based on color & overlap)
+    void matchRois2Regions(std::vector<Region>& listRegions);
     
-    // Tracks the two responding units that are nearest to the sampled region.
-    void trackWinner (std::list<Unit>::iterator it_Unit);
+    // Checks how the given ROI responds to regions. 
+    // The number of positive responses is returned
+    int compareRoi2Regions(int row, ROI& oROI, std::vector<Region>& listRegions);
+    
+    // Establishes correspondences between ROIs and regions
+    void findBestMatches(std::vector<Region>& listRegions);
+    
+    // create new ROIs for uncaptured regions
+    void handleOrphanRegions(std::vector<Region>& listRegions);
+    
+    // eliminate absent ROIs
+    void removeObsoleteRois();
 
-    // This function creates a new unit with the given sampled region.
-    void generateNewUnit (Region& oRegion) ;
-
-    // Merges the two winner units, with the bigger absorbing the smaller.
-    // The absorbed unit is removed from the list of units and its ID is made available for reutilization.
-    void mergeUnits ();
+    // This function creates a new ROI with the given sampled region.
+    void generateNewROI(Region& oRegion) ;
 
 };
 

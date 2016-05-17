@@ -7,7 +7,6 @@
 #include <unistd.h>
 
 #include "goon/peripheral/peripheral_vision.h"
-#include <goon/data/goon_version.h>
 #include <goon/utils/shape.h>
 #include <goon/utils/rgb_color.h>
 
@@ -20,8 +19,6 @@ LoggerPtr PeripheralVision::logger(Logger::getLogger("goon.peripheral"));
 // constructor
 PeripheralVision::PeripheralVision (Retina& oRetina, Rois& oROIs) : mRetina(oRetina), mROIs(oROIs)
 {
-    LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Peripheral vision");
-
     oUnitsDetection.setSizeReceptiveFields(8);          // this value produces receptive fields with double the area of their underlying objects.
     counter = 0;
 	
@@ -116,27 +113,21 @@ void PeripheralVision::computeROIs ()
 // Transforms a Unit into a fully featured ROI (with motion info).
 void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
 {
+    int *translation;
+
     LOG4CXX_TRACE(logger, "update ROI " << oUnit.getID());
     
     oROI.setID(oUnit.getID());
     oROI.setAge(oUnit.getAge());
     oROI.setStability(oUnit.getStability());
     
-    oROI.updateBlob(oUnit);
+    oROI.reBlob(oUnit);
 
-    // update roi translation motion
-    oROI.updateMotion(oUnit.getTransMove());
+    // check roi speed (pixels/second)
+    translation = oUnit.getTranslation();    
+//    oROI.setSpeed(translation[0]*1000/loop_time, translation[1]*1000/loop_time);           
     
     LOG4CXX_TRACE(logger, "age = " << oROI.getAge() << ", stability = " << oROI.getStability());
-}
-
-void PeripheralVision::describeROIs()
-{
-    LOG4CXX_DEBUG(logger, "ROIs description ...");
-    for (ROI& oROI: mROIs.getList()) 
-    {
-        LOG4CXX_DEBUG(logger, oROI.toString());
-    } 
 }
 
 

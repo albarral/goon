@@ -13,8 +13,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
-        <itemPath>src/goon/peripheral/IDPool.cpp</itemPath>
-        <itemPath>src/goon/peripheral/IDPool.h</itemPath>
         <itemPath>src/goon/peripheral/Unit.cpp</itemPath>
         <itemPath>src/goon/peripheral/Unit.h</itemPath>
         <itemPath>src/goon/peripheral/peripheral_vision.cpp</itemPath>
@@ -53,7 +51,6 @@
             <pElem>src</pElem>
             <pElem>../vision_data/src</pElem>
             <pElem>../vision_utils/src</pElem>
-            <pElem>../features/src</pElem>
             <pElem>/usr/include</pElem>
           </incDir>
         </ccTool>
@@ -84,26 +81,10 @@
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
-            <linkerLibProjectItem>
-              <makeArtifact PL="../features"
-                            CT="2"
-                            CN="Debug"
-                            AC="true"
-                            BL="true"
-                            WD="../features"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
-              </makeArtifact>
-            </linkerLibProjectItem>
             <linkerLibLibItem>opencv_core</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/peripheral/IDPool.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/IDPool.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/peripheral/Unit.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/peripheral/Unit.h" ex="false" tool="3" flavor2="0">
@@ -149,10 +130,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/peripheral/IDPool.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/IDPool.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/peripheral/Unit.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/peripheral/Unit.h" ex="false" tool="3" flavor2="0">

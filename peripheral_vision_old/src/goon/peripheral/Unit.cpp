@@ -34,22 +34,24 @@ void Unit::prepare()
 {
     oTracker.setMass(0);
     vec_regions.clear();
-    // store present blob data
-    preBlob = *this;
+    // set markers
+    prev_pos[0] = pos[0];
+    prev_pos[1] = pos[1];
+    prev_mass = mass;
 }
+
 
 // Initializes the unit with its first region (Blob)
 void Unit::initialize (int regionID, Blob& oBlob)
-{
-    Blob::operator=(oBlob);    
-    
-    oTracker = oBlob;
+{    
+    reBlob(oBlob);        
+    oTracker.reBlob(oBlob);  
     vec_regions.push_back(regionID);  
     
     age = 0;
+    translation[0] = translation[1] = 0;
     growth = 0;
     stability = 0; 
-    oTransMove.init(oBlob.getPos());    
 }
 
 
@@ -57,8 +59,8 @@ void Unit::initialize (int regionID, Blob& oBlob)
 void Unit::addRegion (int regionID, Blob& oBlob)
 {    
     // if first region, init tracker with the region's values
-    if (vec_regions.empty()) 
-        oTracker = oBlob;
+    if (vec_regions.empty())        
+        oTracker.reBlob(oBlob);
     // otherwise, merge the region into the tracker
     else
         oTracker.merge(oBlob);
@@ -79,22 +81,20 @@ void Unit::absorb (Unit& oUnit)
 }
 
 
-// updates the Unit with data from its Tracker and recomputes some features (stability, translation)
-void Unit::update()
+// updates the Unit with data from its Tracker and recomputes some features (stability, traslation)
+void Unit::update ()
 {    
     if (oTracker.getMass() > 0)
     {
         // control age's limit
         if (age < 10000)
             age++;
-
-        Blob::operator=(oTracker);
         
-        // update movement info
-        oTransMove.update(pos);
+        reBlob(oTracker);
         
         // check how the unit has evolved (not for new units)
-        checkEvolution();
+        if (age > 1)
+            checkEvolution();
     }
     else
         clear();
@@ -112,11 +112,9 @@ void Unit::checkEvolution ()
 {
     float size_sim;	
 
-    // ignore new units
-    if (age <= 1)
-        return;
-
-    growth = (float)mass / preBlob.getMass();
+    translation[0] = pos[0] - prev_pos[0];
+    translation[1] = pos[1] - prev_pos[1];
+    growth = (float)mass / prev_mass;
 
     if (growth > 1.0)
             size_sim = sqrt(1.0/growth);

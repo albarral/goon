@@ -8,7 +8,6 @@
 
 #include <vector>
 #include <goon/data/base/blob.h>
-#include "goon/data/motion/Move2D.h"
 
 namespace goon
 {
@@ -21,10 +20,11 @@ private:
     float distance;         // distance to sampled region
     std::vector<int> vec_regions; 
     Blob oTracker;
-    Blob preBlob;          // previous blob info
+    int prev_pos[2];
+    int prev_mass;
+    int translation[2];          // change of position (in pixels)
     float growth;               // change of area
     int stability;
-    Move2D oTransMove;    // translation 2D movement
     static int MAX_STABILITY;
     static float STABLE_SIZE;
 
@@ -37,12 +37,10 @@ public:
         float getDistance() {return distance;};
         std::vector<int>& getListRegions() {return vec_regions;};
         Blob& getTracker() {return oTracker;};
+        int* getTranslation() {return translation;};
         float getGrowth() {return growth;};
         int getStability() {return stability;};
-        Move2D& getTransMove() {return oTransMove;}
-        
         static int getMaxStability() {return MAX_STABILITY;};        
-        
         
         void setID (int value);
         // clears the unit, making it inactive 

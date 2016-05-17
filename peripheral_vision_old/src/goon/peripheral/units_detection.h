@@ -22,7 +22,7 @@ class UnitsDetection
 {
 private:
     static log4cxx::LoggerPtr logger;
-    static const int MAX_ID;    
+    static const int MAX_ID;
     float MAXDISTXY_SQR;                        // size of the units' receptive fields 
     std::list<Unit> list_units;                 // list of active units
     std::queue<int> seq_available_ids;  // sequence of available IDs (FIFO queue)
