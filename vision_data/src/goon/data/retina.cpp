@@ -25,18 +25,6 @@ Retina& Retina::operator= (const Retina& oRetina)
     listFinalIDs = oRetina.listFinalIDs;
 }
 
-int Retina::getID()
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    return ID;    
-}
-
-void Retina::setID(int id)
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    ID = id;    
-}
-
 std::vector<Region>& Retina::getListRegions() 
 {
     std::lock_guard<std::mutex> locker(mutex);

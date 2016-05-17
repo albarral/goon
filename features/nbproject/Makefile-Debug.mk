@@ -36,11 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Time.o \
-	${OBJECTDIR}/src/goon/features/body/Body.o \
-	${OBJECTDIR}/src/goon/features/body/BodyUtils.o \
-	${OBJECTDIR}/src/goon/features/motion/Motion.o \
-	${OBJECTDIR}/src/goon/features/motion/Move.o \
-	${OBJECTDIR}/src/goon/features/motion/Move2D.o
+	${OBJECTDIR}/src/goon/features/body/BodyUtils.o
 
 
 # C Compiler Flags
@@ -57,11 +53,13 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-Wl,-rpath,../vision_data/dist/Debug/GNU-Linux -L../vision_data/dist/Debug/GNU-Linux -lgoon_data
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ../vision_data/dist/Debug/GNU-Linux/libgoon_data.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -70,35 +68,16 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${O
 ${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
-
-${OBJECTDIR}/src/goon/features/body/Body.o: src/goon/features/body/Body.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/Body.o src/goon/features/body/Body.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
 
 ${OBJECTDIR}/src/goon/features/body/BodyUtils.o: src/goon/features/body/BodyUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/BodyUtils.o src/goon/features/body/BodyUtils.cpp
-
-${OBJECTDIR}/src/goon/features/motion/Motion.o: src/goon/features/motion/Motion.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/Motion.o src/goon/features/motion/Motion.cpp
-
-${OBJECTDIR}/src/goon/features/motion/Move.o: src/goon/features/motion/Move.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/Move.o src/goon/features/motion/Move.cpp
-
-${OBJECTDIR}/src/goon/features/motion/Move2D.o: src/goon/features/motion/Move2D.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/Move2D.o src/goon/features/motion/Move2D.cpp
+	$(COMPILE.cc) -g -Isrc -I../vision_data/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/BodyUtils.o src/goon/features/body/BodyUtils.cpp
 
 # Subprojects
 .build-subprojects:
+	cd ../vision_data && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -107,6 +86,7 @@ ${OBJECTDIR}/src/goon/features/motion/Move2D.o: src/goon/features/motion/Move2D.
 
 # Subprojects
 .clean-subprojects:
+	cd ../vision_data && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

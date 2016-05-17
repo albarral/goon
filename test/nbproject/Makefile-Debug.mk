@@ -36,6 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/test/Module.o \
+	${OBJECTDIR}/src/goon/test/TestBodies.o \
+	${OBJECTDIR}/src/goon/test/TestRegions.o \
 	${OBJECTDIR}/src/goon/test/main.o \
 	${OBJECTDIR}/src/goon/test/modules/Grab.o \
 	${OBJECTDIR}/src/goon/test/modules/See.o
@@ -85,6 +87,16 @@ ${OBJECTDIR}/src/goon/test/Module.o: src/goon/test/Module.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/Module.o src/goon/test/Module.cpp
+
+${OBJECTDIR}/src/goon/test/TestBodies.o: src/goon/test/TestBodies.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/TestBodies.o src/goon/test/TestBodies.cpp
+
+${OBJECTDIR}/src/goon/test/TestRegions.o: src/goon/test/TestRegions.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../vision_utils/src -I../features/src -I../vision_data/src -I../camera/src -I../retinal_vision/src -I../peripheral_vision/src -I../monitor/src -I../show/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/TestRegions.o src/goon/test/TestRegions.cpp
 
 ${OBJECTDIR}/src/goon/test/main.o: src/goon/test/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test

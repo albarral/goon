@@ -1,5 +1,5 @@
-#ifndef __GOON_MOTION_MOVE_H
-#define __GOON_MOTION_MOVE_H
+#ifndef __GOON_DATA_MOVE_H
+#define __GOON_DATA_MOVE_H
 
 /***************************************************************************
  *   Copyright (C) 2016 by Migtron Robotics   *
@@ -10,8 +10,6 @@
 
 namespace goon 
 {
-namespace features
-{ 
 // Base class for measured movements
 class Move
 {
@@ -39,11 +37,10 @@ public:
      std::chrono::steady_clock::time_point getTimeStamp() {return t1;}
      
      // start measuring the movement (stores initial position)
-     void init(std::chrono::steady_clock::time_point& t);
+     void init();
      // updates the subject's position and performs the measure. Returns true if measure done ok.
-     bool update(std::chrono::steady_clock::time_point& t);     
+     bool update();     
 };
 
-}
 }  
 #endif

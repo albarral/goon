@@ -14,12 +14,22 @@
                    projectFiles="true">
       <logicalFolder name="data" displayName="data" projectFiles="true">
         <logicalFolder name="base" displayName="base" projectFiles="true">
+          <itemPath>src/goon/data/base/Body.cpp</itemPath>
+          <itemPath>src/goon/data/base/Body.h</itemPath>
           <itemPath>src/goon/data/base/blob.cpp</itemPath>
           <itemPath>src/goon/data/base/blob.h</itemPath>
           <itemPath>src/goon/data/base/region.cpp</itemPath>
           <itemPath>src/goon/data/base/region.h</itemPath>
           <itemPath>src/goon/data/base/roi.cpp</itemPath>
           <itemPath>src/goon/data/base/roi.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="features" displayName="motion" projectFiles="true">
+          <itemPath>src/goon/data/motion/Motion.cpp</itemPath>
+          <itemPath>src/goon/data/motion/Motion.h</itemPath>
+          <itemPath>src/goon/data/motion/Move.cpp</itemPath>
+          <itemPath>src/goon/data/motion/Move.h</itemPath>
+          <itemPath>src/goon/data/motion/Move2D.cpp</itemPath>
+          <itemPath>src/goon/data/motion/Move2D.h</itemPath>
         </logicalFolder>
         <itemPath>src/goon/data/capture.cpp</itemPath>
         <itemPath>src/goon/data/capture.h</itemPath>
@@ -61,7 +71,6 @@
           <incDir>
             <pElem>src</pElem>
             <pElem>../vision_utils/src</pElem>
-            <pElem>../features/src</pElem>
             <pElem>/usr/include</pElem>
           </incDir>
         </ccTool>
@@ -80,22 +89,14 @@
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
-            <linkerLibProjectItem>
-              <makeArtifact PL="../features"
-                            CT="2"
-                            CN="Debug"
-                            AC="true"
-                            BL="true"
-                            WD="../features"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
-              </makeArtifact>
-            </linkerLibProjectItem>
             <linkerLibLibItem>opencv_core</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -113,6 +114,18 @@
       <item path="src/goon/data/capture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Motion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Motion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move2D.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -147,6 +160,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -164,6 +181,18 @@
       <item path="src/goon/data/capture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Motion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Motion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move2D.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/motion/Move2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -5,12 +5,10 @@
 
 #include <chrono>
 
-#include "goon/features/motion/Motion.h"
+#include "goon/data/motion/Motion.h"
 
 namespace goon 
 {
-namespace features
-{     
 // Constructor
 Motion::Motion ()
 {
@@ -73,6 +71,5 @@ std::string Motion::toString()
     return desc;
 }
 
-}
 }
 							 

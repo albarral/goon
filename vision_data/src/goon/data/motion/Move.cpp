@@ -3,12 +3,10 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/features/motion/Move.h"  
+#include "goon/data/motion/Move.h"  
 
 namespace goon 
 {
-namespace features
-{    
 // Constructor
 Move::Move ()
 {
@@ -17,17 +15,18 @@ Move::Move ()
     millis = 0;
 }
 
-void Move::init(std::chrono::steady_clock::time_point& t)
+void Move::init()
 {
     bstarted = true;
-    t1 = t;
+    t1 = std::chrono::steady_clock::now();
     millis = 0;
 }
 
-bool Move::update(std::chrono::steady_clock::time_point& t)
+bool Move::update()
 {
     if (bstarted)
     {
+        std::chrono::steady_clock::time_point t = std::chrono::steady_clock::now();
         std::chrono::duration<int, std::milli> interval_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t-t1);
         millis = interval_ms.count();        
         t1 = t;
@@ -38,6 +37,5 @@ bool Move::update(std::chrono::steady_clock::time_point& t)
         return false;
 }
 
-}
 }
 							 

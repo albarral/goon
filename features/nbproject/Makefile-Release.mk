@@ -36,11 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Time.o \
-	${OBJECTDIR}/src/goon/features/body/Body.o \
-	${OBJECTDIR}/src/goon/features/body/BodyUtils.o \
-	${OBJECTDIR}/src/goon/features/motion/Motion.o \
-	${OBJECTDIR}/src/goon/features/motion/Move.o \
-	${OBJECTDIR}/src/goon/features/motion/Move2D.o
+	${OBJECTDIR}/src/goon/features/body/BodyUtils.o
 
 
 # C Compiler Flags
@@ -72,30 +68,10 @@ ${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
 
-${OBJECTDIR}/src/goon/features/body/Body.o: src/goon/features/body/Body.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/Body.o src/goon/features/body/Body.cpp
-
 ${OBJECTDIR}/src/goon/features/body/BodyUtils.o: src/goon/features/body/BodyUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/BodyUtils.o src/goon/features/body/BodyUtils.cpp
-
-${OBJECTDIR}/src/goon/features/motion/Motion.o: src/goon/features/motion/Motion.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/Motion.o src/goon/features/motion/Motion.cpp
-
-${OBJECTDIR}/src/goon/features/motion/Move.o: src/goon/features/motion/Move.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/Move.o src/goon/features/motion/Move.cpp
-
-${OBJECTDIR}/src/goon/features/motion/Move2D.o: src/goon/features/motion/Move2D.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/Move2D.o src/goon/features/motion/Move2D.cpp
 
 # Subprojects
 .build-subprojects:

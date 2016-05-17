@@ -11,18 +11,27 @@ ROI::ROI ()
 {
     ID = -1;
     age = 0;
+    clearMatchingInfo();
 }
 
-void ROI::setID(int value) {ID = value;}
 
-void ROI::setAge(int value) {age = value;}
+void ROI::clearMatchingInfo()
+{
+    touchedRegions = 0;
+    capturedRegion = -1;    
+}
 
-void ROI::setStability(int value) {stability = value;}
 
-void ROI::updateMotion(features::Move2D& oTransMove)
+void ROI::updateMotion(Move2D& oTransMove)
 {
     oMotion.update(oTransMove);
 }
+
+void ROI::updateBlob(Blob& oBlob)
+{
+    Blob::operator=(oBlob);    
+}
+
 
 bool ROI::sortByID (const ROI& oROI1, const ROI& oROI2)
 {

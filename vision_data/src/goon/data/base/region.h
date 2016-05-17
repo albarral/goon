@@ -9,14 +9,13 @@
 #include <string>
 #include "opencv2/core/core.hpp"
 
-#include "goon/data/base/blob.h"
-#include "goon/features/body/Body.h"
+#include "goon/data/base/Body.h"
 
 namespace goon 
 {
 // This class represents a region, the basic element in the retinal vision process.
-// It extends from Blob and Body.
-class Region : public Blob, public Body
+// It extends from Body.
+class Region : public Body
 {
  public:
     enum eTypes
@@ -31,6 +30,7 @@ private:
     int type;
     cv::Mat grid;                    // grid used for merging purpose
     bool bmerge;                   // flag indicating that region is to be merged
+    bool bcaptured;             // indicates region was captured by a ROI
     // for degug ...
     cv::Point seed;                 // first point of the region 
 
@@ -38,21 +38,23 @@ public:
     Region();
     //~Region();
     
-    // copy constructor (needed for vectors)
+    // copy constructor (needed for grid)
     Region(const Region& oRegion);  
-    // assignment operator
+    // assignment operator (needed for grid)
     Region& operator=(const Region& oRegion);
         
     int getID() {return ID;}
     int getType() {return type;}
     cv::Mat& getGrid() {return grid;}
-    int is2Merge() {return bmerge;}
+    bool is2Merge() {return bmerge;}
+    bool isCaptured() {return bcaptured;}
     cv::Point& getSeed() {return seed;}
     
-    void setID (int value);
-    void setType (int value);
-    void setMerge(bool bvalue);
-    void setSeed(cv::Point& seed_point);
+    void setID(int value) {ID = value;}
+    void setType(int value) {type = value;}
+    void setMerge(bool bvalue) {bmerge = bvalue;}
+    void setCaptured(bool bvalue) {bcaptured = bvalue;}
+    void setSeed(cv::Point& seed_point) {seed = seed_point;}
     
     // initializes mask and grid
     void init();

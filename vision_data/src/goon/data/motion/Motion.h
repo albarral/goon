@@ -1,5 +1,5 @@
-#ifndef __GOON_FEATURES_MOTION_H
-#define __GOON_FEATURES_MOTION_H
+#ifndef __GOON_DATA_MOTION_H
+#define __GOON_DATA_MOTION_H
 
 /***************************************************************************
  *   Copyright (C) 2016 by Migtron Robotics   *
@@ -9,12 +9,10 @@
 #include <deque>
 #include <string>
 
-#include "goon/features/motion/Move2D.h"
+#include "goon/data/motion/Move2D.h"
 
 namespace goon 
 {
-namespace features
-{     
 // This class represents a 2D motion (like a translation)
 // It contains a list of consecutive moves (limited to maxMoves) from which a motion can be computed.   
  class Motion
@@ -46,6 +44,5 @@ namespace features
      void compute();
 };  
 
-}
 }  
 #endif

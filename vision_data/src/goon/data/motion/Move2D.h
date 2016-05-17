@@ -1,5 +1,5 @@
-#ifndef __GOON_MOTION_MOVE2D_H
-#define __GOON_MOTION_MOVE2D_H
+#ifndef __GOON_DATA_MOVE2D_H
+#define __GOON_DATA_MOVE2D_H
 
 /***************************************************************************
  *   Copyright (C) 2016 by Migtron Robotics   *
@@ -8,12 +8,10 @@
 
 #include <string>
 
-#include "goon/features/motion/Move.h"
+#include "goon/data/motion/Move.h"
 
 namespace goon 
 {
-namespace features
-{ 
 // Class for 2 dimensional movements (translations & size changes)
 class Move2D : public Move
 {
@@ -27,9 +25,9 @@ class Move2D : public Move
      //~Move2D();
      
      // start measuring the movement (stores subject position))
-     void init(int value[2], std::chrono::steady_clock::time_point& t);
+     void init(int value[2]);
      // updates the subject's position and performs the measure. Returns true if measure done ok.
-     bool update(int value[2], std::chrono::steady_clock::time_point& t);
+     bool update(int value[2]);
      
      int getValueX() {return value[0];} 
      int getValueY() {return value[1];} 
@@ -41,6 +39,5 @@ class Move2D : public Move
      std::string toString();
 };
 
-}
 }  
 #endif

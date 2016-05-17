@@ -31,7 +31,6 @@ RetinalVision::~RetinalVision()
 void RetinalVision::init(int img_w, int img_h)
 {
     oSegmentation4.init(mRetina, img_w, img_h);
-    oMerge.init(img_w, img_h);
 }
 
 // This function changes main parameters of the retinal vision system.

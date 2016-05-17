@@ -30,13 +30,6 @@ Merge::~Merge()
 {
 }
 
-void Merge::init(int img_w, int img_h)
-{        
-    LOG4CXX_DEBUG(logger, "init ...");
-
-    // create the collection mask 
-    maskCollection = cv::Mat::zeros(img_h, img_w, CV_8UC1); 
-}
 
 // This function merges all adjacent regions with similar color.
 int Merge::doMerge (Retina& oRetina)
@@ -159,7 +152,7 @@ int Merge::mergeRegions (Retina& oRetina)
         if (oRegion.is2Merge() && oRegion.getType() == Region::eREG_SIMPLE)
         {		
             // create a new collection
-            createCollection(oRegion, oRetina);            
+            createCollection2(oRegion, oRetina);            
             
             num_collections++;            
         } 
@@ -169,47 +162,39 @@ int Merge::mergeRegions (Retina& oRetina)
 }
 
 
-// Creates a collection by merging a set of regions into the specified base region.
-void Merge::createCollection (Region& oBaseRegion, Retina& oRetina)
+void Merge::createCollection2 (Region& oBaseRegion, Retina& oRetina)
 {  
     LOG4CXX_TRACE(logger, "new collection " << oBaseRegion.getID());
-    
-    // reset collection mask and list
-    maskCollection.setTo(0);
-    windowCollection = cv::Rect(0,0,0,0);
-    setCollectionRegions.clear();
     
     // the base region becomes a collection
     oBaseRegion.setType(Region::eREG_COLLECTION);
 
-    // start collection with the base region
-    setCollectionRegions.insert(oBaseRegion.getID()); // otherwise will be reflexively included
-    windowCollection = oBaseRegion.getWindow();
-    updateCollectionMask(oBaseRegion);
-            
-    // expand the list with more regions
+    // build collection list (using a set to reject reflexive inclusions)
+    setCollectionRegions.clear();
+    setCollectionRegions.insert(oBaseRegion.getID()); 
     checkRegions2Merge(oBaseRegion.getID());
 
    // for each region in the list
+    int i = 0;
     for (int regionID: setCollectionRegions) 
     {
-        Region& oRegion = oRetina.getRegion(regionID);               
-        
-        // add a new region to the collection (avoid self merging)
-        if (oRegion.getID() != oBaseRegion.getID())
-        {		
-            LOG4CXX_TRACE(logger, "add region " << oRegion.getID());
-            // merge blob info (color, covs, window, mass))
-            oBaseRegion.merge(oRegion);
-            // grow collection mask (with original window)
-            updateCollectionMask(oRegion);                    
-            // and mark it as merged
-            oRegion.setType(Region::eREG_MERGED);
+        // skip base region
+        if (i==0) 
+        {
+            i++;
+            continue;
         }
+        
+        Region& oRegion = oRetina.getRegion(regionID);                       
+        LOG4CXX_TRACE(logger, "add region " << oRegion.getID());
+        // merge it 
+        oBaseRegion.merge(oRegion);
+        // and mark it as merged
+        oRegion.setType(Region::eREG_MERGED);        
+        i++;
     }
     
-    oBaseRegion.setMask(maskCollection, windowCollection);           
-    //LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
+    LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
 }
 
 
@@ -230,17 +215,6 @@ void Merge::checkRegions2Merge(int baseID)
                 checkRegions2Merge(j);
         }
     }	
-}
-
-// Extends the collection mask (and window) with the mask of the given region
-void Merge::updateCollectionMask(Region& oRegion)
-{
-    cv::Mat roiCollection;
-    // set roi and fill mask (not copy, to avoid clearing already filled parts)
-    roiCollection = maskCollection(oRegion.getWindow());
-    roiCollection.setTo(ConfigRetinal::BODY_VALUE, oRegion.getMask());
-    // union of windows
-    windowCollection = windowCollection | oRegion.getWindow();    
 }
 
 }

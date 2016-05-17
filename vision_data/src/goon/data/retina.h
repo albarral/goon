@@ -29,9 +29,6 @@ public:
                     
         // assignment operator
         Retina& operator= (const Retina& oRetina);
-
-        int getID();
-        void setID(int id);
         
         // returns a reference to the list of regions
         std::vector<Region>& getListRegions();

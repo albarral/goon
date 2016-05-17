@@ -158,7 +158,7 @@ void Segmenter::extractRegions ()
                 // build the region (type, mass, mask, window, grid, color and position)
                 oRegion.setType(Region::eREG_SIMPLE); 
                 oRegion.setMass(region_size);
-                oRegion.setMask(oFloodfiller.getRegionMask(), oFloodfiller.getRegionWindow());
+                oRegion.setMaskAndWindow(oFloodfiller.getRegionMask(), oFloodfiller.getRegionWindow());
                 oRegion.setGrid(oFloodfiller.getRegionGrid());
                 oRegion.setRGB(oFloodfiller.getRegionColor());	
                 RGBColor::toHSV(oRegion.getRGB(), oRegion.getHSV());

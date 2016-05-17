@@ -14,36 +14,34 @@ Region::Region ()
     // blob constructor ... 
     type = Region::eREG_SIMPLE;
     bmerge = false;
+    bcaptured = false;
 }
 
 // copy constructor (needed for vectors)    
-Region::Region(const Region& oRegion) : Blob(oRegion), Body(oRegion) // dispatch to base copy constructor
+Region::Region(const Region& oRegion) : Body(oRegion)       // base part constructor
 {
     ID = oRegion.ID;
     type = oRegion.type;
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
+    bcaptured = oRegion.bcaptured;
     seed = oRegion.seed;
 }  
 
 // assignment operator
 Region& Region::operator=(const Region& oRegion)
 {
-    Blob::operator=(oRegion);   // blob part copied
-    Body::operator=(oRegion); // body part copied
+    Body::operator=(oRegion); // base part assignment
+
     ID = oRegion.ID;
     type = oRegion.type;
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
+    bcaptured = oRegion.bcaptured;
     seed = oRegion.seed;
     return *this;    
 }
     
-void Region::setID(int value) {ID = value;}
-void Region::setType(int value) {type = value;}
-void Region::setMerge (bool bvalue) {bmerge = bvalue;}
-void Region::setSeed(cv::Point& seed_point) {seed = seed_point;}
-
 // The given grid is cloned.
 void Region::setGrid(const cv::Mat& grid_samples)
 {
@@ -66,7 +64,7 @@ void Region::createDummy()
     cv::Rect rect = cv::Rect(0, 0, w,h);
     
     setRGB(color);
-    setMask(mask, rect);
+    setMaskAndWindow(mask, rect);
     setPos(w/2, h/2);
 }
 
@@ -77,6 +75,7 @@ std::string Region::toString()
             ", mask = " + std::to_string(getMask().cols) + "x" + std::to_string(getMask().rows) +
             ", grid = " + std::to_string(grid.cols) + "x" + std::to_string(grid.rows) +
             ", merge = " + (bmerge ? "1":"0") + 
+            ", captured = " + (bcaptured ? "1":"0") + 
             "]" + 
             "\n" + Blob::toString() + 
             "\n" + Body::toString();

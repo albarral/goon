@@ -8,21 +8,23 @@
 
 #include <string>
 
-#include "goon/data/base/blob.h"
-#include "goon/features/body/Body.h"
-#include "goon/features/motion/Motion.h"
+#include "goon/data/base/Body.h"
+#include "goon/data/motion/Motion.h"
 
 namespace goon 
 {
 // This class represents a ROI (region of interest) which is the main output of the peripheral vision system.
-// It extends from Blob and Body..
-class ROI : public Blob, public Body
+// It extends from Body.
+class ROI : public Body
 {
 private:
     int ID;
     int age;
     int stability;
-    features::Motion oMotion;
+    Motion oMotion;
+    // matching info
+    int touchedRegions;  // number of regions to which the ROI responds 
+    int capturedRegion; // ID of captured region to update the ROI
 
 public:    
     ROI();
@@ -31,13 +33,21 @@ public:
     int getID() {return ID;};
     int getAge() {return age;};
     int getStability() {return stability;};
+    void setID(int value) {ID = value;};
+    void setAge(int value) {age = value;};
+    void setStability(int value) {stability = value;};
+    
+    // matching info
+    int getTouchedRegions() {return touchedRegions;};
+    int getCapturedRegion() {return capturedRegion;};    
+    void setTouchedRegions (int value) {touchedRegions = value;};
+    void setCapturedRegion (int value) {capturedRegion = value;};
+    void clearMatchingInfo();
 
-    void setID (int value);
-    void setAge (int value);
-    void setStability (int value);
-
-    features::Motion& getMotion() {return oMotion;};
-    void updateMotion(features::Move2D& oTransMove);
+    Motion& getMotion() {return oMotion;};
+    void updateMotion(Move2D& oTransMove);
+    // update blob part
+    void updateBlob(Blob& oBlob);
 
     // support function to sort ROIs by ID
     static bool sortByID (const ROI& oROI1, const ROI& oROI2);        
