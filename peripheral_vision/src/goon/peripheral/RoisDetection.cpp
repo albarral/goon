@@ -22,82 +22,96 @@ RoisDetection::RoisDetection ()
 
 //destructor
 RoisDetection::~RoisDetection ()
-{
+{    
 }
 
 
-void RoisDetection::detectROIs(std::vector<Region>& listRegions)
+void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs)
 {
     LOG4CXX_INFO(logger, "detect ROIs");
         
-    // if ROIs & regions exist, try matching them
-    if (listROIs.size()>0 && listRegions.size()>0)
+    pRetina = &oRetina;
+    pROIs = &oROIs;
+    eliminations = 0;
+    
+    // prepares ROIs for a new detection
+    prepareDetection();
+    
+    // try matching only if ROIs & regions exist
+    if (oROIs.getNumROIs()>0 && oRetina.getNumRegions()>0)
     {
-        matchRois2Regions(listRegions);
+        matchROIs2Regions();
+        
+        updateMatchedROIs();
     }    
-    else
-        LOG4CXX_WARN(logger, "Skipped matching! No ROIs or no regions");
             
     // create new ROIs for orphan regions
-    handleOrphanRegions(listRegions);
+    handleOrphanRegions();
     
     // remove obsolete ROIs
     removeObsoleteRois();
 }
 
+// reset values for new detection process
+void RoisDetection::prepareDetection()
+{
+    listMatches.clear();
+    
+    // walk list of ROIs        
+    for (ROI& oROI : pROIs->getList())
+        oROI.setMatched(false);
+}
 
 // try to match ROIs and regions (based on color & overlap)
-void RoisDetection::matchRois2Regions(std::vector<Region>& listRegions)
+void RoisDetection::matchROIs2Regions()
 {
     int totalTouches = 0;
     
     LOG4CXX_DEBUG(logger, "try matching ROIs and regions");
         
-    // create overlap matrix
-    matOverlaps = cv::Mat_<int>(listROIs.size(), listRegions.size());  
-    matOverlaps.setTo(0);           
-
-    // for each ROI
-    int numRoi = 0;
+    std::list<Region>& listRegions = pRetina->getListRegions();
+    std::list<ROI>& listROIs = pROIs->getList();
+            
+    // create overlap matrix (ROIS x regions)
+    matOverlaps = cv::Mat::zeros(listROIs.size(), listRegions.size(), CV_32S);
+    
+    // for each ROI (or row)
+    int indexROI = 0;
     for (ROI& oROI : listROIs)
     {              
-        // reset ROI's matching info
-        oROI.clearMatchingInfo();
-
         // check the regions to which the ROI responds
-        int numTouched = compareRoi2Regions(numRoi, oROI, listRegions);
+        int numTouched = compareROI2Regions(indexROI, oROI, listRegions);
 
         if (numTouched > 0)
-        {
-            oROI.setTouchedRegions(numTouched);                
             totalTouches += numTouched;
-        }
-        numRoi++;
+
+        indexROI++;
 
         LOG4CXX_DEBUG(logger, "ROI " << oROI.getID() << ": " << numTouched << " touches");
     }
 
     // compute correspondences between ROIs and regions
     if (totalTouches > 0)
-        findBestMatches(listRegions);
+        findBestMatches();
 }
+
 
 // Checks how the given ROI responds to regions. 
 // A ROI responds to a region if it has its same color and its mask is overlapped by the region (minimum of 10% required)
 // The number of positive responses is returned.
-int RoisDetection::compareRoi2Regions(int row, ROI& oROI, std::vector<Region>& listRegions)
+int RoisDetection::compareROI2Regions(int row, ROI& oROI, std::list<Region>& listRegions)
 {
     float HSV_SAME = oHSVColor.getDistSameColor();
     int overlapArea = 0;
     int numMatches = 0;
-    int minOverlapArea = minOverlapFraction * oROI.getArea();
+    int minOverlapArea = minOverlapFraction * oROI.getMass();
 
     LOG4CXX_DEBUG(logger, "matchRoi2Regions ... ROI " << oROI.getID());
            
     cv::Mat matRow = matOverlaps.row(row);                
 
-    int numReg = 0;
-    // compare with each region
+    // for each region (or column)
+    int indexRegion = 0;
     for (Region& oRegion : listRegions)    
     {
         // if region and ROI have same color
@@ -106,13 +120,14 @@ int RoisDetection::compareRoi2Regions(int row, ROI& oROI, std::vector<Region>& l
             // checks overlap ROI-region
             overlapArea = oROI.computeOverlap(oRegion);
             if (overlapArea > minOverlapArea)
-            {                
-                matRow.at<int>(numReg) = overlapArea;
+            {          
+                // and stores it in matOverlaps
+                matRow.at<int>(indexRegion) = overlapArea;
                 LOG4CXX_DEBUG(logger, "touched region " << oRegion.getID() << " - overlap area = " << overlapArea);
                 numMatches++;
             }
         }
-        numReg++;
+        indexRegion++;
     }
     
     return numMatches;
@@ -120,12 +135,11 @@ int RoisDetection::compareRoi2Regions(int row, ROI& oROI, std::vector<Region>& l
 
 // Establishes correspondences between ROIs and regions
 // Iteratively searches for the maximum overlaps, each of them yielding a new correspondence
-void RoisDetection::findBestMatches(std::vector<Region>& listRegions)
+void RoisDetection::findBestMatches()
 {    
     double maxVal; 
     cv::Point maxLoc;
-    int row, col;
-    std::list<ROI>::iterator it_ROI;
+    int indexROI, indexRegion;
     bool bsearch = true;
 
     LOG4CXX_DEBUG(logger, "findBestMatches ,,,");
@@ -139,21 +153,21 @@ void RoisDetection::findBestMatches(std::vector<Region>& listRegions)
         // if new maximum found, set correspondence
         if (maxVal > 0)
         {
-            row = maxLoc.y;     // rows are ROIs
-            col = maxLoc.x;      // columns are regions               
+            indexROI = maxLoc.y;           // rows are ROIs
+            indexRegion = maxLoc.x;      // columns are regions               
             
-            // mark correspondence
-            it_ROI = listROIs.begin(); 
-            std::advance(it_ROI, row);  // access element in std::list
-            it_ROI->setCapturedRegion(col);
-            Region& oRegion = listRegions.at(col);
-            oRegion.setCaptured(true);            
+            // mark elements & add new match to the list
+            ROI& oROI = pROIs->getROI(indexROI);
+            Region& oRegion = pRetina->getRegion(indexRegion);
+            oROI.setMatched(true);
+            oRegion.setMatched(true);
+            newMatch(indexROI, indexRegion, maxVal);
             
-            LOG4CXX_DEBUG(logger, "ROI " << it_ROI->getID() << " captured region " << col);
+            LOG4CXX_DEBUG(logger, "ROI " << oROI.getID() << " matched region " << indexRegion);
             
             // eliminate references to this ROI and region in matOverlaps
-            cv::Mat matRow = matOverlaps.row(row);                
-            cv::Mat matCol = matOverlaps.col(col);                
+            cv::Mat matRow = matOverlaps.row(indexROI);                
+            cv::Mat matCol = matOverlaps.col(indexRegion);                
             matRow.setTo(0);
             matCol.setTo(0);            
         }                
@@ -162,55 +176,85 @@ void RoisDetection::findBestMatches(std::vector<Region>& listRegions)
             bsearch = false;
     }
 }
-
-
-// create new ROIs for uncaptured regions    
-void RoisDetection::handleOrphanRegions(std::vector<Region>& listRegions)
+    
+// adds a new match to the list of matches
+void RoisDetection::newMatch(int roiID, int regionID, float confidence)
 {
-    int n=0;
-    for (Region& oRegion : listRegions)    
+    st_match match; 
+    match.roiID = roiID;
+    match.regionID = regionID;
+    match.confidence = confidence;    
+    listMatches.push_back(match);
+}
+
+// create new ROIs for unmatched regions    
+void RoisDetection::handleOrphanRegions()
+{
+    int indexRegion=0;
+    for (Region& oRegion : pRetina->getListRegions())    
     {
-        if (!oRegion.isCaptured())
+        if (!oRegion.isMatched())
         {
             // generate new ROI
-            int ID = oIDPool.takeOne();
-            ROI oROI;
-            oROI.setID(ID);
-            // set the blob part
-            oROI Blob::operator= oRegion;
-            //oROI Blob::operator= (Blob)oRegion;
-            // set the body part
-            //oROI Body::operator=(oRegion); 
-            oROI = (Body)oRegion; 
-            // mark as matched    
-            oROI.setCapturedRegion(n);
-            // mark region as captured
-            oRegion.setCaptured(true);
-
-            // and add it to the list of ROIs
-            listROIs.push_back(oROI);
-            LOG4CXX_DEBUG(logger, "New ROI " << oROI.getID() << " for region " << oRegion.getID());          
+            newROI(oRegion);
         }
-        n++;
+        indexRegion++;
     }
 }
+
+// generate new ROI & adds it to list of ROIs
+void RoisDetection::newROI(Region& oRegion)
+{
+    int ID = oIDPool.takeOne();
     
+    ROI oROI;
+    oROI.setID(ID);
+    oROI.setBody(oRegion);
+    int pos[2] = {oRegion.getPos()[0], oRegion.getPos()[1]};
+    oROI.getTransMove().init(pos);
+    // mark as matched to avoid obsoletes removal    
+    oROI.setMatched(true);     
+    // and add it to the list of ROIs
+    pROIs->addROI(oROI);    
+
+    LOG4CXX_DEBUG(logger, "New ROI " << ID << " for region " << oRegion.getID());          
+}
+
+
+// update matched ROIs to follow their regions
+void RoisDetection::updateMatchedROIs()
+{
+    for (st_match& match : listMatches)
+    {
+        ROI& oROI = pROIs->getROI(match.roiID);        
+        Region& oRegion = pRetina->getRegion(match.regionID);
+
+        oROI.setBody(oRegion);
+        // update ROI's motion & age
+        int pos[2] = {oRegion.getPos()[0], oRegion.getPos()[1]};        
+        oROI.getTransMove().update(pos);
+        oROI.increaseAge();
+    }        
+}
+
 // Eliminate obsolete ROIs    
 void RoisDetection::removeObsoleteRois()
 {
+    std::list<ROI>& listROIs = pROIs->getList();
     std::list<ROI>::iterator it_ROI = listROIs.begin();
     // walk list of ROIs
     while (it_ROI != listROIs.end())
     {
-        // if ROI has no capture, it's obsolete
-        if (it_ROI->getCapturedRegion() == -1)
+        // if ROI not matched, remove it
+        if (!it_ROI->isMatched())
         {
             // make ROI ID available again
             int ID = it_ROI->getID();
             oIDPool.freeOne(ID);
             // remove the ROI from list
             it_ROI = listROIs.erase(it_ROI);
-
+           
+            eliminations++;
             LOG4CXX_TRACE(logger, "eliminate !!!" << ID);
         }
         else
@@ -218,18 +262,4 @@ void RoisDetection::removeObsoleteRois()
     }                  
 }
 
-
-//void RoisDetection::getNumbers (int* merged_units, int* eliminated_units)
-//{
-//    *merged_units = merges;
-//    *eliminated_units = eliminations;
-//}
-
-
-
-
 }
-
-
-
-

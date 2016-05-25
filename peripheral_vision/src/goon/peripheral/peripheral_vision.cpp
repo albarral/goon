@@ -22,7 +22,6 @@ PeripheralVision::PeripheralVision (Retina& oRetina, Rois& oROIs) : mRetina(oRet
 {
     LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Peripheral vision");
 
-    oUnitsDetection.setSizeReceptiveFields(8);          // this value produces receptive fields with double the area of their underlying objects.
     counter = 0;
 	
     for (int i=0; i<4; i++)            
@@ -56,79 +55,21 @@ void PeripheralVision::setParameters (int same_RGB, int similar_RGB)
 // It samples the retinal map to discover and track regions of interest in the visual scene. 	
 void PeripheralVision::update ()
 {
-    int num_rois, merged_rois, eliminated_rois;
-        
     LOG4CXX_TRACE(logger, "update - init");
     
-    oUnitsDetection.prepareUnits();    
-
-    std::vector<int>::iterator it_regID;
-    std::vector<int>::iterator it_end = mRetina.getListFinalIDs().end();
+    oRoisDetection.detectROIs(mRetina, mROIs);
         
-    // walk the list of final retinal regions
-    for (it_regID = mRetina.getListFinalIDs().begin(); it_regID != it_end; it_regID++)
-    {
-        Region& oRegion = mRetina.getRegion(*it_regID);        
-        oUnitsDetection.respond2Region(oRegion);
-    }    
+    LOG4CXX_DEBUG(logger, "rois = " << mROIs.getNumROIs() << ", eliminated = " << oRoisDetection.getEliminations());
 
-    oUnitsDetection.updateUnits();
-    
-    // updates the detected ROIs
-    computeROIs();
-
-    oUnitsDetection.getNumbers(&merged_rois, &eliminated_rois);
-
-    num_rois = mROIs.getNumROIs();
-    LOG4CXX_DEBUG(logger, "rois = " << num_rois << ", merged = " << merged_rois << ", eliminated = " << eliminated_rois);
-
-    storage[0] += mRetina.getNumFinalIDs();
-    storage[1] += num_rois;
-    storage[2] += merged_rois;
-    storage[3] += eliminated_rois;
+    storage[0] += mRetina.getNumRegions();
+    storage[1] += mROIs.getNumROIs();
+    storage[2] += 0;
+    storage[3] += oRoisDetection.getEliminations();
     counter++;
     
     LOG4CXX_TRACE(logger, "update - end");
 }
 
-
-// Rebuilds the list of active ROIs 
-void PeripheralVision::computeROIs ()
-{
-    ROI oROI;      
-
-    LOG4CXX_TRACE(logger, "compute ROIs");
-
-    mROIs.clear();
-
-    std::list<Unit>& list_units = oUnitsDetection.getListUnits();
-    std::list<Unit>::iterator it_Unit;
-
-    for (it_Unit = list_units.begin(); it_Unit != list_units.end(); it_Unit++)
-    {                
-        setROIFromUnit (oROI, *it_Unit);
-
-        mROIs.addROI(oROI);
-    }
-}
-
-
-// Transforms a Unit into a fully featured ROI (with motion info).
-void PeripheralVision::setROIFromUnit (ROI &oROI, Unit &oUnit)
-{
-    LOG4CXX_TRACE(logger, "update ROI " << oUnit.getID());
-    
-    oROI.setID(oUnit.getID());
-    oROI.setAge(oUnit.getAge());
-    oROI.setStability(oUnit.getStability());
-    
-    oROI.updateBlob(oUnit);
-
-    // update roi translation motion
-    oROI.updateMotion(oUnit.getTransMove());
-    
-    LOG4CXX_TRACE(logger, "age = " << oROI.getAge() << ", stability = " << oROI.getStability());
-}
 
 void PeripheralVision::describeROIs()
 {

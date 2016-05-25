@@ -6,7 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <vector>
+#include <list>
 #include <log4cxx/logger.h>
 #include "opencv2/core/core.hpp"
 
@@ -28,7 +28,7 @@ public:
 //    ~RetinaMonitor();
     
     // Draws an image with the given list of regions 
-    void drawRegions (cv::Mat& image_cam, std::vector<Region>& listRegions);
+    void drawRegions (cv::Mat& image_cam, std::list<Region>& listRegions);
     
     cv::Mat& getOutput() {return (oDraw.getOutput());};    
 

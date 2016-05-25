@@ -11,7 +11,8 @@
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
 #include "goon/data/base/roi.h"
-#include "goon/peripheral/units_detection.h"
+//#include "goon/peripheral/units_detection.h"
+#include "goon/peripheral/RoisDetection.h"
 
 namespace goon
 {
@@ -21,7 +22,8 @@ private:
     static log4cxx::LoggerPtr logger;
     Retina& mRetina;
     Rois& mROIs;
-    UnitsDetection oUnitsDetection;
+ //   UnitsDetection oUnitsDetection;
+    RoisDetection oRoisDetection;
     int storage[4];
     int counter;
     int loop_time;      // time ellapsed from the last update (ms)
@@ -37,15 +39,7 @@ public:
     void update ();
        
     // logs a description of the computed ROIs
-    void describeROIs();
-    
-private:
-    // Rebuilds the list of ROIS
-    void computeROIs();
-    
-    // Transforms a Unit into a fully featured ROI (with motion info).
-    void setROIFromUnit (ROI &oROI, Unit &oUnit);
-
+    void describeROIs();    
 };
 
 }  	

@@ -3,7 +3,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <vector>
 #include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
 
 #include "goon/retinal/retinal_vision.h"
@@ -57,7 +56,7 @@ void RetinalVision::update (cv::Mat& image_cam)
 
     oMerge.doMerge(mRetina);
 
-    mRetina.buildListFinalIDs();
+    mRetina.removeInvalidRegions();
 
     //LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
     //describeRegions();
@@ -69,24 +68,19 @@ void RetinalVision::computeCovariances()
 {    
     LOG4CXX_DEBUG(logger, "compute shapes ...");
 
-    std::vector<int>::iterator it_region = mRetina.getListFinalIDs().begin();
-    std::vector<int>::iterator it_end = mRetina.getListFinalIDs().end();
     // walk the list of final regions
-    while (it_region != it_end)
+    for (Region& oRegion : mRetina.getListRegions())
     {
-        Region& oRegion = mRetina.getRegion(*it_region);               
         LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
         
         Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
-
-        it_region++;
     }    
 }
 
 void RetinalVision::describeRegions()
 {
     LOG4CXX_DEBUG(logger, "regions description ...");
-    for (Region& oRegion: mRetina.getListRegions()) 
+    for (Region& oRegion : mRetina.getListRegions()) 
     {
         LOG4CXX_DEBUG(logger, oRegion.shortDesc());
     } 

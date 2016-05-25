@@ -11,11 +11,11 @@ namespace goon
 {
 LoggerPtr RetinaMonitor::logger(Logger::getLogger("goon.monitor"));
 
-void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::vector<Region>& listRegions)
+void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::list<Region>& listRegions)
 {    
     //LOG4CXX_DEBUG(logger, "draw regions = " << listRegions.size());
-    std::vector<Region>::iterator it_region = listRegions.begin();
-    std::vector<Region>::iterator it_end = listRegions.end();
+    std::list<Region>::iterator it_region = listRegions.begin();
+    std::list<Region>::iterator it_end = listRegions.end();
 
     oDraw.setSize(image_cam);
     oDraw.clearBackGround();

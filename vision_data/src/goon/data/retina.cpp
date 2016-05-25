@@ -14,7 +14,7 @@ Retina::Retina ()
 
 Retina::~Retina()
 {
-    clear();
+    listRegions.clear();
 }
 
 // assignment operator
@@ -22,10 +22,9 @@ Retina& Retina::operator= (const Retina& oRetina)
 {
     ID = oRetina.ID;
     listRegions = oRetina.listRegions;
-    listFinalIDs = oRetina.listFinalIDs;
 }
 
-std::vector<Region>& Retina::getListRegions() 
+std::list<Region>& Retina::getListRegions() 
 {
     std::lock_guard<std::mutex> locker(mutex);
     return listRegions;
@@ -39,31 +38,23 @@ void Retina::addRegion(Region& oRegion)
     listRegions.push_back(oRegion);
 }  
 
-// returns a reference to the list of final region IDs        
-std::vector<int>& Retina::getListFinalIDs()
+// remove the invalid (merged) regions from list, reassigning ID's in the new list
+void Retina::removeInvalidRegions()
 {
     std::lock_guard<std::mutex> locker(mutex);
-    return listFinalIDs;
-};
 
-void Retina::setListFinalIDs(std::vector<int>& listFinalIDs)
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    this->listFinalIDs = listFinalIDs;
-}
-
-void Retina::buildListFinalIDs()
-{
-    std::lock_guard<std::mutex> locker(mutex);
-    std::vector<Region>::iterator it_region = listRegions.begin();
-
-    // copies all unmerged regions to the final regions list
+    ID = 0; // reassign IDs
+    std::list<Region>::iterator it_region = listRegions.begin();
+    // remove merged regions from list
     while (it_region != listRegions.end())
     {            
-        if (it_region->getType() != Region::eREG_MERGED)
-                listFinalIDs.push_back(it_region->getID());        
-     
-        it_region++;
+        if (it_region->isMerged())
+            it_region = listRegions.erase(it_region);
+        else 
+        {
+            it_region->setID(ID++);
+            it_region++;
+        }
     }
 }
 
@@ -73,23 +64,22 @@ int Retina::getNumRegions()
    return listRegions.size();
 };
 
-int Retina::getNumFinalIDs()  
-{
-   std::lock_guard<std::mutex> locker(mutex);
-   return listFinalIDs.size();
-};
 
 void Retina::clear()
 {  
     std::lock_guard<std::mutex> locker(mutex);
     listRegions.clear();
-    listFinalIDs.clear();    
     ID = -1;    // first region ID is 0
 }
    
 Region& Retina::getRegion(int ID)
 {
     std::lock_guard<std::mutex> locker(mutex);
-    return listRegions.at(ID);    
+    // regions are ordered by ID
+    std::list<Region>::iterator it_region = listRegions.begin();
+    std::advance(it_region, ID);
+    
+    return *it_region;
 }
+
 }

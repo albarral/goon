@@ -7,7 +7,7 @@
  ***************************************************************************/
 
 #include <string>
-#include <vector>
+#include <list>
 #include "opencv2/core/core.hpp"
 
 #include "goon/monitor/Draw.h"
@@ -32,7 +32,7 @@ public:
     void setDestinationFolder(std::string path);
     
     // saves an image for each region in the given list
-    void saveRegions (cv::Mat& image_cam, std::vector<Region>& listRegions);
+    void saveRegions (cv::Mat& image_cam, std::list<Region>& listRegions);
 };
 }    
 #endif

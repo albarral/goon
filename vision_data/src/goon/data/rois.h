@@ -6,7 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <vector>
+#include <list>
 
 #include "goon/data/base/roi.h"
 
@@ -15,19 +15,16 @@ namespace goon
 class Rois
 {
 private:
-    std::vector<ROI> vec_rois;          // vector of rois 
+    std::list<ROI> listROIs;      // list of ROIS (lists allow fast sorting & removals, not as vectors)
     
 public:
     Rois ();
     ~Rois();
 
-    // sets the ROIs list
-    //void setListROIs(std::vector<ROI>& listROIs);
-    
     // Returns the list of rois
-    std::vector<ROI>& getList () {return vec_rois;};
+    std::list<ROI>& getList() {return listROIs;};
 
-    int getNumROIs() {return vec_rois.size();};
+    int getNumROIs() {return listROIs.size();};
     
     // clears the list of rois
     void clear();
@@ -35,6 +32,9 @@ public:
     // adds a new roi to the list
     void addROI(ROI& oRoi);
 
+    // returns the ROI with the specified ID
+    ROI& getROI(int ID);
+    
     // Checks if the specified roi is still active.
     bool isROIStillActive(int roiID);   
 };

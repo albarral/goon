@@ -7,7 +7,7 @@
  ***************************************************************************/
 
 #include <mutex>
-#include <vector>
+#include <list>
 
 #include "goon/data/base/region.h"
 
@@ -20,8 +20,7 @@ class Retina
 private:
         std::mutex mutex;
         int ID;                                                       // ID of last added region (equal to region's index in the list)
-        std::vector<Region> listRegions;               // list of extracted regions (sorted by ID)         
-        std::vector<int> listFinalIDs;                    // list of final region IDs (without the merged ones)
+        std::list<Region> listRegions;                     // list of extracted regions (sorted by ID)         
 
 public:
         Retina();
@@ -31,23 +30,16 @@ public:
         Retina& operator= (const Retina& oRetina);
         
         // returns a reference to the list of regions
-        std::vector<Region>& getListRegions();
-        // adds a new region to the list
+        std::list<Region>& getListRegions();
+        // adds a new region to the list (thread safe)
         void addRegion (Region& oRegion);
 
-        // returns a reference to the list of final region IDs
-        std::vector<int>& getListFinalIDs();
-        void setListFinalIDs(std::vector<int>& listFinalIDs);
-
-        // build the list of final valid region IDs (ignoring the merged regions)
-        void buildListFinalIDs();        
+        // remove the invalid (merged) regions from list, reassigning ID's in the new list
+        void removeInvalidRegions();        
 
         // returns the number of extracted regions (in vec_regions)
-        int getNumRegions ();
+        int getNumRegions();
  
-        // returns the number of final regions (in vec_final_IDs)
-        int getNumFinalIDs ();
-
         // clears the lists of regions
         void clear();
                 

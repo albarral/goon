@@ -21,7 +21,7 @@ void RetinaSaver::setDestinationFolder(std::string path)
     this->path = path;            
 }
 
-void RetinaSaver::saveRegions (cv::Mat& image_cam, std::vector<Region>& listRegions)
+void RetinaSaver::saveRegions (cv::Mat& image_cam, std::list<Region>& listRegions)
 {    
     oDraw.setSize(image_cam);
     

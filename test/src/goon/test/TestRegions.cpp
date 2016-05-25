@@ -4,7 +4,7 @@
  ***************************************************************************/
 
 #include <iostream> 
-#include <vector>   
+#include <list>   
 
 #include <opencv2/opencv.hpp>
 
@@ -97,7 +97,7 @@ void TestRegions::testMerge()
 //    oRegion4.merge(oRegion2);
 //    oRegion4.merge(oRegion1);
     
-//    std::vector<Region> listRegions2;
+//    std::list<Region> listRegions2;
 //    listRegions2.push_back(oRegion4);
 
     // draw

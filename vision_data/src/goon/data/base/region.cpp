@@ -14,7 +14,7 @@ Region::Region ()
     // blob constructor ... 
     type = Region::eREG_SIMPLE;
     bmerge = false;
-    bcaptured = false;
+    bmatched = false;
 }
 
 // copy constructor (needed for vectors)    
@@ -24,7 +24,7 @@ Region::Region(const Region& oRegion) : Body(oRegion)       // base part constru
     type = oRegion.type;
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
-    bcaptured = oRegion.bcaptured;
+    bmatched = oRegion.bmatched;
     seed = oRegion.seed;
 }  
 
@@ -37,7 +37,7 @@ Region& Region::operator=(const Region& oRegion)
     type = oRegion.type;
     setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
-    bcaptured = oRegion.bcaptured;
+    bmatched = oRegion.bmatched;
     seed = oRegion.seed;
     return *this;    
 }
@@ -75,7 +75,6 @@ std::string Region::toString()
             ", mask = " + std::to_string(getMask().cols) + "x" + std::to_string(getMask().rows) +
             ", grid = " + std::to_string(grid.cols) + "x" + std::to_string(grid.rows) +
             ", merge = " + (bmerge ? "1":"0") + 
-            ", captured = " + (bcaptured ? "1":"0") + 
             "]" + 
             "\n" + Blob::toString() + 
             "\n" + Body::toString();

@@ -3,7 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <vector>
+#include <list>
 
 #include "goon/retinal/merge.h"
 #include "goon/retinal/ConfigRetinal.h"
@@ -64,8 +64,8 @@ void Merge::checkProximityMerge (Retina& oRetina)
     int num_regions = oRetina.getNumRegions();
     mat_proximity = cv::Mat::zeros(num_regions, num_regions, CV_8UC1);    
 
-    std::vector<Region>::iterator it_region1 = oRetina.getListRegions().begin();
-    std::vector<Region>::iterator list_end = oRetina.getListRegions().end();
+    std::list<Region>::iterator it_region1 = oRetina.getListRegions().begin();
+    std::list<Region>::iterator list_end = oRetina.getListRegions().end();
     
     // for each region in the list
     while (it_region1 != list_end)
@@ -74,7 +74,7 @@ void Merge::checkProximityMerge (Retina& oRetina)
         window1 = it_region1->getWindow() + expansion;
 
         // check against the rest of regions
-        std::vector<Region>::iterator it_region2 = it_region1;
+        std::list<Region>::iterator it_region2 = it_region1;
         it_region2++;        
         while (it_region2 != list_end)
         {		

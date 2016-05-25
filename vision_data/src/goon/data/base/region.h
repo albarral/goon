@@ -30,7 +30,8 @@ private:
     int type;
     cv::Mat grid;                    // grid used for merging purpose
     bool bmerge;                   // flag indicating that region is to be merged
-    bool bcaptured;             // indicates region was captured by a ROI
+    // for matching 
+    bool bmatched;              // for ROI-Region matching
     // for degug ...
     cv::Point seed;                 // first point of the region 
 
@@ -44,27 +45,27 @@ public:
     Region& operator=(const Region& oRegion);
         
     int getID() {return ID;}
-    int getType() {return type;}
-    cv::Mat& getGrid() {return grid;}
-    bool is2Merge() {return bmerge;}
-    bool isCaptured() {return bcaptured;}
-    cv::Point& getSeed() {return seed;}
-    
     void setID(int value) {ID = value;}
+    int getType() {return type;}
     void setType(int value) {type = value;}
+    bool is2Merge() {return bmerge;}
     void setMerge(bool bvalue) {bmerge = bvalue;}
-    void setCaptured(bool bvalue) {bcaptured = bvalue;}
+    bool isMatched() {return bmatched;};
+    void setMatched(bool bvalue) {bmatched = bvalue;};
+    cv::Point& getSeed() {return seed;}
     void setSeed(cv::Point& seed_point) {seed = seed_point;}
     
+    cv::Mat& getGrid() {return grid;}
+    // sets the region's grid (cloned)
+    void setGrid (const cv::Mat& grid_samples);
+
+    bool isSimple() {return (type==eREG_SIMPLE);};
+    bool isMerged() {return (type==eREG_MERGED);};
+    bool isCollection() {return (type==eREG_COLLECTION);};
+        
     // initializes mask and grid
     void init();
 
-    // clears the region's features (mask, grid, window)
-    //void clear();
-
-    // sets the region's grid (new cloned matrix)
-    void setGrid (const cv::Mat& grid_samples);
-        
     // support function to sort regions by ID
     static bool sortBySize (const Region& oRegion1, const Region& oRegion2);    
         

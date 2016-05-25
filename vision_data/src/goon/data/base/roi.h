@@ -10,6 +10,7 @@
 
 #include "goon/data/base/Body.h"
 #include "goon/data/motion/Motion.h"
+#include "goon/data/motion/Move2D.h"
 
 namespace goon 
 {
@@ -21,33 +22,32 @@ private:
     int ID;
     int age;
     int stability;
+    Move2D oTransMove;
     Motion oMotion;
-    // matching info
-    int touchedRegions;  // number of regions to which the ROI responds 
-    int capturedRegion; // ID of captured region to update the ROI
+    // for matching 
+    bool bmatched;      // for ROI-Region matching
 
 public:    
     ROI();
     //~ROI();
 
     int getID() {return ID;};
-    int getAge() {return age;};
-    int getStability() {return stability;};
     void setID(int value) {ID = value;};
-    void setAge(int value) {age = value;};
+    int getAge() {return age;};
+    void increaseAge() {age++;};
+    int getStability() {return stability;};
     void setStability(int value) {stability = value;};
-    
-    // matching info
-    int getTouchedRegions() {return touchedRegions;};
-    int getCapturedRegion() {return capturedRegion;};    
-    void setTouchedRegions (int value) {touchedRegions = value;};
-    void setCapturedRegion (int value) {capturedRegion = value;};
-    void clearMatchingInfo();
-
+    Move2D& getTransMove() {return oTransMove;}
+    void setTransMove(Move2D& oTransMove) {this->oTransMove = oTransMove;};
     Motion& getMotion() {return oMotion;};
     void updateMotion(Move2D& oTransMove);
-    // update blob part
+    void setMatched(bool bvalue) {bmatched = bvalue;};
+    bool isMatched() {return bmatched;};
+    
+    // (deprecated) update blob part
     void updateBlob(Blob& oBlob);
+    // set body part
+    void setBody(Body& oBody);
 
     // support function to sort ROIs by ID
     static bool sortByID (const ROI& oROI1, const ROI& oROI2);        

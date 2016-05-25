@@ -227,10 +227,10 @@ int oneShotTest()
 
 int test2()
 {
-    //goon::TestBodies oTestBodies;
-    //oTestBodies.test();
+    goon::TestBodies oTestBodies;
+    oTestBodies.test();
     
-    goon::TestRegions oTestRegions;
-    oTestRegions.testMerge();
+    //goon::TestRegions oTestRegions;
+    //oTestRegions.testMerge();
     return 0;
 }

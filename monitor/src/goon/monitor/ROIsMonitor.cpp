@@ -14,13 +14,13 @@ namespace goon
 LoggerPtr ROIsMonitor::logger(Logger::getLogger("goon.monitor"));
 
 // Shows an image with the ROIs obtained by the peripheral vision process.
-void ROIsMonitor::drawRois(cv::Mat& image_cam, std::vector<ROI>& listROIs)
+void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs)
 {
     float roi_w, roi_h, roi_angle;      // ellipse values
     cv::Vec3f covs;
 
-    std::vector<ROI>::iterator it_roi = listROIs.begin();
-    std::vector<ROI>::iterator it_end = listROIs.end();
+    std::list<ROI>::iterator it_roi = listROIs.begin();
+    std::list<ROI>::iterator it_end = listROIs.end();
 
     oDraw.setBackGround(image_cam);
     

@@ -102,12 +102,17 @@ int Body::computeOverlap(Body& oBody)
     int pixelsShared = 0;
     
     // intersection of windows
-    cv::Rect intersectionWindow = window & oBody.window;     
+    cv::Rect interWindow = window & oBody.window;     
     // if windows intersect, compare masks
-    if (intersectionWindow.width > 0)  
+    if (interWindow.width > 0)  
     {
+        // translate intersection window (in camera coordinates) to local coordinate systems of both bodies
+        cv::Rect window1 = interWindow - cv::Point(window.x, window.y);
+        cv::Rect window2 = interWindow - cv::Point(oBody.window.x, oBody.window.y);
+        cv::Mat mask1 = mask(window1);
+        cv::Mat mask2 = oBody.mask(window2);
         // intersection of masks
-        cv::Mat maskOverlap = mask & oBody.mask;
+        cv::Mat maskOverlap = mask1 & mask2;
         // area of intersection
         pixelsShared = cv::countNonZero(maskOverlap);
     }

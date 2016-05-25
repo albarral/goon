@@ -6,7 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <vector>
+#include <list>
 #include <log4cxx/logger.h>
 #include "opencv2/core/core.hpp"
 
@@ -28,7 +28,7 @@ public:
 //    ~ROIsMonitor();
     
     // Draws an image with the given list of ROI's.
-    void drawRois(cv::Mat& image_cam, std::vector<ROI>& listROIs);
+    void drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs);
 
     // draws the given fps value
     void drawFPS(float fps);
