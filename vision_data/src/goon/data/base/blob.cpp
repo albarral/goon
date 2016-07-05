@@ -4,8 +4,8 @@
  ***************************************************************************/
 
 #include "goon/data/base/blob.h"
-#include "goon/utils/rgb_color.h"
-#include "goon/utils/shape.h"
+#include "goon/features/color/rgb_color.h"
+#include "goon/features/shape/shape.h"
 	
 namespace goon 
 {

@@ -7,7 +7,7 @@
 
 #include "goon/retinal/Floodfiller.h"
 #include "goon/retinal/ConfigRetinal.h"
-#include <goon/utils/rgb_color.h>
+#include <goon/features/color/rgb_color.h>
 #include <goon/utils/distance.h>
 
 using namespace log4cxx;

@@ -12,16 +12,16 @@ CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
 CND_ARTIFACT_NAME_Debug=libgoon_utils.so
 CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/libgoon_utils.so
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=libvisionutils.so.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/libvisionutils.so.tar
+CND_PACKAGE_NAME_Debug=libutils.so.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/libutils.so.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=libvision_utils.so
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/libvision_utils.so
+CND_ARTIFACT_NAME_Release=libutils.so
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/libutils.so
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=libvisionutils.so.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/libvisionutils.so.tar
+CND_PACKAGE_NAME_Release=libutils.so.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/libutils.so.tar
 #
 # include compiler specific variables
 #

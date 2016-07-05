@@ -10,7 +10,7 @@
 
 #include "TestBodies.h"
 #include "goon/data/base/Body.h"
-#include "goon/features/body/BodyUtils.h"
+#include "goon/data/base/BodyUtils.h"
 
 namespace goon
 {    

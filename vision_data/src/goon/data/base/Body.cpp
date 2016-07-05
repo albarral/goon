@@ -4,7 +4,7 @@
  ***************************************************************************/
 
 #include "goon/data/base/Body.h"
-#include "goon/utils/shape.h"
+#include "goon/features/shape/shape.h"
 
 namespace goon 
 {

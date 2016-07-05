@@ -7,7 +7,7 @@
 #include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
 
 #include "goon/retinal/HSVEssence.h"
-#include "goon/utils/rgb_color.h"
+#include "goon/features/color/rgb_color.h"
 
 namespace goon
 {

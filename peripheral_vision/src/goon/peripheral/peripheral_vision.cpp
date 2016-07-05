@@ -8,8 +8,8 @@
 
 #include "goon/peripheral/peripheral_vision.h"
 #include <goon/data/goon_version.h>
-#include <goon/utils/shape.h>
-#include <goon/utils/rgb_color.h>
+#include <goon/features/shape/shape.h>
+#include <goon/features/color/rgb_color.h>
 
 using namespace log4cxx;
 

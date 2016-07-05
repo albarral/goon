@@ -3,7 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 #include <iostream> 
-#include "goon/features/body/BodyUtils.h"
+#include "goon/data/base/BodyUtils.h"
 
 namespace goon 
 {

@@ -4,7 +4,7 @@
  ***************************************************************************/
 
 #include "goon/monitor/ROIsMonitor.h"
-#include <goon/utils/shape.h>
+#include <goon/features/shape/shape.h>
 #include <goon/utils/Coordinates.h>
 
 using namespace log4cxx;

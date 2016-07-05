@@ -36,7 +36,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Time.o \
-	${OBJECTDIR}/src/goon/features/body/BodyUtils.o
+	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
+	${OBJECTDIR}/src/goon/features/color/rgb_color.o \
+	${OBJECTDIR}/src/goon/features/shape/shape.o
 
 
 # C Compiler Flags
@@ -68,10 +70,20 @@ ${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
 
-${OBJECTDIR}/src/goon/features/body/BodyUtils.o: src/goon/features/body/BodyUtils.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/features/body
+${OBJECTDIR}/src/goon/features/color/hsv_color.o: src/goon/features/color/hsv_color.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/body/BodyUtils.o src/goon/features/body/BodyUtils.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/hsv_color.o src/goon/features/color/hsv_color.cpp
+
+${OBJECTDIR}/src/goon/features/color/rgb_color.o: src/goon/features/color/rgb_color.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/rgb_color.o src/goon/features/color/rgb_color.cpp
+
+${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/shape
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
 
 # Subprojects
 .build-subprojects:

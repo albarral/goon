@@ -42,9 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/utils/area.o \
 	${OBJECTDIR}/src/goon/utils/average.o \
 	${OBJECTDIR}/src/goon/utils/distance.o \
-	${OBJECTDIR}/src/goon/utils/hsv_color.o \
-	${OBJECTDIR}/src/goon/utils/rgb_color.o \
-	${OBJECTDIR}/src/goon/utils/shape.o \
 	${OBJECTDIR}/src/goon/utils/trigger.o
 
 
@@ -66,11 +63,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_utils.${CND_DLIB_EXT}
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_utils.${CND_DLIB_EXT}: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_utils.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
 ${OBJECTDIR}/src/goon/utils/Click.o: src/goon/utils/Click.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
@@ -107,21 +104,6 @@ ${OBJECTDIR}/src/goon/utils/distance.o: src/goon/utils/distance.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/distance.o src/goon/utils/distance.cpp
 
-${OBJECTDIR}/src/goon/utils/hsv_color.o: src/goon/utils/hsv_color.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/hsv_color.o src/goon/utils/hsv_color.cpp
-
-${OBJECTDIR}/src/goon/utils/rgb_color.o: src/goon/utils/rgb_color.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/rgb_color.o src/goon/utils/rgb_color.cpp
-
-${OBJECTDIR}/src/goon/utils/shape.o: src/goon/utils/shape.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/shape.o src/goon/utils/shape.cpp
-
 ${OBJECTDIR}/src/goon/utils/trigger.o: src/goon/utils/trigger.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
 	${RM} "$@.d"
@@ -133,7 +115,7 @@ ${OBJECTDIR}/src/goon/utils/trigger.o: src/goon/utils/trigger.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libvision_utils.${CND_DLIB_EXT}
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.${CND_DLIB_EXT}
 
 # Subprojects
 .clean-subprojects:

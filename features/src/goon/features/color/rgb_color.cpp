@@ -5,7 +5,7 @@
  ***************************************************************************/
 
 #include <cmath>
-#include "goon/utils/rgb_color.h"
+#include "goon/features/color/rgb_color.h"
 		
 namespace goon
 {

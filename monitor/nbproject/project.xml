@@ -11,7 +11,7 @@
             <make-dep-projects>
                 <make-dep-project>../vision_data</make-dep-project>
                 <make-dep-project>../features</make-dep-project>
-                <make-dep-project>../vision_utils</make-dep-project>
+                <make-dep-project>../utils</make-dep-project>
             </make-dep-projects>
             <sourceRootList>
                 <sourceRootElem>src/goon/monitor</sourceRootElem>

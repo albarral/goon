@@ -6,7 +6,7 @@
 #include <iostream>
 #include <math.h>  
 
-#include "goon/utils/shape.h"  
+#include "goon/features/shape/shape.h"  
 
 namespace goon
 {

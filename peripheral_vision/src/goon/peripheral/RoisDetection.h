@@ -16,7 +16,7 @@
 #include "goon/data/rois.h"
 #include <goon/data/base/roi.h>
 #include <goon/data/base/region.h>
-#include "goon/utils/hsv_color.h"
+#include "goon/features/color/hsv_color.h"
 
 
 namespace goon

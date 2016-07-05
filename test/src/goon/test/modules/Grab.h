@@ -9,7 +9,7 @@
 #include <string>
 #include <log4cxx/logger.h>
 
-#include "goon/test/Module.h"
+#include "goon/utils/Module.h"
 #include "goon/data/capture.h"
 #include "goon/camera/Grabber.h"
 

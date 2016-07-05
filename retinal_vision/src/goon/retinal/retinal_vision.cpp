@@ -8,8 +8,8 @@
 #include "goon/retinal/retinal_vision.h"
 #include <goon/data/goon_version.h>
 #include <goon/data/base/region.h>
-#include <goon/utils/rgb_color.h>
-#include <goon/utils/shape.h>
+#include <goon/features/color/rgb_color.h>
+#include <goon/features/shape/shape.h>
 
 using namespace log4cxx;
 

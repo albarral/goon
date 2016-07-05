@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/test/Module.o \
 	${OBJECTDIR}/src/goon/test/TestBodies.o \
 	${OBJECTDIR}/src/goon/test/TestRegions.o \
 	${OBJECTDIR}/src/goon/test/main.o \
@@ -66,11 +65,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/src/goon/test/Module.o: src/goon/test/Module.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/test
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/test/Module.o src/goon/test/Module.cpp
 
 ${OBJECTDIR}/src/goon/test/TestBodies.o: src/goon/test/TestBodies.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/test

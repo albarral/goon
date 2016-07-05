@@ -11,14 +11,15 @@
 #include <log4cxx/logger.h>
 #include <opencv2/opencv.hpp>
 
-#include "goon/test/Module.h"
+#include "goon/utils/Click.h"
+#include "goon/utils/Module.h"
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/peripheral_vision.h"
 #include "goon/data/capture.h"
 #include "goon/data/visual_data.h"
 #include "goon/data/retina.h"   // for debug
 #include "goon/data/rois.h"     // for debug
-#include "goon/utils/Click.h"
+
 
 namespace goon
 {    

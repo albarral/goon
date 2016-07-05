@@ -42,9 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/utils/area.o \
 	${OBJECTDIR}/src/goon/utils/average.o \
 	${OBJECTDIR}/src/goon/utils/distance.o \
-	${OBJECTDIR}/src/goon/utils/hsv_color.o \
-	${OBJECTDIR}/src/goon/utils/rgb_color.o \
-	${OBJECTDIR}/src/goon/utils/shape.o \
 	${OBJECTDIR}/src/goon/utils/trigger.o
 
 
@@ -106,21 +103,6 @@ ${OBJECTDIR}/src/goon/utils/distance.o: src/goon/utils/distance.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/distance.o src/goon/utils/distance.cpp
-
-${OBJECTDIR}/src/goon/utils/hsv_color.o: src/goon/utils/hsv_color.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/hsv_color.o src/goon/utils/hsv_color.cpp
-
-${OBJECTDIR}/src/goon/utils/rgb_color.o: src/goon/utils/rgb_color.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/rgb_color.o src/goon/utils/rgb_color.cpp
-
-${OBJECTDIR}/src/goon/utils/shape.o: src/goon/utils/shape.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/shape.o src/goon/utils/shape.cpp
 
 ${OBJECTDIR}/src/goon/utils/trigger.o: src/goon/utils/trigger.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils

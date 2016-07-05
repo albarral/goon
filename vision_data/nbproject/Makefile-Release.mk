@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/base/Body.o \
+	${OBJECTDIR}/src/goon/data/base/BodyUtils.o \
 	${OBJECTDIR}/src/goon/data/base/blob.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
@@ -76,6 +77,11 @@ ${OBJECTDIR}/src/goon/data/base/Body.o: src/goon/data/base/Body.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/Body.o src/goon/data/base/Body.cpp
+
+${OBJECTDIR}/src/goon/data/base/BodyUtils.o: src/goon/data/base/BodyUtils.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
 
 ${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base

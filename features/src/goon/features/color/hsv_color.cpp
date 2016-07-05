@@ -6,7 +6,7 @@
 
 #include <cmath>
 
-#include "goon/utils/hsv_color.h"
+#include "goon/features/color/hsv_color.h"
 		
 //#define USE_PERCEPTUAL_UNIFORMITY   
 //#define KSIN_AMP 0.7            			// amplitude of hue senoidal discriminance

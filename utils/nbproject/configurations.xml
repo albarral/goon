@@ -27,12 +27,6 @@
         <itemPath>src/goon/utils/average.h</itemPath>
         <itemPath>src/goon/utils/distance.cpp</itemPath>
         <itemPath>src/goon/utils/distance.h</itemPath>
-        <itemPath>src/goon/utils/hsv_color.cpp</itemPath>
-        <itemPath>src/goon/utils/hsv_color.h</itemPath>
-        <itemPath>src/goon/utils/rgb_color.cpp</itemPath>
-        <itemPath>src/goon/utils/rgb_color.h</itemPath>
-        <itemPath>src/goon/utils/shape.cpp</itemPath>
-        <itemPath>src/goon/utils/shape.h</itemPath>
         <itemPath>src/goon/utils/trigger.cpp</itemPath>
         <itemPath>src/goon/utils/trigger.h</itemPath>
       </logicalFolder>
@@ -103,18 +97,6 @@
       </item>
       <item path="src/goon/utils/distance.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/utils/hsv_color.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/utils/hsv_color.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/utils/rgb_color.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/utils/rgb_color.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/utils/shape.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/utils/shape.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/utils/trigger.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/utils/trigger.h" ex="false" tool="3" flavor2="0">
@@ -167,18 +149,6 @@
       <item path="src/goon/utils/distance.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/utils/distance.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/utils/hsv_color.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/utils/hsv_color.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/utils/rgb_color.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/utils/rgb_color.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/utils/shape.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/utils/shape.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/utils/trigger.cpp" ex="false" tool="1" flavor2="0">
       </item>

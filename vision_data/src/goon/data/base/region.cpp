@@ -4,7 +4,7 @@
  ***************************************************************************/
 
 #include "goon/data/base/region.h"
-#include "goon/utils/rgb_color.h"
+#include "goon/features/color/rgb_color.h"
 	
 namespace goon 
 {

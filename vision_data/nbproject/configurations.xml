@@ -16,6 +16,8 @@
         <logicalFolder name="base" displayName="base" projectFiles="true">
           <itemPath>src/goon/data/base/Body.cpp</itemPath>
           <itemPath>src/goon/data/base/Body.h</itemPath>
+          <itemPath>src/goon/data/base/BodyUtils.cpp</itemPath>
+          <itemPath>src/goon/data/base/BodyUtils.h</itemPath>
           <itemPath>src/goon/data/base/blob.cpp</itemPath>
           <itemPath>src/goon/data/base/blob.h</itemPath>
           <itemPath>src/goon/data/base/region.cpp</itemPath>
@@ -70,32 +72,36 @@
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
-            <pElem>../vision_utils/src</pElem>
+            <pElem>../features/src</pElem>
             <pElem>/usr/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}</output>
           <linkerLibItems>
+            <linkerLibLibItem>opencv_core</linkerLibLibItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../vision_utils"
+              <makeArtifact PL="../features"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../vision_utils"
+                            WD="../features"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_utils.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
-            <linkerLibLibItem>opencv_core</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
       <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -163,6 +169,10 @@
       <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
