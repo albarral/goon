@@ -41,6 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/utils/angle.o \
 	${OBJECTDIR}/src/goon/utils/area.o \
 	${OBJECTDIR}/src/goon/utils/average.o \
+	${OBJECTDIR}/src/goon/utils/brooks/control.o \
+	${OBJECTDIR}/src/goon/utils/brooks/inhibition.o \
 	${OBJECTDIR}/src/goon/utils/distance.o \
 	${OBJECTDIR}/src/goon/utils/trigger.o
 
@@ -98,6 +100,16 @@ ${OBJECTDIR}/src/goon/utils/average.o: src/goon/utils/average.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/average.o src/goon/utils/average.cpp
+
+${OBJECTDIR}/src/goon/utils/brooks/control.o: src/goon/utils/brooks/control.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/utils/brooks
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/brooks/control.o src/goon/utils/brooks/control.cpp
+
+${OBJECTDIR}/src/goon/utils/brooks/inhibition.o: src/goon/utils/brooks/inhibition.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/utils/brooks
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/utils/brooks/inhibition.o src/goon/utils/brooks/inhibition.cpp
 
 ${OBJECTDIR}/src/goon/utils/distance.o: src/goon/utils/distance.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/utils

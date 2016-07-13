@@ -19,6 +19,32 @@ VisualData::VisualData ()
 VisualData::~VisualData ()
 {
 }
+
+void VisualData::storeRetinaPhoto()
+{
+    std::lock_guard<std::mutex> locker(mutex1);
+    // clone retina
+    oRetina2 = oRetina;    
 }
 
+void VisualData::storeROIsPhoto()
+{
+    std::lock_guard<std::mutex> locker(mutex2);
+    // clone ROIS 
+    oROIs2 = oROIs;    
+}
+
+Retina& VisualData::getRetina2()
+{
+    std::lock_guard<std::mutex> locker(mutex1);
+    return oRetina2;    
+}  
+
+Rois& VisualData::getROIs2()
+{
+    std::lock_guard<std::mutex> locker(mutex2);
+    return oROIs2;    
+}
+
+}
 

@@ -13,6 +13,15 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <logicalFolder name="brooks" displayName="brooks" projectFiles="true">
+          <itemPath>src/goon/utils/brooks/control.cpp</itemPath>
+          <itemPath>src/goon/utils/brooks/control.h</itemPath>
+          <itemPath>src/goon/utils/brooks/controlT2.h</itemPath>
+          <itemPath>src/goon/utils/brooks/inhibition.cpp</itemPath>
+          <itemPath>src/goon/utils/brooks/inhibition.h</itemPath>
+          <itemPath>src/goon/utils/brooks/sensor.h</itemPath>
+          <itemPath>src/goon/utils/brooks/sensorT.h</itemPath>
+        </logicalFolder>
         <itemPath>src/goon/utils/Click.cpp</itemPath>
         <itemPath>src/goon/utils/Click.h</itemPath>
         <itemPath>src/goon/utils/Coordinates.cpp</itemPath>
@@ -93,6 +102,23 @@
       </item>
       <item path="src/goon/utils/average.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/utils/brooks/control.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/controlT2.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/inhibition.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/inhibition.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/sensor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/sensorT.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/utils/distance.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/utils/distance.h" ex="false" tool="3" flavor2="0">
@@ -145,6 +171,23 @@
       <item path="src/goon/utils/average.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/utils/average.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/control.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/controlT2.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/inhibition.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/inhibition.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/sensor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/utils/brooks/sensorT.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/utils/distance.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -12,12 +12,22 @@
 namespace goon
 {    
 // Base class designed to run a module inside its own thread.
-// Derived classes must implement 3 methods: first(), loop() and bye().
-// For starting & stopping the module use the following methods:
-// - on() -> starts the module.
-// - off()  -> asks the module to stop.
-// - wait() -> waits till the thread is finished.
 // Thread safety implemented.    
+
+// Usage instructions ...    
+// 1. All modules must implement 3 methods: 
+// - first() -> first action after thread begins 
+// - loop() -> actions done in a periodic loop 
+// - bye() -> last action before thread ends
+
+// 2. Module starts & stops using these methods:
+// - on() -> launch the thread
+// - off()  -> asks the thread to stop.
+// - wait() -> waits till the thread is finished.
+
+// 3. The loop frequency is set with:
+// -  setFrequency()   
+    
 class Module 
 {
 public:
