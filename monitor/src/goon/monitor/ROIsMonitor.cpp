@@ -5,7 +5,7 @@
 
 #include "goon/monitor/ROIsMonitor.h"
 #include <goon/features/shape/shape.h>
-#include <goon/utils/Coordinates.h>
+#include <maty/math/Coordinates.h>
 
 using namespace log4cxx;
 
@@ -40,7 +40,7 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs)
         
         float* speed = it_roi->getMotion().getAverageSpeed();
         float absSpeed, angle;
-        Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
+        maty::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
         // speed > 0.1 pixels/ms (100 pixels/s))
         if (absSpeed > 0.01)
         {

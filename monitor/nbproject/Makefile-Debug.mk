@@ -55,17 +55,19 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../utils/dist/Debug/GNU-Linux -L../utils/dist/Debug/GNU-Linux -lgoon_utils -Wl,-rpath,../features/dist/Debug/GNU-Linux -L../features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../vision_data/dist/Debug/GNU-Linux -L../vision_data/dist/Debug/GNU-Linux -lgoon_data -llog4cxx -lopencv_core -lopencv_highgui
+LDLIBSOPTIONS=-Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../../tron/tuly/dist/Debug/GNU-Linux -L../../tron/tuly/dist/Debug/GNU-Linux -ltron_tuly -Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty -llog4cxx -lopencv_core -lopencv_highgui
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../utils/dist/Debug/GNU-Linux/libgoon_utils.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../goon_features/dist/Debug/GNU-Linux/libgoon_features.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../features/dist/Debug/GNU-Linux/libgoon_features.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../goon_data/dist/Debug/GNU-Linux/libgoon_data.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../vision_data/dist/Debug/GNU-Linux/libgoon_data.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../../tron/tuly/dist/Debug/GNU-Linux/libtron_tuly.so
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -74,28 +76,29 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}: ${OB
 ${OBJECTDIR}/src/goon/monitor/Draw.o: src/goon/monitor/Draw.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../utils/src -I../features/src -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/Draw.o src/goon/monitor/Draw.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/Draw.o src/goon/monitor/Draw.cpp
 
 ${OBJECTDIR}/src/goon/monitor/ROIsMonitor.o: src/goon/monitor/ROIsMonitor.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../utils/src -I../features/src -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/ROIsMonitor.o src/goon/monitor/ROIsMonitor.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/ROIsMonitor.o src/goon/monitor/ROIsMonitor.cpp
 
 ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o: src/goon/monitor/RetinaMonitor.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../utils/src -I../features/src -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o src/goon/monitor/RetinaMonitor.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaMonitor.o src/goon/monitor/RetinaMonitor.cpp
 
 ${OBJECTDIR}/src/goon/monitor/RetinaSaver.o: src/goon/monitor/RetinaSaver.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/monitor
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../utils/src -I../features/src -I../vision_data/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaSaver.o src/goon/monitor/RetinaSaver.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/monitor/RetinaSaver.o src/goon/monitor/RetinaSaver.cpp
 
 # Subprojects
 .build-subprojects:
-	cd ../utils && ${MAKE}  -f Makefile CONF=Debug
-	cd ../features && ${MAKE}  -f Makefile CONF=Debug
-	cd ../vision_data && ${MAKE}  -f Makefile CONF=Debug
+	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug
+	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -104,9 +107,10 @@ ${OBJECTDIR}/src/goon/monitor/RetinaSaver.o: src/goon/monitor/RetinaSaver.cpp
 
 # Subprojects
 .clean-subprojects:
-	cd ../utils && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../features && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../vision_data && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

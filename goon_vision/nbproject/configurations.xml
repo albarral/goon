@@ -12,15 +12,15 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="monitor" displayName="monitor" projectFiles="true">
-        <itemPath>src/goon/monitor/Draw.cpp</itemPath>
-        <itemPath>src/goon/monitor/Draw.h</itemPath>
-        <itemPath>src/goon/monitor/ROIsMonitor.cpp</itemPath>
-        <itemPath>src/goon/monitor/ROIsMonitor.h</itemPath>
-        <itemPath>src/goon/monitor/RetinaMonitor.cpp</itemPath>
-        <itemPath>src/goon/monitor/RetinaMonitor.h</itemPath>
-        <itemPath>src/goon/monitor/RetinaSaver.cpp</itemPath>
-        <itemPath>src/goon/monitor/RetinaSaver.h</itemPath>
+      <logicalFolder name="vision" displayName="vision" projectFiles="true">
+        <logicalFolder name="modules" displayName="modules" projectFiles="true">
+          <itemPath>src/goon/vision/modules/Grab.cpp</itemPath>
+          <itemPath>src/goon/vision/modules/Grab.h</itemPath>
+          <itemPath>src/goon/vision/modules/See.cpp</itemPath>
+          <itemPath>src/goon/vision/modules/See.h</itemPath>
+        </logicalFolder>
+        <itemPath>src/goon/vision/VisionManager.cpp</itemPath>
+        <itemPath>src/goon/vision/VisionManager.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -36,7 +36,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>src/goon/monitor</Elem>
+    <Elem>src/goon/vision</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -51,16 +51,30 @@
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
+            <pElem>../goon_core/src</pElem>
             <pElem>../goon_features/src</pElem>
             <pElem>../goon_data/src</pElem>
+            <pElem>../goon_camera/src</pElem>
+            <pElem>../goon_retinal/src</pElem>
+            <pElem>../goon_peripheral/src</pElem>
             <pElem>../../tron/tuly/src</pElem>
             <pElem>../../tron/maty/src</pElem>
-            <pElem>/usr/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_monitor.${CND_DLIB_EXT}</output>
           <linkerLibItems>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_core"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_core"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_core.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
             <linkerLibProjectItem>
               <makeArtifact PL="../goon_features"
                             CT="2"
@@ -83,6 +97,42 @@
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_camera"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_camera"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_camera.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_retinal"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_retinal"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_peripheral"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_peripheral"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
@@ -112,24 +162,21 @@
             <linkerLibLibItem>log4cxx</linkerLibLibItem>
             <linkerLibLibItem>opencv_core</linkerLibLibItem>
             <linkerLibLibItem>opencv_highgui</linkerLibLibItem>
+            <linkerLibLibItem>opencv_imgproc</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/monitor/Draw.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/vision/VisionManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/monitor/Draw.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/vision/VisionManager.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/monitor/ROIsMonitor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/vision/modules/Grab.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/monitor/ROIsMonitor.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/vision/modules/Grab.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/monitor/RetinaMonitor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/vision/modules/See.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/monitor/RetinaMonitor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/monitor/RetinaSaver.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/monitor/RetinaSaver.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/vision/modules/See.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="2">
@@ -152,21 +199,17 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/monitor/Draw.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/vision/VisionManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/monitor/Draw.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/vision/VisionManager.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/monitor/ROIsMonitor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/vision/modules/Grab.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/monitor/ROIsMonitor.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/vision/modules/Grab.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/monitor/RetinaMonitor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/vision/modules/See.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/monitor/RetinaMonitor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/monitor/RetinaSaver.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/monitor/RetinaSaver.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/vision/modules/See.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

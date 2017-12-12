@@ -3,35 +3,27 @@
     <type>org.netbeans.modules.cnd.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>look</name>
+            <name>goon_peripheral</name>
             <c-extensions/>
             <cpp-extensions>cpp</cpp-extensions>
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects>
-                <make-dep-project>../goon_peripheral</make-dep-project>
-                <make-dep-project>../../tron/tuly</make-dep-project>
-                <make-dep-project>../goon_retinal</make-dep-project>
-                <make-dep-project>../goon_core</make-dep-project>
-                <make-dep-project>../goon_vision</make-dep-project>
                 <make-dep-project>../../tron/maty</make-dep-project>
                 <make-dep-project>../goon_features</make-dep-project>
-                <make-dep-project>../show</make-dep-project>
-                <make-dep-project>../goon_camera</make-dep-project>
-                <make-dep-project>../monitor</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
             </make-dep-projects>
             <sourceRootList>
-                <sourceRootElem>src/goon/look</sourceRootElem>
+                <sourceRootElem>src</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
                     <name>Debug</name>
-                    <type>1</type>
+                    <type>2</type>
                 </confElem>
                 <confElem>
                     <name>Release</name>
-                    <type>1</type>
+                    <type>2</type>
                 </confElem>
             </confList>
             <formatting>

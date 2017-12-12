@@ -35,12 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/look/LookManager.o \
-	${OBJECTDIR}/src/goon/look/bus/LookBus.o \
+	${OBJECTDIR}/src/goon/look/GoonControl.o \
+	${OBJECTDIR}/src/goon/look/GoonShow.o \
 	${OBJECTDIR}/src/goon/look/main.o \
-	${OBJECTDIR}/src/goon/look/modules/Grab.o \
-	${OBJECTDIR}/src/goon/look/modules/LookMonitor.o \
-	${OBJECTDIR}/src/goon/look/modules/See.o \
 	${OBJECTDIR}/src/goon/look/test/TestBodies.o \
 	${OBJECTDIR}/src/goon/look/test/TestRegions.o
 
@@ -69,35 +66,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/look: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/look ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/src/goon/look/LookManager.o: src/goon/look/LookManager.cpp 
+${OBJECTDIR}/src/goon/look/GoonControl.o: src/goon/look/GoonControl.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/look
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/LookManager.o src/goon/look/LookManager.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/GoonControl.o src/goon/look/GoonControl.cpp
 
-${OBJECTDIR}/src/goon/look/bus/LookBus.o: src/goon/look/bus/LookBus.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/look/bus
+${OBJECTDIR}/src/goon/look/GoonShow.o: src/goon/look/GoonShow.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/look
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/bus/LookBus.o src/goon/look/bus/LookBus.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/GoonShow.o src/goon/look/GoonShow.cpp
 
 ${OBJECTDIR}/src/goon/look/main.o: src/goon/look/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/look
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/main.o src/goon/look/main.cpp
-
-${OBJECTDIR}/src/goon/look/modules/Grab.o: src/goon/look/modules/Grab.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/look/modules
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/modules/Grab.o src/goon/look/modules/Grab.cpp
-
-${OBJECTDIR}/src/goon/look/modules/LookMonitor.o: src/goon/look/modules/LookMonitor.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/look/modules
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/modules/LookMonitor.o src/goon/look/modules/LookMonitor.cpp
-
-${OBJECTDIR}/src/goon/look/modules/See.o: src/goon/look/modules/See.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/look/modules
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/look/modules/See.o src/goon/look/modules/See.cpp
 
 ${OBJECTDIR}/src/goon/look/test/TestBodies.o: src/goon/look/test/TestBodies.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/look/test
