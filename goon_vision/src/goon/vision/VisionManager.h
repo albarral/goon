@@ -16,15 +16,12 @@
 
 namespace goon
 {
-// Manager of look modules.
+// Manager of goon vision modules.
 class VisionManager
 {
 private:
     static log4cxx::LoggerPtr logger;
     bool blaunched;     // indicates when the manager has been launched       
-    //    GoonBus* pGoonBus;      
-//    VisualData* pVisualData;    
-//    Capture* pCapture;
     // modules    
     Grab oGrab; // grab module (grabs images from camera)    
     See oSee;    // see module (retinal & peripheral vision)

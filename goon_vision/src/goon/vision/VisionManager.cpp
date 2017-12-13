@@ -4,7 +4,6 @@
  ***************************************************************************/
 
 #include <unistd.h>
-#include "log4cxx/ndc.h"
 
 #include "goon/vision/VisionManager.h"
 
@@ -30,8 +29,7 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& 
     // launch it if not launched yet
     if (!blaunched)
     {
-        log4cxx::NDC::push("VisionManager");   	
-        LOG4CXX_INFO(logger, "Launching ");
+        LOG4CXX_INFO(logger, "Launching VisionManager");
         
         //float freq = pGoonConfig->getModulesFreq();
         float freq = 20.0; // TEMP to get from config
@@ -59,7 +57,7 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& 
 
 void VisionManager::end()
 {
-    LOG4CXX_INFO(logger, "VisionManager: stopping modules ..."); 
+    LOG4CXX_INFO(logger, "stopping VisionManager ..."); 
 
     if (oSee.isOn())
     {    
@@ -73,7 +71,7 @@ void VisionManager::end()
         oGrab.wait();
     }
 
-    LOG4CXX_INFO(logger, "VisionManager: finished");  
+    LOG4CXX_INFO(logger, "VisionManager finished");  
 }
 
 void VisionManager::oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture)

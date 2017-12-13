@@ -65,7 +65,7 @@ private:
     virtual void bye();
     
     // waits till there's a valid image in the shared visual data (used for retinal vision size initialization)
-    void wait4ValidImage();
+    void wait4FirstCapture();
 };
 
 }

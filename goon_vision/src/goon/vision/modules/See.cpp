@@ -53,7 +53,7 @@ void See::first()
         setState(See::eSTATE_ON);
         
         // set sizes for retinal vision
-        wait4ValidImage();
+        wait4FirstCapture();
         pCapture->getImageCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
         oRetinalVision->init(imageCam.cols, imageCam.rows); // w, h
@@ -99,7 +99,7 @@ void See::loop()
     pGoonBus->getSO_SEE_FPS().setValue(fps);
 }
 
-void See::wait4ValidImage()
+void See::wait4FirstCapture()
 {
     LOG4CXX_INFO(logger, "waiting for first image");     
     // wait for new grabbed frame (50ms waits)
@@ -110,9 +110,9 @@ void See::wait4ValidImage()
 // just one loop exectution (for testing)
 void See::oneShot()
 {
-    LOG4CXX_INFO(logger, "See - one shot");     
     first();
     loop();
+    bye();
 }
 
 }
