@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+   <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">    
+    <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %5p %10x: %m%n"/>
+        </layout>
+   </appender>
+
+   <appender name="dailyAppender" class="org.apache.log4j.rolling.RollingFileAppender">
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="${HOME}/LOGS/GOON/goon_%d{yyyyMMdd}.log"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %5p %15x: %m%n"/>
+        </layout>
+    </appender>
+
+  <root>
+        <priority value="all" />
+  </root>
+
+  <!-- Specify the level for some specific categories -->
+  <category name="goon" >
+        <priority value ="info" />
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="dailyAppender"/>
+  </category>
+  
+ </log4j:configuration>
