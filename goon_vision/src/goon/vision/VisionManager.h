@@ -10,7 +10,6 @@
 
 #include "goon/vision/modules/Grab.h"
 #include "goon/vision/modules/See.h"
-#include "goon/core/Capture.h"
 #include "goon/core/GoonBus.h"
 #include "goon/core/VisualData.h"
 
@@ -32,10 +31,10 @@ public:
     VisionManager();
     ~VisionManager();
                    
-    bool launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture);
+    bool launch(GoonBus& oGoonBus, VisualData& oVisualData);
     void end();
     
-    void oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture);
+    void oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData);
 };
 
 }

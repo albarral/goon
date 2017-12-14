@@ -18,12 +18,12 @@ namespace goon
 LoggerPtr PeripheralVision::logger(Logger::getLogger("goon.peripheral"));
 	
 // constructor
-PeripheralVision::PeripheralVision (Retina& oRetina, Rois& oROIs) : mRetina(oRetina), mROIs(oROIs)
+PeripheralVision::PeripheralVision()
 {
     LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Peripheral vision");
-
-    counter = 0;
-	
+    pRetina = 0;
+    pROIs = 0;
+    counter = 0;	
     for (int i=0; i<4; i++)            
         storage[i] = 0;
 }
@@ -31,9 +31,7 @@ PeripheralVision::PeripheralVision (Retina& oRetina, Rois& oROIs) : mRetina(oRet
 // destructor
 PeripheralVision::~PeripheralVision ()
 {
-
-    float averages[4];
-				
+    float averages[4];				
     if (counter != 0)
     {
         for (int i=0; i<4; i++)
@@ -44,6 +42,11 @@ PeripheralVision::~PeripheralVision ()
     LOG4CXX_TRACE(logger, "regions = " << averages[0] << ", units = " << averages[1] << ", merges = " << averages[2] << ", eliminations = " << averages[3]);
 }
 
+void PeripheralVision::init(Retina& oRetina, Rois& oROIs)
+{
+    pRetina = &oRetina;
+    pROIs = &oROIs;    
+}
 
 void PeripheralVision::setParameters (int same_RGB, int similar_RGB)
 {
@@ -57,12 +60,12 @@ void PeripheralVision::update ()
 {
     LOG4CXX_TRACE(logger, "update - init");
     
-    oRoisDetection.detectROIs(mRetina, mROIs);
+    oRoisDetection.detectROIs(*pRetina, *pROIs);
         
-    LOG4CXX_DEBUG(logger, "rois = " << mROIs.getNumROIs() << ", eliminated = " << oRoisDetection.getEliminations());
+    LOG4CXX_DEBUG(logger, "rois = " << pROIs->getNumROIs() << ", eliminated = " << oRoisDetection.getEliminations());
 
-    storage[0] += mRetina.getNumRegions();
-    storage[1] += mROIs.getNumROIs();
+    storage[0] += pRetina->getNumRegions();
+    storage[1] += pROIs->getNumROIs();
     storage[2] += 0;
     storage[3] += oRoisDetection.getEliminations();
     counter++;
@@ -74,7 +77,7 @@ void PeripheralVision::update ()
 void PeripheralVision::describeROIs()
 {
     LOG4CXX_DEBUG(logger, "ROIs description ...");
-    for (ROI& oROI: mROIs.getList()) 
+    for (ROI& oROI: pROIs->getList()) 
     {
         LOG4CXX_DEBUG(logger, oROI.toString());
     } 

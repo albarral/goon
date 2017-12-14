@@ -32,7 +32,7 @@ Merge::~Merge()
 
 
 // This function merges all adjacent regions with similar color.
-int Merge::doMerge (Retina& oRetina)
+int Merge::doMerge(Retina& oRetina)
 {
     int collections;
 	
@@ -51,7 +51,7 @@ int Merge::doMerge (Retina& oRetina)
 // ****************************************  FUNCTION: CheckProximityMerge  ***************************************
 
 // This function checks if there are nearby regions with similar color that can be merged. 
-void Merge::checkProximityMerge (Retina& oRetina)
+void Merge::checkProximityMerge(Retina& oRetina)
 {
     cv::Rect window1;       // expanded window of region 1
     cv::Rect window2;       // expanded window of region 2
@@ -111,7 +111,7 @@ void Merge::checkProximityMerge (Retina& oRetina)
 
 
 // Checks whether two region grids overlap or not.
-bool Merge::checkGridsOverlap (cv::Mat& mat_grid1, cv::Mat& mat_grid2)
+bool Merge::checkGridsOverlap(cv::Mat& mat_grid1, cv::Mat& mat_grid2)
 {
     bool boverlap = false;
     int rows = mat_grid1.rows;
@@ -141,7 +141,7 @@ bool Merge::checkGridsOverlap (cv::Mat& mat_grid1, cv::Mat& mat_grid2)
 
 // This function merges similar nearby regions into new regions. 
 // Merged regions become subregions and new regions are collections.
-int Merge::mergeRegions (Retina& oRetina)
+int Merge::mergeRegions(Retina& oRetina)
 {
     int num_collections = 0;
 
@@ -162,7 +162,7 @@ int Merge::mergeRegions (Retina& oRetina)
 }
 
 
-void Merge::createCollection2 (Region& oBaseRegion, Retina& oRetina)
+void Merge::createCollection2(Region& oBaseRegion, Retina& oRetina)
 {  
     LOG4CXX_TRACE(logger, "new collection " << oBaseRegion.getID());
     

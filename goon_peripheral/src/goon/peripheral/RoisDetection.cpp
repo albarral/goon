@@ -38,7 +38,7 @@ void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs)
     prepareDetection();
     
     // try matching only if ROIs & regions exist
-    if (oROIs.getNumROIs()>0 && oRetina.getNumRegions()>0)
+    if (pROIs->getNumROIs()>0 && pRetina->getNumRegions()>0)
     {
         matchROIs2Regions();
         

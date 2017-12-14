@@ -35,8 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/core/Capture.o \
 	${OBJECTDIR}/src/goon/core/GoonBus.o \
+	${OBJECTDIR}/src/goon/core/GoonModule.o \
 	${OBJECTDIR}/src/goon/core/VisualData.o
 
 
@@ -64,15 +64,15 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_core.${CND_DLIB_EXT}: ${OBJEC
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_core.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
-${OBJECTDIR}/src/goon/core/Capture.o: src/goon/core/Capture.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/core
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/Capture.o src/goon/core/Capture.cpp
-
 ${OBJECTDIR}/src/goon/core/GoonBus.o: src/goon/core/GoonBus.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/core
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/GoonBus.o src/goon/core/GoonBus.cpp
+
+${OBJECTDIR}/src/goon/core/GoonModule.o: src/goon/core/GoonModule.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/core
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/GoonModule.o src/goon/core/GoonModule.cpp
 
 ${OBJECTDIR}/src/goon/core/VisualData.o: src/goon/core/VisualData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/core

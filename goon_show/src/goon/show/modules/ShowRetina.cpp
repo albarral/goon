@@ -14,10 +14,7 @@ log4cxx::LoggerPtr ShowRetina::logger(log4cxx::Logger::getLogger("goon.show"));
 
 ShowRetina::ShowRetina() 
 {
-    binitialized = false;
-    pGoonBus = 0;
-    pCapture = 0;
-    pVisualData = 0;      
+    modName = "ShowRetina";
     windowName = "Retina";
 }
 
@@ -25,12 +22,8 @@ ShowRetina::~ShowRetina()
 {
 }
 
-void ShowRetina::init(Capture& oCapture, VisualData& oVisualData, GoonBus& oGoonBus)
+void ShowRetina::showInitialized()
 {
-    pGoonBus = &oGoonBus;
-    pCapture = &oCapture;
-    pVisualData = &oVisualData;      
-    binitialized = true;  
     LOG4CXX_INFO(logger, "ShowRetina initialized");             
 };
 
@@ -43,12 +36,12 @@ void ShowRetina::first()
     cv::namedWindow(windowName);         
 
     // avoid undefined imageRetina on first show
-    pCapture->getImageCopy(imageCam);
+    pVisualData->getImageCopy(imageCam);
     imageRetina = imageCam.clone();
     imageROIs = imageCam.clone();
 
-    frameNum = pCapture->getFrameNum();
-    // SO_SEE_BEAT
+    // sense beats
+    grabBeat = pGoonBus->getSO_GRAB_BEAT().getValue();
     seeBeat = pGoonBus->getSO_SEE_BEAT().getValue();
 }
 
@@ -60,34 +53,38 @@ void ShowRetina::bye()
 void ShowRetina::loop()
 {
     //LOG4CXX_DEBUG(logger, "iteration " << i);                
-    // skip if no new grabbed frame
-    if (pCapture->getFrameNum() == frameNum)            
-        return;
 
-    frameNum = pCapture->getFrameNum();
-    pCapture->getImageCopy(imageCam);
-    // SO_SEE_BEAT
-    int newBeat = pGoonBus->getSO_SEE_BEAT().getValue();
-    float fps = pGoonBus->getSO_SEE_FPS().getValue();
-
-    // on each See beat update the output shown
-    if (newBeat != seeBeat)
+    // if no new capture (grab beat not changed), skip
+    if (pGoonBus->getSO_GRAB_BEAT().getValue() == grabBeat)
     {
-        seeBeat = newBeat;       
+        LOG4CXX_INFO(logger, "skip show retina ... ");
+        return;        
+    }
+    // if new capture, get it
+    else
+    {
+        pVisualData->getImageCopy(imageCam);
+        grabBeat = pGoonBus->getSO_GRAB_BEAT().getValue();
+    }
+    
+    // if new See beat update output
+    if (pGoonBus->getSO_SEE_BEAT().getValue() != seeBeat)
+    {
+        seeBeat = pGoonBus->getSO_SEE_BEAT().getValue();       
         // draw regions obtained by the retinal vision 
         oRetinaMonitor.drawRegions(imageCam, pVisualData->getRetina2().getListRegions());            
         imageRetina = oRetinaMonitor.getOutput();
         // draw ROIs obtained by the peripheral vision 
         oROIsMonitor.drawRois(imageCam, pVisualData->getROIs2().getList());                
-        oROIsMonitor.drawFPS(fps);
+        oROIsMonitor.drawFPS(pGoonBus->getSO_SEE_FPS().getValue());
         imageROIs = oROIsMonitor.getOutput();                                
+
+        oDualWindow.setImageLeft(imageROIs);
+        oDualWindow.setImageRight(imageRetina);
     }            
 
     // show dual window
-    oDualWindow.setImageLeft(imageROIs);
-    oDualWindow.setImageRight(imageRetina);
     cv::imshow(windowName, oDualWindow.getImage());   
-
     cv::waitKey(10);            
 }
 
@@ -101,7 +98,7 @@ void ShowRetina::oneShot()
     RetinaSaver oRetinaSaver;
     oRetinaSaver.setDestinationFolder("/home/albarral/TESTS/VISION");
            
-    oRetinaSaver.saveRegions(imageCam,  pVisualData->getRetina2().getListRegions());
+    oRetinaSaver.saveRegions(imageCam, pVisualData->getRetina2().getListRegions());
 }
 
 }

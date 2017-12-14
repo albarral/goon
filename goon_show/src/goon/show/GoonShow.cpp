@@ -18,7 +18,7 @@ GoonShow::~GoonShow()
 {
 }
 
-bool GoonShow::launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture)
+bool GoonShow::launch(GoonBus& oGoonBus, VisualData& oVisualData)
 {
     // launch it if not launched yet
     if (!blaunched)
@@ -28,7 +28,7 @@ bool GoonShow::launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapt
         //float freq = pGoonConfig->getModulesFreq();
         float freq = 20.0; // TEMP to get from config
 
-        oShowRetina.init(oCapture, oVisualData, oGoonBus);
+        oShowRetina.init(oGoonBus, oVisualData);
         oShowRetina.setFrequency(freq);    
 
         // launch modules
@@ -57,10 +57,10 @@ void GoonShow::end()
 }
 
 // just one loop exectution (for testing)
-void GoonShow::oneShot(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture)
+void GoonShow::oneShot(GoonBus& oGoonBus, VisualData& oVisualData)
 {
     LOG4CXX_INFO(logger, "GoonShow: one shot ..."); 
-    oShowRetina.init(oCapture, oVisualData, oGoonBus);   
+    oShowRetina.init(oGoonBus, oVisualData);   
     oShowRetina.oneShot();
 }
 

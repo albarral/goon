@@ -33,11 +33,11 @@ bool GoonControl::launch()
 
     if (bok)
         // launch vision manager
-        bok = oVisionManager.launch(oGoonBus, oVisualData, oCapture);
+        bok = oVisionManager.launch(oGoonBus, oVisualData);
 
     if (bok)
         // launch gui
-        bok = oGoonShow.launch(oGoonBus, oVisualData, oCapture);
+        bok = oGoonShow.launch(oGoonBus, oVisualData);
     
     return bok;
 }
@@ -56,8 +56,8 @@ bool GoonControl::end()
 
 void GoonControl::oneShot(int testCamera)
 {
-    oVisionManager.oneShot(testCamera, oGoonBus, oVisualData, oCapture);
-    oGoonShow.oneShot(oGoonBus, oVisualData, oCapture);    
+    oVisionManager.oneShot(testCamera, oGoonBus, oVisualData);
+    oGoonShow.oneShot(oGoonBus, oVisualData);    
 }
 
 bool GoonControl::checkEndRequested()

@@ -20,8 +20,8 @@ class PeripheralVision
 {
 private:
     static log4cxx::LoggerPtr logger;
-    Retina& mRetina;
-    Rois& mROIs;
+    Retina* pRetina;
+    Rois* pROIs;
  //   UnitsDetection oUnitsDetection;
     RoisDetection oRoisDetection;
     int storage[4];
@@ -29,8 +29,11 @@ private:
     int loop_time;      // time ellapsed from the last update (ms)
 
 public:
-    PeripheralVision (Retina& oRetina, Rois& oROIs);
+    PeripheralVision();
     ~PeripheralVision();
+
+    // Initializes the module 
+    void init(Retina& oRetina, Rois& oROIs);
 
     void setParameters(int same_RGB, int similar_RGB);
 

@@ -24,7 +24,7 @@ VisionManager::~VisionManager()
 {
 }
 
-bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture)
+bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
 {      
     // launch it if not launched yet
     if (!blaunched)
@@ -35,11 +35,12 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& 
         float freq = 20.0; // TEMP to get from config
 
         // grab module (grabs images from camera)
-        oGrab.init(oCapture, workingCamera);
+        oGrab.init(oGoonBus, oVisualData);
+        oGrab.setCameraSource(workingCamera);
         oGrab.setFrequency(freq);
 
         // see module (retinal & peripheral vision)
-        oSee.init(oCapture, oVisualData, oGoonBus);
+        oSee.init(oGoonBus, oVisualData);
         oSee.setFrequency(freq);    
 
         // launch modules
@@ -74,13 +75,14 @@ void VisionManager::end()
     LOG4CXX_INFO(logger, "VisionManager finished");  
 }
 
-void VisionManager::oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture)
+void VisionManager::oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData)
 {
     LOG4CXX_INFO(logger, "VisionManager: one shot ..."); 
     
-    oGrab.init(oCapture, testCamera);
+    oGrab.init(oGoonBus, oVisualData);
+    oGrab.setCameraSource(testCamera);
     oGrab.setFrequency(30.0);
-    oSee.init(oCapture, oVisualData, oGoonBus);
+    oSee.init(oGoonBus, oVisualData);
     
     oGrab.on();        
     oSee.oneShot();    

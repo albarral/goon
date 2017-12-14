@@ -9,7 +9,6 @@
 #include <log4cxx/logger.h>
 
 #include "goon/core/GoonBus.h"
-#include "goon/core/Capture.h"
 #include "goon/core/VisualData.h"
 #include "goon/show/modules/ShowRetina.h"
 
@@ -28,11 +27,11 @@ public:
     GoonShow();
     ~GoonShow();
 
-    bool launch(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture);
+    bool launch(GoonBus& oGoonBus, VisualData& oVisualData);
     void end();    
     
     // just one loop execution (for testing)
-    void oneShot(GoonBus& oGoonBus, VisualData& oVisualData, Capture& oCapture);
+    void oneShot(GoonBus& oGoonBus, VisualData& oVisualData);
 };
 
 }

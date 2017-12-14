@@ -11,10 +11,7 @@
 
 #include <opencv2/opencv.hpp>
 
-#include "tuly/control/module3.h"
-#include "goon/core/GoonBus.h"
-#include "goon/core/Capture.h"
-#include "goon/core/VisualData.h"
+#include "goon/core/GoonModule.h"
 #include "goon/show/monitor/RetinaMonitor.h"
 #include "goon/show/monitor/ROIsMonitor.h"
 #include "goon/show/monitor/RetinaSaver.h"
@@ -23,15 +20,10 @@
 namespace goon
 {
 // Monitoring module of the goon vision process
-class ShowRetina: public tuly::Module3
+class ShowRetina: public GoonModule
 {
 private:
     static log4cxx::LoggerPtr logger;
-    bool binitialized;
-    // shared data
-    GoonBus* pGoonBus;        // access to the internal bus     
-    Capture* pCapture;           // access pointer to capture data
-    VisualData* pVisualData;    // access pointer to visual data
     // logic
     cv::Mat imageCam;
     cv::Mat imageRetina;
@@ -40,25 +32,25 @@ private:
     ROIsMonitor oROIsMonitor;
     tivy::DualWindow oDualWindow; 
     std::string windowName;
-    int frameNum;
+    int grabBeat;       // Grab module's beat
     int seeBeat;        // See module's beat
     
 public:
     ShowRetina();
     ~ShowRetina();
 
-    // initializes the module 
-    void init(Capture& oCapture, VisualData& oVisualData, GoonBus& oGoonBus);   
-    
+    // just one loop exectution (for testing)
+    void oneShot();
+
+private:
+    // show module initialization in logs
+    virtual void showInitialized();        
     // first action after thread begins 
     virtual void first();
     // loops inside the thread 
     virtual void loop();            
     // last action before thread ends
-    virtual void bye();
-    
-    // just one loop exectution (for testing)
-    void oneShot();
+    virtual void bye();    
 };
 
 }

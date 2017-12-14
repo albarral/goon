@@ -9,34 +9,36 @@
 
 namespace goon
 {    
-log4cxx::LoggerPtr Grab::logger(log4cxx::Logger::getLogger("goon.test"));
+log4cxx::LoggerPtr Grab::logger(log4cxx::Logger::getLogger("goon.vision.grab"));
 
 Grab::Grab() 
-{
-    pCapture = 0;
-    binitialized = false;
+{  
+    modName = "Grab";
 }
 
-Grab::~Grab() 
-{
-}
+//Grab::~Grab() 
+//{
+//}
 
-void Grab::init(Capture& oCapture, int sourceCamera)
+void Grab::showInitialized()
 {
-    pCapture = &oCapture;
-    
+    LOG4CXX_INFO(logger, modName + " initialized");             
+};
+
+bool Grab::setCameraSource(int sourceCamera)
+{
     // camera object instantiation
     connect2Camera(sourceCamera);
 
     if (oGrabber.isReady())
     {
-        binitialized = true;
-        LOG4CXX_INFO(logger, "Grab initialized");             
+        LOG4CXX_INFO(logger, "Grab initialized");   
+        return true;
     }
     else
     {
-        binitialized = false;
         LOG4CXX_ERROR(logger, "FAILED Grab initialization!");    
+        return false;
     }    
 };
 
@@ -45,7 +47,7 @@ void Grab::first()
 {    
     log4cxx::NDC::push("Grab");   	
     
-    if (binitialized)
+    if (oGrabber.isReady())
     {
         LOG4CXX_INFO(logger, "started");  
         setState(Grab::eSTATE_ON);
@@ -53,8 +55,8 @@ void Grab::first()
     // if not initialized -> OFF
     else
     {
-        LOG4CXX_WARN(logger, "NOT initialized. Going off ... ");  
-        Module3::off();        
+        LOG4CXX_WARN(logger, "Grabber not connected to camera. Going off ... ");  
+        tuly::Module3::off();        
     }
 }
 
@@ -67,7 +69,13 @@ void Grab::loop()
 {   
     // grab image & pass it to the vision system
     if (oGrabber.grab())            
-        pCapture->newFrame(oGrabber.getCapture());
+    {
+        pVisualData->newFrame(oGrabber.getCapture());
+        // produce new beat
+        newBeat();
+        // SO
+        pGoonBus->getSO_GRAB_BEAT().setValue(beat);
+    }
 }
 
 void Grab::connect2Camera(int option)

@@ -29,7 +29,7 @@ public:
     // change of parameters
     void setGap(int value);
     
-    int doMerge (Retina& oRetina);
+    int doMerge(Retina& oRetina);
     // This function merges all adjacent regions with similar color.
 
 private:
@@ -48,7 +48,7 @@ private:
     void createCollection2(Region& oBaseRegion, Retina& oRetina);
         
     // (Recurrent function) Iteratively builds the list of regions that are to be merged with the specified one.
-    void checkRegions2Merge (int regionID);
+    void checkRegions2Merge(int regionID);
 };
   		  	     
 }  

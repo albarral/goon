@@ -9,7 +9,6 @@
 #include <log4cxx/logger.h>
 
 #include "goon/core/GoonBus.h"
-#include "goon/core/Capture.h"
 #include "goon/core/VisualData.h"
 #include "goon/vision/VisionManager.h"
 #include "goon/show/GoonShow.h"
@@ -25,7 +24,6 @@ private:
     static log4cxx::LoggerPtr logger;
     GoonBus oGoonBus;                            // arm bus
     VisualData oVisualData;    
-    Capture oCapture;
     VisionManager oVisionManager;
 //  GoonComs oGoonComs;
     GoonShow oGoonShow;

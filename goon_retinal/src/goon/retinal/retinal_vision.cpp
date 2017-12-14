@@ -18,18 +18,20 @@ namespace goon
 LoggerPtr RetinalVision::logger(Logger::getLogger("goon.retinal"));
 
 
-RetinalVision::RetinalVision (Retina& oRetina) : mRetina(oRetina)
-{        
+RetinalVision::RetinalVision()
+{  
     LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Retinal vision");
+    pRetina = 0;
 }
 
 RetinalVision::~RetinalVision()
 {
 }
 
-void RetinalVision::init(int img_w, int img_h)
+void RetinalVision::init(Retina& oRetina, int img_w, int img_h)
 {
-    oSegmentation4.init(mRetina, img_w, img_h);
+    pRetina = &oRetina;
+    oSegmentation4.init(oRetina, img_w, img_h);
 }
 
 // This function changes main parameters of the retinal vision system.
@@ -46,7 +48,7 @@ void RetinalVision::update (cv::Mat& image_cam)
 {
     LOG4CXX_TRACE(logger, "update - init");
 
-    mRetina.clear();
+    pRetina->clear();
     
     // convert to HSV space
     cv::Mat image_hsv;        
@@ -54,9 +56,9 @@ void RetinalVision::update (cv::Mat& image_cam)
 
     oSegmentation4.extractRegions(image_cam, image_hsv);
 
-    oMerge.doMerge(mRetina);
+    oMerge.doMerge(*pRetina);
 
-    mRetina.removeInvalidRegions();
+    pRetina->removeInvalidRegions();
 
     //LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
     //describeRegions();
@@ -69,7 +71,7 @@ void RetinalVision::computeCovariances()
     LOG4CXX_DEBUG(logger, "compute shapes ...");
 
     // walk the list of final regions
-    for (Region& oRegion : mRetina.getListRegions())
+    for (Region& oRegion : pRetina->getListRegions())
     {
         LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
         
@@ -80,7 +82,7 @@ void RetinalVision::computeCovariances()
 void RetinalVision::describeRegions()
 {
     LOG4CXX_DEBUG(logger, "regions description ...");
-    for (Region& oRegion : mRetina.getListRegions()) 
+    for (Region& oRegion : pRetina->getListRegions()) 
     {
         LOG4CXX_DEBUG(logger, oRegion.shortDesc());
     } 

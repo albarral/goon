@@ -13,10 +13,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="core" displayName="core" projectFiles="true">
-        <itemPath>src/goon/core/Capture.cpp</itemPath>
-        <itemPath>src/goon/core/Capture.h</itemPath>
         <itemPath>src/goon/core/GoonBus.cpp</itemPath>
         <itemPath>src/goon/core/GoonBus.h</itemPath>
+        <itemPath>src/goon/core/GoonModule.cpp</itemPath>
+        <itemPath>src/goon/core/GoonModule.h</itemPath>
         <itemPath>src/goon/core/VisualData.cpp</itemPath>
         <itemPath>src/goon/core/VisualData.h</itemPath>
       </logicalFolder>
@@ -95,13 +95,13 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/core/Capture.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/core/Capture.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/core/GoonBus.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/core/GoonBus.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/core/GoonModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/core/GoonModule.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/core/VisualData.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -128,13 +128,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/core/Capture.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/core/Capture.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/core/GoonBus.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/core/GoonBus.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/core/GoonModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/core/GoonModule.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/core/VisualData.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -10,36 +10,16 @@
 
 namespace goon
 {    
-log4cxx::LoggerPtr See::logger(log4cxx::Logger::getLogger("goon.test"));
+log4cxx::LoggerPtr See::logger(log4cxx::Logger::getLogger("goon.vision.see"));
 
 See::See() 
 {
-    //  initial state must be Module2::state_OFF
-    binitialized = false;
-    oRetinalVision = 0;
-    oPeripheralVision = 0;
-    beat = 0;
-}
-
-See::~See()
-{
-    if (oRetinalVision != 0)
-        delete (oRetinalVision);
-    
-    if (oPeripheralVision != 0)
-        delete(oPeripheralVision);    
+    modName = "See";
 }
   
-void See::init(Capture& oCapture, VisualData& oVisualData, GoonBus& oLookBus)
+void See::showInitialized()
 {
-    pGoonBus = &oLookBus;
-    pCapture = &oCapture;
-    pVisualData = &oVisualData;  
-    oRetinalVision = new RetinalVision(oVisualData.getRetina());
-    oPeripheralVision = new PeripheralVision(oVisualData.getRetina(), oVisualData.getROIs());
-    
-    binitialized = true;  
-    LOG4CXX_INFO(logger, "See initialized");             
+    LOG4CXX_INFO(logger, modName + " initialized");             
 };
 
 void See::first()
@@ -47,23 +27,24 @@ void See::first()
     log4cxx::NDC::push("See");   	
     
     // we start in LOST state
-    if (binitialized)
+    if (benabled)
     {
         LOG4CXX_INFO(logger, "started");  
         setState(See::eSTATE_ON);
         
         // set sizes for retinal vision
         wait4FirstCapture();
-        pCapture->getImageCopy(imageCam);
+        pVisualData->getImageCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
-        oRetinalVision->init(imageCam.cols, imageCam.rows); // w, h
+        oRetinalVision.init(pVisualData->getRetina(), imageCam.cols, imageCam.rows); // w, h
+        oPeripheralVision.init(pVisualData->getRetina(), pVisualData->getROIs());
         oClick.start();
     }
     // if not initialized -> OFF
     else
     {
         LOG4CXX_WARN(logger, "NOT initialized Going off ... ");  
-        Module3::off();        
+        tuly::Module3::off();        
     }
 }
 
@@ -74,14 +55,14 @@ void See::bye()
 
 void See::loop()
 {   
-    // get copy of last camera image
-    pCapture->getImageCopy(imageCam);            
+    // get last camera capture (don't need to wait, grab is much faster than see)
+    pVisualData->getImageCopy(imageCam);            
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
-    oRetinalVision->update(imageCam);    
-    oRetinalVision->computeCovariances();         
+    oRetinalVision.update(imageCam);    
+    oRetinalVision.computeCovariances();         
     LOG4CXX_DEBUG(logger, "peripheral ... ");
-    oPeripheralVision->update();    
+    oPeripheralVision.update();    
     
     // stores dynamic visual data into static one 
     LOG4CXX_TRACE(logger, "clone retina ... ");
@@ -93,8 +74,10 @@ void See::loop()
     oClick.read();    
     oClick.start();
     fps = 1000.0/oClick.getMillis();
-    beat++;
-    // SO
+    // produce new beat
+    newBeat();
+    
+    // write bus - SO
     pGoonBus->getSO_SEE_BEAT().setValue(beat);
     pGoonBus->getSO_SEE_FPS().setValue(fps);
 }
@@ -103,7 +86,7 @@ void See::wait4FirstCapture()
 {
     LOG4CXX_INFO(logger, "waiting for first image");     
     // wait for new grabbed frame (50ms waits)
-    while (pCapture->getFrameNum() == 0)            
+    while (pGoonBus->getSO_GRAB_BEAT().getValue() == 0)            
         usleep(50000);
 }
 

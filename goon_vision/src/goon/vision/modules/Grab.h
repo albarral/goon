@@ -9,14 +9,13 @@
 #include <string>
 #include <log4cxx/logger.h>
 
-#include "goon/core/Capture.h"
+#include "goon/core/GoonModule.h"
 #include "goon/camera/Grabber.h"
-#include "tuly/control/module3.h"
 
 namespace goon
 {    
 // Module in charge of capturing images from the camera
-class Grab : public tuly::Module3
+class Grab : public GoonModule
 {
 public:
     // states of Grabber module
@@ -45,18 +44,17 @@ public:
 
 private:
     static log4cxx::LoggerPtr logger;
-    bool binitialized;
-    Capture* pCapture;
     Grabber oGrabber;   // utility class used for frame grabbing from any source
 
 public:
     Grab();
-    ~Grab();
+    //~Grab();
     
-    // initializes the module 
-    void init(Capture& oCapture, int sourceCamera);   
+    bool setCameraSource(int sourceCamera);   
        
 private:
+    // show module initialization in logs
+    virtual void showInitialized();    
     // first action after thread begins 
     virtual void first();
     // loop inside the module thread 

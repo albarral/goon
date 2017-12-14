@@ -17,8 +17,10 @@ namespace goon
 class VisualData
 {
     private:
-        std::mutex mutex1;        
-        std::mutex mutex2;        
+        std::mutex mutexCam;        
+        std::mutex mutexRetina;        
+        std::mutex mutexRois;        
+        cv::Mat imageCam;       // image from camera
         // dynamic data (in constant change)
         Retina oRetina;             // retinal data (output of retinal vision)
         Rois oROIs;                  // regions of interest (output of peripheral vision)
@@ -29,6 +31,11 @@ class VisualData
     public:
         VisualData();
         ~VisualData();
+
+        // updates camera image (copies given image)
+        void newFrame(cv::Mat& img);
+        // gets copy of camera image
+        void getImageCopy(cv::Mat& imageOut);
                 
         Retina& getRetina() {return oRetina;};
         Rois& getROIs() {return oROIs;};
