@@ -54,8 +54,8 @@ void runGoon()
     if (oGoonControl.launch())
     {    
         int seconds = 0;
-        //while (!oGoonControl.checkEndRequested()) 
-        while (seconds < 20) 
+        while (!oGoonControl.checkEndRequested()) 
+        //while (seconds < 20) 
         {
             sleep(1);       
             seconds++;

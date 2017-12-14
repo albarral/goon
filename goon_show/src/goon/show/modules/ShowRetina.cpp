@@ -56,10 +56,7 @@ void ShowRetina::loop()
 
     // if no new capture (grab beat not changed), skip
     if (pGoonBus->getSO_GRAB_BEAT().getValue() == grabBeat)
-    {
-        LOG4CXX_INFO(logger, "skip show retina ... ");
         return;        
-    }
     // if new capture, get it
     else
     {
