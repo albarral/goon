@@ -93,7 +93,7 @@ void See::wait4FirstCapture()
         usleep(50000);
 }
 
-// just one loop exectution (for testing)
+// just one loop execution (for testing)
 void See::oneShot()
 {
     first();

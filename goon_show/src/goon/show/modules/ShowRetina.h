@@ -51,6 +51,7 @@ private:
     virtual void loop();            
     // last action before thread ends
     virtual void bye();    
+    
 };
 
 }

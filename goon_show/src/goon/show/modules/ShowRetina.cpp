@@ -68,11 +68,14 @@ void ShowRetina::loop()
     if (pGoonBus->getSO_SEE_BEAT().getValue() != seeBeat)
     {
         seeBeat = pGoonBus->getSO_SEE_BEAT().getValue();       
+        
         // draw regions obtained by the retinal vision 
         oRetinaMonitor.drawRegions(imageCam, pVisualData->getRetina2().getListRegions());            
         imageRetina = oRetinaMonitor.getOutput();
+        
         // draw ROIs obtained by the peripheral vision 
-        oROIsMonitor.drawRois(imageCam, pVisualData->getROIs2().getList());                
+        int focusedROI = pGoonBus->getSO_FOCUS_ROI().getValue();
+        oROIsMonitor.drawRois(imageCam, pVisualData->getROIs2().getList(), focusedROI);                
         oROIsMonitor.drawFPS(pGoonBus->getSO_SEE_FPS().getValue());
         imageROIs = oROIsMonitor.getOutput();                                
 
@@ -84,6 +87,7 @@ void ShowRetina::loop()
     cv::imshow(windowName, oDualWindow.getImage());   
     cv::waitKey(10);            
 }
+
 
 // just one loop exectution (for testing)
 void ShowRetina::oneShot()

@@ -28,7 +28,7 @@ public:
 //    ~ROIsMonitor();
     
     // Draws an image with the given list of ROI's.
-    void drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs);
+    void drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int focusedROI);
 
     // draws the given fps value
     void drawFPS(float fps);

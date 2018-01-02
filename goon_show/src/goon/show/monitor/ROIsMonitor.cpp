@@ -14,7 +14,7 @@ namespace goon
 LoggerPtr ROIsMonitor::logger(Logger::getLogger("goon.show"));
 
 // Shows an image with the ROIs obtained by the peripheral vision process.
-void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs)
+void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int focusedROI)
 {
     float roi_w, roi_h, roi_angle;      // ellipse values
     cv::Vec3f covs;
@@ -34,18 +34,19 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs)
         cv::Point centroid(pos[0], pos[1]);                  
 
         LOG4CXX_TRACE(logger, "roi " << it_roi->getID());        
-        LOG4CXX_TRACE(logger, "(w, h, angle) = " << roi_w << ", " << roi_h << ", " << roi_angle);        
-        oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle);
-        int color = tivy::Draw::eYELLOW;
-        
+        LOG4CXX_TRACE(logger, "(w, h, angle) = " << roi_w << ", " << roi_h << ", " << roi_angle);  
+        int roiColor = tivy::Draw::eYELLOW;        
+        if (it_roi->getID() == focusedROI)
+            roiColor = tivy::Draw::eGREEN;                  
+        oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle, roiColor);
+                
         float* speed = it_roi->getMotion().getSpeed();
         float absSpeed, angle;
         maty::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
         // speed > 0.1 pixels/ms (100 pixels/s))
+        int color = tivy::Draw::eYELLOW;
         if (absSpeed > 0.01)
-        {
             color = tivy::Draw::eRED;            
-        }
         oDraw.drawPoint(centroid, color, it_roi->getStability());
         //oDrawPer.drawNumber(it_roi->getID(), centroid);                        
         

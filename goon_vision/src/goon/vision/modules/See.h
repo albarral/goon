@@ -42,7 +42,7 @@ public:
     See();
     //~See();
         
-    // just one loop exectution (for testing)
+    // just one loop execution (for testing)
     void oneShot();       
 
 private:

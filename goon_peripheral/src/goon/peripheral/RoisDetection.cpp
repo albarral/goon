@@ -28,7 +28,7 @@ RoisDetection::~RoisDetection ()
 
 void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs, int millis)
 {
-    LOG4CXX_INFO(logger, "detect ROIs");
+    LOG4CXX_DEBUG(logger, "detect ROIs");
         
     pRetina = &oRetina;
     pROIs = &oROIs;
