@@ -36,10 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/peripheral/IDPool.o \
-	${OBJECTDIR}/src/goon/peripheral/RoisDetection.o \
-	${OBJECTDIR}/src/goon/peripheral/Unit.o \
-	${OBJECTDIR}/src/goon/peripheral/peripheral_vision.o \
-	${OBJECTDIR}/src/goon/peripheral/units_detection.o
+	${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o \
+	${OBJECTDIR}/src/goon/peripheral/RoisDetection.o
 
 
 # C Compiler Flags
@@ -71,25 +69,15 @@ ${OBJECTDIR}/src/goon/peripheral/IDPool.o: src/goon/peripheral/IDPool.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/IDPool.o src/goon/peripheral/IDPool.cpp
 
+${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o: src/goon/peripheral/PeripheralVision.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o src/goon/peripheral/PeripheralVision.cpp
+
 ${OBJECTDIR}/src/goon/peripheral/RoisDetection.o: src/goon/peripheral/RoisDetection.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/RoisDetection.o src/goon/peripheral/RoisDetection.cpp
-
-${OBJECTDIR}/src/goon/peripheral/Unit.o: src/goon/peripheral/Unit.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/Unit.o src/goon/peripheral/Unit.cpp
-
-${OBJECTDIR}/src/goon/peripheral/peripheral_vision.o: src/goon/peripheral/peripheral_vision.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/peripheral_vision.o src/goon/peripheral/peripheral_vision.cpp
-
-${OBJECTDIR}/src/goon/peripheral/units_detection.o: src/goon/peripheral/units_detection.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/units_detection.o src/goon/peripheral/units_detection.cpp
 
 # Subprojects
 .build-subprojects:

@@ -18,28 +18,28 @@ VisualData::~VisualData ()
 {
 }
 
-void VisualData::newFrame(cv::Mat& img)
+void VisualData::setCameraFrame(cv::Mat& img)
 {
     std::lock_guard<std::mutex> lock(mutexCam);
     // makes copy of given image
     img.copyTo(imageCam);
 }
 
-void VisualData::getImageCopy(cv::Mat& imageOut)
+void VisualData::getCameraFrameCopy(cv::Mat& imageOut)
 {
     std::lock_guard<std::mutex> lock(mutexCam);
     // takes copy of cam image
     imageCam.copyTo(imageOut);    
 }
 
-void VisualData::storeRetinaPhoto()
+void VisualData::cloneRetina()
 {
     std::lock_guard<std::mutex> locker(mutexRetina);
     // clone retina
     oRetina2 = oRetina;    
 }
 
-void VisualData::storeROIsPhoto()
+void VisualData::cloneROIs()
 {
     std::lock_guard<std::mutex> locker(mutexRois);
     // clone ROIS 

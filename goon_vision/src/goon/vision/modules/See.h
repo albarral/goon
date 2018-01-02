@@ -12,7 +12,7 @@
 
 #include "goon/core/GoonModule.h"
 #include "goon/retinal/retinal_vision.h"
-#include "goon/peripheral/peripheral_vision.h"
+#include "goon/peripheral/PeripheralVision.h"
 #include "tuly/control/module3.h"
 #include "maty/math/Click.h"
 

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "goon/peripheral/peripheral_vision.h"
+#include "goon/peripheral/PeripheralVision.h"
 #include <goon/data/goon_version.h>
 #include <goon/features/shape/shape.h>
 #include <goon/features/color/rgb_color.h>
@@ -56,11 +56,11 @@ void PeripheralVision::setParameters (int same_RGB, int similar_RGB)
 
 // This function implements the peripheral vision process.
 // It samples the retinal map to discover and track regions of interest in the visual scene. 	
-void PeripheralVision::update ()
+void PeripheralVision::update(int millis)
 {
     LOG4CXX_TRACE(logger, "update - init");
     
-    oRoisDetection.detectROIs(*pRetina, *pROIs);
+    oRoisDetection.detectROIs(*pRetina, *pROIs, millis);
         
     LOG4CXX_DEBUG(logger, "rois = " << pROIs->getNumROIs() << ", eliminated = " << oRoisDetection.getEliminations());
 

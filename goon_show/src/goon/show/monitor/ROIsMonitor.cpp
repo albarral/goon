@@ -38,7 +38,7 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs)
         oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle);
         int color = tivy::Draw::eYELLOW;
         
-        float* speed = it_roi->getMotion().getAverageSpeed();
+        float* speed = it_roi->getMotion().getSpeed();
         float absSpeed, angle;
         maty::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
         // speed > 0.1 pixels/ms (100 pixels/s))

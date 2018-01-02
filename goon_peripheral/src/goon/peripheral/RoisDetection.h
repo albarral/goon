@@ -51,7 +51,7 @@ public:
     RoisDetection();
     ~RoisDetection ();
 
-    void detectROIs(Retina& oRetina, Rois& oROIs);
+    void detectROIs(Retina& oRetina, Rois& oROIs, int millis);
     
     void setMinOverlapFraction(float value) {minOverlapFraction = value;};
 
@@ -65,7 +65,7 @@ private:
     void matchROIs2Regions();
     
     // update matched ROIs to follow their regions
-    void updateMatchedROIs();
+    void updateMatchedROIs(int millis);
     
     // Checks how the given ROI responds to regions. 
     // The number of positive responses is returned

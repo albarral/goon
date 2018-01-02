@@ -34,7 +34,7 @@ void See::first()
         
         // set sizes for retinal vision
         wait4FirstCapture();
-        pVisualData->getImageCopy(imageCam);
+        pVisualData->getCameraFrameCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
         oRetinalVision.init(pVisualData->getRetina(), imageCam.cols, imageCam.rows); // w, h
         oPeripheralVision.init(pVisualData->getRetina(), pVisualData->getROIs());
@@ -56,23 +56,26 @@ void See::bye()
 void See::loop()
 {   
     // get last camera capture (don't need to wait, grab is much faster than see)
-    pVisualData->getImageCopy(imageCam);            
+    pVisualData->getCameraFrameCopy(imageCam);            
+
+    // clock measure
+    oClick.read();    
+    oClick.start();
+
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision.update(imageCam);    
     oRetinalVision.computeCovariances();         
     LOG4CXX_DEBUG(logger, "peripheral ... ");
-    oPeripheralVision.update();    
+    oPeripheralVision.update(oClick.getMillis());    
     
     // stores dynamic visual data into static one 
     LOG4CXX_TRACE(logger, "clone retina ... ");
-    pVisualData->storeRetinaPhoto();
+    pVisualData->cloneRetina();
     LOG4CXX_TRACE(logger, "clone ROIS ... ");
-    pVisualData->storeROIsPhoto();
+    pVisualData->cloneROIs();
 
     // measure processing speed
-    oClick.read();    
-    oClick.start();
     fps = 1000.0/oClick.getMillis();
     // produce new beat
     newBeat();

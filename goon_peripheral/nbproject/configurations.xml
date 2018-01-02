@@ -15,14 +15,10 @@
       <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
         <itemPath>src/goon/peripheral/IDPool.cpp</itemPath>
         <itemPath>src/goon/peripheral/IDPool.h</itemPath>
+        <itemPath>src/goon/peripheral/PeripheralVision.cpp</itemPath>
+        <itemPath>src/goon/peripheral/PeripheralVision.h</itemPath>
         <itemPath>src/goon/peripheral/RoisDetection.cpp</itemPath>
         <itemPath>src/goon/peripheral/RoisDetection.h</itemPath>
-        <itemPath>src/goon/peripheral/Unit.cpp</itemPath>
-        <itemPath>src/goon/peripheral/Unit.h</itemPath>
-        <itemPath>src/goon/peripheral/peripheral_vision.cpp</itemPath>
-        <itemPath>src/goon/peripheral/peripheral_vision.h</itemPath>
-        <itemPath>src/goon/peripheral/units_detection.cpp</itemPath>
-        <itemPath>src/goon/peripheral/units_detection.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -106,36 +102,22 @@
       </item>
       <item path="src/goon/peripheral/IDPool.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/peripheral/PeripheralVision.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/peripheral/PeripheralVision.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/peripheral/RoisDetection.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/goon/peripheral/RoisDetection.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/Unit.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/Unit.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/peripheral_vision.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/peripheral_vision.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/units_detection.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/units_detection.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -165,36 +147,22 @@
       </item>
       <item path="src/goon/peripheral/IDPool.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/peripheral/PeripheralVision.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/peripheral/PeripheralVision.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/peripheral/RoisDetection.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/goon/peripheral/RoisDetection.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/Unit.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/Unit.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/peripheral_vision.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/peripheral_vision.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/units_detection.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/units_detection.h"
             ex="false"
             tool="3"
             flavor2="0">

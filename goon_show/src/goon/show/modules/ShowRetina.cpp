@@ -36,7 +36,7 @@ void ShowRetina::first()
     cv::namedWindow(windowName);         
 
     // avoid undefined imageRetina on first show
-    pVisualData->getImageCopy(imageCam);
+    pVisualData->getCameraFrameCopy(imageCam);
     imageRetina = imageCam.clone();
     imageROIs = imageCam.clone();
 
@@ -60,7 +60,7 @@ void ShowRetina::loop()
     // if new capture, get it
     else
     {
-        pVisualData->getImageCopy(imageCam);
+        pVisualData->getCameraFrameCopy(imageCam);
         grabBeat = pGoonBus->getSO_GRAB_BEAT().getValue();
     }
     

@@ -18,20 +18,16 @@
           <itemPath>src/goon/data/base/Body.h</itemPath>
           <itemPath>src/goon/data/base/BodyUtils.cpp</itemPath>
           <itemPath>src/goon/data/base/BodyUtils.h</itemPath>
+          <itemPath>src/goon/data/base/RealBody.cpp</itemPath>
+          <itemPath>src/goon/data/base/RealBody.h</itemPath>
+          <itemPath>src/goon/data/base/TransMotion.cpp</itemPath>
+          <itemPath>src/goon/data/base/TransMotion.h</itemPath>
           <itemPath>src/goon/data/base/blob.cpp</itemPath>
           <itemPath>src/goon/data/base/blob.h</itemPath>
           <itemPath>src/goon/data/base/region.cpp</itemPath>
           <itemPath>src/goon/data/base/region.h</itemPath>
           <itemPath>src/goon/data/base/roi.cpp</itemPath>
           <itemPath>src/goon/data/base/roi.h</itemPath>
-        </logicalFolder>
-        <logicalFolder name="features" displayName="motion" projectFiles="true">
-          <itemPath>src/goon/data/motion/Motion.cpp</itemPath>
-          <itemPath>src/goon/data/motion/Motion.h</itemPath>
-          <itemPath>src/goon/data/motion/Move.cpp</itemPath>
-          <itemPath>src/goon/data/motion/Move.h</itemPath>
-          <itemPath>src/goon/data/motion/Move2D.cpp</itemPath>
-          <itemPath>src/goon/data/motion/Move2D.h</itemPath>
         </logicalFolder>
         <itemPath>src/goon/data/retina.cpp</itemPath>
         <itemPath>src/goon/data/retina.h</itemPath>
@@ -99,6 +95,14 @@
       </item>
       <item path="src/goon/data/base/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/data/base/RealBody.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/RealBody.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/TransMotion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/TransMotion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -112,18 +116,6 @@
       <item path="src/goon/data/base/roi.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Motion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Motion.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move2D.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -162,6 +154,14 @@
       </item>
       <item path="src/goon/data/base/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/data/base/RealBody.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/RealBody.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/TransMotion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/base/TransMotion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -175,18 +175,6 @@
       <item path="src/goon/data/base/roi.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Motion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Motion.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move2D.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/motion/Move2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/retina.cpp" ex="false" tool="1" flavor2="0">
       </item>

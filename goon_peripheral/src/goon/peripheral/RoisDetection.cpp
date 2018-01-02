@@ -26,7 +26,7 @@ RoisDetection::~RoisDetection ()
 }
 
 
-void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs)
+void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs, int millis)
 {
     LOG4CXX_INFO(logger, "detect ROIs");
         
@@ -42,7 +42,7 @@ void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs)
     {
         matchROIs2Regions();
         
-        updateMatchedROIs();
+        updateMatchedROIs(millis);
     }    
             
     // create new ROIs for orphan regions
@@ -209,9 +209,10 @@ void RoisDetection::newROI(Region& oRegion)
     
     ROI oROI;
     oROI.setID(ID);
+
+    // set ROIS's body with the perceived region
     oROI.setBody(oRegion);
-    int pos[2] = {oRegion.getPos()[0], oRegion.getPos()[1]};
-    oROI.getTransMove().init(pos);
+    oROI.updateMotion(0);
     // mark as matched to avoid obsoletes removal    
     oROI.setMatched(true);     
     // and add it to the list of ROIs
@@ -222,17 +223,17 @@ void RoisDetection::newROI(Region& oRegion)
 
 
 // update matched ROIs to follow their regions
-void RoisDetection::updateMatchedROIs()
+void RoisDetection::updateMatchedROIs(int millis)
 {
     for (st_match& match : listMatches)
     {
         ROI& oROI = pROIs->getROI(match.roiID);        
         Region& oRegion = pRetina->getRegion(match.regionID);
 
+        // update ROIS's body with its perceived region
         oROI.setBody(oRegion);
         // update ROI's motion & age
-        int pos[2] = {oRegion.getPos()[0], oRegion.getPos()[1]};        
-        oROI.getTransMove().update(pos);
+        oROI.updateMotion(millis);
         oROI.increaseAge();
     }        
 }

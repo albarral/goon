@@ -37,12 +37,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/base/Body.o \
 	${OBJECTDIR}/src/goon/data/base/BodyUtils.o \
+	${OBJECTDIR}/src/goon/data/base/RealBody.o \
+	${OBJECTDIR}/src/goon/data/base/TransMotion.o \
 	${OBJECTDIR}/src/goon/data/base/blob.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
-	${OBJECTDIR}/src/goon/data/motion/Motion.o \
-	${OBJECTDIR}/src/goon/data/motion/Move.o \
-	${OBJECTDIR}/src/goon/data/motion/Move2D.o \
 	${OBJECTDIR}/src/goon/data/retina.o \
 	${OBJECTDIR}/src/goon/data/rois.o
 
@@ -81,6 +80,16 @@ ${OBJECTDIR}/src/goon/data/base/BodyUtils.o: src/goon/data/base/BodyUtils.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
 
+${OBJECTDIR}/src/goon/data/base/RealBody.o: src/goon/data/base/RealBody.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/RealBody.o src/goon/data/base/RealBody.cpp
+
+${OBJECTDIR}/src/goon/data/base/TransMotion.o: src/goon/data/base/TransMotion.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/TransMotion.o src/goon/data/base/TransMotion.cpp
+
 ${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
@@ -95,21 +104,6 @@ ${OBJECTDIR}/src/goon/data/base/roi.o: src/goon/data/base/roi.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
-
-${OBJECTDIR}/src/goon/data/motion/Motion.o: src/goon/data/motion/Motion.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/motion/Motion.o src/goon/data/motion/Motion.cpp
-
-${OBJECTDIR}/src/goon/data/motion/Move.o: src/goon/data/motion/Move.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/motion/Move.o src/goon/data/motion/Move.cpp
-
-${OBJECTDIR}/src/goon/data/motion/Move2D.o: src/goon/data/motion/Move2D.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/motion
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/motion/Move2D.o src/goon/data/motion/Move2D.cpp
 
 ${OBJECTDIR}/src/goon/data/retina.o: src/goon/data/retina.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data

@@ -70,7 +70,7 @@ void Grab::loop()
     // grab image & pass it to the vision system
     if (oGrabber.grab())            
     {
-        pVisualData->newFrame(oGrabber.getCapture());
+        pVisualData->setCameraFrame(oGrabber.getCapture());
         // produce new beat
         newBeat();
         // SO

@@ -20,7 +20,7 @@ namespace goon
 // Extends from Blob
  class Body : public Blob
 {
- private:
+ protected:
      cv::Mat mask;       
      cv::Rect window;
 

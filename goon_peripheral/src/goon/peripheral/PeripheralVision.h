@@ -11,7 +11,6 @@
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
 #include "goon/data/base/roi.h"
-//#include "goon/peripheral/units_detection.h"
 #include "goon/peripheral/RoisDetection.h"
 
 namespace goon
@@ -22,7 +21,6 @@ private:
     static log4cxx::LoggerPtr logger;
     Retina* pRetina;
     Rois* pROIs;
- //   UnitsDetection oUnitsDetection;
     RoisDetection oRoisDetection;
     int storage[4];
     int counter;
@@ -39,7 +37,7 @@ public:
 
     // This function implements the peripheral vision process.
     // It samples the retinal map to discover and track regions of interest in the visual scene.
-    void update ();
+    void update(int millis);
        
     // logs a description of the computed ROIs
     void describeROIs();    

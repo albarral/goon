@@ -19,8 +19,8 @@ protected:
     int mass;                  // area in pixels
     int pos[2];                 // centroid's (x,y) position in the image
     cv::Vec3f covs;             // cx, cy, cxy	
-    cv::Vec3f  rgb_color;     // color in RGB space
-    cv::Vec3f  hsv_color;     // color in HSV space
+    cv::Vec3f rgb_color;     // color in RGB space
+    cv::Vec3f hsv_color;     // color in HSV space
 
 public:
     Blob();
