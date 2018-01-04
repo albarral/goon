@@ -151,6 +151,16 @@ void Grab::connect2Camera(int option)
             oGrabber.connect2Image("/home/albarral/TESTS/images/jluis.jpg");
             LOG4CXX_INFO(logger, "Image: jluis");
             break;
+
+        case Grab::eIMAGE_ORANGE1:
+            oGrabber.connect2Image("/home/albarral/TESTS/images/image_orange1.jpg");
+            LOG4CXX_INFO(logger, "Image: orange1");
+            break;
+            
+        case Grab::eIMAGE_ORANGE2:
+            oGrabber.connect2Image("/home/albarral/TESTS/images/image_orange2.jpg");
+            LOG4CXX_INFO(logger, "Image: orange2");
+            break;
     }
 }
 

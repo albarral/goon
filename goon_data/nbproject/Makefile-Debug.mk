@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/base/Body.o \
 	${OBJECTDIR}/src/goon/data/base/BodyUtils.o \
+	${OBJECTDIR}/src/goon/data/base/ColorBody.o \
 	${OBJECTDIR}/src/goon/data/base/RealBody.o \
 	${OBJECTDIR}/src/goon/data/base/TransMotion.o \
 	${OBJECTDIR}/src/goon/data/base/blob.o \
@@ -81,6 +82,11 @@ ${OBJECTDIR}/src/goon/data/base/BodyUtils.o: src/goon/data/base/BodyUtils.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
+
+${OBJECTDIR}/src/goon/data/base/ColorBody.o: src/goon/data/base/ColorBody.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/ColorBody.o src/goon/data/base/ColorBody.cpp
 
 ${OBJECTDIR}/src/goon/data/base/RealBody.o: src/goon/data/base/RealBody.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base

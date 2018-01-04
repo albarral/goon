@@ -19,10 +19,8 @@ private:
     int rows;
     int cols;
     cv::Mat map_nodes;               // map of nodes corresponding to each image pixel (row, col, type)
-    cv::Mat grid_local_rgb;          // matrix of nodes with local color info (rgb)
-    cv::Mat grid_data;                // matrix of nodes with other info (samples & updates)
-    cv::Rect grid_window;          // grid window equivalent to the exploration window     
-    cv::Vec3f mean_rgb;         // mean color of the grid   
+    cv::Mat gridColor;          // matrix of nodes with local color info (rgb)
+    cv::Mat gridData;                // matrix of nodes with other info (samples & updates)
     int sel_row;                     // row of selected node
     int sel_col;                      // column of selected column  
     ColorNode oNode;           // info of selected node
@@ -49,16 +47,15 @@ public:
     // Updates the region's local color adding a new sample to the grid.
     void updateLocalColor(const cv::Vec3b& rgb_color);
     
-    // Computes the grid's mean color inside the specified image window.
-    void computeMeanColor(cv::Rect& window);
-            
-    cv::Rect& getGridWindow() {return grid_window;}    
-    cv::Vec3f& getColorMean () {return mean_rgb;}    
-    cv::Mat& getLocalGrid() {return grid_local_rgb;}    
+    // computes the grid's mean color inside the specified window.
+    cv::Vec3f computeMeanColor(cv::Rect& window);
+    // compute the grid window associated to to the specified window
+    cv::Rect computeGridWindow(cv::Rect& window);
+    
+    cv::Mat& getColorGrid() {return gridColor;}           
+    cv::Mat getMassGrid();
+
     cv::Mat& getMaskSamples() {return mask_samples;}
-       
-    // extracts samples channel from grid_data
-    cv::Mat getSamplesGrid();
         
 private:
     // Notifies the neighbour nodes about a local color change.

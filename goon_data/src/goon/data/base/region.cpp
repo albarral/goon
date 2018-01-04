@@ -18,11 +18,10 @@ Region::Region ()
 }
 
 // copy constructor (needed for vectors)    
-Region::Region(const Region& oRegion) : Body(oRegion)       // base part constructor
+Region::Region(const Region& oRegion) : ColorBody(oRegion)       // base part constructor
 {
     ID = oRegion.ID;
     type = oRegion.type;
-    setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
     bmatched = oRegion.bmatched;
     seed = oRegion.seed;
@@ -31,41 +30,19 @@ Region::Region(const Region& oRegion) : Body(oRegion)       // base part constru
 // assignment operator
 Region& Region::operator=(const Region& oRegion)
 {
-    Body::operator=(oRegion); // base part assignment
+    ColorBody::operator=(oRegion); // base part assignment
 
     ID = oRegion.ID;
     type = oRegion.type;
-    setGrid(oRegion.grid);   // grid is cloned, not just assigned
     bmerge = oRegion.bmerge;
     bmatched = oRegion.bmatched;
     seed = oRegion.seed;
     return *this;    
 }
     
-// The given grid is cloned.
-void Region::setGrid(const cv::Mat& grid_samples)
-{
-    grid = grid_samples.clone();
-}
-
 bool Region::sortBySize(const Region& oRegion1, const Region& oRegion2) 
 {
     return (oRegion1.mass < oRegion2.mass);
-}
-
-void Region::createDummy()
-{
-    // red
-    cv::Vec3f color = {255.0, 0.0, 0.0};
-    // create rectangular region w x h
-    int w = 200;
-    int h = 100;    
-    cv::Mat mask = cv::Mat::ones(h, w, CV_8UC1);
-    cv::Rect rect = cv::Rect(0, 0, w,h);
-    
-    setRGB(color);
-    setMaskAndWindow(mask, rect);
-    setPos(w/2, h/2);
 }
 
 std::string Region::toString()
@@ -73,7 +50,6 @@ std::string Region::toString()
     std::string desc = "Region [ID = " + std::to_string(ID) +
             ", type = " + getTypeName() +
             ", mask = " + std::to_string(getMask().cols) + "x" + std::to_string(getMask().rows) +
-            ", grid = " + std::to_string(grid.cols) + "x" + std::to_string(grid.rows) +
             ", merge = " + (bmerge ? "1":"0") + 
             "]" + 
             "\n" + Blob::toString() + 

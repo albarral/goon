@@ -14,10 +14,10 @@ log4cxx::LoggerPtr VisionManager::logger(log4cxx::Logger::getLogger("goon.look")
 VisionManager::VisionManager() 
 {
     blaunched = false;    
-    workingCamera = goon::Grab::eCAM_WEBCAM;        
+//    workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    workingCamera = goon::Grab::eCAM_IPCAM;
 //    workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-//    workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
+    workingCamera = goon::Grab::eIMAGE_ORANGE1;
 }
 
 VisionManager::~VisionManager() 
@@ -50,7 +50,7 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
         // launch modules
         oGrab.on();
         oSee.on();    
-        oFocus.on();    
+        //oFocus.on();    // focus temporally disabled
         
         blaunched = true;    
     }

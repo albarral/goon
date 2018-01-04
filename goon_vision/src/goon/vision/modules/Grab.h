@@ -39,6 +39,8 @@ public:
         eIMAGE_BABOON,
         eIMAGE_FRUITS,
         eIMAGE_JLUIS,
+        eIMAGE_ORANGE1,
+        eIMAGE_ORANGE2,
         eOPTIONS_DIM
     };
 

@@ -56,13 +56,10 @@ void TestRegions::testMerge()
     Region oRegion1, oRegion2, oRegion3;
     oRegion1.setID(0);
     oRegion1.setMaskAndWindow(mask1, window1);
-    oRegion1.setGrid(grid);
     oRegion2.setID(1);
     oRegion2.setMaskAndWindow(mask2, window2);
-    oRegion2.setGrid(grid);
     oRegion3.setID(2);
     oRegion3.setMaskAndWindow(mask3, window3);
-    oRegion3.setGrid(grid);
 
     // compute blobs
     oRegion1.computeMass();

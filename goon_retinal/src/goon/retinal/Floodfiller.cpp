@@ -103,8 +103,8 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                 oSizeTrigger.update(num_pixels);
 
                 oExploration.computeWindow();   
-                oColorGrid.computeMeanColor(oExploration.getWindow());                     
-                oHSVEssence.setMainFromRGB(oColorGrid.getColorMean());                
+                cv::Vec3f meanRGB = oColorGrid.computeMeanColor(oExploration.getWindow());                     
+                oHSVEssence.setMainFromRGB(meanRGB);                
 
                 //oCentralColor.computeColorDeviation(oColorGrid.getLocalGrid(), oColorGrid.getGridWindow(), oColorGrid.getMaskSamples());                
                 //if (oCentralColor.typeChanged())
@@ -151,11 +151,6 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
     LOG4CXX_TRACE(logger, "floodfill end (" << num_pixels << " pixels)");
 }
 
-int Floodfiller::getRegionArea()
-{
-    return num_pixels;
-};    
-
 cv::Mat& Floodfiller::getRegionMask()
 {
     return oExploration.getRegionMask();   
@@ -166,15 +161,19 @@ cv::Rect& Floodfiller::getRegionWindow()
     return oExploration.getWindow();    
 }
     
-cv::Vec3f& Floodfiller::getRegionColor()
+cv::Mat Floodfiller::getMassGrid()
 {
-    oColorGrid.computeMeanColor(oExploration.getWindow());    
-    return (oColorGrid.getColorMean());	
+    return oColorGrid.getMassGrid();
 }
 
-cv::Mat Floodfiller::getRegionGrid()
+cv::Mat Floodfiller::getColorGrid()
 {
-    return oColorGrid.getSamplesGrid();    
+    return oColorGrid.getColorGrid();
+}
+
+cv::Rect Floodfiller::getGridWindow()
+{
+    return oColorGrid.computeGridWindow(oExploration.getWindow());
 }
 
 //void Floodfiller::showProgress()

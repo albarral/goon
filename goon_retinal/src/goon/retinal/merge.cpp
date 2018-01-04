@@ -55,7 +55,7 @@ void Merge::checkProximityMerge(Retina& oRetina)
 {
     cv::Rect window1;       // expanded window of region 1
     cv::Rect window2;       // expanded window of region 2
-    cv::Rect wintersection;          // intersection window
+    cv::Rect intersection;          // intersection window
     cv::Size2i expansion;
     float SQR_SAME = RGBColor::getSqrSameDist();
     
@@ -81,13 +81,13 @@ void Merge::checkProximityMerge(Retina& oRetina)
             // expand region2's window
             window2 = it_region2->getWindow() + expansion;
             // compute intersection of both windows
-            wintersection = window1 & window2;
+            intersection = window1 & window2;
 
             // if windows overlap
-            if (wintersection.width != 0  &&  wintersection.height != 0)
+            if (intersection.width != 0  &&  intersection.height != 0)
             {
                 // and region grids overlap ...
-                if (checkGridsOverlap(it_region1->getGrid(), it_region2->getGrid()))
+                if (checkGridsOverlap(it_region1->getMassGrid(), it_region2->getMassGrid()))
                 {
                     // and color is the same -> mark regions for merging
                     if (maty::Distance::getEuclidean3s(it_region1->getRGB(), it_region2->getRGB()) < SQR_SAME) 

@@ -9,13 +9,13 @@
 #include <string>
 #include "opencv2/core/core.hpp"
 
-#include "goon/data/base/Body.h"
+#include "goon/data/base/ColorBody.h"
 
 namespace goon 
 {
 // This class represents a region, the basic element in the retinal vision process.
-// It extends from Body.
-class Region : public Body
+// It extends from ColorBody.
+class Region : public ColorBody
 {
  public:
     enum eTypes
@@ -28,7 +28,6 @@ class Region : public Body
 private:
     int ID;
     int type;
-    cv::Mat grid;                    // grid used for merging purpose
     bool bmerge;                   // flag indicating that region is to be merged
     // for matching 
     bool bmatched;              // for ROI-Region matching
@@ -55,10 +54,6 @@ public:
     cv::Point& getSeed() {return seed;}
     void setSeed(cv::Point& seed_point) {seed = seed_point;}
     
-    cv::Mat& getGrid() {return grid;}
-    // sets the region's grid (cloned)
-    void setGrid (const cv::Mat& grid_samples);
-
     bool isSimple() {return (type==eREG_SIMPLE);};
     bool isMerged() {return (type==eREG_MERGED);};
     bool isCollection() {return (type==eREG_COLLECTION);};
@@ -69,9 +64,6 @@ public:
     // support function to sort regions by ID
     static bool sortBySize (const Region& oRegion1, const Region& oRegion2);    
         
-    // creates a dummy red rectangular region of size 200 x 100
-    void createDummy();
-
     // returns all region values in string form
     virtual std::string toString();    
     // returns short region description

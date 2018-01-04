@@ -61,8 +61,8 @@ void ColorGrid::resize (int img_w, int img_h)
 void ColorGrid::clear () 
 {
     // clear the grids
-    grid_local_rgb = cv::Mat::zeros(rows, cols, CV_32FC3);        // r, g, b
-    grid_data = cv::Mat::zeros(rows, cols, CV_16SC2);                 // samples, updates (specified in ColorNode.h)
+    gridColor = cv::Mat::zeros(rows, cols, CV_32FC3);        // r, g, b
+    gridData = cv::Mat::zeros(rows, cols, CV_16SC2);                 // samples, updates (specified in ColorNode.h)
     sel_row = sel_col = -1;
 }
 
@@ -77,7 +77,7 @@ ColorNode& ColorGrid::selectNode(cv::Point& point)
         sel_row = node[0]; 
         sel_col = node[1];
         
-        oNode.setInfo(node[2], grid_local_rgb.at<cv::Vec3f>(sel_row, sel_col), grid_data.at<cv::Vec2s>(sel_row, sel_col));
+        oNode.setInfo(node[2], gridColor.at<cv::Vec3f>(sel_row, sel_col), gridData.at<cv::Vec2s>(sel_row, sel_col));
 
         // if the node's sorround has changed, update its sorround color value
 //        if (oNode.getSorroundUpdates() != 0)
@@ -101,8 +101,8 @@ void ColorGrid::getLocalColor(cv::Vec3f& rgb_color)
     // check the node's neighbourhood 
     cv::Rect window = oNode.getSorroundWindow();
     window += cv::Point(sel_col, sel_row);
-    cv::Mat roi_local_color = grid_local_rgb(window);
-    cv::Mat roi_data = grid_data(window);        
+    cv::Mat roi_local_color = gridColor(window);
+    cv::Mat roi_data = gridData(window);        
          
     // walk the neighbourhood building the weighted average color
     for (int i=0; i<window.height; i++)
@@ -173,30 +173,34 @@ void ColorGrid::updateLocalColor (const cv::Vec3b& rgb_color)
 //}
 
 
-void ColorGrid::computeMeanColor(cv::Rect& window)
+cv::Vec3f ColorGrid::computeMeanColor(cv::Rect& window)
+{
+    cv::Rect gridWindow = computeGridWindow(window);
+    
+    cv::Mat gridColorROI = gridColor(gridWindow);
+    cv::Mat gridDataROI = gridData(gridWindow);
+
+    // We need to extract the local_samples channel from grid_data
+    cv::Mat gridMass(gridDataROI.rows, gridDataROI.cols, CV_16SC1);
+    cv::Mat out[] = {gridMass};
+    int from_to[] = {0,0};
+    cv::mixChannels (&gridDataROI, 1, out, 1, from_to, 1);
+    
+    // And convert it to a mask, in order to compute the mean
+    gridMass.convertTo(mask_samples, CV_8UC1);
+    cv::Scalar color = cv::mean(gridColorROI, mask_samples);
+    
+    cv::Vec3f rgbColor = cv::Vec3f(color[0], color[1], color[2]);
+    return rgbColor;
+}
+
+cv::Rect ColorGrid::computeGridWindow(cv::Rect& window)
 {
     // translate the image window to a grid window
     cv::Vec3b& node1 = map_nodes.at<cv::Vec3b>(window.y, window.x);
     cv::Vec3b& node2 = map_nodes.at<cv::Vec3b>(window.y + window.height - 1, window.x + window.width - 1);    
-    grid_window = cv::Rect(node1[1], node1[0], node2[1]-node1[1], node2[0]-node1[0]);    
-    
-    cv::Mat roi_local_color = grid_local_rgb(grid_window);
-    cv::Mat roi_data = grid_data(grid_window);
-
-    // We need to extract the local_samples channel from grid_data
-    cv::Mat mat_samples(roi_data.rows, roi_data.cols, CV_16SC1);
-    cv::Mat out[] = {mat_samples};
-    int from_to[] = {0,0};
-    mixChannels (&roi_data, 1, out, 1, from_to, 1);
-    
-    // And convert it to a mask, in order to compute the mean
-    mat_samples.convertTo(mask_samples, CV_8UC1);
-    cv::Scalar color = mean(roi_local_color, mask_samples);
-    
-    for (int i=0; i<3; i++)
-        mean_rgb[i] = color[i];    
+    return (cv::Rect(node1[1], node1[0], node2[1]-node1[1], node2[0]-node1[0]));        
 }
-
 
 // Checks the type of node depending on its position in the grid. 
 int ColorGrid::checkType(int row, int col)
@@ -247,10 +251,10 @@ int ColorGrid::checkType(int row, int col)
     return type;
 }
 
-cv::Mat ColorGrid::getSamplesGrid()
+cv::Mat ColorGrid::getMassGrid()
 {
     cv::Mat planes[2];
-    cv::split(grid_data, planes);  
+    cv::split(gridData, planes);  
     return planes[0];
 }
 }

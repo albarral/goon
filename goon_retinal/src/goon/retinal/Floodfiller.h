@@ -55,14 +55,13 @@ public:
     void floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_hsv);
     
     // get features of the extracted region
-    int getRegionArea();
+    int getRegionArea() {return num_pixels;};
     cv::Mat& getRegionMask();
     cv::Rect& getRegionWindow();
-    cv::Vec3f& getRegionColor();
-    
-    // gets region grid from color grid
-    cv::Mat getRegionGrid();
 
+    cv::Mat getMassGrid();
+    cv::Mat getColorGrid();    
+    cv::Rect getGridWindow();
     
 private:
     // shows the present state of the segmentation process in an image for debugging (segmented pixels, computed colors ...)  
