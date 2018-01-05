@@ -124,7 +124,7 @@ int Body::computeOverlap(Body& oBody)
 std::string Body::toString()
 {
     std::string desc = "Body [ window = (" + 
-            std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ")" + 
+            std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ") - " + 
             Blob::toString() + "]";
     return desc;
 }

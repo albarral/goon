@@ -9,32 +9,29 @@
 #include "opencv2/core/core.hpp"
 
 #include "goon/retinal/ColorNode.h"
+#include "goon/retinal/Grid.h"
 
 namespace goon
 {
-class ColorGrid
+class ColorGrid : public Grid
 {
 private:
-    int GRID_STEP;       // separation between grid nodes (in pixels)
-    int rows;
-    int cols;
-    cv::Mat map_nodes;               // map of nodes corresponding to each image pixel (row, col, type)
     cv::Mat gridColor;          // matrix of nodes with local color info (rgb)
     cv::Mat gridData;                // matrix of nodes with other info (samples & updates)
     int sel_row;                     // row of selected node
     int sel_col;                      // column of selected column  
-    ColorNode oNode;           // info of selected node
+    ColorNode oColorNode;           // info of selected node
     cv::Mat mask_samples;       // mask version of the samples channel in grid_data
     
 public:
 
     ColorGrid();
-    ~ColorGrid();
+    //~ColorGrid();
 
-    void setGridStep(int grid_step);    
-    // resizes the grid
-    void resize(int img_w, int img_h);    
-    
+    cv::Mat& getColorGrid() {return gridColor;}           
+    cv::Mat getMassGrid();
+    cv::Mat& getMaskSamples() {return mask_samples;}        
+
     // clears all grid nodes
     void clear();
 
@@ -48,21 +45,7 @@ public:
     void updateLocalColor(const cv::Vec3b& rgb_color);
     
     // computes the grid's mean color inside the specified window.
-    cv::Vec3f computeMeanColor(cv::Rect& window);
-    // compute the grid window associated to to the specified window
-    cv::Rect computeGridWindow(cv::Rect& window);
-    
-    cv::Mat& getColorGrid() {return gridColor;}           
-    cv::Mat getMassGrid();
-
-    cv::Mat& getMaskSamples() {return mask_samples;}
-        
-private:
-    // Notifies the neighbour nodes about a local color change.
-    // void notifyNeighbours();    
-        
-    // Checks the type of node depending on its position in the grid. 
-    int checkType(int row, int col);
+    cv::Vec3f computeMeanColor(cv::Rect& window);    
 };
 		  	    		  
 }  

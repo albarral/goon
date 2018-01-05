@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o \
 	${OBJECTDIR}/src/goon/retinal/Exploration.o \
 	${OBJECTDIR}/src/goon/retinal/Floodfiller.o \
+	${OBJECTDIR}/src/goon/retinal/Grid.o \
 	${OBJECTDIR}/src/goon/retinal/HSVEssence.o \
 	${OBJECTDIR}/src/goon/retinal/Segmenter.o \
 	${OBJECTDIR}/src/goon/retinal/merge.o \
@@ -95,6 +96,11 @@ ${OBJECTDIR}/src/goon/retinal/Floodfiller.o: src/goon/retinal/Floodfiller.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Floodfiller.o src/goon/retinal/Floodfiller.cpp
+
+${OBJECTDIR}/src/goon/retinal/Grid.o: src/goon/retinal/Grid.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Grid.o src/goon/retinal/Grid.cpp
 
 ${OBJECTDIR}/src/goon/retinal/HSVEssence.o: src/goon/retinal/HSVEssence.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal

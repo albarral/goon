@@ -36,12 +36,14 @@ Floodfiller::~Floodfiller()
 
 void Floodfiller::init(cv::Mat& mask_segmented)
 {
+    ConfigRetinal oConfigRetinal;
+    
     // initialize auxiliary classes
     int w = mask_segmented.cols;
     int h = mask_segmented.rows;
     oExploration.setForbiddenMask(mask_segmented);    
     oExploration.resize(w, h);        
-    oColorGrid.resize (w, h);
+    oColorGrid.setSize(w, h, oConfigRetinal.getGridStep());
 }
 
 // This function obtains homogeneous regions by expanding from an initial seed pixel to all connected pixels with similar color.

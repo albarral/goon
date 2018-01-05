@@ -4,6 +4,7 @@
  ***************************************************************************/
 
 #include "goon/retinal/ColorNode.h"
+#include "goon/retinal/Grid.h"
 
 namespace goon
 {
@@ -14,12 +15,15 @@ ColorNode::ColorNode ()
     psamples = 0;
     pupdates = 0;
     
-    // build list of sorround windows (one for each node type)        
+    // build list of sorround windows (one for each grid location)        
     cv::Rect window;        
-    for (int i=0; i<eTYP_DIM; i++)
+    for (int i=0; i<Grid::eLOC_DIM; i++)
     {
-        computeSorroundWindow(i, window);
-        vec_windows.push_back(window);
+        if (i != Grid::eLOC_OUT)
+        {
+            computeSorroundWindow(i, window);
+            vec_windows.push_back(window);
+        }
     }
 }
 
@@ -51,35 +55,35 @@ cv::Rect& ColorNode::getSorroundWindow()
 }
 
 
-void ColorNode::computeSorroundWindow(int itype, cv::Rect& window)
+void ColorNode::computeSorroundWindow(int gridLocation, cv::Rect& window)
 {
-    switch (itype)
+    switch (gridLocation)
     {
-        case eTYP_INT:
+        case Grid::eLOC_INTERNAL:
             window = cv::Rect(-1, -1, 3, 3);            
             break;
-        case eTYP_N:
+        case Grid::eLOC_N:
             window = cv::Rect(-1, 0, 3, 2);            
             break;
-        case eTYP_S:
+        case Grid::eLOC_S:
             window = cv::Rect(-1, -1, 3, 2);            
             break;
-        case eTYP_E:
+        case Grid::eLOC_E:
             window = cv::Rect(-1, -1, 2, 3);            
             break;
-        case eTYP_W:
+        case Grid::eLOC_W:
             window = cv::Rect(0, -1, 2, 3);            
             break;
-        case eTYP_NE:
+        case Grid::eLOC_NE:
             window = cv::Rect(-1, 0, 2, 2);            
             break;
-        case eTYP_NW:
+        case Grid::eLOC_NW:
             window = cv::Rect(0, 0, 2, 2);            
             break;
-        case eTYP_SE: 
+        case Grid::eLOC_SE: 
             window = cv::Rect(-1, -1, 2, 2);            
             break;
-        case eTYP_SW:
+        case Grid::eLOC_SW:
             window = cv::Rect(0, -1, 2, 2);            
             break;
     }                    

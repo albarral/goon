@@ -15,7 +15,7 @@ ConfigRetinal::ConfigRetinal()
     SEGMENTATION_NUM_SAMPLES = 2000;   // 2000 samples per iteration          
     SEGMENTATION_NUMTHEADS = 4;             // 4 threads for segmentation
     // color grid       
-    COLORGRID_STEP = 10;        // pixel size of nodes in color grid 
+    GRID_STEP = 10;        // pixel size of nodes in color grid 
     // floodfill
     FF_ESSENCE_UPDATE_CHANGE_FACTOR = 0.1;      // region's central color will be updated every 10% size increase (initially every 100 pixels)  
     FF_ESSENCE_UPDATE_MIN_CHANGE = 100;

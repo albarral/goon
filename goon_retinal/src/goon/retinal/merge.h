@@ -11,6 +11,8 @@
 #include <log4cxx/logger.h>
 
 #include <goon/data/retina.h>
+#include "goon/retinal/Grid.h"
+#include "goon/data/base/ColorBody.h"
 
 namespace goon
 {
@@ -21,10 +23,13 @@ private:
         int proximityGAP;                // maximum separation (pixels) between regions to allow them merging
         cv::Mat mat_proximity;       // matrix used to associate regions to be merged   
         std::set<int> setCollectionRegions;   // set of regions to form a collection (automatically avoids duplications)
+        Grid oGrid;                      // class for handling body grids
 
 public:
-    Merge ();
-    ~Merge ();
+    Merge();
+    ~Merge();
+
+    void init(int img_w, int img_h);
 
     // change of parameters
     void setGap(int value);
@@ -40,6 +45,9 @@ private:
     // Checks whether two region grids overlap or not.
     bool checkGridsOverlap(cv::Mat& mat_grid1, cv::Mat& mat_grid2);
 
+    // checks whether two color bodies are mergeable
+    bool checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& window);
+    
     // This function merges similar nearby regions into new regions.
     // Merged regions become subregions and new regions are collections.
     int mergeRegions(Retina& oRetina);

@@ -21,7 +21,7 @@ private:
     int SEGMENTATION_NUM_SAMPLES;    // number of seeds used to extract regions
     int SEGMENTATION_NUMTHEADS;         // number of threads used for segmentation
     // color grid 
-    int COLORGRID_STEP;        // pixel size of nodes in color grid 
+    int GRID_STEP;        // size of grid nodes (in pixels)
     // floodfill
     float FF_ESSENCE_UPDATE_CHANGE_FACTOR;  // size increase (factor) that triggers a color essence update (in floodfill processes)
     int FF_ESSENCE_UPDATE_MIN_CHANGE;           // minimum size increase (absolute) that triggers a color essence update (in floodfill processes)
@@ -38,8 +38,8 @@ public:
     float getSegmentationMinDetail() {return SEGMENTATION_MIN_DETAIL;}
     int getSegmentationNumSamples() {return SEGMENTATION_NUM_SAMPLES;}
     int getSegmentationNumThreads() {return SEGMENTATION_NUMTHEADS;}
-    // color grid 
-    int getColorGridStep() {return COLORGRID_STEP;}
+    // grids
+    int getGridStep() {return GRID_STEP;}
     // floodfiller
     float getColorEssenceUpdateChangeFactor() {return FF_ESSENCE_UPDATE_CHANGE_FACTOR;}
     float getColorEssenceUpdateMinChange() {return FF_ESSENCE_UPDATE_MIN_CHANGE;}    

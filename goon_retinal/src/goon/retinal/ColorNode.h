@@ -20,23 +20,7 @@ public:
         eDAT_SAMPLES,
         eDAT_UPDATES,
     };
-
-    // Node type due to its position in the grid 
-    // (1 internal, 4 side borders and 4 corners)
-    enum eType
-    {
-         eTYP_INT,
-         eTYP_N, 
-         eTYP_S, 
-         eTYP_E, 
-         eTYP_W, 
-         eTYP_NE, 
-         eTYP_NW, 
-         eTYP_SE, 
-         eTYP_SW, 
-         eTYP_DIM,
-    };	
-
+    
 private:
     int type;                         // type of node  
     cv::Vec3f* pcolor;           // (pointer to) node's local color

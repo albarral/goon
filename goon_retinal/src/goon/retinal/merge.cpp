@@ -30,21 +30,24 @@ Merge::~Merge()
 {
 }
 
+void Merge::init(int img_w, int img_h)
+{        
+    ConfigRetinal oConfigRetinal;
+    oGrid.setSize(img_w, img_h, oConfigRetinal.getGridStep());    
+}
 
 // This function merges all adjacent regions with similar color.
 int Merge::doMerge(Retina& oRetina)
 {
-    int collections;
-	
     // check which regions can be merged
     checkProximityMerge(oRetina);
 
     // Merge all mergeable regions by proximity
-    collections = mergeRegions(oRetina);
+    int collections = mergeRegions(oRetina);
 
     LOG4CXX_DEBUG(logger, "collections = " << collections);
 
-    return(collections);
+    return collections;
 }
 					
 
@@ -57,7 +60,6 @@ void Merge::checkProximityMerge(Retina& oRetina)
     cv::Rect window2;       // expanded window of region 2
     cv::Rect intersection;          // intersection window
     cv::Size2i expansion;
-    float SQR_SAME = RGBColor::getSqrSameDist();
     
     expansion.width = expansion.height = proximityGAP;    
     
@@ -86,20 +88,32 @@ void Merge::checkProximityMerge(Retina& oRetina)
             // if windows overlap
             if (intersection.width != 0  &&  intersection.height != 0)
             {
-                // and region grids overlap ...
-                if (checkGridsOverlap(it_region1->getMassGrid(), it_region2->getMassGrid()))
+                LOG4CXX_DEBUG(logger, "check regions " << it_region1->getID());
+                // if bodies are mergeable
+                if (checkMergeableBodies(*it_region1, *it_region2, intersection))
                 {
-                    // and color is the same -> mark regions for merging
-                    if (maty::Distance::getEuclidean3s(it_region1->getRGB(), it_region2->getRGB()) < SQR_SAME) 
-                    {
-                        it_region1->setMerge(true);
-                        it_region2->setMerge(true);
+                    it_region1->setMerge(true);
+                    it_region2->setMerge(true);
+
+                    // make a cross in the proximity matrix (with symmetry)
+                    mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
+                    mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;                    
+                }
                         
-                        // make a cross in the proximity matrix (with symmetry)
-                        mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
-                        mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;
-                    }
-                }			
+                // and region grids overlap ...
+//                if (checkGridsOverlap(it_region1->getMassGrid(), it_region2->getMassGrid()))
+//                {
+//                    // and color is the same -> mark regions for merging
+//                    if (maty::Distance::getEuclidean3s(it_region1->getRGB(), it_region2->getRGB()) < SQR_SAME) 
+//                    {
+//                        it_region1->setMerge(true);
+//                        it_region2->setMerge(true);
+//                        
+//                        // make a cross in the proximity matrix (with symmetry)
+//                        mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
+//                        mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;
+//                    }
+//                }			
             } // end if		
 
             it_region2++;
@@ -138,6 +152,41 @@ bool Merge::checkGridsOverlap(cv::Mat& mat_grid1, cv::Mat& mat_grid2)
     return (boverlap);
 }
 
+
+bool Merge::checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& window)
+{
+    // get grid intersection window
+    cv::Rect gridWindow = oGrid.computeGridWindow(window);
+    
+    // body1 grids   
+    cv::Mat massGrid1 = oBody1.getMassGrid()(gridWindow);
+    cv::Mat rgbGrid1 = oBody1.getRGBGrid()(gridWindow);
+    // body2 grids
+    cv::Mat massGrid2 = oBody2.getMassGrid()(gridWindow);
+    cv::Mat rgbGrid2 = oBody2.getRGBGrid()(gridWindow);
+
+    float SQR_SAME = RGBColor::getSqrSameDist();
+    bool bmerge = false;
+    // checks node by node ...
+    for (int i=0; i<gridWindow.height; i++)
+    {
+        for (int j=0; j<gridWindow.width; j++)
+        {
+            // if nodes overlap
+            if (massGrid1.at<ushort>(i, j) != 0 && massGrid2.at<ushort>(i, j) != 0)
+            {                  
+                // and have same color                 
+                bmerge = maty::Distance::getEuclidean3s(rgbGrid1.at<cv::Vec3f>(i, j), rgbGrid2.at<cv::Vec3f>(i, j)) < SQR_SAME;
+                if (bmerge)
+                    break;
+            }                        
+        }
+        if (bmerge)
+            break;        
+    }
+
+    return bmerge;
+}
 
 // This function merges similar nearby regions into new regions. 
 // Merged regions become subregions and new regions are collections.

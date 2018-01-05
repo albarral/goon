@@ -52,7 +52,6 @@ std::string Region::toString()
             ", mask = " + std::to_string(getMask().cols) + "x" + std::to_string(getMask().rows) +
             ", merge = " + (bmerge ? "1":"0") + 
             "]" + 
-            "\n" + Blob::toString() + 
             "\n" + Body::toString();
     return desc;
 }

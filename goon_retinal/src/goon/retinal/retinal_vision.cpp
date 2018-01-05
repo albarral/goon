@@ -32,6 +32,7 @@ void RetinalVision::init(Retina& oRetina, int img_w, int img_h)
 {
     pRetina = &oRetina;
     oSegmentation4.init(oRetina, img_w, img_h);
+    oMerge.init(img_w, img_h);
 }
 
 // This function changes main parameters of the retinal vision system.
@@ -68,7 +69,7 @@ void RetinalVision::update (cv::Mat& image_cam)
 
 void RetinalVision::computeCovariances()
 {    
-    LOG4CXX_DEBUG(logger, "compute shapes ...");
+    LOG4CXX_TRACE(logger, "computeCovariances - init");
 
     // walk the list of final regions
     for (Region& oRegion : pRetina->getListRegions())
@@ -77,6 +78,8 @@ void RetinalVision::computeCovariances()
         
         Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
     }    
+    
+    LOG4CXX_TRACE(logger, "computeCovariances - end");
 }
 
 void RetinalVision::describeRegions()
