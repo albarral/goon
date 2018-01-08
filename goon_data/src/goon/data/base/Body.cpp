@@ -129,5 +129,13 @@ std::string Body::toString()
     return desc;
 }
 
+std::string Body::shortDesc()
+{
+    std::string desc = "Body [ window = (" + 
+            std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ") - " + 
+            Blob::shortDesc() + "]";
+    return desc;
+}
+
 }
 							 
