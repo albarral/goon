@@ -26,8 +26,6 @@
           <itemPath>src/goon/retinal/Floodfiller.h</itemPath>
           <itemPath>src/goon/retinal/Grid.cpp</itemPath>
           <itemPath>src/goon/retinal/Grid.h</itemPath>
-          <itemPath>src/goon/retinal/HSVEssence.cpp</itemPath>
-          <itemPath>src/goon/retinal/HSVEssence.h</itemPath>
           <itemPath>src/goon/retinal/Segmenter.cpp</itemPath>
           <itemPath>src/goon/retinal/Segmenter.h</itemPath>
           <itemPath>src/goon/retinal/merge.cpp</itemPath>
@@ -155,10 +153,6 @@
       </item>
       <item path="src/goon/retinal/Grid.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/retinal/HSVEssence.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/HSVEssence.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/retinal/Segmenter.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/Segmenter.h" ex="false" tool="3" flavor2="0">
@@ -222,10 +216,6 @@
       <item path="src/goon/retinal/Grid.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/Grid.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/HSVEssence.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/HSVEssence.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/Segmenter.cpp" ex="false" tool="1" flavor2="0">
       </item>

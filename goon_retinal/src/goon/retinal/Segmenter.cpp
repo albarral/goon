@@ -161,11 +161,9 @@ void Segmenter::extractRegions ()
                 oRegion.setMaskAndWindow(oFloodfiller.getRegionMask(), oFloodfiller.getRegionWindow());
                 oRegion.setMassGrid(oFloodfiller.getMassGrid());
                 oRegion.setRGBGrid(oFloodfiller.getColorGrid());
-                cv::Rect gridWindow = oFloodfiller.getGridWindow();
-                oRegion.setGridWindow(gridWindow);
-                cv::Vec3f meanColor = oRegion.computeMeanColor();
-                oRegion.setRGB(meanColor);	
-                RGBColor::toHSV(meanColor, oRegion.getHSV());
+                oRegion.setGridWindow(oFloodfiller.getGridWindow());
+                oRegion.setRGB(oRegion.computeMeanColor());	
+                oRegion.setHSV(RGBColor::toHSV(oRegion.getRGB()));
                 oRegion.setSeed(*it_seed);
 
                 // and add it to the retina (ID assigned there)

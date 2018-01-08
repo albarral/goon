@@ -8,7 +8,6 @@
 #include "goon/retinal/Floodfiller.h"
 #include "goon/retinal/ConfigRetinal.h"
 #include <goon/features/color/rgb_color.h>
-#include <maty/math/distance.h>
 
 using namespace log4cxx;
 
@@ -22,11 +21,10 @@ Floodfiller::Floodfiller ()
     ConfigRetinal oConfigRetinal;
 
     // trigger used to update the region's central color 
-    oSizeTrigger.setParams(oConfigRetinal.getColorEssenceUpdateChangeFactor(), oConfigRetinal.getColorEssenceUpdateMinChange());  
-    SAME_RGB_LOCAL = RGBColor::getSqrSameDist();
-    SAME_HSV_GLOBAL = oConfigRetinal.getColorEssenceHSVSimilarity();
-
-    //bdebug = false;
+    oSizeTrigger.setParams(oConfigRetinal.getColorEssenceUpdateChangeFactor(), oConfigRetinal.getColorEssenceUpdateMinChange());          
+    // same similarity values as in retinal merge
+    oColorSimilarity.setRGBSimilarity(RGBColor::getSqrSameDist());
+    oColorSimilarity.setHSVSimilarity(oConfigRetinal.getColorEssenceHSVSimilarity());
 }
 
 // destructor
@@ -105,8 +103,9 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                 oSizeTrigger.update(num_pixels);
 
                 oExploration.computeWindow();   
-                cv::Vec3f meanRGB = oColorGrid.computeMeanColor(oExploration.getWindow());                     
-                oHSVEssence.setMainFromRGB(meanRGB);                
+                cv::Vec3f rgbColor = oColorGrid.computeMeanColor(oExploration.getWindow());
+                cv::Vec3f hsvColor = RGBColor::toHSV(rgbColor);
+                oHSVEssence.update(hsvColor);                
 
                 //oCentralColor.computeColorDeviation(oColorGrid.getLocalGrid(), oColorGrid.getGridWindow(), oColorGrid.getMaskSamples());                
                 //if (oCentralColor.typeChanged())
@@ -122,8 +121,7 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                     oExploration.getPixelHSV(pixel_hsv);
                                     
                     // if pixel's color is similar to local color and similar to central color -> include it in the region
-                    if ((maty::Distance::getEuclidean3s(local_rgb, pixel_rgb) < SAME_RGB_LOCAL) 
-                            && oHSVEssence.compare(pixel_hsv) < SAME_HSV_GLOBAL)
+                    if (oColorSimilarity.checkSameColor(local_rgb, pixel_rgb, oHSVEssence, pixel_hsv))
                     {
                         num_pixels++;
 

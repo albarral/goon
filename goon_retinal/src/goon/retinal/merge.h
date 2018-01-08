@@ -13,6 +13,7 @@
 #include <goon/data/retina.h>
 #include "goon/retinal/Grid.h"
 #include "goon/data/base/ColorBody.h"
+#include "goon/features/color/ColorSimilarity.h"
 
 namespace goon
 {
@@ -24,6 +25,7 @@ private:
         cv::Mat mat_proximity;       // matrix used to associate regions to be merged   
         std::set<int> setCollectionRegions;   // set of regions to form a collection (automatically avoids duplications)
         Grid oGrid;                      // class for handling body grids
+        ColorSimilarity oColorSimilarity;
 
 public:
     Merge();
@@ -41,9 +43,6 @@ private:
 
     // Checks if there are nearby regions with similar color that can be merged.
     void checkProximityMerge(Retina& oRetina);
-
-    // Checks whether two region grids overlap or not.
-    bool checkGridsOverlap(cv::Mat& mat_grid1, cv::Mat& mat_grid2);
 
     // checks whether two color bodies are mergeable
     bool checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& window);

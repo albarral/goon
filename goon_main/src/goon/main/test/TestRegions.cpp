@@ -72,11 +72,11 @@ void TestRegions::testMerge()
     // set colors
     cv::Vec3f redColor = {255, 0, 0};
     oRegion1.setRGB(redColor);
-    RGBColor::toHSV(oRegion1.getRGB(), oRegion1.getHSV());
+    oRegion1.setHSV(RGBColor::toHSV(oRegion1.getRGB()));
     oRegion2.setRGB(redColor);
-    RGBColor::toHSV(oRegion2.getRGB(), oRegion2.getHSV());
+    oRegion2.setHSV(RGBColor::toHSV(oRegion2.getRGB()));
     oRegion3.setRGB(redColor);
-    RGBColor::toHSV(oRegion3.getRGB(), oRegion3.getHSV());
+    oRegion3.setHSV(RGBColor::toHSV(oRegion3.getRGB()));
                 
     oRetina.addRegion(oRegion1);
     oRetina.addRegion(oRegion2);

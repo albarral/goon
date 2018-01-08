@@ -56,6 +56,9 @@ void RetinalVision::update (cv::Mat& image_cam)
     cv::cvtColor(image_cam, image_hsv, CV_BGR2HSV);
 
     oSegmentation4.extractRegions(image_cam, image_hsv);
+    
+    // show retina description
+    //LOG4CXX_DEBUG(logger, pRetina->shortDesc());
 
     oMerge.doMerge(*pRetina);
 

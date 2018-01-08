@@ -11,8 +11,9 @@
 #include <log4cxx/logger.h>
 
 #include "goon/retinal/Exploration.h"
-#include "goon/retinal/ColorGrid.h"
-#include "goon/retinal/HSVEssence.h"
+#include "goon/retinal/ColorGrid.h"   
+#include "goon/features/color/ColorSimilarity.h"
+#include "goon/features/color/HSVEssence.h"
 #include "maty/math/Trigger.h"
 
 // This class extracts a color homogenous region from an image beginning with a single seed pixel.
@@ -32,15 +33,10 @@ private:
     Exploration oExploration;   // class for image exploration (owns mask_explored and mask_region)       
     ColorGrid oColorGrid;        // class for handling the region's local color
     HSVEssence oHSVEssence; // class for handling the region's central color
+    ColorSimilarity oColorSimilarity;
     maty::Trigger oSizeTrigger;
     std::deque<cv::Point> deq_floodfill;  // list of pixels to which the region may expand (starts with only the seed)
     int num_pixels;
-    float SAME_RGB_LOCAL;       // required RGB similarity vs local color
-    float SAME_HSV_GLOBAL;     // required HSV similarity vs global color 
-
-    // for debug
-    //bool bdebug;
-    //SDebug oDebug;    
 
 public:
     Floodfiller();
