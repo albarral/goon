@@ -71,9 +71,15 @@ cv::Vec3b& Grid::getNode4Point(cv::Point& point)
 
 cv::Rect Grid::computeGridWindow(cv::Rect& window)
 {
+    // check & correct window limits for safe grid computation
+    if (window.x + window.width >= map_nodes.cols)
+        window.width = map_nodes.cols - window.x - 1;
+    if (window.y + window.height >= map_nodes.rows)
+        window.height = map_nodes.rows - window.y - 1;
+    
     // translate the image window to a grid window
     cv::Vec3b& node1 = map_nodes.at<cv::Vec3b>(window.y, window.x);
-    cv::Vec3b& node2 = map_nodes.at<cv::Vec3b>(window.y + window.height - 1, window.x + window.width - 1);    
+    cv::Vec3b& node2 = map_nodes.at<cv::Vec3b>(window.y + window.height, window.x + window.width);    
     return (cv::Rect(node1[1], node1[0], node2[1]-node1[1], node2[0]-node1[0]));        
 }
 
