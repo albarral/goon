@@ -8,6 +8,7 @@
 
 #include <mutex>
 #include <list>
+#include <string>
 
 #include "goon/data/base/region.h"
 
@@ -45,6 +46,12 @@ public:
                 
         // returns the region with the specified ID
         Region& getRegion (int ID);         
+        
+        // returns all regions values in string form
+        std::string toString();    
+        // returns all regions values in short form
+        std::string shortDesc();    
+
 };
 
 }

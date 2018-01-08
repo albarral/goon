@@ -22,7 +22,7 @@ void Blob::merge(Blob& oBlob2)
     Shape::mergeEllipses (pos, covs, oBlob2.pos, oBlob2.covs, mass, oBlob2.mass);
     
     RGBColor::mergeValues(rgb_color, oBlob2.rgb_color, mass, oBlob2.mass);            
-    RGBColor::toHSV (rgb_color, hsv_color);
+    hsv_color = RGBColor::toHSV (rgb_color);
 
     mass += oBlob2.mass;
 }
@@ -33,8 +33,14 @@ std::string Blob::toString()
             ", pos = (" + std::to_string(pos[0]) + "," + std::to_string(pos[1]) + ")" +
             ", covs = (" + std::to_string((int)covs[0]) + "," + std::to_string((int)covs[1]) + "," + std::to_string((int)covs[2]) + ")" +
             ", rgb = (" + std::to_string((int)rgb_color[0]) + "," + std::to_string((int)rgb_color[1]) + "," + std::to_string((int)rgb_color[2]) + ")" +
-            ", hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ")" +
-            "]";
+            ", hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ")]";
+    return desc;
+}
+
+std::string Blob::shortDesc()
+{
+    std::string desc = "Blob [mass = " + std::to_string(mass) +
+            ", hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ")]";
     return desc;
 }
 }

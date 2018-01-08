@@ -35,13 +35,15 @@ public:
     void setPos(int x, int y) {pos[0] = x; pos[1] = y;};
     // (xx, yy, xy)
     void setCovariances(float covx, float covy, float covxy) {covs[0] = covx; covs[1] = covy; covs[2] = covxy;};
-    void setRGB(cv::Vec3f& color) {rgb_color = color;};
-    void setHSV(cv::Vec3f& color) {hsv_color = color;};
+    void setRGB(cv::Vec3f color) {rgb_color = color;};
+    void setHSV(cv::Vec3f color) {hsv_color = color;};
    	        
     // merges with another blob
     virtual void merge(Blob& oBlob2);
+
     // returns all blob values in string form
     virtual std::string toString();
+    virtual std::string shortDesc();    
  }; 
 }
 

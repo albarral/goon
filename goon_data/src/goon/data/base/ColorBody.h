@@ -35,7 +35,7 @@ namespace goon
     // sets the color grid (cloning the input)
     void setRGBGrid (const cv::Mat& grid);
     // sets the grid window
-    void setGridWindow(cv::Rect& window) {gridWindow = window;};    
+    void setGridWindow(cv::Rect window) {gridWindow = window;};    
 
     // copy constructor 
     ColorBody(const ColorBody& oColorBody);  
@@ -46,6 +46,9 @@ namespace goon
     virtual void merge(ColorBody& oColorBody);
     // computes the body mean rgb color (mean of all color nodes)
     cv::Vec3f computeMeanColor();    
+    
+    virtual std::string toString();
+    virtual std::string shortDesc();    
 };  
 
 }  

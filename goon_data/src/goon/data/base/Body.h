@@ -50,7 +50,7 @@ namespace goon
     int computeOverlap(Body& oBody);
     
     virtual std::string toString();
-         
+    virtual std::string shortDesc();             
 };  
 
 }  

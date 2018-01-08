@@ -91,5 +91,21 @@ void ColorBody::merge(ColorBody& oColorBody)
     rgbGridROI = 0.5 * rgbGridROI;
 }
 
+std::string ColorBody::toString()
+{
+    std::string desc = "ColorBody [ grid = (" + 
+            std::to_string(gridWindow.x) + "," + std::to_string(gridWindow.y) + "," + std::to_string(gridWindow.width) + "," + std::to_string(gridWindow.height) + ") - " + 
+            Body::toString() + "]";
+    return desc;
+}
+
+std::string ColorBody::shortDesc()
+{
+    std::string desc = "ColorBody [ grid = (" + 
+            std::to_string(gridWindow.x) + "," + std::to_string(gridWindow.y) + "," + std::to_string(gridWindow.width) + "," + std::to_string(gridWindow.height) + ") - " + 
+            Body::shortDesc() + "]";
+    return desc;
+}
+
 }
 							 

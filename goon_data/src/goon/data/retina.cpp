@@ -82,4 +82,31 @@ Region& Retina::getRegion(int ID)
     return *it_region;
 }
 
+std::string Retina::toString()
+{
+    std::string desc = "Retina:\n";
+    std::list<Region>::iterator it_region = listRegions.begin();
+    // remove merged regions from list
+    while (it_region != listRegions.end())
+    {            
+        desc += it_region->toString() + "\n";
+        it_region++;
+    }
+
+    return desc;
+}
+
+std::string Retina::shortDesc()
+{
+    std::string desc = "Retina:\n";
+    std::list<Region>::iterator it_region = listRegions.begin();
+    // remove merged regions from list
+    while (it_region != listRegions.end())
+    {            
+        desc += it_region->shortDesc() + "\n";
+        it_region++;
+    }
+
+    return desc;
+}
 }
