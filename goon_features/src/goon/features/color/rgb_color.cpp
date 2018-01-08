@@ -57,44 +57,46 @@ void RGBColor::mergeValues (cv::Vec3f& color_A, cv::Vec3f& color_B, int q1, int 
 
 
 // This function converts a color value from RGB to HSV
-void RGBColor::toHSV (cv::Vec3f& rgb_color, cv::Vec3f& hsv_color)
+cv::Vec3f RGBColor::toHSV (cv::Vec3f& rgbColor)
 {
+    cv::Vec3f hsvColor;
     float min, max, delta;
 
-    min = fmin( rgb_color[0], rgb_color[1]);
-    min = fmin( min, rgb_color[2]);
-    max = fmax( rgb_color[0], rgb_color[1]);
-    max = fmax( max, rgb_color[2]);
+    min = fmin( rgbColor[0], rgbColor[1]);
+    min = fmin( min, rgbColor[2]);
+    max = fmax( rgbColor[0], rgbColor[1]);
+    max = fmax( max, rgbColor[2]);
 
-    hsv_color[2] = max;	
+    hsvColor[2] = max;	
 
     if (max == 0)
     {
-            hsv_color[0] = 0;
-            hsv_color[1] = 0;
+            hsvColor[0] = 0;
+            hsvColor[1] = 0;
     }
     else
     {
         delta = max - min;
-        hsv_color[1] = 255 * delta / max;  
+        hsvColor[1] = 255 * delta / max;  
 
         if (delta == 0)
         {
-                hsv_color[0] = 0;
+                hsvColor[0] = 0;
         }
         else
         {
-                if( rgb_color[0] == max )
-                        hsv_color[0] = 60 * (rgb_color[1] - rgb_color[2]) / delta;	// between yellow & magenta
-                else if( rgb_color[1] == max )
-                        hsv_color[0] = 60 * (2 + (rgb_color[2] - rgb_color[0]) / delta);	// between cyan & yellow
+                if( rgbColor[0] == max )
+                        hsvColor[0] = 60 * (rgbColor[1] - rgbColor[2]) / delta;	// between yellow & magenta
+                else if( rgbColor[1] == max )
+                        hsvColor[0] = 60 * (2 + (rgbColor[2] - rgbColor[0]) / delta);	// between cyan & yellow
                 else
-                        hsv_color[0] = 60 * (4 + (rgb_color[0] - rgb_color[1]) / delta);	// between magenta & cyan
+                        hsvColor[0] = 60 * (4 + (rgbColor[0] - rgbColor[1]) / delta);	// between magenta & cyan
 
-                if( hsv_color[0] < 0 )
-                        hsv_color[0] += 360;
+                if( hsvColor[0] < 0 )
+                        hsvColor[0] += 360;
         }		
     }		
+    return hsvColor;
 }
 
 

@@ -1,5 +1,5 @@
-#ifndef __GOON_UTILS_HSV_COLOR_H
-#define __GOON_UTILS_HSV_COLOR_H
+#ifndef __GOON_FEATURES_HSV_COLOR_H
+#define __GOON_FEATURES_HSV_COLOR_H
 
 /***************************************************************************
  *   Copyright (C) 2010 by Migtron Robotics   *

@@ -36,6 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Time.o \
+	${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o \
+	${OBJECTDIR}/src/goon/features/color/HSVEssence.o \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
 	${OBJECTDIR}/src/goon/features/color/rgb_color.o \
 	${OBJECTDIR}/src/goon/features/shape/shape.o
@@ -69,6 +71,16 @@ ${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
+
+${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o src/goon/features/color/ColorSimilarity.cpp
+
+${OBJECTDIR}/src/goon/features/color/HSVEssence.o: src/goon/features/color/HSVEssence.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/HSVEssence.o src/goon/features/color/HSVEssence.cpp
 
 ${OBJECTDIR}/src/goon/features/color/hsv_color.o: src/goon/features/color/hsv_color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color

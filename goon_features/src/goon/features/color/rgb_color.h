@@ -1,5 +1,5 @@
-#ifndef __GOON_UTILS_RGB_COLOR_H
-#define __GOON_UTILS_RGB_COLOR_H
+#ifndef __GOON_FEATURES_RGB_COLOR_H
+#define __GOON_FEATURES_RGB_COLOR_H
 
 /***************************************************************************
  *   Copyright (C) 2010 by Migtron Robotics   *
@@ -36,7 +36,7 @@ public:
     // This function merges two RGB colors in the specified quantities. The result is returned as a new color_A.
 
     // Transform color from RGB to HSV space
-    static void toHSV (cv::Vec3f& rgb_color, cv::Vec3f& hsv_color);
+    static cv::Vec3f toHSV(cv::Vec3f& rgb_color);
 
     static float getIntensity (float* rgb_color);
     // This function gets the grayscale intensity of a given RGB color.

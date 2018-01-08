@@ -36,6 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Time.o \
+	${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o \
+	${OBJECTDIR}/src/goon/features/color/HSVEssence.o \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
 	${OBJECTDIR}/src/goon/features/color/rgb_color.o \
 	${OBJECTDIR}/src/goon/features/shape/shape.o
@@ -55,11 +57,13 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -68,25 +72,36 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${O
 ${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
+
+${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o src/goon/features/color/ColorSimilarity.cpp
+
+${OBJECTDIR}/src/goon/features/color/HSVEssence.o: src/goon/features/color/HSVEssence.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/HSVEssence.o src/goon/features/color/HSVEssence.cpp
 
 ${OBJECTDIR}/src/goon/features/color/hsv_color.o: src/goon/features/color/hsv_color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/hsv_color.o src/goon/features/color/hsv_color.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/hsv_color.o src/goon/features/color/hsv_color.cpp
 
 ${OBJECTDIR}/src/goon/features/color/rgb_color.o: src/goon/features/color/rgb_color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/rgb_color.o src/goon/features/color/rgb_color.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/rgb_color.o src/goon/features/color/rgb_color.cpp
 
 ${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/shape
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
 
 # Subprojects
 .build-subprojects:
+	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -95,6 +110,7 @@ ${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp
 
 # Subprojects
 .clean-subprojects:
+	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
