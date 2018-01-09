@@ -145,7 +145,7 @@ void Segmenter::extractRegions ()
     while (numSeedsUsed < NUM_SAMPLES)
     {        
         // if seed not segmented, expand from it a new region 		
-        if (mask_segmented2.at<ushort>(it_seed->y, it_seed->x) == 0)
+        if (mask_segmented2.at<uchar>(it_seed->y, it_seed->x) == 0)
         {		
             oFloodfiller.floodFill(*it_seed, imageCam, imageHSV);    
             
