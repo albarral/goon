@@ -59,8 +59,8 @@ int Merge::doMerge(Retina& oRetina)
 // This function checks if there are nearby regions with similar color that can be merged. 
 void Merge::checkProximityMerge(Retina& oRetina)
 {
-    cv::Rect window1;       // expanded window of region 1
-    cv::Rect window2;       // expanded window of region 2
+    cv::Rect expWindow1;       // expanded window of region 1
+    cv::Rect expWindow2;       // expanded window of region 2
     cv::Rect intersection;          // intersection window
     cv::Size2i expansion;
     
@@ -77,7 +77,7 @@ void Merge::checkProximityMerge(Retina& oRetina)
     {
         LOG4CXX_DEBUG(logger, "check region " << it_region1->getID());
         // expand region1's window
-        window1 = it_region1->getWindow() + expansion;
+        expWindow1 = it_region1->getWindow() + expansion;
 
         // check against the rest of regions
         std::list<Region>::iterator it_region2 = it_region1;
@@ -85,9 +85,9 @@ void Merge::checkProximityMerge(Retina& oRetina)
         while (it_region2 != list_end)
         {		
             // expand region2's window
-            window2 = it_region2->getWindow() + expansion;
+            expWindow2 = it_region2->getWindow() + expansion;
             // compute intersection of both windows
-            intersection = window1 & window2;
+            intersection = expWindow1 & expWindow2;
 
             // if windows overlap
             if (intersection.width != 0  &&  intersection.height != 0)
@@ -113,10 +113,17 @@ void Merge::checkProximityMerge(Retina& oRetina)
 }
 
 
-bool Merge::checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& window)
+bool Merge::checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& intersectionWindow)
 {
+    // if bodies don't overlap, they can't be merged
+    int overlap = oBody1.computeOverlap(oBody2);
+    if (overlap == 0)
+        return false;
+
+    LOG4CXX_DEBUG(logger, "overlap = " << overlap);
+
     // get grid intersection window
-    cv::Rect gridWindow = oGrid.computeGridWindow(window);
+    cv::Rect gridWindow = oGrid.computeGridWindow(intersectionWindow);
     
     // body1 grids   
     cv::Mat massGrid1 = oBody1.getMassGrid()(gridWindow);
