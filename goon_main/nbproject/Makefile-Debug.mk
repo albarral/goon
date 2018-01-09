@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/main/GoonControl.o \
 	${OBJECTDIR}/src/goon/main/main.o \
+	${OBJECTDIR}/src/goon/main/test/Test.o \
 	${OBJECTDIR}/src/goon/main/test/TestBodies.o \
 	${OBJECTDIR}/src/goon/main/test/TestRegions.o
 
@@ -98,22 +99,27 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/goon: ${OBJECTFILES}
 ${OBJECTDIR}/src/goon/main/GoonControl.o: src/goon/main/GoonControl.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/GoonControl.o src/goon/main/GoonControl.cpp
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/GoonControl.o src/goon/main/GoonControl.cpp
 
 ${OBJECTDIR}/src/goon/main/main.o: src/goon/main/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/main.o src/goon/main/main.cpp
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/main.o src/goon/main/main.cpp
+
+${OBJECTDIR}/src/goon/main/test/Test.o: src/goon/main/test/Test.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/Test.o src/goon/main/test/Test.cpp
 
 ${OBJECTDIR}/src/goon/main/test/TestBodies.o: src/goon/main/test/TestBodies.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestBodies.o src/goon/main/test/TestBodies.cpp
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestBodies.o src/goon/main/test/TestBodies.cpp
 
 ${OBJECTDIR}/src/goon/main/test/TestRegions.o: src/goon/main/test/TestRegions.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestRegions.o src/goon/main/test/TestRegions.cpp
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestRegions.o src/goon/main/test/TestRegions.cpp
 
 # Subprojects
 .build-subprojects:

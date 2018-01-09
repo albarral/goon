@@ -26,7 +26,6 @@
                 <make-dep-project>../../tron/nety</make-dep-project>
             </make-dep-projects>
             <sourceRootList>
-                <sourceRootElem>src/goon/look</sourceRootElem>
                 <sourceRootElem>src/goon/main</sourceRootElem>
             </sourceRootList>
             <confList>

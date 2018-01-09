@@ -12,14 +12,15 @@
 #include <log4cxx/xml/domconfigurator.h>
 
 #include "goon/main/GoonControl.h"
-//#include "goon/main/test/TestBodies.h"
-//#include "goon/main/test/TestRegions.h"
+#include "goon/main/test/TestBodies.h"
+#include "goon/main/test/TestRegions.h"
+#include "goon/main/test/Test.h"
 
 using namespace goon;
 
 void runGoon();
 void oneShotTest();
-int test2();
+int test();
 // obtains user's home path
 std::string getHomePath();
 
@@ -37,6 +38,7 @@ int main(int argc, char** argv)
 
     runGoon();
     //oneShotTest();
+    //test();
       
     return 0;
 }
@@ -55,7 +57,6 @@ void runGoon()
     {    
         int seconds = 0;
         while (!oGoonControl.checkEndRequested()) 
-        //while (seconds < 20) 
         {
             sleep(1);       
             seconds++;
@@ -96,12 +97,16 @@ std::string getHomePath()
         return "";
 }
 
-//int test2()
-//{
+int test()
+{
 //    goon::TestBodies oTestBodies;
 //    oTestBodies.test();
-//    
-//    //goon::TestRegions oTestRegions;
-//    //oTestRegions.testMerge();
-//    return 0;
-//}
+    
+    //goon::TestRegions oTestRegions;
+    //oTestRegions.testMerge();
+
+    goon::Test oTest;
+    oTest.testMaskAcces();
+
+    return 0;
+}

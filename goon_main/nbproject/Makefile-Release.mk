@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/main/GoonControl.o \
 	${OBJECTDIR}/src/goon/main/main.o \
+	${OBJECTDIR}/src/goon/main/test/Test.o \
 	${OBJECTDIR}/src/goon/main/test/TestBodies.o \
 	${OBJECTDIR}/src/goon/main/test/TestRegions.o
 
@@ -74,6 +75,11 @@ ${OBJECTDIR}/src/goon/main/main.o: src/goon/main/main.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/main.o src/goon/main/main.cpp
+
+${OBJECTDIR}/src/goon/main/test/Test.o: src/goon/main/test/Test.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/Test.o src/goon/main/test/Test.cpp
 
 ${OBJECTDIR}/src/goon/main/test/TestBodies.o: src/goon/main/test/TestBodies.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test

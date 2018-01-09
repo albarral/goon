@@ -14,6 +14,8 @@
                    projectFiles="true">
       <logicalFolder name="main" displayName="main" projectFiles="true">
         <logicalFolder name="test" displayName="test" projectFiles="true">
+          <itemPath>src/goon/main/test/Test.cpp</itemPath>
+          <itemPath>src/goon/main/test/Test.h</itemPath>
           <itemPath>src/goon/main/test/TestBodies.cpp</itemPath>
           <itemPath>src/goon/main/test/TestBodies.h</itemPath>
           <itemPath>src/goon/main/test/TestRegions.cpp</itemPath>
@@ -38,7 +40,6 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>src/goon/look</Elem>
     <Elem>src/goon/main</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
@@ -51,6 +52,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <developmentMode>5</developmentMode>
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
@@ -268,6 +270,10 @@
       </item>
       <item path="src/goon/main/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/goon/main/test/Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/test/Test.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/main/test/TestBodies.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/main/test/TestBodies.h" ex="false" tool="3" flavor2="0">
@@ -302,6 +308,10 @@
       <item path="src/goon/main/GoonControl.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/main/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/test/Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/test/Test.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/main/test/TestBodies.cpp" ex="false" tool="1" flavor2="0">
       </item>
