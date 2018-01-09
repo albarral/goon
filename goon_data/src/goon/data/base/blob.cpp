@@ -40,6 +40,7 @@ std::string Blob::toString()
 std::string Blob::shortDesc()
 {
     std::string desc = "Blob [mass = " + std::to_string(mass) +
+            ", pos = (" + std::to_string(pos[0]) + "," + std::to_string(pos[1]) + ")" +
             ", hsv = (" + std::to_string((int)hsv_color[0]) + "," + std::to_string((int)hsv_color[1]) + "," + std::to_string((int)hsv_color[2]) + ")]";
     return desc;
 }

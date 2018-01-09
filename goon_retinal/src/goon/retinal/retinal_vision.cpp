@@ -59,6 +59,9 @@ void RetinalVision::update (cv::Mat& image_cam)
     
     // show retina description
     //LOG4CXX_DEBUG(logger, pRetina->shortDesc());
+    cv::Vec3b hsvColor(8, 230, 180); 
+    cv::Vec3b hsvDev(3, 30, 60); 
+    LOG4CXX_DEBUG(logger, pRetina->showFilterByColor(hsvColor, hsvDev));
 
     oMerge.doMerge(*pRetina);
 

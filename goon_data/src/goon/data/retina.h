@@ -9,6 +9,7 @@
 #include <mutex>
 #include <list>
 #include <string>
+#include "opencv2/core/core.hpp"
 
 #include "goon/data/base/region.h"
 
@@ -47,10 +48,12 @@ public:
         // returns the region with the specified ID
         Region& getRegion (int ID);         
         
-        // returns all regions values in string form
+        // returns description of all retina regions
         std::string toString();    
-        // returns all regions values in short form
+        // returns short description of all retina regions
         std::string shortDesc();    
+        // returns short description of all retina regions with given color range
+        std::string showFilterByColor(cv::Vec3b& hsvColor, cv::Vec3b& hsvDeviation);
 
 };
 

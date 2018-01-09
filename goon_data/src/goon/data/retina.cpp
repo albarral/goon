@@ -86,7 +86,7 @@ std::string Retina::toString()
 {
     std::string desc = "Retina:\n";
     std::list<Region>::iterator it_region = listRegions.begin();
-    // remove merged regions from list
+    // walk all regions from list
     while (it_region != listRegions.end())
     {            
         desc += it_region->toString() + "\n";
@@ -100,10 +100,34 @@ std::string Retina::shortDesc()
 {
     std::string desc = "Retina:\n";
     std::list<Region>::iterator it_region = listRegions.begin();
-    // remove merged regions from list
+    // walk all regions from list
     while (it_region != listRegions.end())
     {            
         desc += it_region->shortDesc() + "\n";
+        it_region++;
+    }
+
+    return desc;
+}
+
+std::string Retina::showFilterByColor(cv::Vec3b& hsvColor, cv::Vec3b& hsvDeviation)
+{
+    std::string desc = "Retina (filtered color):\n";
+    
+    cv::Vec3b hsvColor1 = hsvColor - hsvDeviation;
+    cv::Vec3b hsvColor2 = hsvColor + hsvDeviation;
+            
+    std::list<Region>::iterator it_region = listRegions.begin();
+    // walk all regions from list
+    while (it_region != listRegions.end())
+    {
+        cv::Vec3f& regionColor = it_region->getHSV();
+        // check if region color is in given range
+        if ((regionColor[0] > hsvColor1[0] && regionColor[0] < hsvColor2[0]) && 
+                (regionColor[1] > hsvColor1[1] && regionColor[1] < hsvColor2[1]) &&
+                (regionColor[2] > hsvColor1[2] && regionColor[2] < hsvColor2[2]))
+            desc += it_region->shortDesc() + "\n";
+        
         it_region++;
     }
 

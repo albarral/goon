@@ -153,7 +153,7 @@ void Segmentation4::buildRandomSeeds(int img_w, int img_h)
     // fill the seeds vector with all the pixels in the image
     for (int x=0; x<img_w; x++)
         for (int y=0; y<img_h; y++)
-        {
+        {            
             seed.x = x;
             seed.y = y;
             vec_seeds.push_back(seed);
@@ -162,7 +162,7 @@ void Segmentation4::buildRandomSeeds(int img_w, int img_h)
     // shuffle the vector for random ordering
     std::random_shuffle(vec_seeds.begin(), vec_seeds.end());
 
-    LOG4CXX_DEBUG(logger, "new random seeds " << vec_seeds.size());
+    LOG4CXX_INFO(logger, "new random seeds " << vec_seeds.size());
 }
 
 
