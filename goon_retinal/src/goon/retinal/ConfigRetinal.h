@@ -12,8 +12,6 @@ namespace goon
 class ConfigRetinal
 {
 public:    
-    static const int BODY_VALUE = 255;
-    static const int BORDER_VALUE = 1;
     static const int EXPLORED_VALUE = 255;
 private:
     // segmentation 

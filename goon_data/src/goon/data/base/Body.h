@@ -20,9 +20,13 @@ namespace goon
 // Extends from Blob
  class Body : public Blob
 {
+ public:
+    static const int BODY_VALUE = 255;
+    static const int BORDER_VALUE = 1;
+     
  protected:
-     cv::Mat mask;       
-     cv::Rect window;
+     cv::Mat mask;       // body mask
+     cv::Rect window;   // body window in image
 
  public:
     Body();
@@ -45,10 +49,13 @@ namespace goon
     // merges with another Body
     virtual void merge(Body& oBody);
 
-    // Checks if this body overlaps with the given one (computing the intersection of their masks)
-    // The overlapped area (pixels) is returned.
+    // computes the body's overlapped surface with a given mask (and window)
+    int computeOverlap(cv::Mat& maskB, cv::Rect& windowB);
+
+    // computes the body's overlapped surface with another body (the intersection of both masks)
+    // the overlapped area (pixels) is returned
     int computeOverlap(Body& oBody);
-    
+        
     virtual std::string toString();
     virtual std::string shortDesc();             
 };  

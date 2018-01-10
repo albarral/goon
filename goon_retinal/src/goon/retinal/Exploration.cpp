@@ -5,6 +5,7 @@
 
 #include "goon/retinal/Exploration.h"
 #include "goon/retinal/ConfigRetinal.h"
+#include "goon/data/base/Body.h"
 
 namespace goon
 {
@@ -221,12 +222,12 @@ void Exploration::markPixel(bool baccepted)
     // pixel accepted -> marked as region and forbidden
      if (baccepted)
     {
-         *pregion_pixel = ConfigRetinal::BODY_VALUE;														
-         *pforbiden_pixel = ConfigRetinal::BODY_VALUE;
+         *pregion_pixel = Body::BODY_VALUE;														
+         *pforbiden_pixel = ConfigRetinal::EXPLORED_VALUE;
      }
      // pixel rejected -> marked as border (used by later merge process)
      else
-         *pregion_pixel = ConfigRetinal::BORDER_VALUE;														             
+         *pregion_pixel = Body::BORDER_VALUE;														             
 }
 
 // Must be called at the end of each exploration process.

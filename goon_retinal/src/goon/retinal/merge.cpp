@@ -61,7 +61,7 @@ void Merge::checkProximityMerge(Retina& oRetina)
 {
     cv::Rect expWindow1;       // expanded window of region 1
     cv::Rect expWindow2;       // expanded window of region 2
-    cv::Rect intersection;          // intersection window
+    cv::Rect expIntersection;  // intersection window
     cv::Size2i expansion;
     
     expansion.width = expansion.height = proximityGAP;    
@@ -75,9 +75,10 @@ void Merge::checkProximityMerge(Retina& oRetina)
     // for each region in the list
     while (it_region1 != list_end)
     {
-        LOG4CXX_DEBUG(logger, "check region " << it_region1->getID());
         // expand region1's window
         expWindow1 = it_region1->getWindow() + expansion;
+        // compute region border
+        cv::Mat regionBorder1 = it_region1->computeBorderMask();
 
         // check against the rest of regions
         std::list<Region>::iterator it_region2 = it_region1;
@@ -87,22 +88,30 @@ void Merge::checkProximityMerge(Retina& oRetina)
             // expand region2's window
             expWindow2 = it_region2->getWindow() + expansion;
             // compute intersection of both windows
-            intersection = expWindow1 & expWindow2;
+            expIntersection = expWindow1 & expWindow2;
 
-            // if windows overlap
-            if (intersection.width != 0  &&  intersection.height != 0)
+            // if expanded windows overlap
+            if (expIntersection.width != 0  &&  expIntersection.height != 0)
             {
-                // if bodies are mergeable
-                if (checkMergeableBodies(*it_region1, *it_region2, intersection))
-                {
-                    it_region1->setMerge(true);
-                    it_region2->setMerge(true);
+                // compute border between regions
+                int borderSize = it_region2->computeOverlap(regionBorder1, expWindow1);
+                
+                // if neighbour regions (touching borders)
+                if (borderSize > 0)
+                {                    
+                    // if similiar local colors
+                    if (checkLocalSimilarity(*it_region1, *it_region2, expIntersection))
+                    {
+                        it_region1->setMerge(true);
+                        it_region2->setMerge(true);
 
-                    // make a cross in the proximity matrix (with symmetry)
-                    mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
-                    mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;                    
-                    LOG4CXX_DEBUG(logger, "merged with " << it_region2->getID());
-                }                        
+                        // make a cross in the proximity matrix (with symmetry)
+                        mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
+                        mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;                    
+                        LOG4CXX_DEBUG(logger, "merged " << it_region1->getID() << " + " << it_region2->getID());
+                        LOG4CXX_DEBUG(logger, "border size = " << borderSize);
+                    }
+                }
             } // end if		
 
             it_region2++;
@@ -113,15 +122,8 @@ void Merge::checkProximityMerge(Retina& oRetina)
 }
 
 
-bool Merge::checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& intersectionWindow)
+bool Merge::checkLocalSimilarity(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& intersectionWindow)
 {
-    // if bodies don't overlap, they can't be merged
-    int overlap = oBody1.computeOverlap(oBody2);
-    if (overlap == 0)
-        return false;
-
-    LOG4CXX_DEBUG(logger, "overlap = " << overlap);
-
     // get grid intersection window
     cv::Rect gridWindow = oGrid.computeGridWindow(intersectionWindow);
     
@@ -135,27 +137,26 @@ bool Merge::checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect&
     HSVEssence oHSVEssence;
     oHSVEssence.update(oBody1.getHSV());                
 
-    bool bmerge = false;
-    // checks node by node ...
+    bool bsimilar = false;
+    // check local nodes
     for (int i=0; i<gridWindow.height; i++)
     {
         for (int j=0; j<gridWindow.width; j++)
         {
-            // if nodes overlap
+            // if local nodes overlap
             if (massGrid1.at<ushort>(i, j) != 0 && massGrid2.at<ushort>(i, j) != 0)
             {                  
                 // and have same color              
-                bmerge =  oColorSimilarity.checkSameColor(rgbGrid1.at<cv::Vec3f>(i, j), rgbGrid2.at<cv::Vec3f>(i, j), oHSVEssence, oBody2.getHSV());
-                //bmerge = maty::Distance::getEuclidean3s(rgbGrid1.at<cv::Vec3f>(i, j), rgbGrid2.at<cv::Vec3f>(i, j)) < SQR_SAME;
-                if (bmerge)
+                bsimilar =  oColorSimilarity.checkSameColor(rgbGrid1.at<cv::Vec3f>(i, j), rgbGrid2.at<cv::Vec3f>(i, j), oHSVEssence, oBody2.getHSV());
+                if (bsimilar)
                     break;
             }                        
         }
-        if (bmerge)
+        if (bsimilar)
             break;        
     }
-
-    return bmerge;
+        
+    return bsimilar;
 }
 
 // This function merges similar nearby regions into new regions. 

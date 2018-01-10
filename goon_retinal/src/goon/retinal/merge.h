@@ -45,7 +45,7 @@ private:
     void checkProximityMerge(Retina& oRetina);
 
     // checks whether two color bodies are mergeable
-    bool checkMergeableBodies(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& window);
+    bool checkLocalSimilarity(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& window);
     
     // This function merges similar nearby regions into new regions.
     // Merged regions become subregions and new regions are collections.

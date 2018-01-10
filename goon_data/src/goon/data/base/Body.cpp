@@ -45,7 +45,7 @@ void Body::setMaskAndWindow(cv::Mat& amask, cv::Rect& awindow)
     window = awindow;
     if (!amask.empty())
     {    
-        // make roi of mask before cloning it
+        // the body's mask is reduced to fit in the given window
         cv::Mat roiMask = amask(awindow);       
         mask = roiMask.clone(); 
     }
@@ -97,20 +97,20 @@ void Body::merge(Body& oBody)
 }
 
 
-int Body::computeOverlap(Body& oBody)
+int Body::computeOverlap(cv::Mat& maskB, cv::Rect& windowB)
 {
     int pixelsShared = 0;
     
     // intersection of windows
-    cv::Rect interWindow = window & oBody.window;     
+    cv::Rect intersection = window & windowB;     
     // if windows intersect, compare masks
-    if (interWindow.width > 0)  
+    if (intersection.width > 0)  
     {
         // translate intersection window (in camera coordinates) to local coordinate systems of both bodies
-        cv::Rect window1 = interWindow - cv::Point(window.x, window.y);
-        cv::Rect window2 = interWindow - cv::Point(oBody.window.x, oBody.window.y);
+        cv::Rect window1 = intersection - cv::Point(window.x, window.y);
+        cv::Rect window2 = intersection - cv::Point(windowB.x, windowB.y);
         cv::Mat mask1 = mask(window1);
-        cv::Mat mask2 = oBody.mask(window2);
+        cv::Mat mask2 = maskB(window2);
         // intersection of masks
         cv::Mat maskOverlap = mask1 & mask2;
         // area of intersection
@@ -118,6 +118,11 @@ int Body::computeOverlap(Body& oBody)
     }
     
     return pixelsShared;
+}
+
+int Body::computeOverlap(Body& oBody)
+{
+    return computeOverlap(oBody.mask, oBody.window);
 }
 
 
