@@ -6,6 +6,7 @@
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/Grab.h"
+#include "tuly/utils/Environment.h"
 
 namespace goon
 {    
@@ -113,53 +114,58 @@ void Grab::connect2Camera(int option)
             break;
             
         case Grab::eVIDEO_CAMPUS_HALL:
-            oGrabber.connect2Video("/home/albarral/PROJECTS/IMAGES/sequences/campus_hall.MP4");
+            oGrabber.connect2Video(tuly::Environment::getHomePath() + "/PROJECTS/IMAGES/sequences/campus_hall.MP4");
             LOG4CXX_INFO(logger, "Video: campus hall");
             break;
             
         case Grab::eIMAGE_CAMPUS_HALL1:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/campus_hall1.png");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall1.png");
             LOG4CXX_INFO(logger, "Image: campus hall 1");
             break;
             
         case Grab::eIMAGE_CAMPUS_HALL2:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/campus_hall2.png");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall2.png");
             LOG4CXX_INFO(logger, "Image: campus hall 2");
             break;
 
         case Grab::eIMAGE_CAMPUS_HALL3:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/campus_hall3.png");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall3.png");
             LOG4CXX_INFO(logger, "Image: campus hall 3");
             break;
 
         case Grab::eIMAGE_CAMPUS_HALL4:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/campus_hall4.png");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall4.png");
             LOG4CXX_INFO(logger, "Image: campus hall 4");
             break;
 
         case Grab::eIMAGE_BABOON:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/baboon.jpg");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/baboon.jpg");
             LOG4CXX_INFO(logger, "Image: babbon");
             break;
 
         case Grab::eIMAGE_FRUITS:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/fruits.jpg");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/fruits.jpg");
             LOG4CXX_INFO(logger, "Image: fruits");
             break;
 
         case Grab::eIMAGE_JLUIS:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/jluis.jpg");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/jluis.jpg");
             LOG4CXX_INFO(logger, "Image: jluis");
             break;
 
         case Grab::eIMAGE_ORANGE1:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/image_orange1.jpg");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange1.jpg");
             LOG4CXX_INFO(logger, "Image: orange1");
             break;
             
         case Grab::eIMAGE_ORANGE2:
-            oGrabber.connect2Image("/home/albarral/TESTS/images/image_orange2.jpg");
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange2.jpg");
             LOG4CXX_INFO(logger, "Image: orange2");
+            break;
+
+        case Grab::eIMAGE_ORANGE3:
+            oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange3.jpg");
+            LOG4CXX_INFO(logger, "Image: orange3");
             break;
     }
 }

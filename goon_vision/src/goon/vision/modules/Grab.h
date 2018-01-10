@@ -41,6 +41,7 @@ public:
         eIMAGE_JLUIS,
         eIMAGE_ORANGE1,
         eIMAGE_ORANGE2,
+        eIMAGE_ORANGE3,
         eOPTIONS_DIM
     };
 
