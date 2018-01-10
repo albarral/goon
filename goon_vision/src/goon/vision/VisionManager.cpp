@@ -9,7 +9,7 @@
 
 namespace goon 
 {
-log4cxx::LoggerPtr VisionManager::logger(log4cxx::Logger::getLogger("goon.look"));
+log4cxx::LoggerPtr VisionManager::logger(log4cxx::Logger::getLogger("goon.vision"));
 
 VisionManager::VisionManager() 
 {
@@ -17,7 +17,8 @@ VisionManager::VisionManager()
 //    workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    workingCamera = goon::Grab::eCAM_IPCAM;
 //    workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-    workingCamera = goon::Grab::eIMAGE_ORANGE1;
+//    workingCamera = goon::Grab::eIMAGE_ORANGE2;
+    workingCamera = goon::Grab::eIMAGE_ORANGE3;
 }
 
 VisionManager::~VisionManager() 
@@ -86,13 +87,13 @@ void VisionManager::end()
     LOG4CXX_INFO(logger, "VisionManager finished");  
 }
 
-void VisionManager::oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData)
+void VisionManager::oneShot(GoonBus& oGoonBus, VisualData& oVisualData)
 {
     LOG4CXX_INFO(logger, "VisionManager: one shot ..."); 
     
     oGrab.init(oGoonBus, oVisualData);
-    oGrab.setCameraSource(testCamera);
-    oGrab.setFrequency(30.0);
+    oGrab.setCameraSource(workingCamera);
+    oGrab.setFrequency(20.0);
     oSee.init(oGoonBus, oVisualData);
     oFocus.init(oGoonBus, oVisualData);
     

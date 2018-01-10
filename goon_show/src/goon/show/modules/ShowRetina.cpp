@@ -3,10 +3,12 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <unistd.h>
 #include "log4cxx/ndc.h"
 
 #include "goon/show/modules/ShowRetina.h"
 #include "goon/show/monitor/RetinaSaver.h"
+#include "tuly/utils/Environment.h"
 
 namespace goon
 {  
@@ -35,14 +37,15 @@ void ShowRetina::first()
     //oDualWindow.reSize(320, 240);     // makes it crash
     cv::namedWindow(windowName);         
 
-    // avoid undefined imageRetina on first show
+    // set sizes for image show
+    wait4FirstCapture();
     pVisualData->getCameraFrameCopy(imageCam);
     imageRetina = imageCam.clone();
     imageROIs = imageCam.clone();
 
-    // sense beats
-    grabBeat = pGoonBus->getSO_GRAB_BEAT().getValue();
-    seeBeat = pGoonBus->getSO_SEE_BEAT().getValue();
+    // reset beats
+    grabBeat = 0;
+    seeBeat = 0;
 }
 
 void ShowRetina::bye()
@@ -88,17 +91,33 @@ void ShowRetina::loop()
     cv::waitKey(10);            
 }
 
+void ShowRetina::wait4FirstCapture()
+{
+    LOG4CXX_INFO(logger, "waiting for first image");     
+    // wait for new grabbed frame (50ms waits)
+    while (pGoonBus->getSO_GRAB_BEAT().getValue() == 0)            
+        usleep(50000);
+}
+
 
 // just one loop exectution (for testing)
 void ShowRetina::oneShot()
 {
     first();
     loop();    
+    // show dual window
+    cv::imshow(windowName, oDualWindow.getImage());   
+    cv::waitKey(-1);            
     bye();
     
+    // finally save individual images of retinal regions 
+    std::string folder = tuly::Environment::getHomePath() + "/TESTS/VISION";    
+
+    // clean folder
+    tuly::Environment::cleanFolder(folder);
+    // save region images
     RetinaSaver oRetinaSaver;
-    oRetinaSaver.setDestinationFolder("/home/albarral/TESTS/VISION");
-           
+    oRetinaSaver.setDestinationFolder(folder);           
     oRetinaSaver.saveRegions(imageCam, pVisualData->getRetina2().getListRegions());
 }
 

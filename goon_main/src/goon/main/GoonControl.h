@@ -38,7 +38,7 @@ public:
     // ends the goon modules
     bool end();
     // one shot test
-    void oneShot(int testCamera);
+    void oneShot();
 
     // checks if finish command has been requested from console
     bool checkEndRequested();        

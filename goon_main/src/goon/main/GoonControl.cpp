@@ -54,9 +54,9 @@ bool GoonControl::end()
     oGoonShow.end();
 }
 
-void GoonControl::oneShot(int testCamera)
+void GoonControl::oneShot()
 {
-    oVisionManager.oneShot(testCamera, oGoonBus, oVisualData);
+    oVisionManager.oneShot(oGoonBus, oVisualData);
     oGoonShow.oneShot(oGoonBus, oVisualData);    
 }
 

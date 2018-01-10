@@ -51,6 +51,9 @@ private:
     virtual void loop();            
     // last action before thread ends
     virtual void bye();    
+
+    // waits till there's a valid image in the shared visual data (used for retinal vision size initialization)
+    void wait4FirstCapture();
     
 };
 

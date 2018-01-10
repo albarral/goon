@@ -28,9 +28,9 @@ void RetinaSaver::saveRegions (cv::Mat& image_cam, std::list<Region>& listRegion
     // draw each segmented region in a separate file
     for (Region& oRegion: listRegions) 
     {
-        // skip simple regions
-        if (oRegion.getType() == Region::eREG_SIMPLE)
-            continue;
+//        // skip simple regions
+//        if (oRegion.getType() == Region::eREG_SIMPLE)
+//            continue;
         
         oDraw.clearBackGround();
         // draw masks
@@ -41,27 +41,25 @@ void RetinaSaver::saveRegions (cv::Mat& image_cam, std::list<Region>& listRegion
         // draw centroids
         int* pos = oRegion.getPos();
         cv::Point centroid(pos[0], pos[1]);                        
-        int color;
-        switch (oRegion.getType())
-        {
-            case Region::eREG_SIMPLE:
-                color = tivy::Draw::eGREEN;
-                break;
-            case Region::eREG_MERGED:
-                color = tivy::Draw::eRED;
-                break;
-            case Region::eREG_COLLECTION:
-                color = tivy::Draw::eYELLOW;
-                break;
-        }
         oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
 
         // draw ID's
         oDraw.drawNumber(oRegion.getID(), centroid);                        
 
         // save file        
-        std::string fileName = path + "/region_" + std::to_string(oRegion.getID()) + imgExtension;
-        cv::imwrite(fileName, oDraw.getOutput()); 
+        std::string filename; 
+        switch (oRegion.getType())
+        {
+            case Region::eREG_SIMPLE:
+            case Region::eREG_COLLECTION:
+                filename = "region_";
+                break;
+            case Region::eREG_MERGED:
+                filename = "xregion_";
+                break;
+        }
+        std::string filePath = path + "/" + filename + std::to_string(oRegion.getID()) + imgExtension;
+        cv::imwrite(filePath, oDraw.getOutput()); 
 
 //      cv::Point& seed = oRegion.getSeed();
 //      oDrawRet.drawPoint(seed, tivy::Draw::eYELLOW);

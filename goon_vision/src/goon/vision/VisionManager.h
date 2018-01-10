@@ -36,7 +36,7 @@ public:
     bool launch(GoonBus& oGoonBus, VisualData& oVisualData);
     void end();
     
-    void oneShot(int testCamera, GoonBus& oGoonBus, VisualData& oVisualData);
+    void oneShot(GoonBus& oGoonBus, VisualData& oVisualData);
 };
 
 }
