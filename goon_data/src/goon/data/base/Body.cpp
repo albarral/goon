@@ -69,6 +69,13 @@ void Body::computeBlob()
     Shape::computeCovariances(mask, window, pos, covs);
 }
 
+cv::Mat Body::computeBorderMask()
+{
+    cv::Mat maskBorder = mask == Body::BORDER_VALUE;
+    return maskBorder;    
+}
+
+
 void Body::merge(Body& oBody)
 {
     // merge blob part

@@ -45,6 +45,7 @@ namespace goon
     void clear();
     void computeMass();
     void computeBlob();
+    cv::Mat computeBorderMask();
     
     // merges with another Body
     virtual void merge(Body& oBody);
@@ -58,6 +59,7 @@ namespace goon
         
     virtual std::string toString();
     virtual std::string shortDesc();             
+    
 };  
 
 }  

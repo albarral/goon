@@ -10,6 +10,7 @@
 #include <goon/data/base/region.h>
 #include "goon/features/color/HSVEssence.h"
 #include "goon/features/color/rgb_color.h"
+#include "maty/math/Distance2.h"
 
 using namespace log4cxx;
 
@@ -54,18 +55,9 @@ int Merge::doMerge(Retina& oRetina)
 }
 					
 
-// ****************************************  FUNCTION: CheckProximityMerge  ***************************************
-
 // This function checks if there are nearby regions with similar color that can be merged. 
 void Merge::checkProximityMerge(Retina& oRetina)
-{
-    cv::Rect expWindow1;       // expanded window of region 1
-    cv::Rect expWindow2;       // expanded window of region 2
-    cv::Rect expIntersection;  // intersection window
-    cv::Size2i expansion;
-    
-    expansion.width = expansion.height = proximityGAP;    
-    
+{    
     int num_regions = oRetina.getNumRegions();
     mat_proximity = cv::Mat::zeros(num_regions, num_regions, CV_8UC1);    
 
@@ -75,32 +67,28 @@ void Merge::checkProximityMerge(Retina& oRetina)
     // for each region in the list
     while (it_region1 != list_end)
     {
-        // expand region1's window
-        expWindow1 = it_region1->getWindow() + expansion;
-        // compute region border
-        cv::Mat regionBorder1 = it_region1->computeBorderMask();
+        // compute region1's border mask
+        cv::Mat maskBorder1 = it_region1->computeBorderMask();
+        cv::Rect& window1 = it_region1->getWindow();
 
         // check against the rest of regions
         std::list<Region>::iterator it_region2 = it_region1;
         it_region2++;        
         while (it_region2 != list_end)
-        {		
-            // expand region2's window
-            expWindow2 = it_region2->getWindow() + expansion;
-            // compute intersection of both windows
-            expIntersection = expWindow1 & expWindow2;
+        {	
+            float separation = maty::Distance2::getWindowsSeparation(window1, it_region2->getWindow());
 
-            // if expanded windows overlap
-            if (expIntersection.width != 0  &&  expIntersection.height != 0)
+            // if windows are bordering
+            if (separation < 2)
             {
-                // compute border between regions
-                int borderSize = it_region2->computeOverlap(regionBorder1, expWindow1);
+                // check if region masks are also bordering
+                int borderSize = it_region2->computeOverlap(maskBorder1, window1);
                 
-                // if neighbour regions (touching borders)
+                // if regions have touching borders, check if the can be merged
                 if (borderSize > 0)
                 {                    
-                    // if similiar local colors
-                    if (checkLocalSimilarity(*it_region1, *it_region2, expIntersection))
+                    // check local color similarity
+                    if (checkLocalSimilarity(*it_region1, *it_region2))
                     {
                         it_region1->setMerge(true);
                         it_region2->setMerge(true);
@@ -122,9 +110,11 @@ void Merge::checkProximityMerge(Retina& oRetina)
 }
 
 
-bool Merge::checkLocalSimilarity(ColorBody& oBody1, ColorBody& oBody2, cv::Rect& intersectionWindow)
+bool Merge::checkLocalSimilarity(ColorBody& oBody1, ColorBody& oBody2)
 {
-    // get grid intersection window
+    // get intersection window
+    cv::Rect intersectionWindow = oBody1.getWindow() & oBody2.getWindow();
+    // and its grid intersection
     cv::Rect gridWindow = oGrid.computeGridWindow(intersectionWindow);
     
     // body1 grids   

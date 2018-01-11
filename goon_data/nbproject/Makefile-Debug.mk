@@ -76,52 +76,52 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ${OBJEC
 ${OBJECTDIR}/src/goon/data/base/Body.o: src/goon/data/base/Body.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/Body.o src/goon/data/base/Body.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/Body.o src/goon/data/base/Body.cpp
 
 ${OBJECTDIR}/src/goon/data/base/BodyUtils.o: src/goon/data/base/BodyUtils.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
 
 ${OBJECTDIR}/src/goon/data/base/ColorBody.o: src/goon/data/base/ColorBody.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/ColorBody.o src/goon/data/base/ColorBody.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/ColorBody.o src/goon/data/base/ColorBody.cpp
 
 ${OBJECTDIR}/src/goon/data/base/RealBody.o: src/goon/data/base/RealBody.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/RealBody.o src/goon/data/base/RealBody.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/RealBody.o src/goon/data/base/RealBody.cpp
 
 ${OBJECTDIR}/src/goon/data/base/TransMotion.o: src/goon/data/base/TransMotion.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/TransMotion.o src/goon/data/base/TransMotion.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/TransMotion.o src/goon/data/base/TransMotion.cpp
 
 ${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
 
 ${OBJECTDIR}/src/goon/data/base/region.o: src/goon/data/base/region.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/region.o src/goon/data/base/region.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/region.o src/goon/data/base/region.cpp
 
 ${OBJECTDIR}/src/goon/data/base/roi.o: src/goon/data/base/roi.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
 
 ${OBJECTDIR}/src/goon/data/retina.o: src/goon/data/retina.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/retina.o src/goon/data/retina.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/retina.o src/goon/data/retina.cpp
 
 ${OBJECTDIR}/src/goon/data/rois.o: src/goon/data/rois.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/rois.o src/goon/data/rois.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/rois.o src/goon/data/rois.cpp
 
 # Subprojects
 .build-subprojects:

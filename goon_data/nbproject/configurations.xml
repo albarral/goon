@@ -67,7 +67,6 @@
           <incDir>
             <pElem>src</pElem>
             <pElem>../goon_features/src</pElem>
-            <pElem>/usr/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>

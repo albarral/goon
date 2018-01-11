@@ -15,29 +15,27 @@
 #include "goon/main/test/TestBodies.h"
 #include "goon/main/test/TestRegions.h"
 #include "goon/main/test/Test.h"
+//#include "tuly/utils/Environment.h"
 
 using namespace goon;
 
 void runGoon();
 void oneShotTest();
 int test();
-// obtains user's home path
-std::string getHomePath();
 
 log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.main"));
 
 // main program
 int main(int argc, char** argv) 
 {
-//    std::string home = getHomePath();
-//    std::string configFile = home + "/.tron/log4cxx_config_body.xml";
+//    std::string configFile = tuly::Environment::getHomePath() + "/.tron/log4cxx_config_body.xml";
 //    log4cxx::xml::DOMConfigurator::configure(configFile);    
     log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
         
     LOG4CXX_INFO(logger, "\n\nSTART goon\n");
 
-    runGoon();
-    //oneShotTest();
+    //runGoon();
+    oneShotTest();
     //test();
       
     return 0;
@@ -75,26 +73,10 @@ void oneShotTest()
 {        
     LOG4CXX_INFO(logger, "\n\nONE SHOT TEST goon VISION ...\n");
 
-    int workingCamera = goon::Grab::eIMAGE_CAMPUS_HALL1;
-       
     GoonControl oGoonControl; 
-    oGoonControl.oneShot(workingCamera);
+    oGoonControl.oneShot();
 
     LOG4CXX_INFO(logger, "END of test ...");
-}
-
-std::string getHomePath()
-{    
-    // obtain value of HOME environment variable
-    char* pVar = getenv("HOME");    
-    if (pVar!=NULL)
-    {
-        // transform it in a string
-        std::string home(pVar);
-        return home;
-    }
-    else
-        return "";
 }
 
 int test()
