@@ -34,7 +34,6 @@ void ShowRetina::first()
     log4cxx::NDC::push("ShowRetina");   	
     LOG4CXX_INFO(logger, "started");  
 
-    //oDualWindow.reSize(320, 240);     // makes it crash
     cv::namedWindow(windowName);         
 
     // set sizes for image show
@@ -42,6 +41,7 @@ void ShowRetina::first()
     pVisualData->getCameraFrameCopy(imageCam);
     imageRetina = imageCam.clone();
     imageROIs = imageCam.clone();
+    oDualWindow.resize(imageCam.cols, imageCam.rows);
 
     // reset beats
     grabBeat = 0;
