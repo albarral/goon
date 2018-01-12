@@ -6,6 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <mutex>
 #include <vector>
 #include "opencv2/core/core.hpp"
 #include <log4cxx/logger.h>
@@ -37,6 +38,7 @@ public:
 
 private:
     static log4cxx::LoggerPtr logger;
+    std::mutex mutex2;   
     int ID;                     // segmenter ID
     bool binitialized;      // init has been called, allowed to go on
     // params
@@ -51,8 +53,7 @@ private:
     cv::Mat imageCam;           // image to process (RBG)
     cv::Mat imageHSV;           // image to process (HSV)
     bool bnewRequest;           // new process requested
-    int numSeedsUsed;      // number of used seeds for a frame process
-    int numFloodfills;          // number of floodfills done for a frame process (successful seeds)
+    int beat;   // module's beat
 
 public:
 
@@ -72,8 +73,7 @@ public:
     bool isReady();
     bool isWorking();
     
-    int getNumFloodfills() {return numFloodfills;};
-    int getUsedSeeds() {return numSeedsUsed;};
+    int getBeat();
     
 private:                
     // first action after thread begins 
@@ -90,6 +90,8 @@ private:
     // gets a random index of the seeds vector.
     int getRandomIndex();
 
+    // set new beat
+    void newBeat();
 };
 		  	    		  
 }  

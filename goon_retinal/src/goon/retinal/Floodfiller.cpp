@@ -115,7 +115,8 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
             // analyze the 4 pixels adjacent to the new obtained seed
             for (int i = Exploration::eEAST; i < Exploration::eLOCS_DIM; i++) 
             {
-                if (oExploration.checkAdjacent(i) == Exploration::eFREE)
+                int pixelState = oExploration.checkAdjacent(i);
+                if (pixelState == Exploration::eFREE)
                 {                    
                     oExploration.getPixelRGB(pixel_rgb);                          
                     oExploration.getPixelHSV(pixel_hsv);
@@ -142,6 +143,9 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                     else
                         oExploration.markPixel(false);
                 }
+                else if (pixelState == Exploration::eFORBIDEN)
+                    oExploration.markPixel(false);
+                
             } // end for
         } // end if not in border
     } // end while

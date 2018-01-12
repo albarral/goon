@@ -22,11 +22,11 @@
   </root>
 
   <!-- Specify the level for some specific categories -->
-  <!--category name="goon">
+  <category name="goon.main">
         <priority value ="info" />
         <appender-ref ref="consoleAppender"/>
         <appender-ref ref="dailyAppender"/>
-  </category-->
+  </category>
   <category name="goon.retinal">
         <priority value ="debug" />
         <appender-ref ref="consoleAppender"/>

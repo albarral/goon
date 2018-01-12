@@ -108,18 +108,13 @@ int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv)
     
     // Reset segmentation mask 
     mask_segmented.setTo(0);
+    
+    std::vector<int> listBeats = getSegmenterBeats();
         
     launchSegmenters(image_cam, image_hsv);
-    
-    // wait for all segmenters to start working
-    while (getWorkingSegmenters() < numSegmenters)
-        usleep(10000); // 10ms
-
-    // can do other things ...
-
-    // wait for all segmenter to end their job
-    while (getWorkingSegmenters() > 0)
-        usleep(10000); // 10ms
+        
+    // wait for all segmenters to end their job
+    waitAllFinished(listBeats);
     
     LOG4CXX_DEBUG(logger, "extracted regions = " << pRetina->getNumRegions());
 }
@@ -131,17 +126,36 @@ void Segmentation4::launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv)
         oSegmenters[i].newRequest(image_cam, image_hsv);
 }
 
-int Segmentation4::getWorkingSegmenters()
+std::vector<int> Segmentation4::getSegmenterBeats()
 {
-    int num = 0;
+    std::vector<int> listBeats;
 
     for (int i=0; i<numSegmenters; i++)
     {
-        if (oSegmenters[i].isWorking())            
-            num++;        
+        listBeats.push_back(oSegmenters[i].getBeat());
     }
     
-    return num;
+    return listBeats;
+}
+
+void Segmentation4::waitAllFinished(std::vector<int>& listBeats)
+{
+    bool banyWorking = true;
+    // wait till all segmenters have finished
+    while (banyWorking)
+    {
+        banyWorking = false;
+        // for each segmenter, check if it has produced a new beat
+        for (int i=0; i<numSegmenters; i++)
+        {        
+            if (oSegmenters[i].getBeat() == listBeats[i])            
+            {
+                banyWorking = true;
+                break;
+            }
+        }
+        usleep(10000); // 10ms        
+    }    
 }
 
 void Segmentation4::buildRandomSeeds(int img_w, int img_h)

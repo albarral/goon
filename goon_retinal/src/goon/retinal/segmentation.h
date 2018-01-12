@@ -65,6 +65,10 @@ private:
     void launchSegmenters(cv::Mat& image_cam, cv::Mat& image_hsv);    
     // gets the number of working segmenters
     int getWorkingSegmenters();
+    // get beats of all segmenters
+    std::vector<int> getSegmenterBeats();
+    // wait till all segmenters have finished their job
+    void waitAllFinished(std::vector<int>& listBeats);
         
     // shows the present state of the segmentation process in an image for debugging (segmented pixels, computed colors ...)  
     void showProgress();

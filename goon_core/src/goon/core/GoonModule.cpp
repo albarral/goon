@@ -12,7 +12,6 @@ GoonModule::GoonModule()
 {    
     modName = "GoonModule";
     benabled = false;
-    beat = 0;
     pGoonBus = 0;
     pVisualData = 0;      
  }
@@ -22,6 +21,7 @@ void GoonModule::init(GoonBus& oGoonBus, VisualData& oVisualData)
     pGoonBus = &oGoonBus;
     pVisualData = &oVisualData;  
     benabled = true;    
+    beat = 0;
     showInitialized();
 }
 

@@ -49,7 +49,7 @@ int Merge::doMerge(Retina& oRetina)
     // Merge all mergeable regions by proximity
     int collections = mergeRegions(oRetina);
 
-    LOG4CXX_DEBUG(logger, "collections = " << collections);
+    LOG4CXX_DEBUG(logger, "final collections = " << collections);
 
     return collections;
 }
@@ -204,7 +204,7 @@ void Merge::createCollection2(Region& oBaseRegion, Retina& oRetina)
         i++;
     }
     
-    LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
+    //LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
 }
 
 

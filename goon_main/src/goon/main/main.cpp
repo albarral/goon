@@ -35,8 +35,8 @@ int main(int argc, char** argv)
     LOG4CXX_INFO(logger, "\n\nSTART goon\n");
 
     //runGoon();
-    oneShotTest();
-    //test();
+    //oneShotTest();
+    test();
       
     return 0;
 }
@@ -88,7 +88,7 @@ int test()
     //oTestRegions.testMerge();
 
     goon::Test oTest;
-    oTest.testMaskAcces();
+    oTest.testSegmentation();
 
     return 0;
 }

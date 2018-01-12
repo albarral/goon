@@ -17,7 +17,6 @@ VisionManager::VisionManager()
 //    workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    workingCamera = goon::Grab::eCAM_IPCAM;
 //    workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-//    workingCamera = goon::Grab::eIMAGE_ORANGE2;
     workingCamera = goon::Grab::eIMAGE_ORANGE3;
 }
 

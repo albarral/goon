@@ -28,8 +28,7 @@ Segmenter::Segmenter ()
     MIN_SIZE = 0;
     pRetina = 0;
     bnewRequest = false;
-    numSeedsUsed = 0;
-    numFloodfills = 0;
+    beat = 0;
 }
 
 // destructor
@@ -60,8 +59,9 @@ void Segmenter::first()
     // start in READY state
     if (binitialized)
     {
-        LOG4CXX_INFO(logger, "started");  
         setState(Segmenter::eSEG_READY);
+        beat = 0;
+        LOG4CXX_INFO(logger, "started");  
     }
     // if not initialized -> OFF
     else
@@ -83,6 +83,8 @@ void Segmenter::loop()
         extractRegions();
         // set state READY
         setState(Segmenter::eSEG_READY);
+
+        newBeat();
     }
 }
 
@@ -96,7 +98,7 @@ bool Segmenter::newRequest(cv::Mat& image_cam, cv::Mat& image_hsv)
     // accept request if module is READY
     if (isReady())
     {
-        LOG4CXX_TRACE(logger, "segment requested" << ID);  
+        LOG4CXX_TRACE(logger, "new request");  
         bnewRequest = true;
         imageCam = image_cam;
         imageHSV = image_hsv;
@@ -104,7 +106,10 @@ bool Segmenter::newRequest(cv::Mat& image_cam, cv::Mat& image_hsv)
     }
     // otherwise, reject it
     else
+    {
+        LOG4CXX_WARN(logger, "new request ignored, segmenter not in READY state");  
         return false;
+    }
 }
 
 bool Segmenter::isProcessingRequested()
@@ -135,26 +140,30 @@ void Segmenter::extractRegions ()
     Region oRegion;
     int region_size;
 
-    numSeedsUsed = 0;
-    numFloodfills = 0;
+    // reset counters
+    int samples = 0;
+    int numFloodfills = 0;
+    int numRegions = 0;
 
     // start getting seeds from a random position in the vector
     std::vector<cv::Point>::iterator it_seed = vec_seeds.begin();
     std::advance(it_seed, getRandomIndex());
     
-    while (numSeedsUsed < NUM_SAMPLES)
-    {        
+    while (samples < NUM_SAMPLES)
+    {                 
+        samples++;        
         // if seed not segmented, expand from it a new region 		
         if (mask_segmented2.at<uchar>(it_seed->y, it_seed->x) == 0)
         {		
+            numFloodfills++;
             oFloodfiller.floodFill(*it_seed, imageCam, imageHSV);    
             
             region_size = oFloodfiller.getRegionArea();
-            numFloodfills++;
          
             // if the region is big enough, accept it 
             if (region_size > MIN_SIZE)
             {
+                numRegions++;
                 // build the region (type, mass, mask, window, grid, color and position)
                 oRegion.setType(Region::eREG_SIMPLE); 
                 oRegion.setMass(region_size);
@@ -170,9 +179,6 @@ void Segmenter::extractRegions ()
                 pRetina->addRegion(oRegion);
 
                 LOG4CXX_TRACE(logger, "-> region " << oRegion.getID());
-                //LOG4CXX_TRACE(logger, "mass =" << oRegion.getMass());
-                //cv::Vec3f hsv = oHSVEssence.getMainColor();
-                //LOG4CXX_TRACE(logger, "hsv color = " << (int)hsv[0] << ", " << (int)hsv[1]*100/255 << ", " << (int)hsv[2]*100/255); 
 //                if (bdebug)                            
 //                    showProgress();
             }
@@ -180,14 +186,13 @@ void Segmenter::extractRegions ()
                 LOG4CXX_TRACE(logger, "-> region ignored");
         }      
 
-        numSeedsUsed++;        
         // get next seed (if end of vector reached, follow at the beginning)
         it_seed++;
         if (it_seed == vec_seeds.end())
             it_seed = vec_seeds.begin();            
     } // end while    
     
-    LOG4CXX_TRACE(logger, "extracted regions = " << pRetina->getNumRegions() << " - num floodfills = " << numFloodfills);
+    LOG4CXX_TRACE(logger, "extracted regions = " << numRegions << ", num floodfills = " << numFloodfills << ", samples = " << samples);
 }
   
 
@@ -196,6 +201,21 @@ int Segmenter::getRandomIndex()
     return (vec_seeds.size() * (float) std::rand() / RAND_MAX);
 }
 		
+
+int Segmenter::getBeat() 
+{
+    std::lock_guard<std::mutex> locker(mutex2);
+    return beat;
+}
+
+void Segmenter::newBeat()
+{
+    std::lock_guard<std::mutex> locker(mutex2);
+    // produce new beat
+    beat++;
+    if (beat == 1000)
+        beat = 0;
+}
 
 //void Segmenter::showProgress()
 //{

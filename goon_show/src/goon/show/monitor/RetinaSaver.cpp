@@ -21,9 +21,9 @@ void RetinaSaver::setDestinationFolder(std::string path)
     this->path = path;            
 }
 
-void RetinaSaver::saveRegions (cv::Mat& image_cam, std::list<Region>& listRegions)
+void RetinaSaver::saveRegions (cv::Mat& imageCam, std::list<Region>& listRegions)
 {    
-    oDraw.setSize(image_cam);
+//    oDraw.setSize(image_cam);
     
     // draw each segmented region in a separate file
     for (Region& oRegion: listRegions) 
@@ -31,21 +31,7 @@ void RetinaSaver::saveRegions (cv::Mat& image_cam, std::list<Region>& listRegion
 //        // skip simple regions
 //        if (oRegion.getType() == Region::eREG_SIMPLE)
 //            continue;
-        
-        oDraw.clearBackGround();
-        // draw masks
-        oDraw.setExactColor(oRegion.getRGB());
-        oDraw.drawMask (oRegion.getMask(), oRegion.getWindow());
-        oDraw.drawWindow (oRegion.getWindow());
-
-        // draw centroids
-        int* pos = oRegion.getPos();
-        cv::Point centroid(pos[0], pos[1]);                        
-        oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
-
-        // draw ID's
-        oDraw.drawNumber(oRegion.getID(), centroid);                        
-
+  
         // save file        
         std::string filename; 
         switch (oRegion.getType())
@@ -58,12 +44,33 @@ void RetinaSaver::saveRegions (cv::Mat& image_cam, std::list<Region>& listRegion
                 filename = "xregion_";
                 break;
         }
-        std::string filePath = path + "/" + filename + std::to_string(oRegion.getID()) + imgExtension;
-        cv::imwrite(filePath, oDraw.getOutput()); 
-
-//      cv::Point& seed = oRegion.getSeed();
-//      oDrawRet.drawPoint(seed, tivy::Draw::eYELLOW);
+        filename += std::to_string(oRegion.getID());
+        
+        saveBody(imageCam, oRegion, oRegion.getRGB(), filename, oRegion.getID());
     }
 }
 
+void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, std::string name, int ID)
+{
+    oDraw.setSize(imageCam);
+    
+    oDraw.clearBackGround();
+    // draw mask
+    oDraw.setExactColor(rgbColor);
+    oDraw.drawMask(oBody.getMask(), oBody.getWindow());
+    oDraw.drawWindow(oBody.getWindow());
+
+    // draw centroid
+    int* pos = oBody.getPos();
+    cv::Point centroid(pos[0], pos[1]);                        
+    oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
+    // draw ID
+    oDraw.drawNumber(ID, centroid);                        
+
+    std::string filePath = path + "/" + name + imgExtension;
+    cv::imwrite(filePath, oDraw.getOutput()); 
+
+    //      cv::Point& seed = oBody.getSeed();
+    //      oDrawRet.drawPoint(seed, tivy::Draw::eYELLOW);    
+}
 }
