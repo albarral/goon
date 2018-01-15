@@ -127,7 +127,7 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                         num_pixels++;
 
                         // include pixel in region (mask, color grid, mass)
-                        oExploration.markPixel(true);
+                        oExploration.markPixelAccepted();
                         point_exp = oExploration.getPixel();
                         
                         oColorGrid.selectNode(point_exp);
@@ -141,10 +141,10 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                     }
                     // otherwise -> reject it
                     else
-                        oExploration.markPixel(false);
+                        oExploration.markPixelRejected();
                 }
                 else if (pixelState == Exploration::eFORBIDEN)
-                    oExploration.markPixel(false);
+                    oExploration.markPixelForbidden();
                 
             } // end for
         } // end if not in border

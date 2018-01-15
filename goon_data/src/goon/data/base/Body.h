@@ -21,8 +21,9 @@ namespace goon
  class Body : public Blob
 {
  public:
-    static const int BODY_VALUE = 255;
-    static const int BORDER_VALUE = 1;
+    static const uchar BODY_VALUE = 255;
+    static const uchar BORDER_VALUE = 1;
+    static const uchar FORBIDDEN_VALUE = 2;
      
  protected:
      cv::Mat mask;       // body mask

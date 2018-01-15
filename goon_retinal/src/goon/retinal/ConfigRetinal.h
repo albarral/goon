@@ -12,7 +12,7 @@ namespace goon
 class ConfigRetinal
 {
 public:    
-    static const int EXPLORED_VALUE = 255;
+    static const unsigned char EXPLORED_VALUE = 255;
 private:
     // segmentation 
     float SEGMENTATION_MIN_DETAIL;      // minimum area of details allowed for detection (fraction of image area)

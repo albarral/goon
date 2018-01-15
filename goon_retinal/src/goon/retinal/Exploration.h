@@ -39,7 +39,7 @@ private:
     cv::Mat image_hsv;               // input image in HSV space (externally provided)
     int row_step;                          // real size of image rows      
     cv::Point seed;                       // seed point whose adjacent points are explored
-    cv::Point pixel;                        // sensed pixel (adjacent to seed))
+    cv::Point pixel;                        // sensed pixel (adjacent to seed)
     int state;                                // state of the sensed pixel
     uchar *pexplored_seed;           // pointers to seeds  
     uchar *pregion_seed; 
@@ -79,10 +79,13 @@ public:
     // Explores a location (east, south, west, north) adjacent to the present seed.
     // It returns the pixel state (clean, explored, forbidden).
     int checkAdjacent (int location);
+    // moves the explored pixel to the given direction
+    void movePixel(int direction);
         
-    // Updates the pixel state in the present patch location.
-    // Marks pixels as accepted or rejected.
-    void markPixel (bool baccepted);     
+    // marks pixels as accepted/rejected/border.
+    void markPixelAccepted();     
+    void markPixelRejected();     
+    void markPixelForbidden();     
     
     // Obtains the explored window
     void computeWindow();

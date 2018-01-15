@@ -42,15 +42,17 @@ void Exploration::prepare(cv::Mat& image_cam, cv::Mat& imageHSV)
     if (window.width > 0 && window.height > 0)
     {
          mask_roi = mask_explored(window);
-         mask_roi = cv::Scalar(0,0,0);        
+         mask_roi.setTo(0);
+         //mask_roi = cv::Scalar(0,0,0);        
          mask_roi = mask_region(window);
-         mask_roi = cv::Scalar(0,0,0);        
+         mask_roi.setTo(0);
+         //mask_roi = cv::Scalar(0,0,0);        
     }    
 }
 
 void Exploration::setForbiddenMask(cv::Mat& mask_segmented)
 {
-    mask_forbiden =  mask_segmented;    
+    mask_forbiden = mask_segmented;    
 }
 
 void Exploration::firstWindow(cv::Point& point)
@@ -73,113 +75,90 @@ void Exploration::moveSeed (cv::Point& new_seed)
 }
 
 
-int Exploration::checkAdjacent(int location)
+int Exploration::checkAdjacent(int direction)
 {    
+    // center pixel in seed
     pixel = seed;
-    state = Exploration::eFREE;
-    
-    switch (location)
+    int step, step3;
+    // define steps to get adjacent pixel
+    switch (direction)
     {
         case eEAST:
-                pexplored_pixel = pexplored_seed + 1;
-                // not explored
-                if (*pexplored_pixel == 0)
-                {
-                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
-                    pforbiden_pixel = pforbiden_seed + 1;
-                    pixel.x++;
-                    if (pixel.x > xmax)                    
-                        xmax = pixel.x;
-                    // not forbiden
-                    if (*pforbiden_pixel == 0)                         
-                    {
-                        pimg_pixel = pimg_seed + 3; 
-                        phsv_pixel = phsv_seed + 3; 
-                        pregion_pixel = pregion_seed + 1;                         
-                    }
-                    else
-                        state = Exploration::eFORBIDEN;
-                }
-                else
-                    state = Exploration::eEXPLORED;
-                break;
+            step = 1;
+            step3 = 3;    
+            break;
                 
         case eSOUTH:
-                pexplored_pixel = pexplored_seed + row_step;
-                // not explored
-                if (*pexplored_pixel == 0)
-                {
-                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
-                    pforbiden_pixel = pforbiden_seed + row_step; 						
-                    pixel.y++;
-                    if (pixel.y > ymax)                            
-                        ymax = pixel.y;
-                    // not forbiden
-                    if (*pforbiden_pixel == 0)                         
-                    {
-                        pimg_pixel = pimg_seed + 3*row_step; 
-                        phsv_pixel = phsv_seed + 3*row_step; 
-                        pregion_pixel = pregion_seed + row_step;                         
-                    }
-                    else
-                        state = Exploration::eFORBIDEN;
-                }
-                else
-                    state = Exploration::eEXPLORED;
-                break;
+            step = row_step;
+            step3 = 3*row_step;    
+            break;
                 
         case eWEST:
-                pexplored_pixel = pexplored_seed - 1;
-                // not explored
-                if (*pexplored_pixel == 0)
-                {
-                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
-                    pforbiden_pixel = pforbiden_seed - 1; 						
-                    pixel.x--;
-                    if (pixel.x < xmin)                            
-                        xmin = pixel.x;
-                    // not forbiden
-                    if (*pforbiden_pixel == 0)                         
-                    {
-                        pimg_pixel = pimg_seed - 3;                    
-                        phsv_pixel = phsv_seed - 3; 
-                        pregion_pixel = pregion_seed - 1; 
-                    }
-                    else
-                        state = Exploration::eFORBIDEN;
-                }
-                else
-                    state = Exploration::eEXPLORED;
-               break;
+            step = -1;
+            step3 = -3;    
+            break;
                
         case eNORTH:
-                pexplored_pixel = pexplored_seed - row_step;
-                // not explored
-                if (*pexplored_pixel == 0)
-                {
-                    *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
-                    pforbiden_pixel = pforbiden_seed - row_step; 	
-                    pixel.y--;
-                    if (pixel.y < ymin)                            
-                        ymin = pixel.y;
-                    // not forbiden
-                    if (*pforbiden_pixel == 0)                         
-                    {
-                        pimg_pixel = pimg_seed - 3*row_step; 
-                        phsv_pixel = phsv_seed - 3*row_step; 
-                        pregion_pixel = pregion_seed - row_step; 
-                    }
-                    else
-                        state = Exploration::eFORBIDEN;
-               }
-                else
-                    state = Exploration::eEXPLORED;
-                break;
+            step = -row_step;
+            step3 = -3*row_step;    
+            break;
     } // end switch
+    
+    pexplored_pixel = pexplored_seed + step;
+    // if not explored
+    if (*pexplored_pixel == 0)
+    {
+        *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
+        pforbiden_pixel = pforbiden_seed + step;
+        // move pixel to specified direction
+        movePixel(direction);
+        // if not forbidden, get data
+        if (*pforbiden_pixel == 0)                         
+        {
+            state = Exploration::eFREE;
+            pimg_pixel = pimg_seed + step3; 
+            phsv_pixel = phsv_seed + step3; 
+            pregion_pixel = pregion_seed + step; 
+        }
+        else
+            state = Exploration::eFORBIDEN;
+    }
+    else
+        state = Exploration::eEXPLORED;
     
     return state;
 }
 
+
+void Exploration::movePixel(int direction)
+{    
+    switch (direction)
+    {
+        case eEAST:
+            pixel.x++;
+            if (pixel.x > xmax)                    
+                xmax = pixel.x;
+            break;
+                
+        case eSOUTH:
+            pixel.y++;
+            if (pixel.y > ymax)                            
+                ymax = pixel.y;
+            break;
+                
+        case eWEST:
+            pixel.x--;
+            if (pixel.x < xmin)                            
+                xmin = pixel.x;
+           break;
+               
+        case eNORTH:
+            pixel.y--;
+            if (pixel.y < ymin)                            
+                ymin = pixel.y;
+            break;
+    } // end switch
+}
 
 void Exploration::getPixelRGB(cv::Vec3b& rgb_color)
 {
@@ -217,17 +196,23 @@ void Exploration::getSeedHSV(cv::Vec3i& hsv_color)
 }
 
 
-void Exploration::markPixel(bool baccepted)
+void Exploration::markPixelAccepted()
 {  
     // pixel accepted -> marked as region and forbidden
-     if (baccepted)
-    {
-         *pregion_pixel = Body::BODY_VALUE;														
-         *pforbiden_pixel = ConfigRetinal::EXPLORED_VALUE;
-     }
+     *pregion_pixel = Body::BODY_VALUE;														
+     *pforbiden_pixel = ConfigRetinal::EXPLORED_VALUE;
+}
+
+void Exploration::markPixelRejected()
+{  
      // pixel rejected -> marked as border (used by later merge process)
-     else
-         *pregion_pixel = Body::BORDER_VALUE;														             
+    *pregion_pixel = Body::BORDER_VALUE;														             
+}
+
+void Exploration::markPixelForbidden()
+{  
+     // pixel forbidden -> marked as forbidden
+    *pregion_pixel = Body::BORDER_VALUE;	//	Body::FORBIDDEN_VALUE;														             
 }
 
 // Must be called at the end of each exploration process.
