@@ -118,7 +118,7 @@ void ShowRetina::oneShot()
     // save region images
     RetinaSaver oRetinaSaver;
     oRetinaSaver.setDestinationFolder(folder);           
-    oRetinaSaver.saveRegions(imageCam, pVisualData->getRetina2().getListRegions());
+    oRetinaSaver.saveRegions(imageCam, pVisualData->getRetina2().getListRegions(), true);
 }
 
 }

@@ -13,7 +13,8 @@ namespace goon
 RetinaSaver::RetinaSaver()
 {
     path = std::getenv("HOME");    
-    imgExtension = ".jpg";
+    //imgExtension = ".jpg";
+    imgExtension = ".bmp";
 }
 
 void RetinaSaver::setDestinationFolder(std::string path)
@@ -21,10 +22,8 @@ void RetinaSaver::setDestinationFolder(std::string path)
     this->path = path;            
 }
 
-void RetinaSaver::saveRegions (cv::Mat& imageCam, std::list<Region>& listRegions)
+void RetinaSaver::saveRegions (cv::Mat& imageCam, std::list<Region>& listRegions, bool bdrawCentroid)
 {    
-//    oDraw.setSize(image_cam);
-    
     // draw each segmented region in a separate file
     for (Region& oRegion: listRegions) 
     {
@@ -46,11 +45,11 @@ void RetinaSaver::saveRegions (cv::Mat& imageCam, std::list<Region>& listRegions
         }
         filename += std::to_string(oRegion.getID());
         
-        saveBody(imageCam, oRegion, oRegion.getRGB(), filename, oRegion.getID());
+        saveBody(imageCam, oRegion, oRegion.getRGB(), filename, oRegion.getID(), bdrawCentroid);
     }
 }
 
-void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, std::string name, int ID)
+void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, std::string name, int ID, bool bdrawCentroid)
 {
     oDraw.setSize(imageCam);
     
@@ -58,14 +57,17 @@ void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, 
     // draw mask
     oDraw.setExactColor(rgbColor);
     oDraw.drawMask(oBody.getMask(), oBody.getWindow());
-    oDraw.drawWindow(oBody.getWindow());
+    //oDraw.drawWindow(oBody.getWindow());
 
     // draw centroid
-    int* pos = oBody.getPos();
-    cv::Point centroid(pos[0], pos[1]);                        
-    oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
-    // draw ID
-    oDraw.drawNumber(ID, centroid);                        
+    if (bdrawCentroid)
+    {
+        int* pos = oBody.getPos();
+        cv::Point centroid(pos[0], pos[1]);                        
+        oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
+        // draw ID
+        oDraw.drawNumber(ID, centroid);                        
+    }
 
     std::string filePath = path + "/" + name + imgExtension;
     cv::imwrite(filePath, oDraw.getOutput()); 

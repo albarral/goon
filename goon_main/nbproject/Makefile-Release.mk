@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/main/main.o \
 	${OBJECTDIR}/src/goon/main/test/Test.o \
 	${OBJECTDIR}/src/goon/main/test/TestBodies.o \
+	${OBJECTDIR}/src/goon/main/test/TestImage.o \
 	${OBJECTDIR}/src/goon/main/test/TestRegions.o
 
 
@@ -85,6 +86,11 @@ ${OBJECTDIR}/src/goon/main/test/TestBodies.o: src/goon/main/test/TestBodies.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestBodies.o src/goon/main/test/TestBodies.cpp
+
+${OBJECTDIR}/src/goon/main/test/TestImage.o: src/goon/main/test/TestImage.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestImage.o src/goon/main/test/TestImage.cpp
 
 ${OBJECTDIR}/src/goon/main/test/TestRegions.o: src/goon/main/test/TestRegions.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test

@@ -33,10 +33,10 @@ public:
     void setDestinationFolder(std::string path);
     
     // saves an image for each region in the given list
-    void saveRegions (cv::Mat& image_cam, std::list<Region>& listRegions);
+    void saveRegions (cv::Mat& image_cam, std::list<Region>& listRegions, bool bdrawCentroid = false);
     
     // saves an image of the given body (and sets the given name)
-    void saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& color, std::string name, int ID);    
+    void saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& color, std::string name, int ID, bool bdrawCentroid = false);    
 };
 }    
 #endif

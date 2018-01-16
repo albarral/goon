@@ -6,13 +6,10 @@
 #include <unistd.h>
 #include <vector>
 
-#include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
+#include <opencv2/highgui/highgui.hpp>
 
 #include "goon/main/test/Test.h"
-#include "goon/core/VisualData.h"
-#include "goon/camera/Grabber.h"
 #include "goon/retinal/merge.h"
-#include "goon/retinal/Segmenter.h"
 #include "goon/show/monitor/RetinaSaver.h"
 #include "tuly/utils/Environment.h"
 
@@ -26,92 +23,117 @@ void Test::testMaskAcces()
 {        
     LOG4CXX_INFO(logger, "\n\nTest mask access ...\n");    
 
-    int w = 640;
-    int h = 480;
+    int w = 20;
+    int h = 20;
 
     cv::Mat mask = cv::Mat::zeros(h, w, CV_8UC1); 
     
-    cv::Point point(w, h);  // BAD LOCATION
+    cv::Point point(10, 5);
     int value = mask.at<uchar>(point.y, point.x);
     
-    LOG4CXX_INFO(logger, "value = " << value);    
+    LOG4CXX_INFO(logger, "value = " << value);        
 }
 
 void Test::testSegmentation()
 {        
     LOG4CXX_INFO(logger, "\nTest segmentation ...");    
 
+    bool bdual = true; // dual segmentation
+    
     VisualData oVisualData;        
-    Grabber oGrabber;   // utility class used for frame grabbing from any source    
-    oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange3.jpg");
-    if (oGrabber.grab())            
+    TestImage oTestImage;
+//    oTestImage.createImage(20,20);
+//    bool bok = true;
+    bool bok = oTestImage.loadImage();
+    if (bok)            
     {
-        cv::Mat imageCam = oGrabber.getCapture();
-        // convert to HSV space
-        cv::Mat imageHSV;        
-        cv::cvtColor(imageCam, imageHSV, CV_BGR2HSV);
+        // get test images & mask segmented
+        cv::Mat imageCam = oTestImage.getImageCam();
+        cv::Mat imageHSV = oTestImage.getImageHSV();        
+        cv::Mat mask_segmented = oTestImage.getMaskSegmented();
         
-        int imgW = imageCam.cols;
-        int imgH = imageCam.rows;
-
         // compute minimum detail size
         float MIN_DETAIL = 0.001;        // regions accepted from at least 0.1% of image area
-        int minDetailSize = imgH * imgW * MIN_DETAIL;   
+        int minDetailSize = imageCam.cols * imageCam.rows * MIN_DETAIL;   
+        minDetailSize = 1;
         int samples = 1;
-
-        // create the segmentation mask (to be shared by all segmenters)
-        cv::Mat mask_segmented = cv::Mat::zeros(imgH, imgW, CV_8UC1); 
-        cv::Point p1(100, 150);
-        cv::Point p2(300, 150);
-        std::vector<cv::Point> listSeeds1 = {p1};
-        std::vector<cv::Point> listSeeds2 = {p2};   
+                
         // segmenter 1
         Segmenter oSegmenter1;
         oSegmenter1.setID(1);
         oSegmenter1.init(oVisualData.getRetina(), mask_segmented);
-        oSegmenter1.config(listSeeds1, samples, minDetailSize);
-        oSegmenter1.setFrequency(100);   // to wait small delays
         // segmenter 2
         Segmenter oSegmenter2;
-        oSegmenter2.setID(2);
-        oSegmenter2.init(oVisualData.getRetina(), mask_segmented);
-        oSegmenter2.config(listSeeds2, samples, minDetailSize);         
-        oSegmenter2.setFrequency(100);   // to wait small delays
-        
-        oSegmenter1.on();
-        oSegmenter2.on();
-        // wait till both segmenters are ready
-        while (!oSegmenter1.isReady() || !oSegmenter2.isReady())
+        if (bdual)
         {
-            usleep(10000); // 10ms        
+            oSegmenter2.setID(2);
+            oSegmenter2.init(oVisualData.getRetina(), mask_segmented);
         }
 
-        int beat1 = oSegmenter1.getBeat();
-        int beat2 = oSegmenter2.getBeat();
-        oSegmenter1.newRequest(imageCam, imageHSV);
-        oSegmenter2.newRequest(imageCam, imageHSV);        
+        // launch segmenters
+        //cv::Point seed1(10, 10);
+        cv::Point seed1(100, 150);
+        cv::Point seed2(300, 150);
+        bok = launchSegmenter(oSegmenter1, imageCam, imageHSV, seed1, samples, minDetailSize);
+        if (bok && bdual)
+            bok = launchSegmenter(oSegmenter2, imageCam, imageHSV, seed2, samples, minDetailSize);
         
-        // wait till both segmenters are finished
-        while (oSegmenter1.getBeat() == beat1 || oSegmenter2.getBeat() == beat2)
-        {
-            usleep(10000); // 10ms        
-        }
+        // wait for segmenter jobs done
+        if (bok)
+            waitSegmenterFinished(oSegmenter1);
+        if (bok && bdual)
+            waitSegmenterFinished(oSegmenter2);
 
         // show retina description
         LOG4CXX_INFO(logger, oVisualData.getRetina().shortDesc());
         
-        oSegmenter1.off();
-        oSegmenter2.off();
-        oSegmenter1.wait();
-        oSegmenter2.wait();        
-     
-//        Merge oMerge;
-//        oMerge.init(imgW, imgH);
-//        oMerge.doMerge(oVisualData.getRetina());
+        Merge oMerge;
+        oMerge.init(imageCam.cols, imageCam.rows);
+        oMerge.doMerge(oVisualData.getRetina());
 
         showRetina(imageCam, oVisualData.getRetina());
     }
     LOG4CXX_INFO(logger, "Test finished");    
+}
+
+bool Test::launchSegmenter(Segmenter& oSegmenter, cv::Mat& imageCam, cv::Mat& imageHSV, cv::Point& seed, int samples, int detail)
+{
+    if (seed.x >= imageCam.cols || seed.y >= imageCam.rows)
+    {
+        LOG4CXX_WARN(logger, "Segmenter not launched, seed out of bounds!");           
+        return false;
+    }
+    
+    // prepare segmenter
+    std::vector<cv::Point> listSeeds = {seed};
+    oSegmenter.config(listSeeds, samples, detail);
+    oSegmenter.setFrequency(100);           
+
+    // launch segmenter thread
+    oSegmenter.on();
+    // wait till segmenter is ready to work
+    while (!oSegmenter.isReady())
+    {
+        usleep(10000); // 10ms        
+    }
+
+    // and request image processing
+    oSegmenter.newRequest(imageCam, imageHSV);    
+
+    return true;
+}
+
+void Test::waitSegmenterFinished(Segmenter& oSegmenter)
+{
+    // wait till segmenter has finished its work
+    while (oSegmenter.getBeat() == 0)
+    {
+        usleep(10000); // 10ms        
+    }
+
+    // and ask it to end
+    oSegmenter.off();
+    oSegmenter.wait();
 }
 
 void Test::showRetina(cv::Mat& imageCam, Retina& oRetina)
@@ -122,26 +144,35 @@ void Test::showRetina(cv::Mat& imageCam, Retina& oRetina)
     // save region images
     RetinaSaver oRetinaSaver;
     oRetinaSaver.setDestinationFolder(folder);           
-    oRetinaSaver.saveRegions(imageCam, oRetina.getListRegions());   
+    oRetinaSaver.saveRegions(imageCam, oRetina.getListRegions(), false);   
 
+    // save region borders
     std::list<Region>::iterator itRegion = oRetina.getListRegions().begin();
-    Body oBorder1 = getBorderFromRegion(*itRegion);
-    std::string filename = "border1";            
-    oRetinaSaver.saveBody(imageCam, oBorder1, itRegion->getRGB(), filename, 1);
+    for (int i=0; i<oRetina.getNumRegions(); i++)
+    {
+        Body oBorder = getBorderFromRegion(*itRegion);
+        std::string filename = "border" + std::to_string(i);            
+        oRetinaSaver.saveBody(imageCam, oBorder, itRegion->getRGB(), filename, i, false);    
+        itRegion++;
+    }
     
-    itRegion++;
-    Body oBorder2 = getBorderFromRegion(*itRegion);
-    filename = "border2";            
-    oRetinaSaver.saveBody(imageCam, oBorder2, itRegion->getRGB(), filename, 2);
+    // save camera image
+    std::string filePath = folder + "/image.bmp";
+    cv::imwrite(filePath, imageCam);     
 }
 
 Body Test::getBorderFromRegion(Region& oRegion)
 {
     Body oBody;
     cv::Mat maskBorder = oRegion.computeBorderMask();
-    //cv::Rect window = oRegion.getWindow();
-    cv::Rect window(0, 0, maskBorder.cols, maskBorder.rows);
-    oBody.setMaskAndWindow(maskBorder, window);
+    // the border mask is translated to (0,0) as comes from the region mask
+    // so to create a body of the border the window must start at (0,0)
+    cv::Rect borderWindow = oRegion.getWindow();
+    borderWindow.x = borderWindow.y = 0;
+    oBody.setMaskAndWindow(maskBorder, borderWindow);
+    // but finally move window to original position to be coherent with region
+    cv::Rect& bodyWindow = oBody.getWindow();
+    bodyWindow += cv::Point(oRegion.getWindow().x, oRegion.getWindow().y);
     
     return oBody;
 }

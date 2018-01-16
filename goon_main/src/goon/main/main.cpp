@@ -34,9 +34,9 @@ int main(int argc, char** argv)
         
     LOG4CXX_INFO(logger, "\n\nSTART goon\n");
 
-    //runGoon();
+    runGoon();
     //oneShotTest();
-    test();
+    //test();
       
     return 0;
 }
