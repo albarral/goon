@@ -39,6 +39,7 @@ Body& Body::operator=(const Body& oBody)
 // The given mask is roied and cloned
 void Body::setMaskAndWindow(cv::Mat& amask, cv::Rect& awindow)
 {
+    // assure that given window lies inside of given mask
     assert(amask.rows >= awindow.y+awindow.height);
     assert(amask.cols >= awindow.x+awindow.width);
     

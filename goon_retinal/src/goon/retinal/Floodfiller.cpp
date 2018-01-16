@@ -86,6 +86,7 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
         point = deq_floodfill.front();
         deq_floodfill.pop_front();
         
+        //LOG4CXX_TRACE(logger, "Floodfill: seed " << "(" << point.x << ", " << point.y << ")");
         bInBorder = (point.x == 0 || point.x == right_border || point.y == 0 || point.y == bottom_border);
 
         // avoid expanding to the border
@@ -116,6 +117,9 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
             for (int i = Exploration::eEAST; i < Exploration::eLOCS_DIM; i++) 
             {
                 int pixelState = oExploration.checkAdjacent(i);
+//                cv::Point pointAux = oExploration.getPixel();
+//                LOG4CXX_TRACE(logger, "Floodfill: point " << "(" << pointAux.x << ", " << pointAux.y << ") " << pixelState);
+                
                 if (pixelState == Exploration::eFREE)
                 {                    
                     oExploration.getPixelRGB(pixel_rgb);                          
@@ -124,6 +128,7 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
                     // if pixel's color is similar to local color and similar to central color -> include it in the region
                     if (oColorSimilarity.checkSameColor(local_rgb, pixel_rgb, oHSVEssence, pixel_hsv))
                     {
+                        //LOG4CXX_TRACE(logger, "ok");
                         num_pixels++;
 
                         // include pixel in region (mask, color grid, mass)
@@ -139,12 +144,13 @@ void Floodfiller::floodFill(cv::Point& seed, cv::Mat& image_cam, cv::Mat& image_
 //                        if (bdebug && oDebug.checkProgress())
 //                            showProgress();
                     }
-                    // otherwise -> reject it
+                    // otherwise -> reject it (mark it as border)
                     else
                         oExploration.markPixelRejected();
                 }
+                // forbidden pixels also marked as border
                 else if (pixelState == Exploration::eFORBIDEN)
-                    oExploration.markPixelForbidden();
+                    oExploration.markPixelRejected();
                 
             } // end for
         } // end if not in border

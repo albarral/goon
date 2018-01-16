@@ -84,8 +84,8 @@ void Merge::checkProximityMerge(Retina& oRetina)
                 // check if region masks are also bordering
                 int borderSize = it_region2->computeOverlap(maskBorder1, window1);
                 
-                // if regions have touching borders, check if the can be merged
-                if (borderSize > 0)
+                // if regions have touching borders, check if they can be merged
+                if (borderSize > 10)
                 {                    
                     // check local color similarity
                     if (checkLocalSimilarity(*it_region1, *it_region2))
@@ -97,7 +97,7 @@ void Merge::checkProximityMerge(Retina& oRetina)
                         mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
                         mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;                    
                         LOG4CXX_DEBUG(logger, "merged " << it_region1->getID() << " + " << it_region2->getID());
-                        LOG4CXX_DEBUG(logger, "border size = " << borderSize);
+                        //LOG4CXX_DEBUG(logger, "border size = " << borderSize);
                     }
                 }
             } // end if		

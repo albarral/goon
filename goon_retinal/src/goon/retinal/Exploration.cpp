@@ -110,6 +110,7 @@ int Exploration::checkAdjacent(int direction)
     {
         *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
         pforbiden_pixel = pforbiden_seed + step;
+        pregion_pixel = pregion_seed + step; // move pixel even if it's forbidden to allow whole border marking
         // move pixel to specified direction
         movePixel(direction);
         // if not forbidden, get data
@@ -118,7 +119,6 @@ int Exploration::checkAdjacent(int direction)
             state = Exploration::eFREE;
             pimg_pixel = pimg_seed + step3; 
             phsv_pixel = phsv_seed + step3; 
-            pregion_pixel = pregion_seed + step; 
         }
         else
             state = Exploration::eFORBIDEN;
@@ -207,12 +207,6 @@ void Exploration::markPixelRejected()
 {  
      // pixel rejected -> marked as border (used by later merge process)
     *pregion_pixel = Body::BORDER_VALUE;														             
-}
-
-void Exploration::markPixelForbidden()
-{  
-     // pixel forbidden -> marked as forbidden
-    *pregion_pixel = Body::BORDER_VALUE;	//	Body::FORBIDDEN_VALUE;														             
 }
 
 // Must be called at the end of each exploration process.

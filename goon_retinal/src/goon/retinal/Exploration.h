@@ -82,10 +82,9 @@ public:
     // moves the explored pixel to the given direction
     void movePixel(int direction);
         
-    // marks pixels as accepted/rejected/border.
+    // marks pixels as accepted/rejected
     void markPixelAccepted();     
     void markPixelRejected();     
-    void markPixelForbidden();     
     
     // Obtains the explored window
     void computeWindow();

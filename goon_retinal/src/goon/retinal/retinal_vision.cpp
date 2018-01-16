@@ -65,7 +65,7 @@ void RetinalVision::update (cv::Mat& image_cam)
 
     oMerge.doMerge(*pRetina);
 
-    //pRetina->removeInvalidRegions();
+    pRetina->removeInvalidRegions();
 
     //LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
     //describeRegions();

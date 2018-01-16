@@ -23,7 +23,6 @@ namespace goon
  public:
     static const uchar BODY_VALUE = 255;
     static const uchar BORDER_VALUE = 1;
-    static const uchar FORBIDDEN_VALUE = 2;
      
  protected:
      cv::Mat mask;       // body mask
