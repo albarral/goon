@@ -23,6 +23,10 @@
           <itemPath>src/goon/features/color/rgb_color.cpp</itemPath>
           <itemPath>src/goon/features/color/rgb_color.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="motion" displayName="motion" projectFiles="true">
+          <itemPath>src/goon/features/motion/TransMotion.cpp</itemPath>
+          <itemPath>src/goon/features/motion/TransMotion.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="shape" displayName="shape" projectFiles="true">
           <itemPath>src/goon/features/shape/shape.cpp</itemPath>
           <itemPath>src/goon/features/shape/shape.h</itemPath>
@@ -124,6 +128,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/features/motion/TransMotion.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/motion/TransMotion.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/features/shape/shape.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/shape/shape.h" ex="false" tool="3" flavor2="0">
@@ -189,6 +203,16 @@
             flavor2="0">
       </item>
       <item path="src/goon/features/color/rgb_color.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/motion/TransMotion.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/motion/TransMotion.h"
             ex="false"
             tool="3"
             flavor2="0">

@@ -10,7 +10,7 @@ namespace goon
 RealBody::RealBody ()
 {
     age = 0;
-    stability = 0;
+//    stability = 0;
 }
 
 void RealBody::setBody(Body& oBody)
@@ -26,7 +26,7 @@ void RealBody::updateMotion(int millis)
 std::string RealBody::toString()
 {
     std::string desc = "RealBody [age = " + std::to_string(age) + 
-            ", stability = " + std::to_string(stability) + 
+//            ", stability = " + std::to_string(stability) + 
             "\n" + oMotion.toString() +
             "]" + 
             "\n" + Blob::toString() + 
@@ -37,8 +37,9 @@ std::string RealBody::toString()
 std::string RealBody::shortDesc()
 {
     return ("RealBody: age = " + std::to_string(age) + 
-            ", stability = " + std::to_string(stability) + 
-            "\n" + oMotion.toString());
+ //           ", stability = " + std::to_string(stability) + 
+            "\n" + oMotion.toString() +
+            "\n" + Body::shortDesc());
 }
 
 }

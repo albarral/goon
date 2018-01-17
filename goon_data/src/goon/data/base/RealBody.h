@@ -9,7 +9,7 @@
 #include <string>
 
 #include "goon/data/base/Body.h"
-#include "goon/data/base/TransMotion.h"
+#include "goon/features/motion/TransMotion.h"
 
 namespace goon 
 {
@@ -19,7 +19,7 @@ class RealBody : public Body
 {
 protected:
     int age;
-    int stability;
+//    int stability;
     TransMotion oMotion;
 
 public:    
@@ -32,8 +32,8 @@ public:
     int getAge() {return age;};
     void increaseAge() {age++;};
     
-    int getStability() {return stability;};
-    void setStability(int value) {stability = value;};
+//    int getStability() {return stability;};
+//    void setStability(int value) {stability = value;};
     
     TransMotion& getMotion() {return oMotion;};    
     void updateMotion(int millis);

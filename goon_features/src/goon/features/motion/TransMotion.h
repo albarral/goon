@@ -1,5 +1,5 @@
-#ifndef __GOON_DATA_TRANSMOTION_H
-#define __GOON_DATA_TRANSMOTION_H
+#ifndef __GOON_FEATURES_TRANSMOTION_H
+#define __GOON_FEATURES_TRANSMOTION_H
 
 /***************************************************************************
  *   Copyright (C) 2018 by Migtron Robotics   *
@@ -20,7 +20,7 @@ namespace goon
     int timeSpan;       // time span for stored trajectory (ms)
     int trackedTime;    // time of stored trajectory (must approach predefined timeSpan)
     std::deque<cv::Vec3i> trajectory;   // stored 2D trajectory (x, y, millis)
-    float speed[2];    // average speed
+    cv::Vec2f speed;    // average speed
 
  public:
      TransMotion();
@@ -34,7 +34,7 @@ namespace goon
      void update(int x, int y, int millis);
        
      // gets the computed average speed (cartesian coordinates)
-     float* getSpeed() {return speed;};
+     cv::Vec2f& getSpeed() {return speed;};
      
      std::string toString(); 
      

@@ -3,7 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/data/base/TransMotion.h"
+#include "goon/features/motion/TransMotion.h"
 
 namespace goon 
 {

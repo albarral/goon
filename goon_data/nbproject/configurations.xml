@@ -22,8 +22,6 @@
           <itemPath>src/goon/data/base/ColorBody.h</itemPath>
           <itemPath>src/goon/data/base/RealBody.cpp</itemPath>
           <itemPath>src/goon/data/base/RealBody.h</itemPath>
-          <itemPath>src/goon/data/base/TransMotion.cpp</itemPath>
-          <itemPath>src/goon/data/base/TransMotion.h</itemPath>
           <itemPath>src/goon/data/base/blob.cpp</itemPath>
           <itemPath>src/goon/data/base/blob.h</itemPath>
           <itemPath>src/goon/data/base/region.cpp</itemPath>
@@ -104,10 +102,6 @@
       </item>
       <item path="src/goon/data/base/RealBody.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/data/base/TransMotion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/TransMotion.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
@@ -166,10 +160,6 @@
       <item path="src/goon/data/base/RealBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/RealBody.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/TransMotion.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/TransMotion.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
