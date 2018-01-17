@@ -37,7 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/peripheral/IDPool.o \
 	${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o \
-	${OBJECTDIR}/src/goon/peripheral/RoisDetection.o
+	${OBJECTDIR}/src/goon/peripheral/RoisDetection.o \
+	${OBJECTDIR}/src/goon/peripheral/Saliency.o
 
 
 # C Compiler Flags
@@ -84,6 +85,11 @@ ${OBJECTDIR}/src/goon/peripheral/RoisDetection.o: src/goon/peripheral/RoisDetect
 	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/RoisDetection.o src/goon/peripheral/RoisDetection.cpp
+
+${OBJECTDIR}/src/goon/peripheral/Saliency.o: src/goon/peripheral/Saliency.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/Saliency.o src/goon/peripheral/Saliency.cpp
 
 # Subprojects
 .build-subprojects:
