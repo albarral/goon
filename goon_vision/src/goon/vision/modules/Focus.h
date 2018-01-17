@@ -12,6 +12,7 @@
 
 #include "goon/core/GoonModule.h"
 #include "goon/data/base/roi.h"
+#include "goon/peripheral/Saliency.h"
 #include "tuly/control/module3.h"
 
 namespace goon
@@ -42,6 +43,7 @@ private:
     int mode;   // search mode
     cv::Vec3f features;    // feature values to be searched 
     int targetROI;      // ID of target ROI
+    Saliency oSaliency;         // saliency computation
 
 public:
     Focus();

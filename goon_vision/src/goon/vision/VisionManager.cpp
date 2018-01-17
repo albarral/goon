@@ -50,7 +50,7 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
         // launch modules
         oGrab.on();
         oSee.on();    
-        //oFocus.on();    // focus temporally disabled
+        oFocus.on();    
         
         blaunched = true;    
     }

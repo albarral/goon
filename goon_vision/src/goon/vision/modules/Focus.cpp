@@ -16,6 +16,8 @@ log4cxx::LoggerPtr Focus::logger(log4cxx::Logger::getLogger("goon.vision.focus")
 Focus::Focus() 
 {
     modName = "Focus";
+    // set color saliency mode
+    oSaliency.setMode(Saliency::eSALIENCY_COLOR);
 }
   
 void Focus::showInitialized()
@@ -125,19 +127,25 @@ bool Focus::selectTarget()
 
     Rois& oROIs2 = pVisualData->getROIs2();
     winner = -1;
-    maxInterest = 0.0;
-    // get ROI with max interest
-    for (ROI& oROI : oROIs2.getList()) 
+//    maxInterest = 0.0;
+//    // get ROI with max interest
+//    for (ROI& oROI : oROIs2.getList()) 
+//    {
+//        interest = computeInterest(oROI);
+//
+//        if (interest > maxInterest) 
+//        {
+//            winner = oROI.getID();
+//            maxInterest = interest;
+//        }
+//    }
+
+    if (!oROIs2.getList().empty())
     {
-        interest = computeInterest(oROI);
-
-        if (interest > maxInterest) 
-        {
-            winner = oROI.getID();
-            maxInterest = interest;
-        }
+        oSaliency.computeSaliency(oROIs2.getList());
+        winner = oSaliency.getMostSalient().roiID;
     }
-
+    
     targetROI = winner;
     return (targetROI != -1);
 }

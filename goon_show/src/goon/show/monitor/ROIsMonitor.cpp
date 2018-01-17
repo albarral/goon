@@ -5,7 +5,6 @@
 
 #include "goon/show/monitor/ROIsMonitor.h"
 #include <goon/features/shape/shape.h>
-#include <maty/math/Coordinates.h>
 
 using namespace log4cxx;
 
@@ -35,19 +34,21 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int foc
 
         LOG4CXX_TRACE(logger, "roi " << it_roi->getID());        
         LOG4CXX_TRACE(logger, "(w, h, angle) = " << roi_w << ", " << roi_h << ", " << roi_angle);  
+        // draw ellipse (green if focused)
         int roiColor = tivy::Draw::eYELLOW;        
         if (it_roi->getID() == focusedROI)
             roiColor = tivy::Draw::eGREEN;                  
         oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle, roiColor);
                 
-        float* speed = it_roi->getMotion().getSpeed();
-        float absSpeed, angle;
-        maty::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
-        // speed > 0.1 pixels/ms (100 pixels/s))
-        int color = tivy::Draw::eYELLOW;
-        if (absSpeed > 0.01)
-            color = tivy::Draw::eRED;            
-        oDraw.drawPoint(centroid, color, it_roi->getStability());
+        // draw centroid (all yellow)
+//        cv::Vec2f& speed = it_roi->getMotion().getSpeed();
+//        float absSpeed, angle;
+//        maty::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
+//        // speed > 0.1 pixels/ms (100 pixels/s))
+//        int color = tivy::Draw::eYELLOW;
+//        if (absSpeed > 0.01)
+//            color = tivy::Draw::eRED;            
+        oDraw.drawPoint(centroid, tivy::Draw::eYELLOW, 3);
         //oDrawPer.drawNumber(it_roi->getID(), centroid);                        
         
         it_roi++;
