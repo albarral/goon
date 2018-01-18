@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/vision/VisionManager.o \
 	${OBJECTDIR}/src/goon/vision/modules/Focus.o \
 	${OBJECTDIR}/src/goon/vision/modules/Grab.o \
+	${OBJECTDIR}/src/goon/vision/modules/Look.o \
 	${OBJECTDIR}/src/goon/vision/modules/See.o
 
 
@@ -79,6 +80,11 @@ ${OBJECTDIR}/src/goon/vision/modules/Grab.o: src/goon/vision/modules/Grab.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/vision/modules
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/vision/modules/Grab.o src/goon/vision/modules/Grab.cpp
+
+${OBJECTDIR}/src/goon/vision/modules/Look.o: src/goon/vision/modules/Look.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/vision/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/vision/modules/Look.o src/goon/vision/modules/Look.cpp
 
 ${OBJECTDIR}/src/goon/vision/modules/See.o: src/goon/vision/modules/See.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/vision/modules

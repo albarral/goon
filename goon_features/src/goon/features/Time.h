@@ -10,8 +10,6 @@
 
 namespace goon 
 {
-namespace features
-{  
 // Utility class for computing time intervals (in milliseconds).
 // Start measuring with start()
 // Measure interval with read(), time keeps running
@@ -38,6 +36,5 @@ public:
     
 };
 
-}
 }
 #endif

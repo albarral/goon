@@ -47,10 +47,15 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
         oFocus.init(oGoonBus, oVisualData);
         oFocus.setFrequency(freq);    
         
+        // look module 
+        oLook.init(oGoonBus, oVisualData);
+        oLook.setFrequency(freq);    
+
         // launch modules
         oGrab.on();
         oSee.on();    
         oFocus.on();    
+        oLook.on();    
         
         blaunched = true;    
     }
@@ -64,6 +69,12 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
 void VisionManager::end()
 {
     LOG4CXX_INFO(logger, "stopping VisionManager ..."); 
+
+    if (oLook.isOn())
+    {    
+        oLook.off();
+        oLook.wait();
+    }
 
     if (oFocus.isOn())
     {    
@@ -95,12 +106,15 @@ void VisionManager::oneShot(GoonBus& oGoonBus, VisualData& oVisualData)
     oGrab.setFrequency(20.0);
     oSee.init(oGoonBus, oVisualData);
     oFocus.init(oGoonBus, oVisualData);
+    oLook.init(oGoonBus, oVisualData);
     
     oGrab.on();        
+    
     oSee.oneShot();    
     oFocus.oneShot();    
-    oGrab.off();
+    oLook.oneShot();    
     
+    oGrab.off();    
     oGrab.wait();        
 }
 

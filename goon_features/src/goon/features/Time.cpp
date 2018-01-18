@@ -7,8 +7,6 @@
 
 namespace goon 
 {
-namespace features
-{  
 Time::Time()
 {
     brunning = false;
@@ -43,5 +41,4 @@ void Time::read()
     }
 }
 
-}
 }
