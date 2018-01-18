@@ -3,7 +3,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <unistd.h>
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/Focus.h"
@@ -16,8 +15,6 @@ log4cxx::LoggerPtr Focus::logger(log4cxx::Logger::getLogger("goon.vision.focus")
 Focus::Focus() 
 {
     modName = "Focus";
-    // set color saliency mode
-    oSaliency.setMode(Saliency::eSALIENCY_COLOR);
 }
   
 void Focus::showInitialized()
@@ -29,17 +26,20 @@ void Focus::first()
 {    
     log4cxx::NDC::push("Focus");   	
     
-    // we start in LOST state
+    // start in SEARCH state
     if (benabled)
     {
         LOG4CXX_INFO(logger, "started");  
-        setState(Focus::eSTATE_SEARCH);
-        // default search mode by position
-        mode = Focus::eSEARCH_POSITION;        
-        // TEST features
-        features[0] = 320;
-        features[1] = 240;        
         targetROI = -1;
+        setState(Focus::eSTATE_SEARCH);
+ 
+        // default search mode ...
+        // by saliency
+        mode = Focus::eSEARCH_SALIENCY;
+        // by position near to (320,240)
+//        mode = Focus::eSEARCH_POSITION;        
+//        features[0] = 320;
+//        features[1] = 240;        
     }
     // if not initialized -> OFF
     else
@@ -74,8 +74,6 @@ void Focus::loop()
                 setState(eSTATE_TRACK);
                 LOG4CXX_WARN(logger, "new target selected -> ROI " << targetROI);                
             }
-            else
-                LOG4CXX_WARN(logger, "target selection failed");                                
             break;
 
         case eSTATE_TRACK:
@@ -115,38 +113,39 @@ void Focus::loop()
 }
 
 // This function searches the visual field for the next target ROI.
-// An interest measure is used that favours the selection of big rois that are near to the specified central position.
-// An inhibition of return mechanism avoids repeating past selections, allowing the focus to always explore new rois.
+// The target selection is done in the way defined by the present search mode (see enum eModes).
+// FUTURE: An inhibition of return mechanism should avoid repeating past selections, allowing the focus to always explore new rois.
 // If a new target roi is selected the function returns true. Otherwise false is returned.
 bool Focus::selectTarget()
 {
-    float interest, maxInterest;
-    int winner;
-
     LOG4CXX_DEBUG(logger, "select target ... ");
 
     Rois& oROIs2 = pVisualData->getROIs2();
-    winner = -1;
-//    maxInterest = 0.0;
-//    // get ROI with max interest
-//    for (ROI& oROI : oROIs2.getList()) 
-//    {
-//        interest = computeInterest(oROI);
-//
-//        if (interest > maxInterest) 
-//        {
-//            winner = oROI.getID();
-//            maxInterest = interest;
-//        }
-//    }
-
-    if (!oROIs2.getList().empty())
+    if (oROIs2.getList().empty())
     {
-        oSaliency.computeSaliency(oROIs2.getList());
-        winner = oSaliency.getMostSalient().roiID;
+        LOG4CXX_WARN(logger, "can't select target, no ROIs detected!");
+        return false;
     }
     
-    targetROI = winner;
+    switch (mode)
+    {
+        case Focus::eSEARCH_SALIENCY:
+            // set saliency mode (color by default)
+            oSaliency.setMode(Saliency::eSALIENCY_COLOR);   
+            oSaliency.computeSaliency(oROIs2.getList());
+            targetROI = oSaliency.getMostSalient().roiID;
+            break;
+
+        case Focus::eSEARCH_POSITION:
+            targetROI = selectTargetByPosition(oROIs2.getList());
+            break;
+                        
+        default:
+            LOG4CXX_WARN(logger, "can't select target, search mode not implemented ");
+            targetROI = -1;
+            break;
+    }
+    
     return (targetROI != -1);
 }
 
@@ -160,29 +159,35 @@ bool Focus::followTarget()
 
 bool Focus::detectTarget()
 {
+    LOG4CXX_WARN(logger, "detect target -> TO DO");
     // TO DO ...
     return false;
 }
 
-float Focus::computeInterest(ROI& oROI)
+// An interest measure is used to select big rois near a defined position.
+int Focus::selectTargetByPosition(std::list<ROI>& listROIs)
 {
-    float interest = 0.0;
-    
-    if (mode == Focus::eSEARCH_POSITION)
+    float interest, maxInterest = 0.0;
+    int winner = -1;
+    // get ROI with max interest 
+    for (ROI& oROI : listROIs) 
     {
         float xdif = oROI.getPos()[0] - features[0];
         float ydif = oROI.getPos()[1] - features[1];
-
         // avoid division by 0
-        if (xdif == 0)
-            xdif = 1;
-        if (ydif == 0)
-            ydif = 1;
+        if (xdif == 0) xdif = 1;
+        if (ydif == 0) ydif = 1;
 
-        interest = ((float)oROI.getMass() / (xdif*xdif + ydif*ydif));
+        // interest = mass/distance
+        interest = (float)oROI.getMass() / (xdif*xdif + ydif*ydif);
+        if (interest > maxInterest) 
+        {
+            winner = oROI.getID();
+            maxInterest = interest;
+        }
     }
     
-    return interest;
+    return winner;
 }
 
 void Focus::senseBus()
@@ -190,38 +195,27 @@ void Focus::senseBus()
     // search mode
     if (pGoonBus->getCO_FOCUS_MODE().checkRequested())
     {
-        mode = pGoonBus->getCO_FOCUS_MODE().getValue();
+        int value = pGoonBus->getCO_FOCUS_MODE().getValue();
         // if valid mode -> LAUNCH movement
-        if (mode >= 0 && mode < Focus::eSEARCH_DIM)
+        if (value >= 0 && value < Focus::eSEARCH_DIM)
         {
+            mode = value;
             LOG4CXX_INFO(logger, modName << " new search mode " + std::to_string(mode));                     
         }
         else
-            LOG4CXX_WARN(logger, modName << " invalid search mode requested " + std::to_string(mode));                     
+            LOG4CXX_WARN(logger, modName << " invalid search mode " + std::to_string(mode));                     
     }
         
     // search features
-    if (pGoonBus->getCO_FOCUS_SEARCH_V0().checkRequested())
+    if (pGoonBus->getCO_FOCUS_SEARCH_VALUE().checkRequested())
     {  
-        features[0] = pGoonBus->getCO_FOCUS_SEARCH_V0().getValue();
-        LOG4CXX_INFO(logger, modName << " search feature 0 = " + std::to_string(features[0]));                     
-    }
-    if (pGoonBus->getCO_FOCUS_SEARCH_V1().checkRequested())
-    {  
-        features[1] = pGoonBus->getCO_FOCUS_SEARCH_V1().getValue();
-        LOG4CXX_INFO(logger, modName << " search feature 1 = " + std::to_string(features[1]));                     
-    }
-    if (pGoonBus->getCO_FOCUS_SEARCH_V2().checkRequested())
-    {  
-        features[2] = pGoonBus->getCO_FOCUS_SEARCH_V2().getValue();
-        LOG4CXX_INFO(logger, modName << " search feature 2 = " + std::to_string(features[2]));                     
+        features = pGoonBus->getCO_FOCUS_SEARCH_VALUE().getValue();
+        LOG4CXX_INFO(logger, modName << " search features = " + std::to_string(features[0]) + ", " + std::to_string(features[1]) + ", " + std::to_string(features[2]));                     
     }
 
     // if shift requested -> SEARCH
     if (pGoonBus->getCO_FOCUS_SHIFT().checkRequested())
-    {
         setState(eSTATE_SEARCH);
-    }
 }
 
 void Focus::writeBus()
