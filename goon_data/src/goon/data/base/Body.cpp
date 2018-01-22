@@ -65,9 +65,18 @@ void Body::computeMass()
     mass = cv::countNonZero(mask);    
 }
 
-void Body::computeBlob()
+void Body::computeBasicShape()
 {
     Shape::computeCovariances(mask, window, pos, covs);
+}
+
+void Body::computeComplexShape()
+{
+    Shape oShape;
+    oShape.computeShapeFromCovs(covs);
+    
+    shapeFactor = oShape.getShapeFactor();
+    orientation = oShape.getAngle();    
 }
 
 cv::Mat Body::computeBorderMask()

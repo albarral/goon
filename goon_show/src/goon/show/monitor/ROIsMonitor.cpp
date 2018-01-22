@@ -29,7 +29,7 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int foc
         // computes main ellipse
         covs = it_roi->getCovariances();     // cxx, cyy, cxy        
         Shape::computeEllipse(covs[0], covs[1], covs[2], roi_w, roi_h, roi_angle);            
-        int* pos = it_roi->getPos();
+        cv::Vec2i& pos = it_roi->getPos();
         cv::Point centroid(pos[0], pos[1]);                  
 
         LOG4CXX_TRACE(logger, "roi " << it_roi->getID());        

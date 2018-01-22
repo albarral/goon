@@ -26,24 +26,28 @@ Shape::Shape ()
 // This function computes a region's shape calculates the centroid and covariances of a region
 void Shape::computeShape (cv::Mat& mask, cv::Rect& window)
 {
-        computeCovariances (mask, window, centroid, covs);
+    computeCovariances(mask, window, centroid, covs);
 
-        computeEllipse (covs[0], covs[1], covs[2], width, height, angle);
-
-        if (height > 0.0)
-            shape_factor = width / height;
-        else
-            shape_factor = 1000;
-
-        // when the shape factor is around 1, orientation is undefined
-        if (shape_factor < ORIENTED_SHAPE_FACTOR)
-                angle = UNDEFINED_ORIENTATION;
+    computeShapeFromCovs(covs);
 }
 							 
 
+void Shape::computeShapeFromCovs(cv::Vec3f& covs)
+{
+    computeEllipse(covs[0], covs[1], covs[2], width, height, angle);
+
+    if (height > 0.0)
+        shape_factor = width / height;
+    else
+        shape_factor = 1000;
+
+    // when the shape factor is around 1, orientation is undefined
+    if (shape_factor < ORIENTED_SHAPE_FACTOR)
+            angle = UNDEFINED_ORIENTATION;    
+}
 
 // This function calculates the centroid (x, y) and covariances (cxx, cyy, cxy) of a region
-void Shape::computeCovariances (cv::Mat& mask, cv::Rect& window, int* centroid, cv::Vec3f& covs)
+void Shape::computeCovariances (cv::Mat& mask, cv::Rect& window, cv::Vec2i& centroid, cv::Vec3f& covs)
 {
     cv::Mat mask_aux;
     st_moments moments;
@@ -66,6 +70,7 @@ void Shape::computeCovariances (cv::Mat& mask, cv::Rect& window, int* centroid, 
         covs[2] = moments.mu11/moments.m00;        
     }
 }
+
 
 // This function calculates the principal axes of a main ellipse from its given covariances.
 // Resulting angle (in counter clockwise direction) is always inside [-90, 90]
@@ -130,7 +135,7 @@ void Shape::computeMoments (cv::Mat& mask, st_moments& moments)
 
 // This function merges two ellipses by combining their covariances and centroids.
 // The function returns the resulting ellipse in the first position and covariances values.
-void Shape::mergeEllipses (int (&pos1)[2], cv::Vec3f& covs1, int (&pos2)[2], cv::Vec3f& covs2, int m1, int m2)
+void Shape::mergeEllipses(cv::Vec2i& pos1, cv::Vec3f& covs1, cv::Vec2i& pos2, cv::Vec3f& covs2, int m1, int m2)
 {
     float x1, y1, x2, y2, dx, dy;
     float cx1, cy1, cxy1, cx2, cy2, cxy2;
@@ -170,15 +175,5 @@ void Shape::mergeEllipses (int (&pos1)[2], cv::Vec3f& covs1, int (&pos2)[2], cv:
     pos1[0] = w1*x1 + w2*x2;
     pos1[1] = w1*y1 + w2*y2;
 }
-
-
-int* Shape::getCentroid () {return centroid;}
-
-cv::Vec3f& Shape::getCovariances () {return covs;}
-
-float Shape::getWidth() {return width;}
-float Shape::getHeight() {return height;}
-float Shape::getAngle() {return angle;}
-float Shape::getShapeFactor() {return shape_factor;}
 
 }

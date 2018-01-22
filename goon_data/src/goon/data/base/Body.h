@@ -44,7 +44,11 @@ namespace goon
 
     void clear();
     void computeMass();
-    void computeBlob();
+    // compute body basic shape (centroid & covariances)
+    void computeBasicShape();
+    // compute body complex shape (shape factor & orientation)    
+    void computeComplexShape();
+    // compute mask with only the body's border
     cv::Mat computeBorderMask();
     
     // merges with another Body
@@ -56,7 +60,7 @@ namespace goon
     // computes the body's overlapped surface with another body (the intersection of both masks)
     // the overlapped area (pixels) is returned
     int computeOverlap(Body& oBody);
-        
+            
     virtual std::string toString();
     virtual std::string shortDesc();             
     

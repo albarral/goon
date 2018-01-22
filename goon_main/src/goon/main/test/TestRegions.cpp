@@ -63,11 +63,11 @@ void TestRegions::testMerge()
 
     // compute blobs
     oRegion1.computeMass();
-    oRegion1.computeBlob();
+    oRegion1.computeBasicShape();
     oRegion2.computeMass();
-    oRegion2.computeBlob();
+    oRegion2.computeBasicShape();
     oRegion3.computeMass();
-    oRegion3.computeBlob();
+    oRegion3.computeBasicShape();
 
     // set colors
     cv::Vec3f redColor = {255, 0, 0};

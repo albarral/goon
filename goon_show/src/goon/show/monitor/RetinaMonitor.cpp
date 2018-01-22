@@ -31,7 +31,7 @@ void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::list<Region>& listRegi
             oDraw.setExactColor(it_region->getRGB());
             oDraw.drawMask (it_region->getMask(), it_region->getWindow());
             // draw centroids
-            int* pos = it_region->getPos();
+            cv::Vec2i& pos = it_region->getPos();
             cv::Point centroid(pos[0], pos[1]);            
             if (it_region->is2Merge())
                 oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);

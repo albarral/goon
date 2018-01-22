@@ -62,7 +62,7 @@ void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, 
     // draw centroid
     if (bdrawCentroid)
     {
-        int* pos = oBody.getPos();
+        cv::Vec2i& pos = oBody.getPos();
         cv::Point centroid(pos[0], pos[1]);                        
         oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
         // draw ID

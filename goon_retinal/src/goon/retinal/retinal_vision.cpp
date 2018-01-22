@@ -9,7 +9,6 @@
 #include <goon/data/goon_version.h>
 #include <goon/data/base/region.h>
 #include <goon/features/color/rgb_color.h>
-#include <goon/features/shape/shape.h>
 
 using namespace log4cxx;
 
@@ -81,8 +80,7 @@ void RetinalVision::computeCovariances()
     for (Region& oRegion : pRetina->getListRegions())
     {
         LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
-        
-        Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
+        oRegion.computeBasicShape();
     }    
     
     LOG4CXX_TRACE(logger, "computeCovariances - end");
