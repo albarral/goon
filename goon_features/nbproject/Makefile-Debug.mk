@@ -41,7 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
 	${OBJECTDIR}/src/goon/features/color/rgb_color.o \
 	${OBJECTDIR}/src/goon/features/motion/TransMotion.o \
-	${OBJECTDIR}/src/goon/features/shape/shape.o
+	${OBJECTDIR}/src/goon/features/shape/shape.o \
+	${OBJECTDIR}/src/goon/features/structure/Structure.o
 
 
 # C Compiler Flags
@@ -104,6 +105,11 @@ ${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/shape
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
+
+${OBJECTDIR}/src/goon/features/structure/Structure.o: src/goon/features/structure/Structure.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure.o src/goon/features/structure/Structure.cpp
 
 # Subprojects
 .build-subprojects:

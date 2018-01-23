@@ -23,6 +23,14 @@ void RealBody::updateMotion(int millis)
     oMotion.update(pos[0], pos[1], millis);
 }
 
+void RealBody::clear()
+{
+    Body::clear();
+
+    age = 0;
+    oMotion.clear();
+}
+
 std::string RealBody::toString()
 {
     std::string desc = "RealBody [age = " + std::to_string(age) + 

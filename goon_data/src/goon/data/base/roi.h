@@ -33,8 +33,6 @@ public:
     static bool sortByID (const ROI& oROI1, const ROI& oROI2);        
 
     virtual std::string toString();    
-    
-    // returns short ROI description
     virtual std::string shortDesc();    
 };
 }

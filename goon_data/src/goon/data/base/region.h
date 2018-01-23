@@ -57,17 +57,13 @@ public:
     bool isSimple() {return (type==eREG_SIMPLE);};
     bool isMerged() {return (type==eREG_MERGED);};
     bool isCollection() {return (type==eREG_COLLECTION);};
-        
-    // initializes mask and grid
-    void init();
 
     // support function to sort regions by ID
     static bool sortBySize (const Region& oRegion1, const Region& oRegion2);    
         
-    // returns all region values in string form
     virtual std::string toString();    
-    // returns short region description
     virtual std::string shortDesc();    
+
     // returns name of region type
     std::string getTypeName();  
  };

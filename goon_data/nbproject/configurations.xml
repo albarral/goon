@@ -16,8 +16,6 @@
         <logicalFolder name="base" displayName="base" projectFiles="true">
           <itemPath>src/goon/data/base/Body.cpp</itemPath>
           <itemPath>src/goon/data/base/Body.h</itemPath>
-          <itemPath>src/goon/data/base/BodyUtils.cpp</itemPath>
-          <itemPath>src/goon/data/base/BodyUtils.h</itemPath>
           <itemPath>src/goon/data/base/ColorBody.cpp</itemPath>
           <itemPath>src/goon/data/base/ColorBody.h</itemPath>
           <itemPath>src/goon/data/base/RealBody.cpp</itemPath>
@@ -28,6 +26,12 @@
           <itemPath>src/goon/data/base/region.h</itemPath>
           <itemPath>src/goon/data/base/roi.cpp</itemPath>
           <itemPath>src/goon/data/base/roi.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="cortex" displayName="cortex" projectFiles="true">
+          <itemPath>src/goon/data/cortex/Object.cpp</itemPath>
+          <itemPath>src/goon/data/cortex/Object.h</itemPath>
+          <itemPath>src/goon/data/cortex/Scene.cpp</itemPath>
+          <itemPath>src/goon/data/cortex/Scene.h</itemPath>
         </logicalFolder>
         <itemPath>src/goon/data/retina.cpp</itemPath>
         <itemPath>src/goon/data/retina.h</itemPath>
@@ -90,10 +94,6 @@
       </item>
       <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/data/base/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/BodyUtils.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/ColorBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/ColorBody.h" ex="false" tool="3" flavor2="0">
@@ -113,6 +113,14 @@
       <item path="src/goon/data/base/roi.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/roi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Object.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Scene.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Scene.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -149,10 +157,6 @@
       </item>
       <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/data/base/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/BodyUtils.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/ColorBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/ColorBody.h" ex="false" tool="3" flavor2="0">
@@ -172,6 +176,14 @@
       <item path="src/goon/data/base/roi.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/roi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Object.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Scene.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Scene.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/goon_version.h" ex="false" tool="3" flavor2="0">
       </item>

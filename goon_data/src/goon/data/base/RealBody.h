@@ -38,10 +38,10 @@ public:
     TransMotion& getMotion() {return oMotion;};    
     void updateMotion(int millis);
     
-    virtual std::string toString();    
+    virtual void clear();
     
-    // returns short RealBody description
-    std::string shortDesc();    
+    virtual std::string toString();    
+    virtual std::string shortDesc();    
 };
 }
    

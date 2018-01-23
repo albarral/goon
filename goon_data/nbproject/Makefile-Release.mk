@@ -36,12 +36,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/base/Body.o \
-	${OBJECTDIR}/src/goon/data/base/BodyUtils.o \
 	${OBJECTDIR}/src/goon/data/base/ColorBody.o \
 	${OBJECTDIR}/src/goon/data/base/RealBody.o \
 	${OBJECTDIR}/src/goon/data/base/blob.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
+	${OBJECTDIR}/src/goon/data/cortex/Object.o \
+	${OBJECTDIR}/src/goon/data/cortex/Scene.o \
 	${OBJECTDIR}/src/goon/data/retina.o \
 	${OBJECTDIR}/src/goon/data/rois.o
 
@@ -75,11 +76,6 @@ ${OBJECTDIR}/src/goon/data/base/Body.o: src/goon/data/base/Body.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/Body.o src/goon/data/base/Body.cpp
 
-${OBJECTDIR}/src/goon/data/base/BodyUtils.o: src/goon/data/base/BodyUtils.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
-
 ${OBJECTDIR}/src/goon/data/base/ColorBody.o: src/goon/data/base/ColorBody.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
@@ -104,6 +100,16 @@ ${OBJECTDIR}/src/goon/data/base/roi.o: src/goon/data/base/roi.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/Object.o: src/goon/data/cortex/Object.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Object.o src/goon/data/cortex/Object.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/Scene.o: src/goon/data/cortex/Scene.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Scene.o src/goon/data/cortex/Scene.cpp
 
 ${OBJECTDIR}/src/goon/data/retina.o: src/goon/data/retina.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data

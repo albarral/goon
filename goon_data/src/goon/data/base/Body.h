@@ -42,7 +42,8 @@ namespace goon
     // fills the Body with the given mask and window (cloning the mask)    
     void setMaskAndWindow(cv::Mat& mask, cv::Rect& window);    
 
-    void clear();
+    virtual void clear();
+    
     void computeMass();
     // compute body basic shape (centroid & covariances)
     void computeBasicShape();

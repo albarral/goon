@@ -1,5 +1,5 @@
-#ifndef __GOON_FEATURES_BODYUTILS_H
-#define __GOON_FEATURES_BODYUTILS_H
+#ifndef __GOON_MAIN_BODYUTILS_H
+#define __GOON_MAIN_BODYUTILS_H
 
 /***************************************************************************
  *   Copyright (C) 2016 by Migtron Robotics   *
