@@ -35,16 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/cortex/ConfigCortex.o \
+	${OBJECTDIR}/src/goon/cortex/CortexVision.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/binding.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o \
 	${OBJECTDIR}/src/goon/cortex/data/Landmark.o \
 	${OBJECTDIR}/src/goon/cortex/data/memory_center.o \
 	${OBJECTDIR}/src/goon/cortex/data/retinal_center.o \
-	${OBJECTDIR}/src/goon/cortex/data/visual_center.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/coherence.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/confidence.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/matching.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/recognition.o
+	${OBJECTDIR}/src/goon/cortex/data/visual_center.o
 
 
 # C Compiler Flags
@@ -70,6 +68,16 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/goon/cortex/ConfigCortex.o: src/goon/cortex/ConfigCortex.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/ConfigCortex.o src/goon/cortex/ConfigCortex.cpp
+
+${OBJECTDIR}/src/goon/cortex/CortexVision.o: src/goon/cortex/CortexVision.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/CortexVision.o src/goon/cortex/CortexVision.cpp
 
 ${OBJECTDIR}/src/goon/cortex/analysis/binding.o: src/goon/cortex/analysis/binding.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
@@ -100,26 +108,6 @@ ${OBJECTDIR}/src/goon/cortex/data/visual_center.o: src/goon/cortex/data/visual_c
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/visual_center.o src/goon/cortex/data/visual_center.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/coherence.o: src/goon/cortex/recognition/coherence.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/coherence.o src/goon/cortex/recognition/coherence.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/confidence.o: src/goon/cortex/recognition/confidence.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/confidence.o src/goon/cortex/recognition/confidence.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/matching.o: src/goon/cortex/recognition/matching.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/matching.o src/goon/cortex/recognition/matching.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/recognition.o: src/goon/cortex/recognition/recognition.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/recognition.o src/goon/cortex/recognition/recognition.cpp
 
 # Subprojects
 .build-subprojects:

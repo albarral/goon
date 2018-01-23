@@ -11,6 +11,7 @@
             <make-dep-projects>
                 <make-dep-project>../../tron/maty</make-dep-project>
                 <make-dep-project>../goon_features</make-dep-project>
+                <make-dep-project>../goon_data</make-dep-project>
             </make-dep-projects>
             <sourceRootList>
                 <sourceRootElem>src/goon/cortex</sourceRootElem>

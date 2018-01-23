@@ -6,9 +6,11 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <log4cxx/logger.h>
 #include <opencv2/core/core.hpp>
-#include "goon/cortex/data/retinal_center.h"
-#include "goon/cortex/data/visual_center.h"
+
+#include "goon/data/retina.h"
+#include "goon/data/cortex/Object.h"
 
 
 namespace goon
@@ -16,19 +18,14 @@ namespace goon
 class Binding
 {
 private:
-    RetinalCenter* mRetinalCenter;
-    VisualCenter* mVisualCenter;
-    Landmark* oLandmark;
-    float joinObjectFraction;
+    static log4cxx::LoggerPtr logger;
+    float bindObjectFraction;
 
 public:
-    Binding (RetinalCenter* oRetinalCenter, VisualCenter* oVisualCenter);
+    Binding();
     ~Binding();
-  
  		
-    void formObject (CvRect* roi_window);
-    // This function builds the global landmark from the specified list of retinal regions.
-    // The landmark's mask is built and its global features are computed. 	     
+    void formObject(Object& oObject, Retina& oRetina, cv::Rect& window);
  };
 }
 #endif

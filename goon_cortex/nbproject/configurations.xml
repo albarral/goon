@@ -45,16 +45,11 @@
           <itemPath>src/goon/cortex/data/visual_center.h</itemPath>
         </logicalFolder>
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
-          <itemPath>src/goon/cortex/recognition/coherence.cpp</itemPath>
-          <itemPath>src/goon/cortex/recognition/coherence.h</itemPath>
-          <itemPath>src/goon/cortex/recognition/confidence.cpp</itemPath>
-          <itemPath>src/goon/cortex/recognition/confidence.h</itemPath>
-          <itemPath>src/goon/cortex/recognition/matches.h</itemPath>
-          <itemPath>src/goon/cortex/recognition/matching.cpp</itemPath>
-          <itemPath>src/goon/cortex/recognition/matching.h</itemPath>
-          <itemPath>src/goon/cortex/recognition/recognition.cpp</itemPath>
-          <itemPath>src/goon/cortex/recognition/recognition.h</itemPath>
         </logicalFolder>
+        <itemPath>src/goon/cortex/ConfigCortex.cpp</itemPath>
+        <itemPath>src/goon/cortex/ConfigCortex.h</itemPath>
+        <itemPath>src/goon/cortex/CortexVision.cpp</itemPath>
+        <itemPath>src/goon/cortex/CortexVision.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -85,6 +80,7 @@
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
+            <pElem>../goon_data/src</pElem>
             <pElem>../goon_features/src</pElem>
             <pElem>../../tron/maty/src</pElem>
           </incDir>
@@ -93,15 +89,15 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}</output>
           <linkerLibItems>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/maty"
+              <makeArtifact PL="../goon_data"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/maty"
+                            WD="../goon_data"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_maty.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
@@ -116,9 +112,29 @@
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../../tron/maty"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../../tron/maty"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_maty.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="src/goon/cortex/ConfigCortex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/ConfigCortex.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/CortexVision.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/CortexVision.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/cortex/analysis/binding.cpp"
             ex="false"
             tool="1"
@@ -216,51 +232,6 @@
             flavor2="0">
       </item>
       <item path="src/goon/cortex/data/visual_center.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/coherence.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/coherence.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/confidence.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/confidence.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/matches.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/matching.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/matching.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/recognition.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/recognition.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -286,6 +257,14 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="src/goon/cortex/ConfigCortex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/ConfigCortex.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/CortexVision.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/CortexVision.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/cortex/analysis/binding.cpp"
             ex="false"
             tool="1"
@@ -383,51 +362,6 @@
             flavor2="0">
       </item>
       <item path="src/goon/cortex/data/visual_center.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/coherence.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/coherence.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/confidence.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/confidence.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/matches.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/matching.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/matching.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/recognition.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/recognition/recognition.h"
             ex="false"
             tool="3"
             flavor2="0">

@@ -35,16 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/cortex/ConfigCortex.o \
+	${OBJECTDIR}/src/goon/cortex/CortexVision.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/binding.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o \
 	${OBJECTDIR}/src/goon/cortex/data/Landmark.o \
 	${OBJECTDIR}/src/goon/cortex/data/memory_center.o \
 	${OBJECTDIR}/src/goon/cortex/data/retinal_center.o \
-	${OBJECTDIR}/src/goon/cortex/data/visual_center.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/coherence.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/confidence.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/matching.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/recognition.o
+	${OBJECTDIR}/src/goon/cortex/data/visual_center.o
 
 
 # C Compiler Flags
@@ -61,74 +59,67 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features
+LDLIBSOPTIONS=-Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../goon_data/dist/Debug/GNU-Linux/libgoon_data.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../goon_features/dist/Debug/GNU-Linux/libgoon_features.so
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
+${OBJECTDIR}/src/goon/cortex/ConfigCortex.o: src/goon/cortex/ConfigCortex.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/ConfigCortex.o src/goon/cortex/ConfigCortex.cpp
+
+${OBJECTDIR}/src/goon/cortex/CortexVision.o: src/goon/cortex/CortexVision.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/CortexVision.o src/goon/cortex/CortexVision.cpp
+
 ${OBJECTDIR}/src/goon/cortex/analysis/binding.o: src/goon/cortex/analysis/binding.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/binding.o src/goon/cortex/analysis/binding.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/binding.o src/goon/cortex/analysis/binding.cpp
 
 ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o: src/goon/cortex/analysis/characterization.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o src/goon/cortex/analysis/characterization.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o src/goon/cortex/analysis/characterization.cpp
 
 ${OBJECTDIR}/src/goon/cortex/data/Landmark.o: src/goon/cortex/data/Landmark.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/Landmark.o src/goon/cortex/data/Landmark.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/Landmark.o src/goon/cortex/data/Landmark.cpp
 
 ${OBJECTDIR}/src/goon/cortex/data/memory_center.o: src/goon/cortex/data/memory_center.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/memory_center.o src/goon/cortex/data/memory_center.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/memory_center.o src/goon/cortex/data/memory_center.cpp
 
 ${OBJECTDIR}/src/goon/cortex/data/retinal_center.o: src/goon/cortex/data/retinal_center.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/retinal_center.o src/goon/cortex/data/retinal_center.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/retinal_center.o src/goon/cortex/data/retinal_center.cpp
 
 ${OBJECTDIR}/src/goon/cortex/data/visual_center.o: src/goon/cortex/data/visual_center.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/visual_center.o src/goon/cortex/data/visual_center.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/coherence.o: src/goon/cortex/recognition/coherence.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/coherence.o src/goon/cortex/recognition/coherence.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/confidence.o: src/goon/cortex/recognition/confidence.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/confidence.o src/goon/cortex/recognition/confidence.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/matching.o: src/goon/cortex/recognition/matching.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/matching.o src/goon/cortex/recognition/matching.cpp
-
-${OBJECTDIR}/src/goon/cortex/recognition/recognition.o: src/goon/cortex/recognition/recognition.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/recognition.o src/goon/cortex/recognition/recognition.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/visual_center.o src/goon/cortex/data/visual_center.cpp
 
 # Subprojects
 .build-subprojects:
-	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
+	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug
 	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -137,8 +128,9 @@ ${OBJECTDIR}/src/goon/cortex/recognition/recognition.o: src/goon/cortex/recognit
 
 # Subprojects
 .clean-subprojects:
-	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

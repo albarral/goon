@@ -61,19 +61,19 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../../tron/tuly/dist/Debug/GNU-Linux -L../../tron/tuly/dist/Debug/GNU-Linux -ltron_tuly -Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty -lopencv_core -lopencv_imgproc
+LDLIBSOPTIONS=-Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty -Wl,-rpath,../../tron/tuly/dist/Debug/GNU-Linux -L../../tron/tuly/dist/Debug/GNU-Linux -ltron_tuly -lopencv_core -lopencv_imgproc
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ../goon_features/dist/Debug/GNU-Linux/libgoon_features.so
-
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ../goon_data/dist/Debug/GNU-Linux/libgoon_data.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ../../tron/tuly/dist/Debug/GNU-Linux/libtron_tuly.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ../goon_features/dist/Debug/GNU-Linux/libgoon_features.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ../../tron/tuly/dist/Debug/GNU-Linux/libtron_tuly.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -82,59 +82,59 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}: ${OB
 ${OBJECTDIR}/src/goon/retinal/ColorGrid.o: src/goon/retinal/ColorGrid.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ColorGrid.o src/goon/retinal/ColorGrid.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ColorGrid.o src/goon/retinal/ColorGrid.cpp
 
 ${OBJECTDIR}/src/goon/retinal/ColorNode.o: src/goon/retinal/ColorNode.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ColorNode.o src/goon/retinal/ColorNode.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ColorNode.o src/goon/retinal/ColorNode.cpp
 
 ${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o: src/goon/retinal/ConfigRetinal.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o src/goon/retinal/ConfigRetinal.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o src/goon/retinal/ConfigRetinal.cpp
 
 ${OBJECTDIR}/src/goon/retinal/Exploration.o: src/goon/retinal/Exploration.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Exploration.o src/goon/retinal/Exploration.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Exploration.o src/goon/retinal/Exploration.cpp
 
 ${OBJECTDIR}/src/goon/retinal/Floodfiller.o: src/goon/retinal/Floodfiller.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Floodfiller.o src/goon/retinal/Floodfiller.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Floodfiller.o src/goon/retinal/Floodfiller.cpp
 
 ${OBJECTDIR}/src/goon/retinal/Grid.o: src/goon/retinal/Grid.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Grid.o src/goon/retinal/Grid.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Grid.o src/goon/retinal/Grid.cpp
 
 ${OBJECTDIR}/src/goon/retinal/Segmenter.o: src/goon/retinal/Segmenter.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Segmenter.o src/goon/retinal/Segmenter.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/Segmenter.o src/goon/retinal/Segmenter.cpp
 
 ${OBJECTDIR}/src/goon/retinal/merge.o: src/goon/retinal/merge.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/merge.o src/goon/retinal/merge.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/merge.o src/goon/retinal/merge.cpp
 
 ${OBJECTDIR}/src/goon/retinal/retinal_vision.o: src/goon/retinal/retinal_vision.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/retinal_vision.o src/goon/retinal/retinal_vision.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/retinal_vision.o src/goon/retinal/retinal_vision.cpp
 
 ${OBJECTDIR}/src/goon/retinal/segmentation.o: src/goon/retinal/segmentation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tuly/src -I../../tron/maty/src -I/usr/include -I../show/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/segmentation.o src/goon/retinal/segmentation.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tuly/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/segmentation.o src/goon/retinal/segmentation.cpp
 
 # Subprojects
 .build-subprojects:
-	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug
 	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug
-	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug
+	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug
 	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -143,10 +143,10 @@ ${OBJECTDIR}/src/goon/retinal/segmentation.o: src/goon/retinal/segmentation.cpp
 
 # Subprojects
 .clean-subprojects:
-	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
