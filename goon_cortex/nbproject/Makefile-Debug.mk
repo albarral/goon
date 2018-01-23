@@ -38,11 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/cortex/ConfigCortex.o \
 	${OBJECTDIR}/src/goon/cortex/CortexVision.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/binding.o \
-	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o \
-	${OBJECTDIR}/src/goon/cortex/data/Landmark.o \
-	${OBJECTDIR}/src/goon/cortex/data/memory_center.o \
-	${OBJECTDIR}/src/goon/cortex/data/retinal_center.o \
-	${OBJECTDIR}/src/goon/cortex/data/visual_center.o
+	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o
 
 
 # C Compiler Flags
@@ -94,26 +90,6 @@ ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o: src/goon/cortex/analys
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o src/goon/cortex/analysis/characterization.cpp
-
-${OBJECTDIR}/src/goon/cortex/data/Landmark.o: src/goon/cortex/data/Landmark.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/Landmark.o src/goon/cortex/data/Landmark.cpp
-
-${OBJECTDIR}/src/goon/cortex/data/memory_center.o: src/goon/cortex/data/memory_center.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/memory_center.o src/goon/cortex/data/memory_center.cpp
-
-${OBJECTDIR}/src/goon/cortex/data/retinal_center.o: src/goon/cortex/data/retinal_center.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/retinal_center.o src/goon/cortex/data/retinal_center.cpp
-
-${OBJECTDIR}/src/goon/cortex/data/visual_center.o: src/goon/cortex/data/visual_center.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/data
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/data/visual_center.o src/goon/cortex/data/visual_center.cpp
 
 # Subprojects
 .build-subprojects:

@@ -26,7 +26,7 @@ private:
     Rois* pROIs;
     Scene* pScene;
     Object oObject;
-    Binding oRoisDetection;
+    Binding oBinding;
     Characterization oCharacterization;
     //Recognition oRecognition;
 

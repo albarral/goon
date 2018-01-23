@@ -35,27 +35,21 @@ void CortexVision::formObject(int focusedROI)
 {
     LOG4CXX_TRACE(logger, "CortexVision.formObject");
     
-    oRoisDetection.detectROIs(*pRetina, *pROIs, millis);
-        
-    LOG4CXX_DEBUG(logger, "rois = " << pROIs->getNumROIs() << ", eliminated = " << oRoisDetection.getEliminations());
-
-    storage[0] += pRetina->getNumRegions();
-    storage[1] += pROIs->getNumROIs();
-    storage[2] += 0;
-    storage[3] += oRoisDetection.getEliminations();
-    counter++;
+    ROI& oROI = pROIs->getROI(focusedROI);
     
-    LOG4CXX_TRACE(logger, "update - end");
+    oBinding.formObject(oObject, pRetina, oROI.getWindow());
+    
+    LOG4CXX_DEBUG(logger, "cortex: " << oObject.shortDesc());
 }
 
 
-void CortexVision::describeROIs()
+void CortexVision::analyseObject()
 {
-    LOG4CXX_DEBUG(logger, "ROIs description ...");
-    for (ROI& oROI: pROIs->getList()) 
-    {
-        LOG4CXX_DEBUG(logger, oROI.toString());
-    } 
+    LOG4CXX_TRACE(logger, "CortexVision.analyseObject");
+    
+    oCharacterization.checkGlobalObject(oObject);
+    
+    oCharacterization.checkObjectDetails(oObject);
 }
 
 

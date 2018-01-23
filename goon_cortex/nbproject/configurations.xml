@@ -25,24 +25,8 @@
           <itemPath>src/goon/cortex/config/peripheral_defines.h</itemPath>
           <itemPath>src/goon/cortex/config/recognition_defines.h</itemPath>
           <itemPath>src/goon/cortex/config/retinal_defines.h</itemPath>
-          <itemPath>src/goon/cortex/config/vanal_defines.h</itemPath>
           <itemPath>src/goon/cortex/config/vision_defines.h</itemPath>
           <itemPath>src/goon/cortex/config/vision_times.h</itemPath>
-        </logicalFolder>
-        <logicalFolder name="data" displayName="data" projectFiles="true">
-          <itemPath>src/goon/cortex/data/Landmark.cpp</itemPath>
-          <itemPath>src/goon/cortex/data/Landmark.h</itemPath>
-          <itemPath>src/goon/cortex/data/common.h</itemPath>
-          <itemPath>src/goon/cortex/data/landmarks.h</itemPath>
-          <itemPath>src/goon/cortex/data/memory_center.cpp</itemPath>
-          <itemPath>src/goon/cortex/data/memory_center.h</itemPath>
-          <itemPath>src/goon/cortex/data/models.h</itemPath>
-          <itemPath>src/goon/cortex/data/regions.h</itemPath>
-          <itemPath>src/goon/cortex/data/retinal_center.cpp</itemPath>
-          <itemPath>src/goon/cortex/data/retinal_center.h</itemPath>
-          <itemPath>src/goon/cortex/data/rois.h</itemPath>
-          <itemPath>src/goon/cortex/data/visual_center.cpp</itemPath>
-          <itemPath>src/goon/cortex/data/visual_center.h</itemPath>
         </logicalFolder>
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
         </logicalFolder>
@@ -177,61 +161,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/goon/cortex/config/vanal_defines.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="src/goon/cortex/config/vision_defines.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
       <item path="src/goon/cortex/config/vision_times.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/Landmark.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/Landmark.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/common.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/landmarks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/memory_center.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/memory_center.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/models.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/regions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/retinal_center.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/retinal_center.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/rois.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/visual_center.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/visual_center.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -307,61 +242,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/goon/cortex/config/vanal_defines.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="src/goon/cortex/config/vision_defines.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
       <item path="src/goon/cortex/config/vision_times.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/Landmark.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/Landmark.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/common.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/landmarks.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/memory_center.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/memory_center.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/models.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/regions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/retinal_center.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/retinal_center.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/rois.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/visual_center.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/data/visual_center.h"
             ex="false"
             tool="3"
             flavor2="0">

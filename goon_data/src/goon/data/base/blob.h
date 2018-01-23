@@ -50,6 +50,8 @@ public:
     // merges with another blob
     virtual void merge(Blob& oBlob2);
 
+    cv::Vec3f computeSpatialRelation2Blob(Blob& oBlob2);
+    
     // returns all blob values in string form
     virtual std::string toString();
     virtual std::string shortDesc();    
