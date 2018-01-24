@@ -35,15 +35,19 @@ void VisualData::getCameraFrameCopy(cv::Mat& imageOut)
 void VisualData::cloneRetina()
 {
     std::lock_guard<std::mutex> locker(mutexRetina);
-    // clone retina
     oRetina2 = oRetina;    
 }
 
 void VisualData::cloneROIs()
 {
     std::lock_guard<std::mutex> locker(mutexRois);
-    // clone ROIS 
     oROIs2 = oROIs;    
+}
+
+void VisualData::cloneObject(Object& oObject)
+{
+    std::lock_guard<std::mutex> locker(mutexObject);
+    oObject2 = oObject;    
 }
 
 Retina& VisualData::getRetina2()
@@ -58,5 +62,10 @@ Rois& VisualData::getROIs2()
     return oROIs2;    
 }
 
+Object& VisualData::getObject2()
+{
+    std::lock_guard<std::mutex> locker(mutexObject);
+    return oObject2;
+}
 }
 

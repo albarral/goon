@@ -32,6 +32,8 @@ void Look::first()
     {
         LOG4CXX_INFO(logger, "started");  
         setState(Look::eSTATE_SEARCH);
+        
+        oCortexVision.init(pVisualData->getRetina(), pVisualData->getROIs(), pVisualData->getScene());
         focusedROI = -1;
         lookedObject = -1;
     }
@@ -68,6 +70,7 @@ void Look::loop()
 
         case eSTATE_NEW_FOCUS:
             
+            LOG4CXX_INFO(logger, "ROI " << focusedROI);  
             bindObject();
             identifyObject();
             setState(eSTATE_IDENTIFY);
@@ -95,8 +98,17 @@ bool Look::changeFocus()
 }
 
 bool Look::bindObject()
-{
-    LOG4CXX_DEBUG(logger, "bind object -> TO DO");
+{    
+    LOG4CXX_DEBUG(logger, "binding ... ");    
+    oCortexVision.formObject(focusedROI);
+    LOG4CXX_DEBUG(logger, "characterization ... ");    
+    oCortexVision.analyseObject();
+    
+    LOG4CXX_TRACE(logger, "clone object ... ");
+    pVisualData->cloneObject(oCortexVision.getObject());
+
+    LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
+
     return true;
 }
 

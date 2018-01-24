@@ -11,7 +11,9 @@
 #include <opencv2/core/core.hpp>
 
 #include "goon/core/GoonModule.h"
+#include "goon/cortex/CortexVision.h"
 #include "goon/data/base/roi.h"
+
 
 namespace goon
 {    
@@ -30,6 +32,7 @@ public:
 private:
     static log4cxx::LoggerPtr logger;
     // logic
+    CortexVision oCortexVision;
     int focusedROI;      // ID of focused ROI
     int lookedObject;   // ID of identified object
 

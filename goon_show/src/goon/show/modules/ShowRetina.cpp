@@ -74,6 +74,7 @@ void ShowRetina::loop()
         
         // draw regions obtained by the retinal vision 
         oRetinaMonitor.drawRegions(imageCam, pVisualData->getRetina2().getListRegions());            
+        oRetinaMonitor.drawObject(imageCam, pVisualData->getObject2());
         imageRetina = oRetinaMonitor.getOutput();
         
         // draw ROIs obtained by the peripheral vision 

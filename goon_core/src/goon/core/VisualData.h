@@ -22,16 +22,17 @@ class VisualData
         std::mutex mutexCam;        
         std::mutex mutexRetina;        
         std::mutex mutexRois;        
+        std::mutex mutexObject;        
         cv::Mat imageCam;       // image from camera
         // dynamic data (in constant change)
         Retina oRetina;             // retinal data (output of retinal vision)
         Rois oROIs;                  // regions of interest (output of peripheral vision)
-        // static data (copy of the dynamic data after each see loop)
+        // cortex section
+        Scene oScene;
+        // static data (copy of the dynamic data)
         Retina oRetina2;          // copy of the dynamic retina
         Rois oROIs2;               // copy of the dynamic rois 
-        // cortex section
-        Object oObject;
-        Scene oScene;
+        Object oObject2;        // copy of the dynamic object
         
     public:
         VisualData();
@@ -44,15 +45,16 @@ class VisualData
                 
         Retina& getRetina() {return oRetina;};
         Rois& getROIs() {return oROIs;};
-        Retina& getRetina2();
-        Rois& getROIs2();
-                
-        Object& getObject() {return oObject;};
         Scene& getScene() {return oScene;};
+
+        Retina& getRetina2();
+        Rois& getROIs2();                
+        Object& getObject2();
 
         // store static copies of the dynamic data
         void cloneRetina();
         void cloneROIs();
+        void cloneObject(Object& oObject);
                 
 };
 }    

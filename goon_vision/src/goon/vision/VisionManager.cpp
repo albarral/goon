@@ -14,10 +14,10 @@ log4cxx::LoggerPtr VisionManager::logger(log4cxx::Logger::getLogger("goon.vision
 VisionManager::VisionManager() 
 {
     blaunched = false;    
-    workingCamera = goon::Grab::eCAM_WEBCAM;        
+//    workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    workingCamera = goon::Grab::eCAM_IPCAM;
 //    workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-//    workingCamera = goon::Grab::eIMAGE_ORANGE1;
+    workingCamera = goon::Grab::eIMAGE_ORANGE1;
 }
 
 VisionManager::~VisionManager() 

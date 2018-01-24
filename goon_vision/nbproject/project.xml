@@ -15,6 +15,7 @@
                 <make-dep-project>../goon_core</make-dep-project>
                 <make-dep-project>../../tron/maty</make-dep-project>
                 <make-dep-project>../goon_features</make-dep-project>
+                <make-dep-project>../goon_cortex</make-dep-project>
                 <make-dep-project>../goon_camera</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
             </make-dep-projects>

@@ -34,20 +34,16 @@ void RealBody::clear()
 std::string RealBody::toString()
 {
     std::string desc = "RealBody [age = " + std::to_string(age) + 
-//            ", stability = " + std::to_string(stability) + 
-            "\n" + oMotion.toString() +
-            "]" + 
-            "\n" + Blob::toString() + 
+            ", " + oMotion.toString() +
             "\n" + Body::toString();
     return desc;
 }
 
 std::string RealBody::shortDesc()
 {
-    return ("RealBody: age = " + std::to_string(age) + 
- //           ", stability = " + std::to_string(stability) + 
-            "\n" + oMotion.toString() +
-            "\n" + Body::shortDesc());
+    return ("RealBody [age = " + std::to_string(age) + 
+            ", " + oMotion.shortDesc() +
+            ", " + Body::shortDesc());
 }
 
 }

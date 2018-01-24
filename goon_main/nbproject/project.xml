@@ -20,6 +20,7 @@
                 <make-dep-project>../../tron/tuly</make-dep-project>
                 <make-dep-project>../goon_retinal</make-dep-project>
                 <make-dep-project>../goon_core</make-dep-project>
+                <make-dep-project>../goon_cortex</make-dep-project>
                 <make-dep-project>../../tron/talky</make-dep-project>
                 <make-dep-project>../../tron/tivy</make-dep-project>
                 <make-dep-project>../goon_camera</make-dep-project>

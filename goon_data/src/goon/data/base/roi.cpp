@@ -20,13 +20,14 @@ bool ROI::sortByID (const ROI& oROI1, const ROI& oROI2)
 
 std::string ROI::toString()
 {
-    std::string desc = "ROI [ID = " + std::to_string(ID) + RealBody::toString() + "]";
+    std::string desc = "ROI [ID = " + std::to_string(ID) + " " + RealBody::toString() + "]";
     return desc;
 }
 
 std::string ROI::shortDesc()
 {
-    return (std::to_string(ID) + RealBody::shortDesc());
+    std::string desc = "ROI [ID = " + std::to_string(ID) + " " + RealBody::shortDesc() + "]";
+    return desc;
 }
 
 }

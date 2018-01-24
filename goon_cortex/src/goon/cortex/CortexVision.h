@@ -24,7 +24,7 @@ private:
     static log4cxx::LoggerPtr logger;
     Retina* pRetina;
     Rois* pROIs;
-    Scene* pScene;
+//    Scene* pScene;
     Object oObject;
     Binding oBinding;
     Characterization oCharacterization;
@@ -34,6 +34,8 @@ public:
     CortexVision();
     //~CortexVision();
 
+    Object& getObject() {return oObject;}
+    
     // Initializes the module 
     void init(Retina& oRetina, Rois& oROIs, Scene& oScene);
 

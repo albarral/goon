@@ -22,12 +22,9 @@ Binding::Binding ()
     bindObjectFraction = oConfigCortex.getBINDING_OVERLAP_FRACTION();
 }
 
-
-// destructor
 //Binding::~Binding()
 //{
 //}
-
 
 // This function builds the landmark from the regions inside the roi's window.
 // The landmark's mask is built from them.
@@ -39,6 +36,7 @@ void Binding::formObject(Object& oObject, Retina* pRetina, cv::Rect& window)
     oObject.clear();
     
     float overlap;
+    bool bempty = true;
     std::list<Region>::iterator it_region = pRetina->getListRegions().begin();
     std::list<Region>::iterator it_end = pRetina->getListRegions().end();
     // walk all retina regions 
@@ -49,9 +47,17 @@ void Binding::formObject(Object& oObject, Retina* pRetina, cv::Rect& window)
         // adding regions that lay inside the specified window to object
         if (overlap > bindObjectFraction)
         {
-            // merge region to object
-            oObject.merge(*it_region);
-            // and add region as component
+            // first region is assigned to the object
+            if (bempty)
+            {
+                oObject.setBody(*it_region);
+                bempty = false;
+            }
+            // next regions are merged
+            else
+                oObject.merge(*it_region);
+
+            // add region as component
             oObject.addSubBody(*it_region);
             LOG4CXX_TRACE(logger, "Binding: + region " << it_region->getID());
         }

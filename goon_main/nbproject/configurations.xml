@@ -66,6 +66,7 @@
             <pElem>../goon_camera/src</pElem>
             <pElem>../goon_retinal/src</pElem>
             <pElem>../goon_peripheral/src</pElem>
+            <pElem>../goon_cortex/src</pElem>
             <pElem>../goon_vision/src</pElem>
             <pElem>../goon_coms/src</pElem>
             <pElem>../goon_show/src</pElem>
@@ -151,6 +152,18 @@
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_cortex"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_cortex"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>

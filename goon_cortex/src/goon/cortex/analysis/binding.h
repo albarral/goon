@@ -23,7 +23,7 @@ private:
 
 public:
     Binding();
-    ~Binding();
+    //~Binding();
  		
     void formObject(Object& oObject, Retina* pRetina, cv::Rect& window);
  };

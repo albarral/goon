@@ -12,6 +12,7 @@
 
 #include "tivy/Draw.h"
 #include "goon/data/base/region.h"
+#include "goon/data/cortex/Object.h"
 
 namespace goon 
 {
@@ -28,7 +29,8 @@ public:
 //    ~RetinaMonitor();
     
     // Draws an image with the given list of regions 
-    void drawRegions (cv::Mat& image_cam, std::list<Region>& listRegions);
+    void drawRegions(cv::Mat& image_cam, std::list<Region>& listRegions);
+    void drawObject(cv::Mat& image_cam, Object& oObject);
     
     cv::Mat& getOutput() {return (oDraw.getOutput());};    
 

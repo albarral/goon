@@ -50,6 +50,9 @@ void RoisDetection::detectROIs(Retina& oRetina, Rois& oROIs, int millis)
     
     // remove obsolete ROIs
     removeObsoleteRois();
+    
+    // remap ROIs
+    pROIs->remap();
 }
 
 // reset values for new detection process
@@ -157,19 +160,22 @@ void RoisDetection::findBestMatches()
             indexRegion = maxLoc.x;      // columns are regions               
             
             // mark elements & add new match to the list
-            ROI& oROI = pROIs->getROI(indexROI);
-            Region& oRegion = pRetina->getRegion(indexRegion);
-            oROI.setMatched(true);
-            oRegion.setMatched(true);
-            newMatch(indexROI, indexRegion, maxVal);
-            
-            LOG4CXX_DEBUG(logger, "ROI " << oROI.getID() << " matched region " << indexRegion);
-            
-            // eliminate references to this ROI and region in matOverlaps
-            cv::Mat matRow = matOverlaps.row(indexROI);                
-            cv::Mat matCol = matOverlaps.col(indexRegion);                
-            matRow.setTo(0);
-            matCol.setTo(0);            
+            ROI* pROI = pROIs->getROIByIndex(indexROI);
+            if (pROI != 0)
+            {
+                Region& oRegion = pRetina->getRegion(indexRegion);
+                pROI->setMatched(true);
+                oRegion.setMatched(true);
+                newMatch(indexROI, indexRegion, maxVal);
+
+                LOG4CXX_DEBUG(logger, "ROI " << pROI->getID() << " matched region " << indexRegion);
+
+                // eliminate references to this ROI and region in matOverlaps
+                cv::Mat matRow = matOverlaps.row(indexROI);                
+                cv::Mat matCol = matOverlaps.col(indexRegion);                
+                matRow.setTo(0);
+                matCol.setTo(0);            
+            }
         }                
         // if nothing found, finish search
         else
@@ -227,14 +233,17 @@ void RoisDetection::updateMatchedROIs(int millis)
 {
     for (st_match& match : listMatches)
     {
-        ROI& oROI = pROIs->getROI(match.roiID);        
+        ROI* pROI = pROIs->getROIByID(match.roiID);        
         Region& oRegion = pRetina->getRegion(match.regionID);
 
-        // update ROIS's body with its perceived region
-        oROI.setBody(oRegion);
-        // update ROI's motion & age
-        oROI.updateMotion(millis);
-        oROI.increaseAge();
+        if (pROI != 0)
+        {
+            // update ROIS's body with its perceived region
+            pROI->setBody(oRegion);
+            // update ROI's motion & age
+            pROI->updateMotion(millis);
+            pROI->increaseAge();
+        }
     }        
 }
 

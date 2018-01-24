@@ -13,7 +13,6 @@ LoggerPtr RetinaMonitor::logger(Logger::getLogger("goon.show"));
 
 void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::list<Region>& listRegions)
 {    
-    //LOG4CXX_DEBUG(logger, "draw regions = " << listRegions.size());
     std::list<Region>::iterator it_region = listRegions.begin();
     std::list<Region>::iterator it_end = listRegions.end();
 
@@ -46,6 +45,13 @@ void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::list<Region>& listRegi
         }
         it_region++;
     }
+}
+
+
+void RetinaMonitor::drawObject(cv::Mat& image_cam, Object& oObject)
+{        
+    oDraw.setDefaultColor(tivy::Draw::eYELLOW);
+    oDraw.drawWindow(oObject.getWindow());
 }
 
 /*

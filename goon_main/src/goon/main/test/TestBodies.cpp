@@ -9,8 +9,8 @@
 #include <opencv2/opencv.hpp>
 
 #include "goon/main/test/TestBodies.h"
+#include "goon/main/test/BodyUtils.h"
 #include "goon/data/base/Body.h"
-#include "goon/data/base/BodyUtils.h"
 
 namespace goon
 {    

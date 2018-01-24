@@ -152,7 +152,7 @@ bool Focus::selectTarget()
 // This function follows the target, checking if the target ROI still exists.
 bool Focus::followTarget()
 {
-    bool bfound = pVisualData->getROIs2().isROIStillActive(targetROI);
+    bool bfound = pVisualData->getROIs2().doesROIExist(targetROI);
 
     return bfound;
 }
