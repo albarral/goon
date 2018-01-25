@@ -3,11 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <stdio.h>
-#include <unistd.h>
-
 #include "goon/peripheral/PeripheralVision.h"
-#include <goon/data/goon_version.h>
 #include <goon/features/shape/shape.h>
 #include <goon/features/color/rgb_color.h>
 
@@ -20,7 +16,6 @@ LoggerPtr PeripheralVision::logger(Logger::getLogger("goon.peripheral"));
 // constructor
 PeripheralVision::PeripheralVision()
 {
-    LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Peripheral vision");
     pRetina = 0;
     pROIs = 0;
     counter = 0;	

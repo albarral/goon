@@ -3,8 +3,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <unistd.h>
-
 #include "goon/vision/VisionManager.h"
 
 namespace goon 

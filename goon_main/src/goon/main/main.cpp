@@ -32,10 +32,8 @@ int main(int argc, char** argv)
 //    log4cxx::xml::DOMConfigurator::configure(configFile);    
     log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
         
-    LOG4CXX_INFO(logger, "\n\nSTART goon\n");
-
-    //runGoon();
-    oneShotTest();
+    runGoon();
+    //oneShotTest();
     //test();
       
     return 0;
@@ -44,6 +42,8 @@ int main(int argc, char** argv)
 // runs the body control
 void runGoon()
 {        
+    LOG4CXX_INFO(logger, "\ngoon STARTED\n");
+
     GoonControl oGoonControl; 
 
     // TEST SECTION
@@ -71,7 +71,7 @@ void runGoon()
 
 void oneShotTest() 
 {        
-    LOG4CXX_INFO(logger, "\n\nONE SHOT TEST goon VISION ...\n");
+    LOG4CXX_INFO(logger, "\ngoon STARTED (one shot test)\n");
 
     GoonControl oGoonControl; 
     oGoonControl.oneShot();

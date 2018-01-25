@@ -6,7 +6,6 @@
 #include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
 
 #include "goon/retinal/retinal_vision.h"
-#include <goon/data/goon_version.h>
 #include <goon/data/base/region.h>
 #include <goon/features/color/rgb_color.h>
 
@@ -16,10 +15,8 @@ namespace goon
 {
 LoggerPtr RetinalVision::logger(Logger::getLogger("goon.retinal"));
 
-
 RetinalVision::RetinalVision()
 {  
-    LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Retinal vision");
     pRetina = 0;
 }
 
