@@ -3,7 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <unistd.h>
+#include <unistd.h> // for sleep
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/See.h"
@@ -32,8 +32,8 @@ void See::first()
         LOG4CXX_INFO(logger, "started");  
         setState(See::eSTATE_ON);
         
+        wait4GrabBeat();
         // set sizes for retinal vision
-        wait4FirstCapture();
         pVisualData->getCameraFrameCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
         oRetinalVision.init(pVisualData->getRetina(), imageCam.cols, imageCam.rows); // w, h
@@ -77,20 +77,23 @@ void See::loop()
 
     // measure processing speed
     fps = 1000.0/oClick.getMillis();
+    
     // produce new beat
     newBeat();
-    
-    // write bus - SO
-    pGoonBus->getSO_SEE_BEAT().setValue(beat);
-    pGoonBus->getSO_SEE_FPS().setValue(fps);
+    writeBus();    
 }
 
-void See::wait4FirstCapture()
+void See::writeBus()
 {
-    LOG4CXX_INFO(logger, "waiting for first image");     
-    // wait for new grabbed frame (50ms waits)
+    pGoonBus->getSO_SEE_FPS().setValue(fps);
+    pGoonBus->getSO_SEE_BEAT().setValue(beat);
+}
+
+void See::wait4GrabBeat()
+{
+    LOG4CXX_INFO(logger, "wait first grab beat");     
     while (pGoonBus->getSO_GRAB_BEAT().getValue() == 0)            
-        usleep(50000);
+        usleep(50000);  // 50 ms
 }
 
 // just one loop execution (for testing)

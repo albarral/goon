@@ -76,6 +76,9 @@ private:
     
     // select target by position
     int selectTargetByPosition(std::list<ROI>& listROIs);
+            
+    // waits first beat from see module
+    void wait4SeeBeat();
 };
 
 }

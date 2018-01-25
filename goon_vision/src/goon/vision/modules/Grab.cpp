@@ -33,12 +33,12 @@ bool Grab::setCameraSource(int sourceCamera)
 
     if (oGrabber.isReady())
     {
-        LOG4CXX_INFO(logger, "Grab initialized");   
+        LOG4CXX_INFO(logger, "source connection ok");   
         return true;
     }
     else
     {
-        LOG4CXX_ERROR(logger, "FAILED Grab initialization!");    
+        LOG4CXX_ERROR(logger, "source connection FAILED!");    
         return false;
     }    
 };
@@ -86,86 +86,86 @@ void Grab::connect2Camera(int option)
         case Grab::eCAM_WEBCAM:  
             oGrabber.connect2Webcam();
             //oGrabber.setVisualField(33);       
-            LOG4CXX_INFO(logger, "Web camera");
+            LOG4CXX_INFO(logger, "visual source: Web camera");
             break;
 
         case Grab::eCAM_IPCAM:                        
             oGrabber.connect2IPCam("http://192.168.1.3/video.cgi?.mjpg");
             //oGrabber.setVisualField(33);                
             //oGrabber.setCamHeight(25);
-            LOG4CXX_INFO(logger, "IP camera");
+            LOG4CXX_INFO(logger, "visual source: IP camera");
             break;
             
         case Grab::eCAM_WIFIBOT_WIRELESS:            
             oGrabber.connect2IPCam("http://192.168.1.105/video.cgi?.mjpg");
             //oGrabber.setVisualField(33);                
             //oGrabber.setCamHeight(25);
-            LOG4CXX_INFO(logger, "IP camera: Wifibot (wireless)");
+            LOG4CXX_INFO(logger, "visual source: IP camera Wifibot (wireless)");
             break;
 
         case Grab::eCAM_ALBARRACIN:
             oGrabber.connect2IPCam("http://212.170.22.153:8080/mjpg/video.mjpg");
-            LOG4CXX_INFO(logger, "IP camera: webcam Albarracin");
+            LOG4CXX_INFO(logger, "visual source: IP camera webcam Albarracin");
             break;
 
         case Grab::eCAM_SOUTHERN_BEACH:
             oGrabber.connect2IPCam("http://66.184.211.231/mjpg/video.mjpg");
-            LOG4CXX_INFO(logger, "IP camera: webcam Southernmost beach");
+            LOG4CXX_INFO(logger, "visual source: IP camera webcam Southernmost beach");
             break;
             
         case Grab::eVIDEO_CAMPUS_HALL:
             oGrabber.connect2Video(tuly::Environment::getHomePath() + "/PROJECTS/IMAGES/sequences/campus_hall.MP4");
-            LOG4CXX_INFO(logger, "Video: campus hall");
+            LOG4CXX_INFO(logger, "visual source: video campus hall");
             break;
             
         case Grab::eIMAGE_CAMPUS_HALL1:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall1.png");
-            LOG4CXX_INFO(logger, "Image: campus hall 1");
+            LOG4CXX_INFO(logger, "visual source: image campus hall 1");
             break;
             
         case Grab::eIMAGE_CAMPUS_HALL2:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall2.png");
-            LOG4CXX_INFO(logger, "Image: campus hall 2");
+            LOG4CXX_INFO(logger, "visual source: image campus hall 2");
             break;
 
         case Grab::eIMAGE_CAMPUS_HALL3:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall3.png");
-            LOG4CXX_INFO(logger, "Image: campus hall 3");
+            LOG4CXX_INFO(logger, "visual source: image campus hall 3");
             break;
 
         case Grab::eIMAGE_CAMPUS_HALL4:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/campus_hall4.png");
-            LOG4CXX_INFO(logger, "Image: campus hall 4");
+            LOG4CXX_INFO(logger, "visual source: image campus hall 4");
             break;
 
         case Grab::eIMAGE_BABOON:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/baboon.jpg");
-            LOG4CXX_INFO(logger, "Image: babbon");
+            LOG4CXX_INFO(logger, "visual source: image babbon");
             break;
 
         case Grab::eIMAGE_FRUITS:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/fruits.jpg");
-            LOG4CXX_INFO(logger, "Image: fruits");
+            LOG4CXX_INFO(logger, "visual source: image fruits");
             break;
 
         case Grab::eIMAGE_JLUIS:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/jluis.jpg");
-            LOG4CXX_INFO(logger, "Image: jluis");
+            LOG4CXX_INFO(logger, "visual source: image jluis");
             break;
 
         case Grab::eIMAGE_ORANGE1:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange1.jpg");
-            LOG4CXX_INFO(logger, "Image: orange1");
+            LOG4CXX_INFO(logger, "visual source: image orange1");
             break;
             
         case Grab::eIMAGE_ORANGE2:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange2.jpg");
-            LOG4CXX_INFO(logger, "Image: orange2");
+            LOG4CXX_INFO(logger, "visual source: image orange2");
             break;
 
         case Grab::eIMAGE_ORANGE3:
             oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange3.jpg");
-            LOG4CXX_INFO(logger, "Image: orange3");
+            LOG4CXX_INFO(logger, "visual source: image orange3");
             break;
     }
 }

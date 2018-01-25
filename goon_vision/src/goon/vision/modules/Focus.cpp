@@ -3,6 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <unistd.h> // for sleep
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/Focus.h"
@@ -30,12 +31,13 @@ void Focus::first()
     if (benabled)
     {
         LOG4CXX_INFO(logger, "started");  
-        targetROI = -1;
         setState(Focus::eSTATE_SEARCH);
  
+        wait4SeeBeat();
         // default search mode ...
         // by saliency
         mode = Focus::eSEARCH_SALIENCY;
+        targetROI = -1;
         // by position near to (320,240)
 //        mode = Focus::eSEARCH_POSITION;        
 //        features[0] = 320;
@@ -72,7 +74,7 @@ void Focus::loop()
             if (selectTarget())
             {
                 setState(eSTATE_TRACK);
-                LOG4CXX_WARN(logger, "new target selected -> ROI " << targetROI);                
+                LOG4CXX_WARN(logger, "new target -> ROI " << targetROI);                
             }
             break;
 
@@ -107,8 +109,7 @@ void Focus::loop()
     }   // end switch        
     
     // produce new beat
-    newBeat();
-    
+    newBeat();    
     writeBus();
 }
 
@@ -123,7 +124,7 @@ bool Focus::selectTarget()
     Rois& oROIs2 = pVisualData->getROIs2();
     if (oROIs2.getList().empty())
     {
-        LOG4CXX_WARN(logger, "can't select target, no ROIs detected!");
+        LOG4CXX_WARN(logger, "skip, no ROIs detected!");
         return false;
     }
     
@@ -141,7 +142,7 @@ bool Focus::selectTarget()
             break;
                         
         default:
-            LOG4CXX_WARN(logger, "can't select target, search mode not implemented ");
+            LOG4CXX_WARN(logger, "skip, unknown search mode!");
             targetROI = -1;
             break;
     }
@@ -192,36 +193,49 @@ int Focus::selectTargetByPosition(std::list<ROI>& listROIs)
 
 void Focus::senseBus()
 {
-    // search mode
+    // if search mode requested -> SEARCH
     if (pGoonBus->getCO_FOCUS_MODE().checkRequested())
     {
         int value = pGoonBus->getCO_FOCUS_MODE().getValue();
-        // if valid mode -> LAUNCH movement
+        // check that mode is valid
         if (value >= 0 && value < Focus::eSEARCH_DIM)
         {
             mode = value;
-            LOG4CXX_INFO(logger, modName << " new search mode " + std::to_string(mode));                     
+            LOG4CXX_INFO(logger, "> new search mode " + std::to_string(mode));                     
+            setState(eSTATE_SEARCH);
         }
         else
-            LOG4CXX_WARN(logger, modName << " invalid search mode " + std::to_string(mode));                     
+            LOG4CXX_WARN(logger, "> invalid search mode " + std::to_string(mode));                     
     }
         
-    // search features
+    // if search features requested -> SEARCH
     if (pGoonBus->getCO_FOCUS_SEARCH_VALUE().checkRequested())
     {  
         features = pGoonBus->getCO_FOCUS_SEARCH_VALUE().getValue();
-        LOG4CXX_INFO(logger, modName << " search features = " + std::to_string(features[0]) + ", " + std::to_string(features[1]) + ", " + std::to_string(features[2]));                     
+        LOG4CXX_INFO(logger, "> new search features = " + std::to_string(features[0]) + ", " + std::to_string(features[1]) + ", " + std::to_string(features[2]));                     
+        setState(eSTATE_SEARCH);
     }
 
     // if shift requested -> SEARCH
     if (pGoonBus->getCO_FOCUS_SHIFT().checkRequested())
+    {
+        LOG4CXX_INFO(logger, "> new focus shift");                     
         setState(eSTATE_SEARCH);
+    }
 }
 
 void Focus::writeBus()
 {
-    pGoonBus->getSO_FOCUS_BEAT().setValue(beat);
     pGoonBus->getSO_FOCUS_ROI().setValue(targetROI);
+    pGoonBus->getSO_FOCUS_FOCUSED().setValue(getState() == eSTATE_TRACK);
+    pGoonBus->getSO_FOCUS_BEAT().setValue(beat);
+}
+
+void Focus::wait4SeeBeat()
+{
+    LOG4CXX_INFO(logger, "wait first see beat");     
+    while (pGoonBus->getSO_SEE_BEAT().getValue() == 0)            
+        usleep(50000);  // 50 ms
 }
 
 void Focus::showState()
