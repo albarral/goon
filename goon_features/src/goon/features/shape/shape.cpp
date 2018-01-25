@@ -36,7 +36,7 @@ void Shape::computeShapeFromCovs(cv::Vec3f& covs)
 {
     computeEllipse(covs[0], covs[1], covs[2], width, height, angle);
 
-    if (height > 0.0)
+    if (height != 0.0)
         shape_factor = width / height;
     else
         shape_factor = 1000;
@@ -49,6 +49,10 @@ void Shape::computeShapeFromCovs(cv::Vec3f& covs)
 // This function calculates the centroid (x, y) and covariances (cxx, cyy, cxy) of a region
 void Shape::computeCovariances (cv::Mat& mask, cv::Rect& window, cv::Vec2i& centroid, cv::Vec3f& covs)
 {
+    // skip if mask empty
+    if (mask.empty())
+        return;
+    
     cv::Mat mask_aux;
     st_moments moments;
 
@@ -58,7 +62,7 @@ void Shape::computeCovariances (cv::Mat& mask, cv::Rect& window, cv::Vec2i& cent
     else 
         mask_aux = mask;
     
-    computeMoments (mask_aux, moments);
+    computeMoments(mask_aux, moments);
     
     if (moments.m00 != 0)
     {
@@ -91,7 +95,7 @@ void Shape::computeEllipse (float cxx, float cyy, float cxy, float& width, float
     angle = (atan2(-b, a)/2)*(180/M_PI); // sign of y changed because mask Y axis faces down
 }
 
-void Shape::computeMoments (cv::Mat& mask, st_moments& moments)
+void Shape::computeMoments(cv::Mat& mask, st_moments& moments)
 {
     float xo, yo;
     int x, y;

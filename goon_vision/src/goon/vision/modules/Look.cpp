@@ -3,6 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <unistd.h> // for sleep
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/Look.h"
@@ -31,9 +32,10 @@ void Look::first()
     if (benabled)
     {
         LOG4CXX_INFO(logger, "started");  
-        setState(Look::eSTATE_SEARCH);
+        setState(Look::eSTATE_WAIT);
         
-        oCortexVision.init(pVisualData->getRetina(), pVisualData->getROIs(), pVisualData->getScene());
+        wait4FocusBeat();
+        oCortexVision.init(pVisualData->getRetina2(), pVisualData->getROIs2(), pVisualData->getScene());
         focusedROI = -1;
         lookedObject = -1;
     }
@@ -63,75 +65,80 @@ void Look::loop()
 
     switch (getState())
     {
-        case eSTATE_SEARCH:
+        case Look::eSTATE_WAIT:
             
-            changeFocus();
+            clearObject();
+            //changeFocus();
             break;
 
-        case eSTATE_NEW_FOCUS:
-            
-            LOG4CXX_INFO(logger, "ROI " << focusedROI);  
-            bindObject();
-            identifyObject();
-            setState(eSTATE_IDENTIFY);
-            break;
+//        case eSTATE_NEW_FOCUS:
+//            
+//            bindObject();
+//            //identifyObject();
+//            setState(eSTATE_IDENTIFY);
+//            break;
 
-
-        case eSTATE_IDENTIFY:
+        case Look::eSTATE_IDENTIFY:
 
             bindObject();
-            identifyObject();
+            //identifyObject();        
+            LOG4CXX_TRACE(logger, "clone object ... ");
+            pVisualData->cloneObject(oCortexVision.getObject());
+
             break;
     }   // end switch        
     
     // produce new beat
-    newBeat();
-    
+    newBeat();    
     writeBus();
 }
 
-bool Look::changeFocus()
+//bool Look::changeFocus()
+//{
+//    pGoonBus->getCO_FOCUS_SHIFT().request();
+//    pGoonBus->getCO_FOCUS_MODE().request(Focus::eSEARCH_SALIENCY);
+//    return true;
+//}
+
+void Look::clearObject()
 {
-    pGoonBus->getCO_FOCUS_SHIFT().request();
-    pGoonBus->getCO_FOCUS_MODE().request(Focus::eSEARCH_SALIENCY);
-    return true;
+    // clear object if not done before
+    if (lookedObject != -1)
+    {
+        oCortexVision.getObject().clear();
+        lookedObject = -1;
+    }    
 }
 
-bool Look::bindObject()
+void Look::bindObject()
 {    
     LOG4CXX_DEBUG(logger, "binding ... ");    
     oCortexVision.formObject(focusedROI);
-    LOG4CXX_DEBUG(logger, "characterization ... ");    
-    oCortexVision.analyseObject();
     
-    LOG4CXX_TRACE(logger, "clone object ... ");
-    pVisualData->cloneObject(oCortexVision.getObject());
-
+    //LOG4CXX_DEBUG(logger, "characterization ... ");    
+    //oCortexVision.analyseObject();
+    
     LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
-
-    return true;
 }
 
-bool Look::identifyObject()
+void Look::identifyObject()
 {
     LOG4CXX_DEBUG(logger, "identify object -> TO DO");
-    return true;
+    // get identified object ID 
+    lookedObject = oCortexVision.getObject().getID();
 }
-
 
 void Look::senseBus()
 {
-    // if focused ROI has changed
-    if (focusedROI != pGoonBus->getSO_FOCUS_ROI().getValue())
+    // if target focused, analyze it
+    if (pGoonBus->getSO_FOCUS_FOCUSED().getValue())
     {
         focusedROI = pGoonBus->getSO_FOCUS_ROI().getValue();
-        // if focus lost -> search new target
-        if (focusedROI == -1)
-            setState(eSTATE_SEARCH);    
-        // if focus set -> analyze new object
-        else
-            setState(eSTATE_NEW_FOCUS);        
+        setState(Look::eSTATE_IDENTIFY);            
     }
+    // otherwise wait
+    else
+        setState(Look::eSTATE_WAIT);    
 }
 
 void Look::writeBus()
@@ -140,16 +147,23 @@ void Look::writeBus()
     pGoonBus->getSO_LOOK_BEAT().setValue(beat);
 }
 
+void Look::wait4FocusBeat()
+{
+    LOG4CXX_INFO(logger, "wait first focus beat");     
+    while (pGoonBus->getSO_FOCUS_BEAT().getValue() == 0)            
+        usleep(50000);  // 50 ms
+}
+
 void Look::showState()
 {
     switch (getState())
     {
-        case eSTATE_SEARCH:
-            LOG4CXX_INFO(logger, ">> search");
+        case eSTATE_WAIT:
+            LOG4CXX_INFO(logger, ">> wait");
             break;
-        case eSTATE_NEW_FOCUS:
-            LOG4CXX_INFO(logger, ">> new focus");
-            break;
+//        case eSTATE_NEW_FOCUS:
+//            LOG4CXX_INFO(logger, ">> new focus");
+//            break;
         case eSTATE_IDENTIFY:
             LOG4CXX_INFO(logger, ">> identify");
             break;

@@ -24,8 +24,8 @@ public:
     // states of Look module
     enum eState
     {
-        eSTATE_SEARCH,
-        eSTATE_NEW_FOCUS,
+        eSTATE_WAIT,
+        //eSTATE_NEW_FOCUS,
         eSTATE_IDENTIFY
     };
 
@@ -56,13 +56,18 @@ private:
     void senseBus();
     void writeBus();
     void showState();
-    
-    bool changeFocus();
-    // try to update the target's info 
-    bool bindObject();
-    // try to detect a lost target
-    bool identifyObject();
 
+    // clear object
+    void clearObject();
+    // do object binding
+    void bindObject();
+    // do object identification
+    void identifyObject();
+
+    //bool changeFocus();
+
+    // waits first beat from focus module
+    void wait4FocusBeat();
 };
 
 }

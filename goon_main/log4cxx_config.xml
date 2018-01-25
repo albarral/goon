@@ -27,8 +27,23 @@
         <appender-ref ref="consoleAppender"/>
         <appender-ref ref="dailyAppender"/>
   </category>
+  <category name="goon.vision">
+        <priority value ="info" />
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="dailyAppender"/>
+  </category>
   <category name="goon.retinal">
-        <priority value ="debug" />
+        <priority value ="info" />
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="dailyAppender"/>
+  </category>
+  <category name="goon.peripheral">
+        <priority value ="info" />
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="dailyAppender"/>
+  </category>
+  <category name="goon.cortex">
+        <priority value ="info" />
         <appender-ref ref="consoleAppender"/>
         <appender-ref ref="dailyAppender"/>
   </category>

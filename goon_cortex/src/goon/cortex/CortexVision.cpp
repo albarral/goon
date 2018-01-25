@@ -45,16 +45,28 @@ void CortexVision::formObject(int focusedROI)
 
         LOG4CXX_TRACE(logger, "cortex: " << oObject.shortDesc());
     }
+    // skip if ROI doesn't exist
+    else
+    {
+        // clear object
+        oObject.clear();
+        LOG4CXX_WARN(logger, "formObject skipped, ROI not found");            
+    }
 }
 
 
 void CortexVision::analyseObject()
 {
     LOG4CXX_TRACE(logger, "CortexVision.analyseObject");
-    
-    oCharacterization.checkGlobalObject(oObject);
-    
-    oCharacterization.checkObjectDetails(oObject);
+
+    if (oObject.getMass() > 0)
+    {
+        oCharacterization.checkGlobalObject(oObject);    
+        oCharacterization.checkObjectDetails(oObject);
+    }
+    // skip if empty object
+    else
+        LOG4CXX_WARN(logger, "formObject skipped, ROI not found");            
 }
 }
 
