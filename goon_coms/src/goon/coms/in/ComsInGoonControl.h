@@ -42,6 +42,8 @@ public:
     tuly::IntegerQueue& getQueueSpecialActions() {return oQueueSpecialActions;}
     
 private:
+    // process command of focus category
+    bool processFocusCommand(talky::Command& oCommand);
     // process command of extra category
     bool processExtraCommand(talky::Command& oCommand);
 

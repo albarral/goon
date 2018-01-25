@@ -36,6 +36,10 @@ bool ComsInGoonControl::processCommand(talky::Command& oCommand)
 
     switch (oCommand.getCategory())
     {
+        case talky::VisionTopic::eCAT_VISION_FOCUS:
+            bret = processFocusCommand(oCommand);
+            break;
+
         case talky::VisionTopic::eCAT_VISION_EXTRA:
             bret = processExtraCommand(oCommand);
             break;
@@ -47,6 +51,29 @@ bool ComsInGoonControl::processCommand(talky::Command& oCommand)
     return bret;
 }
 
+bool ComsInGoonControl::processFocusCommand(talky::Command& oCommand)
+{
+    bool bret = true;
+    float quantity = oCommand.getQuantity();
+    
+    switch (oCommand.getConcept())
+    {            
+        case talky::VisionTopic::eFOCUS_SHIFT:
+            LOG4CXX_INFO(logger, "> focus shift");  
+            pGoonBus->getCO_FOCUS_SHIFT().request();
+            break;
+
+        case talky::VisionTopic::eFOCUS_MODE:
+            LOG4CXX_INFO(logger, "> focus mode" << (int)quantity);  
+            pGoonBus->getCO_FOCUS_MODE().request((int)quantity);
+            break;
+
+        default:
+            bret = false;
+            LOG4CXX_WARN(logger, "ComsInGoonControl: can't process command, untreated extra concept " << oCommand.getConcept());           
+    }    
+    return bret;
+}
 
 bool ComsInGoonControl::processExtraCommand(talky::Command& oCommand)
 {

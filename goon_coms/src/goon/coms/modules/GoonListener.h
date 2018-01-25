@@ -25,6 +25,7 @@ private:
     std::string modName;          // module name
     bool benabled;
     // logic
+    nety::NetNodeServer oNetyServerFocus;      // communications server for focus category
     nety::NetNodeServer oNetyServerExtra;      // communications server for extra category
     ComsInGoonControl oCIGoonControl;         // object that gets talky commands and transforms them to bus control values
     bool brequestedGoonEnd;

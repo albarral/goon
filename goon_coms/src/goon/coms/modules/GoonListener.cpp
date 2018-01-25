@@ -27,12 +27,14 @@ void GoonListener::init(GoonBus& oGoonBus)
 {
     int topic = talky::Topics::eTOPIC_VISION;
     // prepare communication servers
+    oNetyServerFocus.init(topic, talky::VisionTopic::eCAT_VISION_FOCUS);    
     oNetyServerExtra.init(topic, talky::VisionTopic::eCAT_VISION_EXTRA);    
     
     oCIGoonControl.connect2Arm(&oGoonBus);
     
     // if servers enabled
-    if (oNetyServerExtra.isConnected())
+    if (oNetyServerFocus.isConnected() &&
+            oNetyServerExtra.isConnected())
     {
         benabled = true;
         LOG4CXX_INFO(logger, modName + " initialized");                                
@@ -48,6 +50,8 @@ void GoonListener::first()
 
 void GoonListener::loop()
 {
+    // listen to focus messages
+    checkServer(oNetyServerFocus);
     // listen to extra messages
     checkServer(oNetyServerExtra);
 }
