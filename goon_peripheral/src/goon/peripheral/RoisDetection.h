@@ -11,7 +11,6 @@
 #include <log4cxx/logger.h>
 #include "opencv2/core/core.hpp"
 
-#include "goon/peripheral/IDPool.h"
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
 #include <goon/data/base/roi.h>
@@ -42,7 +41,6 @@ private:
     Rois* pROIs;            // pointer to ROIs
     int eliminations;
     HSVColor oHSVColor;
-    IDPool oIDPool;             // pool of IDs for the ROIs
     cv::Mat matOverlaps;    // matrix of ROI overlaps (ROIS x regions), stores overlap amounts (in pixels) 
     std::vector<st_match> listMatches;  // list of ROI-Region matchings 
 
@@ -80,9 +78,6 @@ private:
     void handleOrphanRegions();
     // adds a new ROI to the list of ROIs
     void newROI(Region& oRegion);
-    
-    // eliminate absent ROIs
-    void removeObsoleteRois();    
 };
 
 }  

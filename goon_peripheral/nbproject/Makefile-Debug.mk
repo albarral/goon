@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/peripheral/IDPool.o \
 	${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o \
 	${OBJECTDIR}/src/goon/peripheral/RoisDetection.o \
 	${OBJECTDIR}/src/goon/peripheral/Saliency.o
@@ -70,11 +69,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT}: .
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
-
-${OBJECTDIR}/src/goon/peripheral/IDPool.o: src/goon/peripheral/IDPool.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/maty/src -I/usr/include -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/IDPool.o src/goon/peripheral/IDPool.cpp
 
 ${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o: src/goon/peripheral/PeripheralVision.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral

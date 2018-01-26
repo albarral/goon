@@ -13,8 +13,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
-        <itemPath>src/goon/peripheral/IDPool.cpp</itemPath>
-        <itemPath>src/goon/peripheral/IDPool.h</itemPath>
         <itemPath>src/goon/peripheral/PeripheralVision.cpp</itemPath>
         <itemPath>src/goon/peripheral/PeripheralVision.h</itemPath>
         <itemPath>src/goon/peripheral/RoisDetection.cpp</itemPath>
@@ -100,10 +98,6 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/peripheral/IDPool.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/IDPool.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/peripheral/PeripheralVision.cpp"
             ex="false"
             tool="1"
@@ -149,10 +143,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/peripheral/IDPool.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/peripheral/IDPool.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/peripheral/PeripheralVision.cpp"
             ex="false"
             tool="1"

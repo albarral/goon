@@ -12,6 +12,7 @@ namespace goon
 // constructor
 Rois::Rois()
 {
+    clear();
 }
 
 // destructor
@@ -24,14 +25,22 @@ void Rois::clear()
 {
     listROIs.clear();
     mapROIs.clear();
+    oIDPool.refill(500); // 500 roi IDs
 }
 
-void Rois::addROI (ROI& oRoi)
+int Rois::addROI (ROI& oRoi)
 {
-    listROIs.push_back(oRoi);
+    int ID = oIDPool.takeElement();
+    if (ID != -1)
+    {
+        oRoi.setID(ID);    
+        listROIs.push_back(oRoi);
+    }
+    
+    return ID; 
 }
 
-void Rois::remap()
+void Rois::updateRoisMap()
 {
     // clear map
     mapROIs.clear();
@@ -45,8 +54,7 @@ void Rois::remap()
         mapROIs.emplace(it_ROI->getID(), pos);        
         it_ROI++;
         pos++;
-    }
-    
+    }    
 }
 
 ROI* Rois::getROIByID(int ID)
@@ -69,6 +77,24 @@ ROI* Rois::getROIByIndex(int pos)
     // otherwise, return 0
     else
         return 0;
+}
+
+// eliminate invalid ROIs    
+void Rois::removeInvalidRois()
+{
+    std::list<ROI>::iterator it_roi = listROIs.begin();
+    // remove unmatched ROIs from list
+    while (it_roi != listROIs.end())
+    {
+        if (!it_roi->isMatched())
+        {
+            // make ID available again
+            oIDPool.freeElement(it_roi->getID());
+            it_roi = listROIs.erase(it_roi);
+        }
+        else
+            it_roi++;
+    }                  
 }
 
 // This function checks if the specified roi is still active or not.

@@ -13,12 +13,12 @@ GoonVersion::GoonVersion()
     date = "8/3/2016";
     speed = 5; 
     
-    addFeature("retinal: multi-threaded segmentation (4 threads) + merge", true);
-    addFeature("peripheral: rois detection + motion perception", true);
-    addFeature("focus: color saliency + interest position", true);
-    addFeature("binding: target ROI window", true);
-    addFeature("characterization: global + local + structure", false);
-    addFeature("recognition: ", false);    
+    addFeature("retinal: \t multi-threaded segmentation (4 threads) + merge", true);
+    addFeature("peripheral: \t rois detection + motion perception", true);
+    addFeature("focus: \t color saliency + interest position", true);
+    addFeature("binding: \t target ROI window", true);
+    addFeature("characterization: \t global + local + structure", false);
+    addFeature("recognition: \t ", false);    
 }
 
 GoonVersion::~GoonVersion()
@@ -42,7 +42,7 @@ std::string GoonVersion::toString()
     // walk lists
     while (it_feature != listFeatures.end() && it_activation != listActivations.end())
     {            
-        desc += *it_feature + ", activated : " + std::to_string(*it_activation) + "\n";
+        desc += *it_feature + " - \t activated : " + std::to_string(*it_activation) + "\n";
         it_feature++;
         it_activation++;        
     }

@@ -116,6 +116,9 @@ int Segmentation4::extractRegions (cv::Mat& image_cam, cv::Mat& image_hsv)
     // wait for all segmenters to end their job
     waitAllFinished(listBeats);
     
+    // map regions once all detected
+    pRetina->updateRegionsMap();
+
     LOG4CXX_DEBUG(logger, "extracted regions = " << pRetina->getNumRegions());
 }
   

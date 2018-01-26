@@ -22,7 +22,7 @@ class Merge
 private:
         static log4cxx::LoggerPtr logger;
         int proximityGAP;                // maximum separation (pixels) between regions to allow them merging
-        cv::Mat mat_proximity;       // matrix used to associate regions to be merged   
+        cv::Mat mat2Merge;       // matrix used to associate regions to be merged   
         std::set<int> setCollectionRegions;   // set of regions to form a collection (automatically avoids duplications)
         Grid oGrid;                      // class for handling body grids
         ColorSimilarity oColorSimilarity;
@@ -42,7 +42,7 @@ public:
 private:
 
     // Checks if there are nearby regions with similar color that can be merged.
-    void checkProximityMerge(Retina& oRetina);
+    void checkMergeRelations(Retina& oRetina);
 
     // checks whether two color bodies are mergeable
     bool checkLocalSimilarity(ColorBody& oBody1, ColorBody& oBody2);

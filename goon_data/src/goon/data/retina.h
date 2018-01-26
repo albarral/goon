@@ -8,7 +8,9 @@
 
 #include <mutex>
 #include <list>
+#include <map>
 #include <string>
+
 #include "opencv2/core/core.hpp"
 
 #include "goon/data/base/region.h"
@@ -23,30 +25,34 @@ private:
         std::mutex mutex;
         int ID;                                                       // ID of last added region (equal to region's index in the list)
         std::list<Region> listRegions;                     // list of extracted regions (sorted by ID)         
+        std::map<int, int> mapRegions;                  // map: region.ID - region position in listRegions
 
 public:
         Retina();
         ~Retina();
-                    
-        // assignment operator
-        Retina& operator= (const Retina& oRetina);
-        
+
+        // assignment operator (default assignment is implicitly deleted due to mutex copy prohibition)
+       Retina& operator= (const Retina& oRetina);
+                            
         // returns a reference to the list of regions
         std::list<Region>& getListRegions();
+        // returns the number regions 
+        int getNumRegions();
+         // clears the lists of regions
+        void clear();
+
         // adds a new region to the list (thread safe)
         void addRegion (Region& oRegion);
 
-        // remove the invalid (merged) regions from list, reassigning ID's in the new list
-        void removeInvalidRegions();        
+        // rebuilds mapRegions in coherence with present listRegions
+        void updateRegionsMap();
+        // returns the Region with the specified ID
+        Region* getRegionByID(int ID);
+        // returns the Region at the specified position in the list
+        Region* getRegionByIndex(int pos);
 
-        // returns the number of extracted regions (in vec_regions)
-        int getNumRegions();
- 
-        // clears the lists of regions
-        void clear();
-                
-        // returns the region with the specified ID
-        Region& getRegion (int ID);         
+        // remove the invalid (merged) regions from list
+        void removeInvalidRegions();        
         
         // returns description of all retina regions
         std::string toString();    
@@ -54,6 +60,10 @@ public:
         std::string shortDesc();    
         // returns short description of all retina regions with given color range
         std::string showFilterByColor(cv::Vec3b& hsvColor, cv::Vec3b& hsvDeviation);
+
+private:
+    // get Region position in list (using the map)
+    int getRegionPosition(int regionID);    
 
 };
 
