@@ -1,5 +1,5 @@
-#ifndef __GOON_RETINAL_CONFIG_H
-#define __GOON_RETINAL_CONFIG_H
+#ifndef __GOON_DATA_RETINALCONFIG_H
+#define __GOON_DATA_RETINALCONFIG_H
 
 /***************************************************************************
  *   Copyright (C) 2016 by Migtron Robotics   *
@@ -9,10 +9,8 @@
 
 namespace goon
 {
-class ConfigRetinal
+class RetinalConfig
 {
-public:    
-    static const unsigned char EXPLORED_VALUE = 255;
 private:
     // segmentation 
     float SEGMENTATION_MIN_DETAIL;      // minimum area of details allowed for detection (fraction of image area)
@@ -29,8 +27,8 @@ private:
 
 
 public:
-    ConfigRetinal();
-    //~ConfigRetinal();
+    RetinalConfig();
+    //~RetinalConfig();
 
     // segmentation 
     float getSegmentationMinDetail() {return SEGMENTATION_MIN_DETAIL;}

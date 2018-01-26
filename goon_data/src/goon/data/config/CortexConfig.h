@@ -1,5 +1,5 @@
-#ifndef __GOON_CORTEX_CONFIGCORTEX_H
-#define __GOON_CORTEX_CONFIGCORTEX_H
+#ifndef __GOON_DATA_CORTEXCONFIG_H
+#define __GOON_DATA_CORTEXCONFIG_H
 
 /***************************************************************************
  *   Copyright (C) 2018 by Migtron Robotics   *
@@ -9,7 +9,7 @@
 
 namespace goon
 {
-class ConfigCortex
+class CortexConfig
 {
 private:
     // binding
@@ -17,8 +17,8 @@ private:
 
 
 public:
-    ConfigCortex();
-    //~ConfigCortex();
+    CortexConfig();
+    //~CortexConfig();
 
     // binding
     float getBINDING_OVERLAP_FRACTION() {return BINDING_OVERLAP_FRACTION;}    

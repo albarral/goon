@@ -18,8 +18,6 @@
           <itemPath>src/goon/retinal/ColorGrid.h</itemPath>
           <itemPath>src/goon/retinal/ColorNode.cpp</itemPath>
           <itemPath>src/goon/retinal/ColorNode.h</itemPath>
-          <itemPath>src/goon/retinal/ConfigRetinal.cpp</itemPath>
-          <itemPath>src/goon/retinal/ConfigRetinal.h</itemPath>
           <itemPath>src/goon/retinal/Exploration.cpp</itemPath>
           <itemPath>src/goon/retinal/Exploration.h</itemPath>
           <itemPath>src/goon/retinal/Floodfiller.cpp</itemPath>
@@ -135,10 +133,6 @@
       </item>
       <item path="src/goon/retinal/ColorNode.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/retinal/ConfigRetinal.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/retinal/Exploration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/Exploration.h" ex="false" tool="3" flavor2="0">
@@ -198,10 +192,6 @@
       <item path="src/goon/retinal/ColorNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/ColorNode.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/Exploration.cpp" ex="false" tool="1" flavor2="0">
       </item>

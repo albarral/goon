@@ -3,12 +3,12 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/retinal/ConfigRetinal.h"
+#include "goon/data/config/RetinalConfig.h"
 		
 namespace goon
 {
 // constructor
-ConfigRetinal::ConfigRetinal()
+RetinalConfig::RetinalConfig()
 {
     // segmentation 
     SEGMENTATION_MIN_DETAIL = 0.001;        // regions accepted from at least 0.1% of image area

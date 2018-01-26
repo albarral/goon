@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/main/GoonControl.o \
+	${OBJECTDIR}/src/goon/main/GoonVersion.o \
 	${OBJECTDIR}/src/goon/main/main.o \
 	${OBJECTDIR}/src/goon/main/test/BodyUtils.o \
 	${OBJECTDIR}/src/goon/main/test/Test.o \
@@ -104,6 +105,11 @@ ${OBJECTDIR}/src/goon/main/GoonControl.o: src/goon/main/GoonControl.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_cortex/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/GoonControl.o src/goon/main/GoonControl.cpp
+
+${OBJECTDIR}/src/goon/main/GoonVersion.o: src/goon/main/GoonVersion.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/main
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_cortex/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/GoonVersion.o src/goon/main/GoonVersion.cpp
 
 ${OBJECTDIR}/src/goon/main/main.o: src/goon/main/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main

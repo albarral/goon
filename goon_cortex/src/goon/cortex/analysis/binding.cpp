@@ -6,8 +6,8 @@
 #include <list>
 
 #include "goon/cortex/analysis/binding.h"
-#include "goon/cortex/ConfigCortex.h"	
 #include "goon/data/base/region.h"
+#include "goon/data/config/CortexConfig.h"
 #include "maty/math/area.h"
 
 using namespace log4cxx;
@@ -18,8 +18,8 @@ LoggerPtr Binding::logger(Logger::getLogger("goon.cortex.binding"));
 // constructor
 Binding::Binding ()
 {
-    ConfigCortex oConfigCortex;
-    bindObjectFraction = oConfigCortex.getBINDING_OVERLAP_FRACTION();
+    CortexConfig oCortexConfig;
+    bindObjectFraction = oCortexConfig.getBINDING_OVERLAP_FRACTION();
 }
 
 //Binding::~Binding()

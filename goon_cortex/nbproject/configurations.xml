@@ -30,8 +30,6 @@
         </logicalFolder>
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
         </logicalFolder>
-        <itemPath>src/goon/cortex/ConfigCortex.cpp</itemPath>
-        <itemPath>src/goon/cortex/ConfigCortex.h</itemPath>
         <itemPath>src/goon/cortex/CortexVision.cpp</itemPath>
         <itemPath>src/goon/cortex/CortexVision.h</itemPath>
       </logicalFolder>
@@ -111,10 +109,6 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/cortex/ConfigCortex.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/ConfigCortex.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/cortex/CortexVision.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/cortex/CortexVision.h" ex="false" tool="3" flavor2="0">
@@ -192,10 +186,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/cortex/ConfigCortex.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/ConfigCortex.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/cortex/CortexVision.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/cortex/CortexVision.h" ex="false" tool="3" flavor2="0">

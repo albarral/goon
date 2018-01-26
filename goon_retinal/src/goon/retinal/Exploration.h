@@ -32,6 +32,7 @@ public:
     };
 
 private:
+    const unsigned char EXPLORED_VALUE = 255;    
     cv::Mat mask_explored;         // mask of explored pixels (internal)
     cv::Mat mask_region;            // mask of accepted pixels (internal)
     cv::Mat mask_forbiden;         // mask of forbidden pixels (externally provided)

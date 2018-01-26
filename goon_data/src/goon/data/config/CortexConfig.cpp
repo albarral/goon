@@ -3,12 +3,12 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/cortex/ConfigCortex.h"
+#include "goon/data/config/CortexConfig.h"
 		
 namespace goon
 {
 // constructor
-ConfigCortex::ConfigCortex()
+CortexConfig::CortexConfig()
 {
     // binding
     BINDING_OVERLAP_FRACTION = 0.50;

@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/cortex/ConfigCortex.o \
 	${OBJECTDIR}/src/goon/cortex/CortexVision.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/binding.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o
@@ -64,11 +63,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
-
-${OBJECTDIR}/src/goon/cortex/ConfigCortex.o: src/goon/cortex/ConfigCortex.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/ConfigCortex.o src/goon/cortex/ConfigCortex.cpp
 
 ${OBJECTDIR}/src/goon/cortex/CortexVision.o: src/goon/cortex/CortexVision.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex

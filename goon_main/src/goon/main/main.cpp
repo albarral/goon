@@ -12,6 +12,7 @@
 #include <log4cxx/xml/domconfigurator.h>
 
 #include "goon/main/GoonControl.h"
+#include "goon/main/GoonVersion.h"
 #include "goon/main/test/TestBodies.h"
 #include "goon/main/test/TestRegions.h"
 #include "goon/main/test/Test.h"
@@ -43,6 +44,9 @@ int main(int argc, char** argv)
 void runGoon()
 {        
     LOG4CXX_INFO(logger, "\ngoon STARTED\n");
+    
+    GoonVersion oGoonVersion;
+    LOG4CXX_INFO(logger, oGoonVersion.toString());
 
     GoonControl oGoonControl; 
 

@@ -6,8 +6,8 @@
 #include <list>
 
 #include "goon/retinal/merge.h"
-#include "goon/retinal/ConfigRetinal.h"
 #include <goon/data/base/region.h>
+#include "goon/data/config/RetinalConfig.h"
 #include "goon/features/color/HSVEssence.h"
 #include "goon/features/color/rgb_color.h"
 #include "maty/math/Distance2.h"
@@ -21,11 +21,11 @@ LoggerPtr Merge::logger(Logger::getLogger("goon.retinal"));
 // Constructor
 Merge::Merge()
 {        
-    ConfigRetinal oConfigRetinal;
-    proximityGAP = oConfigRetinal.getMergeProximityGap();   // default gap = 10 pixels
+    RetinalConfig oRetinalConfig;
+    proximityGAP = oRetinalConfig.getMergeProximityGap();   // default gap = 10 pixels
     // same similarity values as in retinal segmentation
     oColorSimilarity.setRGBSimilarity(RGBColor::getSqrSameDist());
-    oColorSimilarity.setHSVSimilarity(oConfigRetinal.getColorEssenceHSVSimilarity());    
+    oColorSimilarity.setHSVSimilarity(oRetinalConfig.getColorEssenceHSVSimilarity());    
 }
 
 
@@ -36,8 +36,8 @@ Merge::~Merge()
 
 void Merge::init(int img_w, int img_h)
 {        
-    ConfigRetinal oConfigRetinal;
-    oGrid.setSize(img_w, img_h, oConfigRetinal.getGridStep());    
+    RetinalConfig oRetinalConfig;
+    oGrid.setSize(img_w, img_h, oRetinalConfig.getGridStep());    
 }
 
 // This function merges all adjacent regions with similar color.

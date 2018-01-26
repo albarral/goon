@@ -7,7 +7,6 @@
 #include <cmath>
 
 #include "goon/retinal/ColorGrid.h"
-#include "goon/retinal/ConfigRetinal.h"
 #include <maty/math/average.h>
 
 namespace goon

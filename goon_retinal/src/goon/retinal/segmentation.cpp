@@ -7,9 +7,9 @@
 #include <unistd.h> // for usleep
 
 #include "goon/retinal/segmentation.h"
-#include "goon/retinal/ConfigRetinal.h"
 #include "goon/retinal/Floodfiller.h"
 #include <goon/data/base/region.h>
+#include "goon/data/config/RetinalConfig.h"
 #include <goon/features/color/rgb_color.h>
 
 using namespace log4cxx;
@@ -22,10 +22,10 @@ LoggerPtr Segmentation4::logger(Logger::getLogger("goon.retinal"));
 Segmentation4::Segmentation4 ()
 {
     // default values
-    ConfigRetinal oConfigRetinal;
-    MIN_DETAIL = oConfigRetinal.getSegmentationMinDetail();        // regions accepted from at least 0.1% of image area
-    NUM_SAMPLES = oConfigRetinal.getSegmentationNumSamples();   // 2000 samples per iteration          
-    numSegmenters = oConfigRetinal.getSegmentationNumThreads();
+    RetinalConfig oRetinalConfig;
+    MIN_DETAIL = oRetinalConfig.getSegmentationMinDetail();        // regions accepted from at least 0.1% of image area
+    NUM_SAMPLES = oRetinalConfig.getSegmentationNumSamples();   // 2000 samples per iteration          
+    numSegmenters = oRetinalConfig.getSegmentationNumThreads();
     pRetina = 0;
     //bdebug = false;    
 }

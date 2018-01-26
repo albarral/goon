@@ -4,7 +4,6 @@
  ***************************************************************************/
 
 #include "goon/retinal/Exploration.h"
-#include "goon/retinal/ConfigRetinal.h"
 #include "goon/data/base/Body.h"
 
 namespace goon
@@ -108,7 +107,7 @@ int Exploration::checkAdjacent(int direction)
     // if not explored
     if (*pexplored_pixel == 0)
     {
-        *pexplored_pixel = ConfigRetinal::EXPLORED_VALUE;
+        *pexplored_pixel = EXPLORED_VALUE;
         pforbiden_pixel = pforbiden_seed + step;
         pregion_pixel = pregion_seed + step; // move pixel even if it's forbidden to allow whole border marking
         // move pixel to specified direction
@@ -200,7 +199,7 @@ void Exploration::markPixelAccepted()
 {  
     // pixel accepted -> marked as region and forbidden
      *pregion_pixel = Body::BODY_VALUE;														
-     *pforbiden_pixel = ConfigRetinal::EXPLORED_VALUE;
+     *pforbiden_pixel = EXPLORED_VALUE;
 }
 
 void Exploration::markPixelRejected()

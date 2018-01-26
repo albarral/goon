@@ -27,6 +27,8 @@
         </logicalFolder>
         <itemPath>src/goon/main/GoonControl.cpp</itemPath>
         <itemPath>src/goon/main/GoonControl.h</itemPath>
+        <itemPath>src/goon/main/GoonVersion.cpp</itemPath>
+        <itemPath>src/goon/main/GoonVersion.h</itemPath>
         <itemPath>src/goon/main/main.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
@@ -285,6 +287,10 @@
       </item>
       <item path="src/goon/main/GoonControl.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/main/GoonVersion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/GoonVersion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/main/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/main/test/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
@@ -331,6 +337,10 @@
       <item path="src/goon/main/GoonControl.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/main/GoonControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/main/GoonVersion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/GoonVersion.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/main/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

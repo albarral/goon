@@ -6,7 +6,7 @@
 #include <algorithm>
 
 #include "goon/retinal/Floodfiller.h"
-#include "goon/retinal/ConfigRetinal.h"
+#include "goon/data/config/RetinalConfig.h"
 #include <goon/features/color/rgb_color.h>
 
 using namespace log4cxx;
@@ -18,13 +18,13 @@ LoggerPtr Floodfiller::logger(Logger::getLogger("goon.retinal"));
 // constructor
 Floodfiller::Floodfiller ()
 {
-    ConfigRetinal oConfigRetinal;
+    RetinalConfig oRetinalConfig;
 
     // trigger used to update the region's central color 
-    oSizeTrigger.setParams(oConfigRetinal.getColorEssenceUpdateChangeFactor(), oConfigRetinal.getColorEssenceUpdateMinChange());          
+    oSizeTrigger.setParams(oRetinalConfig.getColorEssenceUpdateChangeFactor(), oRetinalConfig.getColorEssenceUpdateMinChange());          
     // same similarity values as in retinal merge
     oColorSimilarity.setRGBSimilarity(RGBColor::getSqrSameDist());
-    oColorSimilarity.setHSVSimilarity(oConfigRetinal.getColorEssenceHSVSimilarity());
+    oColorSimilarity.setHSVSimilarity(oRetinalConfig.getColorEssenceHSVSimilarity());
 }
 
 // destructor
@@ -34,14 +34,14 @@ Floodfiller::~Floodfiller()
 
 void Floodfiller::init(cv::Mat& mask_segmented)
 {
-    ConfigRetinal oConfigRetinal;
+    RetinalConfig oRetinalConfig;
     
     // initialize auxiliary classes
     int w = mask_segmented.cols;
     int h = mask_segmented.rows;
     oExploration.setForbiddenMask(mask_segmented);    
     oExploration.resize(w, h);        
-    oColorGrid.setSize(w, h, oConfigRetinal.getGridStep());
+    oColorGrid.setSize(w, h, oRetinalConfig.getGridStep());
 }
 
 // This function obtains homogeneous regions by expanding from an initial seed pixel to all connected pixels with similar color.
