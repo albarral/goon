@@ -13,6 +13,7 @@
 #include <opencv2/core/core.hpp>
 
 #include "goon/core/GoonModule.h"
+#include "goon/data/rois.h"
 #include "goon/data/base/roi.h"
 #include "goon/peripheral/Saliency.h"
 
@@ -45,6 +46,7 @@ private:
     int mode;                  // search mode for target selection
     cv::Vec3f features;    // feature values to be searched 
     int targetROI;              // ID of target ROI
+    Rois oROIs3;
     Saliency oSaliency;      // saliency computation for target selection
 
 public:

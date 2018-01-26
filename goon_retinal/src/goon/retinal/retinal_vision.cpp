@@ -17,16 +17,14 @@ LoggerPtr RetinalVision::logger(Logger::getLogger("goon.retinal"));
 
 RetinalVision::RetinalVision()
 {  
-    pRetina = 0;
 }
 
 RetinalVision::~RetinalVision()
 {
 }
 
-void RetinalVision::init(Retina& oRetina, int img_w, int img_h)
+void RetinalVision::init(int img_w, int img_h)
 {
-    pRetina = &oRetina;
     oSegmentation4.init(oRetina, img_w, img_h);
     oMerge.init(img_w, img_h);
 }
@@ -45,7 +43,8 @@ void RetinalVision::update (cv::Mat& image_cam)
 {
     LOG4CXX_TRACE(logger, "update - init");
 
-    pRetina->clear();
+    // clear retina on every update
+    oRetina.clear();
     
     // convert to HSV space
     cv::Mat image_hsv;        
@@ -54,15 +53,13 @@ void RetinalVision::update (cv::Mat& image_cam)
     oSegmentation4.extractRegions(image_cam, image_hsv);
     
     // show retina description
-    LOG4CXX_DEBUG(logger, pRetina->shortDesc());
+    LOG4CXX_DEBUG(logger, oRetina.shortDesc());
 //    cv::Vec3b hsvColor(8, 230, 180); 
 //    cv::Vec3b hsvDev(3, 30, 60); 
-//    LOG4CXX_DEBUG(logger, pRetina->showFilterByColor(hsvColor, hsvDev));
+//    LOG4CXX_DEBUG(logger, oRetina.showFilterByColor(hsvColor, hsvDev));
 
-    oMerge.doMerge(*pRetina);
+    oMerge.doMerge(oRetina);
 
-    //LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
-    //describeRegions();
     LOG4CXX_TRACE(logger, "update - end");
 }
 
@@ -72,7 +69,7 @@ void RetinalVision::computeCovariances()
     LOG4CXX_TRACE(logger, "computeCovariances - init");
 
     // walk the list of final regions
-    for (Region& oRegion : pRetina->getListRegions())
+    for (Region& oRegion : oRetina.getListRegions())
     {
         LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
         oRegion.computeBasicShape();
@@ -84,7 +81,7 @@ void RetinalVision::computeCovariances()
 void RetinalVision::describeRegions()
 {
     LOG4CXX_DEBUG(logger, "regions description ...");
-    for (Region& oRegion : pRetina->getListRegions()) 
+    for (Region& oRegion : oRetina.getListRegions()) 
     {
         LOG4CXX_DEBUG(logger, oRegion.shortDesc());
     } 

@@ -35,7 +35,7 @@ void Look::first()
         setState(Look::eSTATE_WAIT);
         
         wait4FocusBeat();
-        oCortexVision.init(pVisualData->getRetina2(), pVisualData->getROIs2(), pVisualData->getScene());
+        oCortexVision.init(pVisualData->getScene());
         focusedROI = -1;
         lookedObject = -1;
     }
@@ -111,7 +111,11 @@ void Look::clearObject()
 }
 
 void Look::bindObject()
-{    
+{  
+    // get updated copy of retina & rois
+    pVisualData->getRetinaCopy(oCortexVision.getRetina());
+    pVisualData->getROIsCopy(oCortexVision.getROIs());
+    
     LOG4CXX_DEBUG(logger, "binding ... ");    
     oCortexVision.formObject(focusedROI);
     

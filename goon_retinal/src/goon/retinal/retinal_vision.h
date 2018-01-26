@@ -19,7 +19,7 @@ class RetinalVision
 {
 private:
         static log4cxx::LoggerPtr logger;
-        Retina* pRetina;
+        Retina oRetina;
         Segmentation4 oSegmentation4;
         Merge oMerge;
 
@@ -27,8 +27,10 @@ public:
     RetinalVision();
     ~RetinalVision();
 
+    Retina& getRetina() {return oRetina;};
+
     /// Initializes the module adapting it to the image size
-    void init(Retina& oRetina, int img_w, int img_h);
+    void init(int img_w, int img_h);
     
     // Changes the main parameters of the retinal vision system.
     void setParameters(int retinal_samples, int same_RGB, int similar_RGB);

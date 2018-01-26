@@ -9,6 +9,7 @@
 #include <opencv2/highgui/highgui.hpp>
 
 #include "goon/main/test/Test.h"
+#include <goon/data/retina.h>
 #include "goon/retinal/merge.h"
 #include "goon/show/monitor/RetinaSaver.h"
 #include "tuly/utils/Environment.h"
@@ -41,6 +42,7 @@ void Test::testSegmentation()
     bool bdual = true; // dual segmentation
     
     VisualData oVisualData;        
+    Retina oRetina;
     TestImage oTestImage;
 //    oTestImage.createImage(20,20);
 //    bool bok = true;
@@ -61,13 +63,13 @@ void Test::testSegmentation()
         // segmenter 1
         Segmenter oSegmenter1;
         oSegmenter1.setID(1);
-        oSegmenter1.init(oVisualData.getRetina(), mask_segmented);
+        oSegmenter1.init(oRetina, mask_segmented);
         // segmenter 2
         Segmenter oSegmenter2;
         if (bdual)
         {
             oSegmenter2.setID(2);
-            oSegmenter2.init(oVisualData.getRetina(), mask_segmented);
+            oSegmenter2.init(oRetina, mask_segmented);
         }
 
         // launch segmenters
@@ -85,13 +87,13 @@ void Test::testSegmentation()
             waitSegmenterFinished(oSegmenter2);
 
         // show retina description
-        LOG4CXX_INFO(logger, oVisualData.getRetina().shortDesc());
+        LOG4CXX_INFO(logger, oRetina.shortDesc());
         
         Merge oMerge;
         oMerge.init(imageCam.cols, imageCam.rows);
-        oMerge.doMerge(oVisualData.getRetina());
+        oMerge.doMerge(oRetina);
 
-        showRetina(imageCam, oVisualData.getRetina());
+        showRetina(imageCam, oRetina);
     }
     LOG4CXX_INFO(logger, "Test finished");    
 }

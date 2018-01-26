@@ -12,6 +12,8 @@
 #include <opencv2/opencv.hpp>
 
 #include "goon/core/GoonModule.h"
+#include "goon/data/retina.h"
+#include "goon/data/rois.h"
 #include "goon/show/monitor/RetinaMonitor.h"
 #include "goon/show/monitor/ROIsMonitor.h"
 #include "goon/show/monitor/RetinaSaver.h"
@@ -32,6 +34,8 @@ private:
     ROIsMonitor oROIsMonitor;
     tivy::DualWindow oDualWindow; 
     std::string windowName;
+    Retina oRetina3;
+    Rois oROIs3;
     int grabBeat;       // Grab module's beat
     int seeBeat;        // See module's beat
     

@@ -28,7 +28,7 @@ Binding::Binding ()
 
 // This function builds the landmark from the regions inside the roi's window.
 // The landmark's mask is built from them.
-void Binding::formObject(Object& oObject, Retina* pRetina, cv::Rect& window)
+void Binding::formObject(Retina& oRetina, cv::Rect& window, Object& oObject)
 {
     LOG4CXX_TRACE(logger, "Binding::formObject");
     
@@ -37,8 +37,8 @@ void Binding::formObject(Object& oObject, Retina* pRetina, cv::Rect& window)
     
     float overlap;
     bool bempty = true;
-    std::list<Region>::iterator it_region = pRetina->getListRegions().begin();
-    std::list<Region>::iterator it_end = pRetina->getListRegions().end();
+    std::list<Region>::iterator it_region = oRetina.getListRegions().begin();
+    std::list<Region>::iterator it_end = oRetina.getListRegions().end();
     // walk all retina regions 
     while (it_region != it_end)
     {                         

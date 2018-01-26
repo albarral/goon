@@ -7,6 +7,8 @@
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/See.h"
+#include "goon/data/retina.h"
+#include "goon/data/rois.h"
 
 namespace goon
 {    
@@ -36,8 +38,7 @@ void See::first()
         // set sizes for retinal vision
         pVisualData->getCameraFrameCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
-        oRetinalVision.init(pVisualData->getRetina(), imageCam.cols, imageCam.rows); // w, h
-        oPeripheralVision.init(pVisualData->getRetina(), pVisualData->getROIs());
+        oRetinalVision.init(imageCam.cols, imageCam.rows); // w, h
         oClick.start();
     }
     // if not initialized -> OFF
@@ -65,15 +66,18 @@ void See::loop()
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision.update(imageCam);    
-    oRetinalVision.computeCovariances();         
+    oRetinalVision.computeCovariances();             
+    Retina& oRetina = oRetinalVision.getRetina();
+    
     LOG4CXX_DEBUG(logger, "peripheral ... ");
-    oPeripheralVision.update(oClick.getMillis());    
+    oPeripheralVision.update(oRetina, oClick.getMillis());    
+    Rois& oROIs = oPeripheralVision.getROIs();
     
     // stores dynamic visual data into static one 
     LOG4CXX_TRACE(logger, "clone retina ... ");
-    pVisualData->cloneRetina();
+    pVisualData->updateRetina(oRetina);
     LOG4CXX_TRACE(logger, "clone ROIS ... ");
-    pVisualData->cloneROIs();
+    pVisualData->updateROIs(oROIs);
 
     // measure processing speed
     fps = 1000.0/oClick.getMillis();

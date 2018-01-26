@@ -19,8 +19,7 @@ class PeripheralVision
 {
 private:
     static log4cxx::LoggerPtr logger;
-    Retina* pRetina;
-    Rois* pROIs;
+    Rois oROIs;
     RoisDetection oRoisDetection;
     int storage[4];
     int counter;
@@ -30,14 +29,13 @@ public:
     PeripheralVision();
     ~PeripheralVision();
 
-    // Initializes the module 
-    void init(Retina& oRetina, Rois& oROIs);
+    Rois& getROIs() {return oROIs;};
 
     void setParameters(int same_RGB, int similar_RGB);
 
     // This function implements the peripheral vision process.
     // It samples the retinal map to discover and track regions of interest in the visual scene.
-    void update(int millis);
+    void update(Retina& oRetina, int millis);
        
     // logs a description of the computed ROIs
     void describeROIs();    

@@ -22,8 +22,8 @@ class CortexVision
 {
 private:
     static log4cxx::LoggerPtr logger;
-    Retina* pRetina;
-    Rois* pROIs;
+    Retina oRetina3;
+    Rois oROIs3;
 //    Scene* pScene;
     Object oObject;
     Binding oBinding;
@@ -34,10 +34,12 @@ public:
     CortexVision();
     //~CortexVision();
 
+    Retina& getRetina() {return oRetina3;};
+    Rois& getROIs() {return oROIs3;};    
     Object& getObject() {return oObject;}
     
     // Initializes the module 
-    void init(Retina& oRetina, Rois& oROIs, Scene& oScene);
+    void init(Scene& oScene);
 
     // it does the object binding process starting from the given focused ROI
     void formObject(int focusedROI);

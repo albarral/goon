@@ -25,7 +25,7 @@ public:
     Binding();
     //~Binding();
  		
-    void formObject(Object& oObject, Retina* pRetina, cv::Rect& window);
+    void formObject(Retina& oRetina, cv::Rect& window, Object& oObject);
  };
 }
 #endif

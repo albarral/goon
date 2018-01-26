@@ -121,8 +121,10 @@ bool Focus::selectTarget()
 {
     LOG4CXX_DEBUG(logger, "select target ... ");
 
-    Rois& oROIs2 = pVisualData->getROIs2();
-    if (oROIs2.getList().empty())
+    // get updated copy of rois
+    pVisualData->getROIsCopy(oROIs3);
+
+    if (oROIs3.getList().empty())
     {
         LOG4CXX_WARN(logger, "skip, no ROIs detected!");
         return false;
@@ -133,12 +135,12 @@ bool Focus::selectTarget()
         case Focus::eSEARCH_SALIENCY:
             // set saliency mode (color by default)
             oSaliency.setMode(Saliency::eSALIENCY_COLOR);   
-            oSaliency.computeSaliency(oROIs2.getList());
+            oSaliency.computeSaliency(oROIs3.getList());
             targetROI = oSaliency.getMostSalient().roiID;
             break;
 
         case Focus::eSEARCH_POSITION:
-            targetROI = selectTargetByPosition(oROIs2.getList());
+            targetROI = selectTargetByPosition(oROIs3.getList());
             break;
                         
         default:
@@ -153,7 +155,10 @@ bool Focus::selectTarget()
 // This function follows the target, checking if the target ROI still exists.
 bool Focus::followTarget()
 {
-    bool bfound = pVisualData->getROIs2().doesROIExist(targetROI);
+    // get updated copy of rois
+    pVisualData->getROIsCopy(oROIs3);
+    
+    bool bfound = oROIs3.doesROIExist(targetROI);
 
     return bfound;
 }
