@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
 	${OBJECTDIR}/src/goon/features/color/rgb_color.o \
 	${OBJECTDIR}/src/goon/features/motion/TransMotion.o \
+	${OBJECTDIR}/src/goon/features/nature/Nature.o \
 	${OBJECTDIR}/src/goon/features/shape/shape.o \
 	${OBJECTDIR}/src/goon/features/structure/Structure.o
 
@@ -100,6 +101,11 @@ ${OBJECTDIR}/src/goon/features/motion/TransMotion.o: src/goon/features/motion/Tr
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/TransMotion.o src/goon/features/motion/TransMotion.cpp
+
+${OBJECTDIR}/src/goon/features/nature/Nature.o: src/goon/features/nature/Nature.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/nature
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/nature/Nature.o src/goon/features/nature/Nature.cpp
 
 ${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/shape

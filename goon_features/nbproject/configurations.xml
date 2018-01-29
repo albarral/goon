@@ -27,6 +27,10 @@
           <itemPath>src/goon/features/motion/TransMotion.cpp</itemPath>
           <itemPath>src/goon/features/motion/TransMotion.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="f2" displayName="nature" projectFiles="true">
+          <itemPath>src/goon/features/nature/Nature.cpp</itemPath>
+          <itemPath>src/goon/features/nature/Nature.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="shape" displayName="shape" projectFiles="true">
           <itemPath>src/goon/features/shape/shape.cpp</itemPath>
           <itemPath>src/goon/features/shape/shape.h</itemPath>
@@ -142,6 +146,13 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/features/nature/Nature.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/nature/Nature.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/features/shape/shape.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/shape/shape.h" ex="false" tool="3" flavor2="0">
@@ -230,6 +241,13 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="src/goon/features/nature/Nature.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/nature/Nature.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/shape/shape.cpp" ex="false" tool="1" flavor2="0">
       </item>
