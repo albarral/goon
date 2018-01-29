@@ -13,12 +13,17 @@ namespace goon
 // constructor
 Blob::Blob ()
 {
+    clear();
+}
+
+void Blob::clear()
+{
     mass = 0;
     pos[0] = pos[1] = 0;
     covs[0] = covs[1] = covs[2] = 0.0;
     shapeFactor = 0.0;
     orientation = 0;    
-    scale = 0.0;
+    scale = 0.0;    
 }
 
 void Blob::merge(Blob& oBlob2)

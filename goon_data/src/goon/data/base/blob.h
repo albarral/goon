@@ -46,10 +46,11 @@ public:
     void setScale(float value) {scale = value;};
     void setRGB(cv::Vec3f color) {rgb_color = color;};
     void setHSV(cv::Vec3f color) {hsv_color = color;};
-   	        
+   
+    virtual void clear();    
     // merges with another blob
     virtual void merge(Blob& oBlob2);
-
+    // computes spatial relation to given blob (affine module, relative angle, relative weight)
     cv::Vec3f computeSpatialRelation2Blob(Blob& oBlob2);
     
     // returns all blob values in string form

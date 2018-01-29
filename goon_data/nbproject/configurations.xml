@@ -34,8 +34,12 @@
           <itemPath>src/goon/data/config/RetinalConfig.h</itemPath>
         </logicalFolder>
         <logicalFolder name="cortex" displayName="cortex" projectFiles="true">
+          <itemPath>src/goon/data/cortex/Model.cpp</itemPath>
+          <itemPath>src/goon/data/cortex/Model.h</itemPath>
           <itemPath>src/goon/data/cortex/Object.cpp</itemPath>
           <itemPath>src/goon/data/cortex/Object.h</itemPath>
+          <itemPath>src/goon/data/cortex/ObjectModel.cpp</itemPath>
+          <itemPath>src/goon/data/cortex/ObjectModel.h</itemPath>
           <itemPath>src/goon/data/cortex/Scene.cpp</itemPath>
           <itemPath>src/goon/data/cortex/Scene.h</itemPath>
         </logicalFolder>
@@ -152,9 +156,20 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/data/cortex/Model.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Model.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/cortex/Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/cortex/Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/ObjectModel.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/ObjectModel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/cortex/Scene.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -233,9 +248,20 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/data/cortex/Model.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/Model.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/cortex/Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/cortex/Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/ObjectModel.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/data/cortex/ObjectModel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/cortex/Scene.cpp" ex="false" tool="1" flavor2="0">
       </item>

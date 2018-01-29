@@ -54,6 +54,8 @@ void Body::setMaskAndWindow(cv::Mat& amask, cv::Rect& awindow)
 
 void Body::clear()
 {
+    Blob::clear();
+    
     if (!mask.empty())            
         mask.setTo(0);
     window = cv::Rect (0,0,0,0);

@@ -43,7 +43,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
 	${OBJECTDIR}/src/goon/data/config/CortexConfig.o \
 	${OBJECTDIR}/src/goon/data/config/RetinalConfig.o \
+	${OBJECTDIR}/src/goon/data/cortex/Model.o \
 	${OBJECTDIR}/src/goon/data/cortex/Object.o \
+	${OBJECTDIR}/src/goon/data/cortex/ObjectModel.o \
 	${OBJECTDIR}/src/goon/data/cortex/Scene.o \
 	${OBJECTDIR}/src/goon/data/retina.o \
 	${OBJECTDIR}/src/goon/data/rois.o
@@ -113,10 +115,20 @@ ${OBJECTDIR}/src/goon/data/config/RetinalConfig.o: src/goon/data/config/RetinalC
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/config/RetinalConfig.o src/goon/data/config/RetinalConfig.cpp
 
+${OBJECTDIR}/src/goon/data/cortex/Model.o: src/goon/data/cortex/Model.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Model.o src/goon/data/cortex/Model.cpp
+
 ${OBJECTDIR}/src/goon/data/cortex/Object.o: src/goon/data/cortex/Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Object.o src/goon/data/cortex/Object.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/ObjectModel.o: src/goon/data/cortex/ObjectModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/ObjectModel.o src/goon/data/cortex/ObjectModel.cpp
 
 ${OBJECTDIR}/src/goon/data/cortex/Scene.o: src/goon/data/cortex/Scene.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
