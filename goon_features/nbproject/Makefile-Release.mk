@@ -43,7 +43,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/motion/TransMotion.o \
 	${OBJECTDIR}/src/goon/features/nature/Nature.o \
 	${OBJECTDIR}/src/goon/features/shape/shape.o \
-	${OBJECTDIR}/src/goon/features/structure/Structure.o
+	${OBJECTDIR}/src/goon/features/structure/Structure.o \
+	${OBJECTDIR}/src/goon/features/structure/Structure2.o
 
 
 # C Compiler Flags
@@ -114,6 +115,11 @@ ${OBJECTDIR}/src/goon/features/structure/Structure.o: src/goon/features/structur
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure.o src/goon/features/structure/Structure.cpp
+
+${OBJECTDIR}/src/goon/features/structure/Structure2.o: src/goon/features/structure/Structure2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure2.o src/goon/features/structure/Structure2.cpp
 
 # Subprojects
 .build-subprojects:
