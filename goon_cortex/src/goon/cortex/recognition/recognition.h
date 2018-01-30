@@ -10,6 +10,7 @@
 
 #include "goon/cortex/data/visual_center.h"
 #include "goon/cortex/data/memory_center.h"
+#include "goon/data/VisualMemory.h"
 #include "goon/cortex/recognition/matching.h"
 #include "goon/cortex/recognition/coherence.h"
 #include "goon/cortex/recognition/confidence.h"

@@ -62,7 +62,19 @@ void CortexVision::analyseObject()
     }
     // skip if empty object
     else
-        LOG4CXX_WARN(logger, "formObject skipped, ROI not found");            
+        LOG4CXX_WARN(logger, "analyseObject skipped, no object detected");            
+}
+
+void CortexVision::identifyObject()
+{
+    LOG4CXX_TRACE(logger, "CortexVision.identifyObject");
+
+    if (oObject.getMass() > 0)
+    {
+    }
+    // skip if empty object
+    else
+        LOG4CXX_WARN(logger, "identifyObject skipped, no object detected");            
 }
 }
 

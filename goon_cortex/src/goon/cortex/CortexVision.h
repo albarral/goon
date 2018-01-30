@@ -10,6 +10,7 @@
 
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
+#include "goon/data/VisualMemory.h"
 #include "goon/data/cortex/Object.h"
 #include "goon/data/cortex/Scene.h"
 #include "goon/cortex/analysis/binding.h"
@@ -26,6 +27,7 @@ private:
     Rois oROIs3;
 //    Scene* pScene;
     Object oObject;
+    VisualMemory oVisualMemory;
     Binding oBinding;
     Characterization oCharacterization;
     //Recognition oRecognition;
@@ -48,7 +50,7 @@ public:
     void analyseObject();    
     
     // if performs the object recognition process (comparing it with a all stored models in memory)
-    //void identifyObject();        
+    void identifyObject();        
 };
 
 }  	

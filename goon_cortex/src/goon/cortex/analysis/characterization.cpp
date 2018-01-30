@@ -4,6 +4,7 @@
   ***************************************************************************/
   
 #include "goon/cortex/analysis/characterization.h"
+#include "goon/features/structure/Structure2.h"
 
 using namespace log4cxx;
 
@@ -38,40 +39,24 @@ void Characterization::checkObjectDetails(Object& oObject)
         oBody.computeComplexShape();
     }
 
-    // resize object's structure to manage all components
-    Structure& oStructure = oObject.getStructure();
-    oStructure.resize(oObject.getSubBodies().size());
+    // and compute object structure ...
     
-    // compute local structure of all object's components
-    std::vector<cv::Vec4f> listNeighbours;
-    int index = 0;
+    // set object as structure reference
+    cv::Point centroid(oObject.getPos()[0], oObject.getPos()[1]);
+    Structure2& oStructure = oObject.getStructure();
+    oStructure.setReference(centroid, oObject.getCovariances(), oObject.getMass());
+    
+    // get list of elements for the structure
+    std::vector<cv::Vec3i> listElements;
     for (Body& oBody : oObject.getSubBodies())
     {
-        listNeighbours = characterizeLocalStructure(oBody, oObject.getSubBodies());
-        // and add it to global structure
-        oStructure.setNeighbours(index, listNeighbours); 
-        index++;
+        cv::Vec3i element(oBody.getPos()[0], oBody.getPos()[1], oBody.getMass());
+        listElements.push_back(element);
     }    
+    
+    // and compute it
+    oStructure.computeStructure(listElements);
 }
 				 
-
-// This function characterizes the neighborhood of a given body
-std::vector<cv::Vec4f> Characterization::characterizeLocalStructure(Body& oBody, std::vector<Body>& listBodies)
-{
-    LOG4CXX_TRACE(logger, "Characterization.characterizeLocalStructure");
-    
-    std::vector<cv::Vec4f> listSpatialRelations;
-    // compute spatial relations from given body to rest of bodies
-    int index = 0;
-    for (Body& oBody2 : listBodies)
-    {
-        // CAUTION, avoid computing spatial relation to itself
-        cv::Vec3f spacialRelation = oBody.computeSpatialRelation2Blob(oBody2);
-        listSpatialRelations.push_back(cv::Vec4f(index, spacialRelation[0], spacialRelation[1], spacialRelation[2]));
-        index++;
-    }
-    
-    return listSpatialRelations;
-}
 }
 

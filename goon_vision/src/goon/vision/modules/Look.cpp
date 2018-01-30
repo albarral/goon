@@ -119,8 +119,8 @@ void Look::bindObject()
     LOG4CXX_DEBUG(logger, "binding ... ");    
     oCortexVision.formObject(focusedROI);
     
-    //LOG4CXX_DEBUG(logger, "characterization ... ");    
-    //oCortexVision.analyseObject();
+    LOG4CXX_DEBUG(logger, "characterization ... ");    
+    oCortexVision.analyseObject();
     
     LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
 }

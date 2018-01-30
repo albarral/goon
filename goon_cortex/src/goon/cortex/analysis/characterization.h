@@ -29,9 +29,6 @@ public:
 
     // compute the detailed features of the given object as a composition of subbodies following a structural distribution
     void checkObjectDetails(Object& oObject);
-
-private:
-  std::vector<cv::Vec4f> characterizeLocalStructure(Body& oBody, std::vector<Body>& listBodies);
 };
 }
 #endif
