@@ -75,9 +75,9 @@ void See::loop()
     
     // stores dynamic visual data into static one 
     LOG4CXX_TRACE(logger, "clone retina ... ");
-    pVisualData->updateRetina(oRetina);
+    pVisualData->updateRetina2(oRetina);
     LOG4CXX_TRACE(logger, "clone ROIS ... ");
-    pVisualData->updateROIs(oROIs);
+    pVisualData->updateROIs2(oROIs);
 
     // measure processing speed
     fps = 1000.0/oClick.getMillis();

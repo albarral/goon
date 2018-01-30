@@ -41,14 +41,11 @@ class VisualData
         void getCameraFrameCopy(cv::Mat& imageOut);
                 
         Scene& getScene() {return oScene;};
-
-//        Retina& getRetina2();
-//        Rois& getROIs2();                
         Object& getObject2();
 
         // store static copies of the dynamic data
-        void updateRetina(Retina& oRetina);
-        void updateROIs(Rois& oROIs);
+        void updateRetina2(Retina& oRetina);
+        void updateROIs2(Rois& oROIs);
         void getRetinaCopy(Retina& oRetina3);
         void getROIsCopy(Rois& oROIs3);
 

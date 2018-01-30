@@ -9,7 +9,7 @@ namespace goon
 {
 Retina::Retina ()
 {
-    ID = -1;
+    ID = 0;
 }
 
 Retina::~Retina()

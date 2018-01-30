@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/goon/data/VisualMemory.o \
 	${OBJECTDIR}/src/goon/data/base/Body.o \
 	${OBJECTDIR}/src/goon/data/base/ColorBody.o \
 	${OBJECTDIR}/src/goon/data/base/RealBody.o \
@@ -78,6 +79,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ../../t
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/src/goon/data/VisualMemory.o: src/goon/data/VisualMemory.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/VisualMemory.o src/goon/data/VisualMemory.cpp
 
 ${OBJECTDIR}/src/goon/data/base/Body.o: src/goon/data/base/Body.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base

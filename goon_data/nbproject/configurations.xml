@@ -43,6 +43,8 @@
           <itemPath>src/goon/data/cortex/Scene.cpp</itemPath>
           <itemPath>src/goon/data/cortex/Scene.h</itemPath>
         </logicalFolder>
+        <itemPath>src/goon/data/VisualMemory.cpp</itemPath>
+        <itemPath>src/goon/data/VisualMemory.h</itemPath>
         <itemPath>src/goon/data/retina.cpp</itemPath>
         <itemPath>src/goon/data/retina.h</itemPath>
         <itemPath>src/goon/data/rois.cpp</itemPath>
@@ -112,6 +114,10 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="src/goon/data/VisualMemory.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/VisualMemory.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
@@ -204,6 +210,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="src/goon/data/VisualMemory.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/data/VisualMemory.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">

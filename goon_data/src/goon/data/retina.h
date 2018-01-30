@@ -23,8 +23,8 @@ class Retina
 {
 private:
         std::mutex mutex;
-        int ID;                                                       // ID of last added region (equal to region's index in the list)
-        std::list<Region> listRegions;                     // list of extracted regions (sorted by ID)         
+        int ID;                                                       // ID of last added region 
+        std::list<Region> listRegions;                     // list of extracted regions
         std::map<int, int> mapRegions;                  // map: region.ID - region position in listRegions
 
 public:

@@ -10,7 +10,7 @@
 #include <vector>
 
 #include "goon/data/base/Body.h"
-#include "goon/features/structure/Structure.h"
+#include "goon/features/structure/Structure2.h"
 
 namespace goon 
 {
@@ -20,7 +20,7 @@ class Object : public Body
 protected:
     int ID;
     std::vector<Body> listBodies;       // list of subbodies composing the object
-    Structure oStructure;                   // object structure (distribution of subbodies)                    
+    Structure2 oStructure;                   // object structure (distribution of subbodies)                    
 
 public:    
     Object();
@@ -35,9 +35,7 @@ public:
     std::vector<Body>& getSubBodies() {return listBodies;};
     void addSubBody(Body& oBody);
     
-    Structure& getStructure() {return oStructure;};   
-    // compute object structure
-    //void computeStructure();
+    Structure2& getStructure() {return oStructure;};   
     
     virtual void clear();
     

@@ -27,11 +27,6 @@ void Object::addSubBody(Body& oBody)
     listBodies.push_back(oBody);
 }
 
-//void Object::computeStructure()
-//{
-//    // TO DO    
-//}
-
 void Object::clear()
 {
     Body::clear();

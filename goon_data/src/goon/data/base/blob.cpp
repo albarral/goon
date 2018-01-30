@@ -38,24 +38,6 @@ void Blob::merge(Blob& oBlob2)
     // to update shape factor & orientation the shape needs to be recomputed
 }
 
-cv::Vec3f Blob::computeSpatialRelation2Blob(Blob& oBlob2)
-{
-    float relativeWeight; 
-    if (mass > 0)        
-        relativeWeight = (float)oBlob2.mass / mass;
-    else
-        relativeWeight = 1000;
-        
-    // relative position in polar coordinates
-    int xdif = oBlob2.pos[0] - pos[0];
-    int ydif = oBlob2.pos[1] - pos[1];
-    // affine invariant module
-    float affineModule = sqrt(maty::Distance::getMahalanobis2s(oBlob2.pos, pos, covs)); 
-    float relativeAngle = atan2(-ydif, xdif)*180/M_PI; // sign of y changed because image Y axis faces down
-    
-    return cv::Vec3f(affineModule, relativeAngle, relativeWeight);
-}
-
 std::string Blob::toString()
 {
     std::string desc = "Blob [mass = " + std::to_string(mass) +
