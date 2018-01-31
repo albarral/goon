@@ -4,13 +4,15 @@
  ***************************************************************************/
 
 #include <iostream> 
+#include <list>
 #include <vector>   
 
+#include "opencv2/core/core.hpp"
 #include <opencv2/opencv.hpp>
 
 #include "goon/main/test/TestBodies.h"
 #include "goon/features/Body.h"
-#include "goon/features/BodyUtils.h"
+#include "goon/features/BodyOverlapFraction.h"
 
 namespace goon
 {    
@@ -61,7 +63,7 @@ void TestBodies::test()
     oBody5.setMaskAndWindow(mask5, window);
     oBody6.setMaskAndWindow(mask6, window);
 
-    std::vector<Body> listBodies;
+    std::list<Body> listBodies;
     listBodies.push_back(oBody1);
     listBodies.push_back(oBody2);
     //listBodies.push_back(oBody3);
@@ -75,10 +77,20 @@ void TestBodies::test()
     }
     oBody3.computeMass(); 
 
+    std::list<Body> listBodies1; 
+    listBodies1.push_back(oBody3);
+    
     // compute overlaps to Body3
-    std::vector<cv::Vec2f> listOverlaps = BodyUtils::computeBodyOverlappedFractions(oBody3, listBodies);
+    BodyOverlapFraction oBodyOverlapFraction;
+    oBodyOverlapFraction.computeOverlaps(listBodies1, listBodies);
+    std::vector<cv::Vec2i>& listCorrespondences = oBodyOverlapFraction.getCorrespondences();
 
-    int matchedBody = getBestOverlap(listOverlaps);
+    int matchedBody = -1; 
+    if (listCorrespondences.size() > 0)
+    {
+        cv::Vec2i& correspondence = listCorrespondences.at(0);
+        matchedBody = correspondence[1];
+    }
     
     // get which body best overlaps Body3
     std::cout << "best overlap: " << matchedBody << std::endl;
@@ -99,27 +111,6 @@ void TestBodies::test()
     cv::imshow("mask6", mask6);           
     cv::waitKey(0); // wait for keyb interaction
  //    */    
-}
-
-int TestBodies::getBestOverlap(std::vector<cv::Vec2f> listOverlaps)
-{
-    int winner = -1;
-    float mutualOverlap, maxOverlap = 0.0;
-
-    // we track the maximum mutual overlap 
-    int i = 0;
-    for (cv::Vec2f& overlap : listOverlaps)
-    {
-        mutualOverlap = overlap[0] * overlap[1];
-        if (mutualOverlap > maxOverlap)
-        {
-            maxOverlap = mutualOverlap;
-            winner = i;
-        }
-        i++;
-    }
-    
-    return winner;
 }
 
 }
