@@ -14,6 +14,7 @@
 #include "goon/main/GoonControl.h"
 #include "goon/main/GoonVersion.h"
 #include "goon/main/test/TestBodies.h"
+#include "goon/main/test/TestObjects.h"
 #include "goon/main/test/TestRegions.h"
 #include "goon/main/test/Test.h"
 //#include "tuly/utils/Environment.h"
@@ -33,9 +34,9 @@ int main(int argc, char** argv)
 //    log4cxx::xml::DOMConfigurator::configure(configFile);    
     log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
         
-    runGoon();
+    //runGoon();
     //oneShotTest();
-    //test();
+    test();
       
     return 0;
 }
@@ -88,11 +89,14 @@ int test()
 //    goon::TestBodies oTestBodies;
 //    oTestBodies.test();
     
+    goon::TestObjects oTestObjects;
+    oTestObjects.test();
+
     //goon::TestRegions oTestRegions;
     //oTestRegions.testMerge();
 
-    goon::Test oTest;
-    oTest.testSegmentation();
+//    goon::Test oTest;
+//    oTest.testSegmentation();
 
     return 0;
 }

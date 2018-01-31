@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/main/test/Test.o \
 	${OBJECTDIR}/src/goon/main/test/TestBodies.o \
 	${OBJECTDIR}/src/goon/main/test/TestImage.o \
+	${OBJECTDIR}/src/goon/main/test/TestObjects.o \
 	${OBJECTDIR}/src/goon/main/test/TestRegions.o
 
 
@@ -129,6 +130,11 @@ ${OBJECTDIR}/src/goon/main/test/TestImage.o: src/goon/main/test/TestImage.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_cortex/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestImage.o src/goon/main/test/TestImage.cpp
+
+${OBJECTDIR}/src/goon/main/test/TestObjects.o: src/goon/main/test/TestObjects.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Isrc -I../goon_core/src -I../goon_data/src -I../goon_features/src -I../goon_camera/src -I../goon_retinal/src -I../goon_peripheral/src -I../goon_cortex/src -I../goon_vision/src -I../goon_coms/src -I../goon_show/src -I../../tron/tuly/src -I../../tron/maty/src -I../../tron/tivy/src -I../../tron/nety/src -I../../tron/talky/src -I../../tron/comy/src -I/usr/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/main/test/TestObjects.o src/goon/main/test/TestObjects.cpp
 
 ${OBJECTDIR}/src/goon/main/test/TestRegions.o: src/goon/main/test/TestRegions.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/main/test

@@ -20,6 +20,8 @@
           <itemPath>src/goon/main/test/TestBodies.h</itemPath>
           <itemPath>src/goon/main/test/TestImage.cpp</itemPath>
           <itemPath>src/goon/main/test/TestImage.h</itemPath>
+          <itemPath>src/goon/main/test/TestObjects.cpp</itemPath>
+          <itemPath>src/goon/main/test/TestObjects.h</itemPath>
           <itemPath>src/goon/main/test/TestRegions.cpp</itemPath>
           <itemPath>src/goon/main/test/TestRegions.h</itemPath>
         </logicalFolder>
@@ -303,6 +305,10 @@
       </item>
       <item path="src/goon/main/test/TestImage.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/goon/main/test/TestObjects.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/test/TestObjects.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/main/test/TestRegions.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/main/test/TestRegions.h" ex="false" tool="3" flavor2="0">
@@ -349,6 +355,10 @@
       <item path="src/goon/main/test/TestImage.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/main/test/TestImage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/main/test/TestObjects.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/main/test/TestObjects.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/main/test/TestRegions.cpp" ex="false" tool="1" flavor2="0">
       </item>
