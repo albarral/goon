@@ -3,11 +3,11 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/features/BodyUtils.h"
+#include "goon/features/BodyOverlap.h"
 
 namespace goon 
 {
-int BodyUtils::computeBodiesOverlaps(std::list<Body> listBodies1, std::list<Body> listBodies2)
+int BodyOverlap::computeOverlaps(std::list<Body>& listBodies1, std::list<Body>& listBodies2)
 {
     // create overlap matrix (bodies 1 x bodies 2)
     matOverlaps = cv::Mat::zeros(listBodies1.size(), listBodies2.size(), CV_32SC1);    
@@ -22,7 +22,7 @@ int BodyUtils::computeBodiesOverlaps(std::list<Body> listBodies1, std::list<Body
         // walk list 2 (columns)
         for (Body& oBody2 : listBodies2)
         {               
-            // compute overlapped area
+            // compute bodies overlap
             overlap = oBody1.computeOverlap(oBody2);
             // if positive, store it
             if (overlap > 0)
@@ -35,11 +35,14 @@ int BodyUtils::computeBodiesOverlaps(std::list<Body> listBodies1, std::list<Body
         row++;        
     }            
     
-    // return number of overlaps
-    return numOverlaps;        
+    if (numOverlaps > 0)
+        computeCorrespondences();
+    
+    // return number of correspondences
+    return listCorrespondences.size();
 }
 
-int BodyUtils::findBodyCorrespondences()
+void BodyOverlap::computeCorrespondences()
 {    
     double maxVal; 
     cv::Point maxLoc;
@@ -73,40 +76,7 @@ int BodyUtils::findBodyCorrespondences()
         // if nothing found, finish search
         else
             bsearch = false;
-    }
-    
-    return listCorrespondences.size();
+    }    
 }
-
-
-std::vector<cv::Vec2f> BodyUtils::computeBodyOverlappedFractions(Body oBody, std::vector<Body> listBodies)
-{
-    int area;
-    float fraction1, fraction2;
-    std::vector<cv::Vec2f> listOverlaps;    
-    
-    for (Body& oBody2 : listBodies)
-    {               
-        // if bodies overlap, add overlap info to overlaps list
-        area = oBody.computeOverlap(oBody2);
-        if (area > 0)
-        {         
-            // protect against zero division
-            if (oBody.getMass() > 0)
-                fraction1 = (float)area / oBody.getMass();
-            else
-                fraction1 = 1000;
-            // protect against zero division
-            if (oBody2.getMass() > 0)
-                fraction2 = (float)area / oBody2.getMass();
-            else
-                fraction2 = 1000;
-            listOverlaps.push_back(cv::Vec2f(fraction1, fraction2));
-        }
-    }            
-    
-    return listOverlaps;        
-}
-
 }
 							 

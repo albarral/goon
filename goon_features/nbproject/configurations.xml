@@ -45,8 +45,10 @@
         <itemPath>src/goon/features/Blob.h</itemPath>
         <itemPath>src/goon/features/Body.cpp</itemPath>
         <itemPath>src/goon/features/Body.h</itemPath>
-        <itemPath>src/goon/features/BodyUtils.cpp</itemPath>
-        <itemPath>src/goon/features/BodyUtils.h</itemPath>
+        <itemPath>src/goon/features/BodyOverlap.cpp</itemPath>
+        <itemPath>src/goon/features/BodyOverlap.h</itemPath>
+        <itemPath>src/goon/features/BodyOverlapFraction.cpp</itemPath>
+        <itemPath>src/goon/features/BodyOverlapFraction.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -106,9 +108,19 @@
       </item>
       <item path="src/goon/features/Body.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/features/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/BodyOverlap.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/BodyUtils.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/BodyOverlap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"
@@ -220,9 +232,19 @@
       </item>
       <item path="src/goon/features/Body.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/features/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/BodyOverlap.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/BodyUtils.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/BodyOverlap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"

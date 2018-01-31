@@ -59,8 +59,8 @@ void Structure2::computeStructure(std::vector<cv::Vec3i>& listElements)
     int j = 0;
     for (cv::Vec3i& element : listElements)
     {
-        cv::Point pos = cv::Point(element[0], element[1]);
-        matStructure.at<cv::Vec3f>(j) = computeSpatialRelation(pos, element[2]);
+        cv::Point pos(element[0], element[1]);
+        matStructure.at<cv::Vec3f>(1, j) = computeSpatialRelation(pos, element[2]);
     }
 }
 

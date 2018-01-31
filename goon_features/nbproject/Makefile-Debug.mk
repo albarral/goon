@@ -37,7 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Blob.o \
 	${OBJECTDIR}/src/goon/features/Body.o \
-	${OBJECTDIR}/src/goon/features/BodyUtils.o \
+	${OBJECTDIR}/src/goon/features/BodyOverlap.o \
+	${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o \
 	${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o \
 	${OBJECTDIR}/src/goon/features/color/HSVEssence.o \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
@@ -85,10 +86,15 @@ ${OBJECTDIR}/src/goon/features/Body.o: src/goon/features/Body.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Body.o src/goon/features/Body.cpp
 
-${OBJECTDIR}/src/goon/features/BodyUtils.o: src/goon/features/BodyUtils.cpp 
+${OBJECTDIR}/src/goon/features/BodyOverlap.o: src/goon/features/BodyOverlap.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyUtils.o src/goon/features/BodyUtils.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlap.o src/goon/features/BodyOverlap.cpp
+
+${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o: src/goon/features/BodyOverlapFraction.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o src/goon/features/BodyOverlapFraction.cpp
 
 ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
