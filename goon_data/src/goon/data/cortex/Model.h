@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "goon/data/base/blob.h"
+#include "goon/features/Blob.h"
 #include "goon/features/nature/Nature.h"
 
 namespace goon 

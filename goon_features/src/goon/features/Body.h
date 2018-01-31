@@ -1,5 +1,5 @@
-#ifndef __GOON_DATA_BODY_H
-#define __GOON_DATA_BODY_H
+#ifndef __GOON_FEATURES_BODY_H
+#define __GOON_FEATURES_BODY_H
 
 /***************************************************************************
  *   Copyright (C) 2016 by Migtron Robotics   *
@@ -9,7 +9,7 @@
 #include <string>
 #include "opencv2/core/core.hpp"
 
-#include "goon/data/base/blob.h"
+#include "goon/features/Blob.h"
 
 namespace goon 
 {

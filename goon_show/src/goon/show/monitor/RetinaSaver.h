@@ -11,7 +11,7 @@
 #include "opencv2/core/core.hpp"
 
 #include "tivy/Draw.h"
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 #include "goon/data/base/region.h"
 
 namespace goon 

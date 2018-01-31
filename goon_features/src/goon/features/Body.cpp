@@ -3,7 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 #include "goon/features/shape/shape.h"
 
 namespace goon 

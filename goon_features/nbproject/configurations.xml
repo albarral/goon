@@ -41,8 +41,12 @@
           <itemPath>src/goon/features/structure/Structure2.cpp</itemPath>
           <itemPath>src/goon/features/structure/Structure2.h</itemPath>
         </logicalFolder>
-        <itemPath>src/goon/features/Time.cpp</itemPath>
-        <itemPath>src/goon/features/Time.h</itemPath>
+        <itemPath>src/goon/features/Blob.cpp</itemPath>
+        <itemPath>src/goon/features/Blob.h</itemPath>
+        <itemPath>src/goon/features/Body.cpp</itemPath>
+        <itemPath>src/goon/features/Body.h</itemPath>
+        <itemPath>src/goon/features/BodyUtils.cpp</itemPath>
+        <itemPath>src/goon/features/BodyUtils.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -94,9 +98,17 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/features/Time.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/Blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/Blob.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"
@@ -200,9 +212,17 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/features/Time.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/Blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/Blob.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyUtils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"

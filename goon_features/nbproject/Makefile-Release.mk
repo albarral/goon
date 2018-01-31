@@ -35,7 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/features/Time.o \
+	${OBJECTDIR}/src/goon/features/Blob.o \
+	${OBJECTDIR}/src/goon/features/Body.o \
+	${OBJECTDIR}/src/goon/features/BodyUtils.o \
 	${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o \
 	${OBJECTDIR}/src/goon/features/color/HSVEssence.o \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
@@ -71,10 +73,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${O
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
-${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp 
+${OBJECTDIR}/src/goon/features/Blob.o: src/goon/features/Blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Blob.o src/goon/features/Blob.cpp
+
+${OBJECTDIR}/src/goon/features/Body.o: src/goon/features/Body.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Body.o src/goon/features/Body.cpp
+
+${OBJECTDIR}/src/goon/features/BodyUtils.o: src/goon/features/BodyUtils.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyUtils.o src/goon/features/BodyUtils.cpp
 
 ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color

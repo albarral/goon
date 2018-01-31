@@ -9,7 +9,7 @@
 #include <string>
 #include "opencv2/core/core.hpp"
 
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 
 namespace goon 
 {

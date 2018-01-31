@@ -3,10 +3,9 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "goon/data/base/blob.h"
+#include "goon/features/Blob.h"
 #include "goon/features/color/rgb_color.h"
 #include "goon/features/shape/shape.h"
-#include "maty/math/distance.h"
 
 namespace goon 
 {

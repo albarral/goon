@@ -14,14 +14,10 @@
                    projectFiles="true">
       <logicalFolder name="data" displayName="data" projectFiles="true">
         <logicalFolder name="base" displayName="base" projectFiles="true">
-          <itemPath>src/goon/data/base/Body.cpp</itemPath>
-          <itemPath>src/goon/data/base/Body.h</itemPath>
           <itemPath>src/goon/data/base/ColorBody.cpp</itemPath>
           <itemPath>src/goon/data/base/ColorBody.h</itemPath>
           <itemPath>src/goon/data/base/RealBody.cpp</itemPath>
           <itemPath>src/goon/data/base/RealBody.h</itemPath>
-          <itemPath>src/goon/data/base/blob.cpp</itemPath>
-          <itemPath>src/goon/data/base/blob.h</itemPath>
           <itemPath>src/goon/data/base/region.cpp</itemPath>
           <itemPath>src/goon/data/base/region.h</itemPath>
           <itemPath>src/goon/data/base/roi.cpp</itemPath>
@@ -118,10 +114,6 @@
       </item>
       <item path="src/goon/data/VisualMemory.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/ColorBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/ColorBody.h" ex="false" tool="3" flavor2="0">
@@ -129,10 +121,6 @@
       <item path="src/goon/data/base/RealBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/RealBody.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/base/region.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -214,10 +202,6 @@
       </item>
       <item path="src/goon/data/VisualMemory.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/data/base/Body.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/Body.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/goon/data/base/ColorBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/ColorBody.h" ex="false" tool="3" flavor2="0">
@@ -225,10 +209,6 @@
       <item path="src/goon/data/base/RealBody.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/data/base/RealBody.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/blob.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/data/base/blob.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/data/base/region.cpp" ex="false" tool="1" flavor2="0">
       </item>

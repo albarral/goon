@@ -1,5 +1,5 @@
-#ifndef __GOON_DATA_BLOB_H
-#define __GOON_DATA_BLOB_H
+#ifndef __GOON_FEATURES_BLOB_H
+#define __GOON_FEATURES_BLOB_H
 
 /***************************************************************************
  *   Copyright (C) 2014 by Migtron Robotics   *

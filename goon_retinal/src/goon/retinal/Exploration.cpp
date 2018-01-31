@@ -4,7 +4,7 @@
  ***************************************************************************/
 
 #include "goon/retinal/Exploration.h"
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 
 namespace goon
 {

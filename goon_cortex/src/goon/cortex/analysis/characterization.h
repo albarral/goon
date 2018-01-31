@@ -6,11 +6,8 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 	
-#include <vector>
 #include <log4cxx/logger.h>
-#include <opencv2/core/core.hpp>
 
-#include "goon/data/base/Body.h"
 #include "goon/data/cortex/Object.h"
 
 namespace goon

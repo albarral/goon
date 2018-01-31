@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 #include "goon/features/motion/TransMotion.h"
 
 namespace goon 

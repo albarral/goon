@@ -36,10 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/data/VisualMemory.o \
-	${OBJECTDIR}/src/goon/data/base/Body.o \
 	${OBJECTDIR}/src/goon/data/base/ColorBody.o \
 	${OBJECTDIR}/src/goon/data/base/RealBody.o \
-	${OBJECTDIR}/src/goon/data/base/blob.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
 	${OBJECTDIR}/src/goon/data/config/CortexConfig.o \
@@ -85,11 +83,6 @@ ${OBJECTDIR}/src/goon/data/VisualMemory.o: src/goon/data/VisualMemory.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/VisualMemory.o src/goon/data/VisualMemory.cpp
 
-${OBJECTDIR}/src/goon/data/base/Body.o: src/goon/data/base/Body.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/Body.o src/goon/data/base/Body.cpp
-
 ${OBJECTDIR}/src/goon/data/base/ColorBody.o: src/goon/data/base/ColorBody.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
@@ -99,11 +92,6 @@ ${OBJECTDIR}/src/goon/data/base/RealBody.o: src/goon/data/base/RealBody.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/RealBody.o src/goon/data/base/RealBody.cpp
-
-${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -I../goon_features/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
 
 ${OBJECTDIR}/src/goon/data/base/region.o: src/goon/data/base/region.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base

@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 #include "goon/features/structure/Structure2.h"
 
 namespace goon 
