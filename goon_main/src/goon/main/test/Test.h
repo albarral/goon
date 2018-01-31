@@ -13,7 +13,7 @@
 #include "goon/core/VisualData.h"
 #include "goon/data/retina.h"
 #include "goon/data/base/region.h"
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
 #include "goon/retinal/Segmenter.h"
 #include "goon/main/test/TestImage.h"
 

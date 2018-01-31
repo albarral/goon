@@ -6,6 +6,8 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <vector>
+#include "opencv2/core/core.hpp"
 
 namespace goon
 {    
@@ -14,9 +16,11 @@ class TestBodies
 private:
 
 public:
-        //TestBodies();
-                
-        void test();                    
+        //TestBodies();                
+        void test();              
+        
+private:
+    int getBestOverlap(std::vector<cv::Vec2f> listOverlaps);
 };
 
 }    

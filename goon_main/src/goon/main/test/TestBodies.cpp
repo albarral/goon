@@ -9,8 +9,8 @@
 #include <opencv2/opencv.hpp>
 
 #include "goon/main/test/TestBodies.h"
-#include "goon/main/test/BodyUtils.h"
-#include "goon/data/base/Body.h"
+#include "goon/features/Body.h"
+#include "goon/features/BodyUtils.h"
 
 namespace goon
 {    
@@ -75,10 +75,13 @@ void TestBodies::test()
     }
     oBody3.computeMass(); 
 
-    // get which body best overlaps Body3
-    goon::st_bodyOverlap bestOverlap = goon::BodyUtils::getBestOverlap(oBody3, listBodies);
+    // compute overlaps to Body3
+    std::vector<cv::Vec2f> listOverlaps = BodyUtils::computeBodyOverlappedFractions(oBody3, listBodies);
 
-    std::cout << bestOverlap.body2 << " - " << bestOverlap.overlap1 << ", " << bestOverlap.overlap2 << std::endl;
+    int matchedBody = getBestOverlap(listOverlaps);
+    
+    // get which body best overlaps Body3
+    std::cout << "best overlap: " << matchedBody << std::endl;
     
 //    /*
     cv::namedWindow("mask1");         
@@ -96,6 +99,27 @@ void TestBodies::test()
     cv::imshow("mask6", mask6);           
     cv::waitKey(0); // wait for keyb interaction
  //    */    
+}
+
+int TestBodies::getBestOverlap(std::vector<cv::Vec2f> listOverlaps)
+{
+    int winner = -1;
+    float mutualOverlap, maxOverlap = 0.0;
+
+    // we track the maximum mutual overlap 
+    int i = 0;
+    for (cv::Vec2f& overlap : listOverlaps)
+    {
+        mutualOverlap = overlap[0] * overlap[1];
+        if (mutualOverlap > maxOverlap)
+        {
+            maxOverlap = mutualOverlap;
+            winner = i;
+        }
+        i++;
+    }
+    
+    return winner;
 }
 
 }
