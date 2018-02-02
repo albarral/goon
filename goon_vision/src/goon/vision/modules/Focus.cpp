@@ -178,8 +178,8 @@ int Focus::selectTargetByPosition(std::list<ROI>& listROIs)
     // get ROI with max interest 
     for (ROI& oROI : listROIs) 
     {
-        float xdif = oROI.getPos()[0] - features[0];
-        float ydif = oROI.getPos()[1] - features[1];
+        float xdif = oROI.getPos().x - features[0];
+        float ydif = oROI.getPos().y - features[1];
         // avoid division by 0
         if (xdif == 0) xdif = 1;
         if (ydif == 0) ydif = 1;

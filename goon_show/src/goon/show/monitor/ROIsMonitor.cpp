@@ -29,8 +29,6 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int foc
         // computes main ellipse
         covs = it_roi->getCovariances();     // cxx, cyy, cxy        
         Shape::computeEllipse(covs[0], covs[1], covs[2], roi_w, roi_h, roi_angle);            
-        cv::Vec2i& pos = it_roi->getPos();
-        cv::Point centroid(pos[0], pos[1]);                  
 
         LOG4CXX_TRACE(logger, "roi " << it_roi->getID());        
         LOG4CXX_TRACE(logger, "(w, h, angle) = " << roi_w << ", " << roi_h << ", " << roi_angle);  
@@ -38,7 +36,7 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int foc
         int roiColor = tivy::Draw::eYELLOW;        
         if (it_roi->getID() == focusedROI)
             roiColor = tivy::Draw::eGREEN;                  
-        oDraw.drawEllipse(centroid, roi_w, roi_h, -roi_angle, roiColor);
+        oDraw.drawEllipse(it_roi->getPos(), roi_w, roi_h, -roi_angle, roiColor);
                 
         // draw centroid (all yellow)
 //        cv::Vec2f& speed = it_roi->getMotion().getSpeed();
@@ -48,7 +46,7 @@ void ROIsMonitor::drawRois(cv::Mat& image_cam, std::list<ROI>& listROIs, int foc
 //        int color = tivy::Draw::eYELLOW;
 //        if (absSpeed > 0.01)
 //            color = tivy::Draw::eRED;            
-        oDraw.drawPoint(centroid, tivy::Draw::eYELLOW, 3);
+        oDraw.drawPoint(it_roi->getPos(), tivy::Draw::eYELLOW, 3);
         //oDrawPer.drawNumber(it_roi->getID(), centroid);                        
         
         it_roi++;

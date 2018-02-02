@@ -17,7 +17,7 @@ class Blob
 {
 protected:
     int mass;                  // area in pixels
-    cv::Vec2i pos;           // centroid's (x,y) position in the image
+    cv::Point pos;           // centroid's (x,y) position in the image
     cv::Vec3f covs;             // cx, cy, cxy	
     float shapeFactor;
     int orientation;    
@@ -26,13 +26,13 @@ public:
     Blob();
     
     int getMass() {return mass;};
-    cv::Vec2i& getPos() {return pos;};
+    cv::Point& getPos() {return pos;};
     cv::Vec3f& getCovariances() {return covs;};
     float getShapeFactor() {return shapeFactor;};
     int getOrientation() {return orientation;};
     
     void setMass(int value) {mass = value;};
-    void setPos(int x, int y) {pos[0] = x; pos[1] = y;};
+    void setPos(int x, int y) {pos.x = x; pos.y = y;};
     // (xx, yy, xy)
     void setCovariances(float covx, float covy, float covxy) {covs[0] = covx; covs[1] = covy; covs[2] = covxy;};
     void setShapeFactor(float value) {shapeFactor = value;};

@@ -32,7 +32,7 @@ class Shape
      static const int UNDEFINED_ORIENTATION;
 
  private:
-        cv::Vec2i centroid;		// (x, y)
+        cv::Point centroid;		// (x, y)
         cv::Vec3f covs; 		// (cov_xx, cov_yy, cov_xy)
         float width;
         float height;
@@ -43,7 +43,7 @@ class Shape
      Shape ();
      //~Shape();
 
-    cv::Vec2i& getCentroid() {return centroid;};
+    cv::Point& getCentroid() {return centroid;};
     cv::Vec3f& getCovariances() {return covs;};
     float getWidth() {return width;};
     float getHeight() {return height;};
@@ -57,13 +57,13 @@ class Shape
     void computeShapeFromCovs(cv::Vec3f& covs);
 
     // compute centroid (x, y) and covariances (cxx, cyy, cxy) of a given mask & window
-    static void computeCovariances(cv::Mat& mask, cv::Rect& window, cv::Vec2i& centroid, cv::Vec3f& covs);
+    static void computeCovariances(cv::Mat& mask, cv::Rect& window, cv::Point& centroid, cv::Vec3f& covs);
     
     static void computeEllipse(float cxx, float cyy, float cxy, float& width, float& height, float &angle);
     // This function calculates the principal axes of a main ellipse from its given covariances.
     // Resulting angle (in counter clockwise direction) is always inside [-90, 90]
 
-    static void mergeEllipses(cv::Vec2i& pos1, cv::Vec3f& covs1, cv::Vec2i& pos2, cv::Vec3f& covs2, int m1, int m2);
+    static void mergeEllipses(cv::Point& pos1, cv::Vec3f& covs1, cv::Point& pos2, cv::Vec3f& covs2, int m1, int m2);
     // This function merges two ellipses by combining their covariances and centroids.
     // The function returns the resulting ellipse in the first position and covariances values.
       

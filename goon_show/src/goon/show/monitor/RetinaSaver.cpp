@@ -62,11 +62,9 @@ void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, 
     // draw centroid
     if (bdrawCentroid)
     {
-        cv::Vec2i& pos = oBody.getPos();
-        cv::Point centroid(pos[0], pos[1]);                        
-        oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
+        oDraw.drawPoint(oBody.getPos(), tivy::Draw::eRED, 3);
         // draw ID
-        oDraw.drawNumber(ID, centroid);                        
+        oDraw.drawNumber(ID, oBody.getPos());                        
     }
 
     std::string filePath = path + "/" + name + imgExtension;

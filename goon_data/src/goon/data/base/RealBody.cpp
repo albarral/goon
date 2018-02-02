@@ -20,7 +20,7 @@ void RealBody::setBody(Body& oBody)
 
 void RealBody::updateMotion(int millis)
 {
-    oMotion.update(pos[0], pos[1], millis);
+    oMotion.update(pos.x, pos.y, millis);
 }
 
 void RealBody::clear()
