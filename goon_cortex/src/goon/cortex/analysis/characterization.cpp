@@ -43,26 +43,20 @@ void Characterization::checkObjectDetails(Object& oObject)
         oBody.computeShape();
     }
 
-    // and compute object structure ...
-/*    
-    // set object as structure reference
-    cv::Point centroid(oObject.getPos()[0], oObject.getPos()[1]);
-    Structure2& oStructure = oObject.getStructure();
-    oStructure.setReference(centroid, oObject.getCovariances(), oObject.getMass());
+//    // and compute object structure ...
+//    Structure2& oStructure = oObject.getStructure();
+//    // set object as structure reference
+//    oStructure.setReferenceBlob(oObject);    
+//    // get list of elements for the structure
+//    std::vector<Blob> listBlobs;
+//    for (Body& oBody : oObject.getSubBodies())
+//    {
+//        listBlobs.push_back(oBody);
+//    }        
+//    // compute structure
+//    oStructure.computeStructure(listBlobs);
     
-    // get list of elements for the structure
-    std::vector<cv::Vec3i> listElements;
-    for (Body& oBody : oObject.getSubBodies())
-    {
-        cv::Vec3i element(oBody.getPos()[0], oBody.getPos()[1], oBody.getMass());
-        listElements.push_back(element);
-    }    
-    
-    // and compute it
-    oStructure.computeStructure(listElements);
-    
-    listElements.clear();
- */
+//    listBlobs.clear();
 }
 				 
 }

@@ -9,6 +9,7 @@
 
 #include "goon/main/test/TestObjects.h"
 #include "goon/data/cortex/Object.h"
+#include "goon/features/Blob.h"
 #include "goon/features/Body.h"
 #include "goon/features/structure/Structure2.h"
 
@@ -82,29 +83,26 @@ void TestObjects::test()
     oObject.computeShape();            
 
     // compute object structure ...    
-//    Structure2& oStructure = oObject.getStructure();
-//    // set structure reference (object center)
-//    cv::Point centroid(oObject.getPos()[0], oObject.getPos()[1]);
-//    oStructure.setReference(centroid, oObject.getCovariances(), oObject.getMass());    
-//    // get list of elements for the structure
-//    std::vector<cv::Vec3i> listElements;
-//    for (Body& oBody : oObject.getSubBodies())
-//    {
-//        cv::Vec2i& pos = oBody.getPos();
-//        cv::Vec3i element(pos[0], pos[1], oBody.getMass());
-//        listElements.push_back(element);
-//    }        
-//    // compute structure
-//    oStructure.computeStructure(listElements);
+    Structure2& oStructure = oObject.getStructure();
+    // set object as structure reference
+    oStructure.setReferenceBlob(oObject);    
+    // get list of elements for the structure
+    std::vector<Blob> listBlobs;
+    for (Body& oBody : oObject.getSubBodies())
+    {
+        listBlobs.push_back(oBody);
+    }        
+    // compute structure
+    oStructure.computeStructure(listBlobs);
 
-//    LOG4CXX_INFO(logger, oObject.toString()); 
-//    LOG4CXX_INFO(logger, oStructure.toString()); 
+    LOG4CXX_INFO(logger, oObject.toString()); 
+    LOG4CXX_INFO(logger, oStructure.toString()); 
 
-//    cv::namedWindow("object");             
-//    cv::imshow("object", oObject.getMask());           
-//    cv::waitKey(0); // wait for keyb interaction
+    cv::namedWindow("object");             
+    cv::imshow("object", oObject.getMask());           
+    cv::waitKey(0); // wait for keyb interaction
     
-//    listElements.clear();
+    listBlobs.clear();
     listBodies.clear();
 }
 

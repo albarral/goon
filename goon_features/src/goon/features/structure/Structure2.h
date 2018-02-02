@@ -10,6 +10,8 @@
 #include <vector>
 #include "opencv2/core/core.hpp"
 
+#include "goon/features/Blob.h"
+
  namespace goon
 {
 // This class represents a 2D structure, a spatial distribution of elements in a 2D body.
@@ -41,9 +43,7 @@ public:
  private:
 //     int anchor;        // anchor type 
      cv::Mat matStructure;	// matrix representing the body structure (3 depth float matrix)
-     cv::Point point;   // reference point
-     cv::Vec3f covs;   // reference covariances
-     int area;            // reference area             
+     Blob oRefBlob;      // reference blob
 
  public:
      Structure2();
@@ -56,10 +56,10 @@ public:
      
     cv::Mat& getMatStructure() {return matStructure;};
 
-    // set reference values from which the structure will be computed
-    void setReference(cv::Point& refPoint, cv::Vec3f& refCovs, int refArea);
+    // set reference blob from which the structure will be computed
+    void setReferenceBlob(Blob& oBlob);
     // compute the structure of the given elements with respect to the preset reference
-    void computeStructure(std::vector<cv::Vec3i>& listElements);
+    void computeStructure(std::vector<Blob>& listBlobs);
     // clear structure
     void clear();
     

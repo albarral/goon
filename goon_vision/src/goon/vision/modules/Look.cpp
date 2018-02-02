@@ -83,7 +83,7 @@ void Look::loop()
             bindObject();
             //identifyObject();        
             LOG4CXX_TRACE(logger, "clone object ... ");
-            pVisualData->cloneObject(oCortexVision.getObject());
+            pVisualData->updateObject2(oCortexVision.getObject());
 
             break;
     }   // end switch        
@@ -122,7 +122,7 @@ void Look::bindObject()
     LOG4CXX_DEBUG(logger, "characterization ... ");    
     oCortexVision.analyseObject();
     
-    LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
+    //LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
 }
 
 void Look::identifyObject()

@@ -60,16 +60,18 @@ void VisualData::getROIsCopy(Rois& oROIs3)
     oROIs3 = oROIs2;        
 }
 
-void VisualData::cloneObject(Object& oObject)
+void VisualData::updateObject2(Object& oObject)
 {
     std::lock_guard<std::mutex> locker(mutexObject);
+    oObject2.clear();
     oObject2 = oObject;    
 }
 
-Object& VisualData::getObject2()
+void VisualData::getObjectCopy(Object& oObject3)
 {
     std::lock_guard<std::mutex> locker(mutexObject);
-    return oObject2;
+    oObject3.clear();
+    oObject3 = oObject2;    
 }
 }
 

@@ -28,8 +28,8 @@ class VisualData
         Retina oRetina2;          // copy of the dynamic retina
         Rois oROIs2;               // copy of the dynamic rois 
         // cortex section
-        Scene oScene;
         Object oObject2;        // copy of the dynamic object
+        Scene oScene;
         
     public:
         VisualData();
@@ -40,18 +40,16 @@ class VisualData
         // gets copy of camera image
         void getCameraFrameCopy(cv::Mat& imageOut);
                 
-        Scene& getScene() {return oScene;};
-        Object& getObject2();
-
         // store static copies of the dynamic data
         void updateRetina2(Retina& oRetina);
         void updateROIs2(Rois& oROIs);
+        void updateObject2(Object& oObject);
+
         void getRetinaCopy(Retina& oRetina3);
         void getROIsCopy(Rois& oROIs3);
-
-        void cloneObject(Object& oObject);
-        
+        void getObjectCopy(Object& oObject3);        
                 
+        Scene& getScene() {return oScene;};
 };
 }    
 #endif

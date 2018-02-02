@@ -46,6 +46,7 @@ void ShowRetina::first()
     // reset beats
     grabBeat = 0;
     seeBeat = 0;
+    lookBeat = 0;
 }
 
 void ShowRetina::bye()
@@ -78,7 +79,7 @@ void ShowRetina::loop()
         
         // draw regions obtained by the retinal vision 
         oRetinaMonitor.drawRegions(imageCam, oRetina3.getListRegions());            
-        oRetinaMonitor.drawObject(imageCam, pVisualData->getObject2());
+        oRetinaMonitor.drawObject(imageCam, oObject3);
         imageRetina = oRetinaMonitor.getOutput();
         
         // draw ROIs obtained by the peripheral vision 
@@ -91,6 +92,15 @@ void ShowRetina::loop()
         oDualWindow.setImageRight(imageRetina);
     }            
 
+    if (pGoonBus->getSO_LOOK_BEAT().getValue() != lookBeat)
+    {
+        lookBeat = pGoonBus->getSO_LOOK_BEAT().getValue();
+        
+        // get updated copy of looked object
+        pVisualData->getObjectCopy(oObject3);
+    }
+    
+    
     // show dual window
     cv::imshow(windowName, oDualWindow.getImage());   
     cv::waitKey(10);            
