@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/features/Body.o \
 	${OBJECTDIR}/src/goon/features/BodyOverlap.o \
 	${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o \
+	${OBJECTDIR}/src/goon/features/ColorBlob.o \
 	${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o \
 	${OBJECTDIR}/src/goon/features/color/HSVEssence.o \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
@@ -93,6 +94,11 @@ ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o: src/goon/features/BodyOver
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o src/goon/features/BodyOverlapFraction.cpp
+
+${OBJECTDIR}/src/goon/features/ColorBlob.o: src/goon/features/ColorBlob.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/ColorBlob.o src/goon/features/ColorBlob.cpp
 
 ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color

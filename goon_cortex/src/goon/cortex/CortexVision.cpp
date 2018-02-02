@@ -38,8 +38,6 @@ void CortexVision::formObject(int focusedROI)
         LOG4CXX_TRACE(logger, "formObject: " + pROI->shortDesc());    
 
         oBinding.formObject(oRetina3, pROI->getWindow(), oObject);
-
-        LOG4CXX_TRACE(logger, "cortex: " << oObject.shortDesc());
     }
     // skip if ROI doesn't exist
     else

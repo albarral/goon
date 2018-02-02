@@ -48,7 +48,7 @@ void Structure2::computeStructure(std::vector<cv::Vec3i>& listElements)
     // security check
     if (listElements.size() == 0)
     {
-        matStructure.deallocate();
+        clear();
         return; 
     }
 
@@ -61,6 +61,7 @@ void Structure2::computeStructure(std::vector<cv::Vec3i>& listElements)
     {
         cv::Point pos(element[0], element[1]);
         matStructure.at<cv::Vec3f>(1, j) = computeSpatialRelation(pos, element[2]);
+        j++;
     }
 }
 
@@ -84,6 +85,25 @@ cv::Vec3f Structure2::computeSpatialRelation(cv::Point& position, int mass)
 
 void Structure2::clear()
 {
-    matStructure.deallocate();
+    if (!matStructure.empty())
+        matStructure = cv::Scalar(0.0);
+}
+
+std::string Structure2::toString()
+{
+    std::string desc = "Structure2 [reference (" + std::to_string(point.x) + ", " + std::to_string(point.y) + ")" +
+            ", area = " + std::to_string(area) + 
+            ", covs = (" + std::to_string(covs[0]) + "," + std::to_string(covs[1]) + "," + std::to_string(covs[2]) + ")" +
+            "\n matrix: \n";
+    if (!matStructure.empty())
+    {
+        // matrix elements
+        for (int j=0; j<matStructure.cols; j++)
+        {
+            cv::Vec3f& structure = matStructure.at<cv::Vec3f>(1, j);
+            desc += std::to_string(structure[0]) + "," + std::to_string(structure[1]) + "," + std::to_string(structure[2]) + "\n";
+        }
+    }    
+    return desc;
 }
 }

@@ -12,7 +12,7 @@
 namespace goon 
 {
 // This class represents a blob, the basic visual entity in the goon vision system.
-// A blob has a characteristic color, shape (covariances) and position.
+// A blob has a characteristic shape (covariances), mass and position.
 class Blob
 {
 protected:
@@ -21,9 +21,6 @@ protected:
     cv::Vec3f covs;             // cx, cy, cxy	
     float shapeFactor;
     int orientation;    
-    float scale;
-    cv::Vec3f rgb_color;     // color in RGB space
-    cv::Vec3f hsv_color;     // color in HSV space
 
 public:
     Blob();
@@ -33,9 +30,6 @@ public:
     cv::Vec3f& getCovariances() {return covs;};
     float getShapeFactor() {return shapeFactor;};
     int getOrientation() {return orientation;};
-    float getScale() {return scale;};
-    cv::Vec3f& getRGB() {return rgb_color;};
-    cv::Vec3f& getHSV() {return hsv_color;};
     
     void setMass(int value) {mass = value;};
     void setPos(int x, int y) {pos[0] = x; pos[1] = y;};
@@ -43,9 +37,6 @@ public:
     void setCovariances(float covx, float covy, float covxy) {covs[0] = covx; covs[1] = covy; covs[2] = covxy;};
     void setShapeFactor(float value) {shapeFactor = value;};
     void setOrientation (int value) {orientation = value;};
-    void setScale(float value) {scale = value;};
-    void setRGB(cv::Vec3f color) {rgb_color = color;};
-    void setHSV(cv::Vec3f color) {hsv_color = color;};
    
     virtual void clear();    
     // merges with another blob

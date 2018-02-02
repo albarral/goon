@@ -49,6 +49,8 @@
         <itemPath>src/goon/features/BodyOverlap.h</itemPath>
         <itemPath>src/goon/features/BodyOverlapFraction.cpp</itemPath>
         <itemPath>src/goon/features/BodyOverlapFraction.h</itemPath>
+        <itemPath>src/goon/features/ColorBlob.cpp</itemPath>
+        <itemPath>src/goon/features/ColorBlob.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -121,6 +123,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"
@@ -245,6 +251,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"

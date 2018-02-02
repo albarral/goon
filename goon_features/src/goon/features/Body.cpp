@@ -15,7 +15,7 @@ Body::Body ()
 }
 
 // copy constructor (needed for mask)    
-Body::Body(const Body& oBody) : Blob(oBody)
+Body::Body(const Body& oBody) : ColorBlob(oBody)
 {
     window = oBody.window;
     // mask is cloned, not just assigned
@@ -26,7 +26,7 @@ Body::Body(const Body& oBody) : Blob(oBody)
 // assignment operator (needed for mask)
 Body& Body::operator=(const Body& oBody)
 {
-    Blob::operator=(oBody);
+    ColorBlob::operator=(oBody);
     
     window = oBody.window;
     // mask is cloned, not just assigned
@@ -67,12 +67,12 @@ void Body::computeMass()
     mass = cv::countNonZero(mask);    
 }
 
-void Body::computeBasicShape()
+void Body::computeBlob()
 {
     Shape::computeCovariances(mask, window, pos, covs);
 }
 
-void Body::computeComplexShape()
+void Body::computeShape()
 {
     Shape oShape;
     oShape.computeShapeFromCovs(covs);
@@ -90,8 +90,8 @@ cv::Mat Body::computeBorderMask()
 
 void Body::merge(Body& oBody)
 {
-    // merge blob part
-    Blob::merge(oBody);
+    // merge color blob part
+    ColorBlob::merge(oBody);
     
     // get windows union 
     cv::Rect windowBig = window | oBody.window;     
@@ -149,7 +149,7 @@ std::string Body::toString()
 {
     std::string desc = "Body [ window = (" + 
             std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ") - " + 
-            Blob::toString() + "]";
+            ColorBlob::toString() + "]";
     return desc;
 }
 
@@ -157,7 +157,7 @@ std::string Body::shortDesc()
 {
     std::string desc = "Body [ window = (" + 
             std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ") - " + 
-            Blob::shortDesc() + "]";
+            ColorBlob::shortDesc() + "]";
     return desc;
 }
 

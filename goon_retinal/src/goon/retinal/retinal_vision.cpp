@@ -72,7 +72,7 @@ void RetinalVision::computeCovariances()
     for (Region& oRegion : oRetina.getListRegions())
     {
         LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
-        oRegion.computeBasicShape();
+        oRegion.computeBlob();
     }    
     
     LOG4CXX_TRACE(logger, "computeCovariances - end");

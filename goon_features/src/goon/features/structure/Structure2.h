@@ -6,6 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 	
+#include <string>
 #include <vector>
 #include "opencv2/core/core.hpp"
 
@@ -61,6 +62,9 @@ public:
     void computeStructure(std::vector<cv::Vec3i>& listElements);
     // clear structure
     void clear();
+    
+    // return structure description
+    std::string toString();
 
 private:    
     // computes the spatial relation of given element with respect to reference

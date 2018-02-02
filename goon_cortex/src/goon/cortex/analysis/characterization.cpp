@@ -27,8 +27,8 @@ void Characterization::checkGlobalObject(Object& oObject)
     LOG4CXX_TRACE(logger, "Characterization.checkGlobalObject");
         
     // compute object's shape
-    oObject.computeBasicShape();
-    oObject.computeComplexShape();            
+    oObject.computeBlob();
+    oObject.computeShape();            
 }
 
 
@@ -39,12 +39,12 @@ void Characterization::checkObjectDetails(Object& oObject)
     // compute shapes of all object's components
     for (Body& oBody : oObject.getSubBodies())
     {
-        oBody.computeBasicShape();
-        oBody.computeComplexShape();
+        oBody.computeBlob();
+        oBody.computeShape();
     }
 
     // and compute object structure ...
-    
+/*    
     // set object as structure reference
     cv::Point centroid(oObject.getPos()[0], oObject.getPos()[1]);
     Structure2& oStructure = oObject.getStructure();
@@ -60,6 +60,9 @@ void Characterization::checkObjectDetails(Object& oObject)
     
     // and compute it
     oStructure.computeStructure(listElements);
+    
+    listElements.clear();
+ */
 }
 				 
 }

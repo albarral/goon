@@ -9,7 +9,7 @@
 #include <string>
 #include "opencv2/core/core.hpp"
 
-#include "goon/features/Blob.h"
+#include "goon/features/ColorBlob.h"
 
 namespace goon 
 {
@@ -17,8 +17,8 @@ namespace goon
 // It is represented by the following elements: 
 // a mask
 // a window 
-// Extends from Blob
- class Body : public Blob
+// Extends from ColorBlob
+ class Body : public ColorBlob
 {
  public:
     static const uchar BODY_VALUE = 255;
@@ -46,9 +46,9 @@ namespace goon
     
     void computeMass();
     // compute body basic shape (centroid & covariances)
-    void computeBasicShape();
+    void computeBlob();
     // compute body complex shape (shape factor & orientation)    
-    void computeComplexShape();
+    void computeShape();
     // compute mask with only the body's border
     cv::Mat computeBorderMask();
     
