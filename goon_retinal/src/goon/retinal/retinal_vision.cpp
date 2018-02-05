@@ -50,33 +50,24 @@ void RetinalVision::update (cv::Mat& image_cam)
     cv::Mat image_hsv;        
     cv::cvtColor(image_cam, image_hsv, CV_BGR2HSV);
 
+    // segment regions
     oSegmentation4.extractRegions(image_cam, image_hsv);
     
     // show retina description
     LOG4CXX_DEBUG(logger, oRetina.shortDesc());
-//    cv::Vec3b hsvColor(8, 230, 180); 
-//    cv::Vec3b hsvDev(3, 30, 60); 
-//    LOG4CXX_DEBUG(logger, oRetina.showFilterByColor(hsvColor, hsvDev));
 
+    // merge regions
     oMerge.doMerge(oRetina);
+
+    LOG4CXX_TRACE(logger, "compute covariances");
+
+    // compute region blobs (covariances & centroids)
+    for (Region& oRegion : oRetina.getListRegions())
+        oRegion.computeBlob();
 
     LOG4CXX_TRACE(logger, "update - end");
 }
 
-
-void RetinalVision::computeCovariances()
-{    
-    LOG4CXX_TRACE(logger, "computeCovariances - init");
-
-    // walk the list of final regions
-    for (Region& oRegion : oRetina.getListRegions())
-    {
-        LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
-        oRegion.computeBlob();
-    }    
-    
-    LOG4CXX_TRACE(logger, "computeCovariances - end");
-}
 
 void RetinalVision::describeRegions()
 {

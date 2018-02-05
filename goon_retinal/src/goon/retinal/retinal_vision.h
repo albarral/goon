@@ -39,9 +39,6 @@ public:
     // This function performs the retinal vision process.
     // It detects homogenous color regions in the captured image which will be later used by higher vision processes.
 
-    // computes the covariances of the final retinal regions
-    void computeCovariances();
-
 private:    
     // logs a short description of all extracted regions
     void describeRegions ();

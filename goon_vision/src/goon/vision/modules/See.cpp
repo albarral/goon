@@ -66,7 +66,6 @@ void See::loop()
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision.update(imageCam);    
-    oRetinalVision.computeCovariances();             
     Retina& oRetina = oRetinalVision.getRetina();
     
     LOG4CXX_DEBUG(logger, "peripheral ... ");
