@@ -47,18 +47,19 @@ void Binding::formObject(Retina& oRetina, cv::Rect& window, Object& oObject)
         // adding regions that lay inside the specified window to object
         if (overlap > bindObjectFraction)
         {
+            Body& oBody = *it_region;
             // first region is assigned to the object
             if (bempty)
             {
-                oObject.setBody(*it_region);
+                oObject.setBody(oBody);
                 bempty = false;
             }
             // next regions are merged
             else
-                oObject.merge(*it_region);
+                oObject.merge(oBody);
 
             // add region as component
-            oObject.addSubBody(*it_region);
+            oObject.addSubBody(oBody);
             LOG4CXX_TRACE(logger, "Binding: + region " << it_region->getID());
         }
 

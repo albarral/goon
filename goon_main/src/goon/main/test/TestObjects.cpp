@@ -3,14 +3,12 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <vector>
 #include "opencv2/core/core.hpp"
-#include <opencv2/opencv.hpp> // for imshow
+//#include <opencv2/opencv.hpp> // for imshow
 
 #include "goon/main/test/TestObjects.h"
 #include "goon/data/cortex/Object.h"
-#include "goon/features/Blob.h"
-#include "goon/features/Body.h"
+#include "goon/cortex/analysis/characterization.h"
 #include "goon/features/structure/Structure2.h"
 
 using namespace log4cxx;
@@ -23,10 +21,26 @@ void TestObjects::test()
 {        
     LOG4CXX_INFO(logger, "TEST OBJECTS ..."); 
     
-    // this method creates an object from the union of 3 rectangular bodies (lying in horizontal distribution)
-    // the object structure is then computed  
+    std::vector<Body> listBodies;
     
-    // objects size
+    for (int i=0; i<5; i++)
+    {
+        LOG4CXX_INFO(logger, "i = " << std::to_string(i)); 
+     
+        createBodies(listBodies);
+        createObject(listBodies);
+    }
+    
+    listBodies.clear();    
+}
+
+// this method creates 3 rectangular bodies (lying in horizontal distribution)
+// and puts them in the given list
+void TestObjects::createBodies(std::vector<Body>& listBodies)
+{                
+    listBodies.clear();
+    
+    // bodies size
     int w = 20;
     int h = 10;
 
@@ -48,62 +62,58 @@ void TestObjects::test()
     // third region
     mask(window3).setTo(255);
     
-    // 3 bodies
+    // create 3 bodies
     Body oBody1, oBody2, oBody3;    
     oBody1.setMaskAndWindow(mask, window1);
     oBody2.setMaskAndWindow(mask, window2);
     oBody3.setMaskAndWindow(mask, window3);   
 
-    // create bodies list
-    std::vector<Body> listBodies;
+    // put them in the list
     listBodies.push_back(oBody1);
     listBodies.push_back(oBody2);
-    listBodies.push_back(oBody3);
-    
-    // create object with the 3 bodies
+    listBodies.push_back(oBody3);    
+            
+    // and compute their mass & shapes
+    for (Body& oBody : listBodies)
+    {
+        oBody.computeMass();
+        oBody.computeBlob();    
+    }
+
+}
+
+// this method creates an object with the given list of bodies
+// and computes its structure
+void TestObjects::createObject(std::vector<Body>& listBodies)
+{                
+    // create object with the bodies
     Object oObject;                    
     int counter = 0;
     for (Body& oBody : listBodies)
     {
-        // compute bodies
-        oBody.computeMass();
-        oBody.computeBlob();
-        // form object
+        // form object (assign first body & merge the rest)
         if (counter == 0)
             oObject.setBody(oBody);            
         else
             oObject.merge(oBody);            
+
         // add subbodies
         oObject.addSubBody(oBody);        
         counter++;
     }
     
+    Characterization oCharacterization;    
     // compute object's shape
-    oObject.computeBlob();
-    oObject.computeShape();            
-
-    // compute object structure ...    
-    Structure2& oStructure = oObject.getStructure();
-    // set object as structure reference
-    oStructure.setReferenceBlob(oObject);    
-    // get list of elements for the structure
-    std::vector<Blob> listBlobs;
-    for (Body& oBody : oObject.getSubBodies())
-    {
-        listBlobs.push_back(oBody);
-    }        
-    // compute structure
-    oStructure.computeStructure(listBlobs);
+    oCharacterization.checkGlobalObject(oObject);
+    // compute object's details
+    oCharacterization.checkObjectDetails(oObject);
 
     LOG4CXX_INFO(logger, oObject.toString()); 
-    LOG4CXX_INFO(logger, oStructure.toString()); 
+    LOG4CXX_INFO(logger, oObject.getStructure().toString()); 
 
-    cv::namedWindow("object");             
-    cv::imshow("object", oObject.getMask());           
-    cv::waitKey(0); // wait for keyb interaction
-    
-    listBlobs.clear();
-    listBodies.clear();
+//    cv::namedWindow("object");             
+//    cv::imshow("object", oObject.getMask());           
+//    cv::waitKey(0); // wait for keyb interaction
 }
 
 }

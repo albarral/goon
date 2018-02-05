@@ -54,7 +54,7 @@ void Structure2::computeStructure(std::vector<Blob>& listBlobs)
     int j = 0;
     for (Blob& oBlob : listBlobs)
     {
-        matStructure.at<cv::Vec3f>(1, j) = computeSpatialRelation(oBlob.getPos(), oBlob.getMass());
+        matStructure.at<cv::Vec3f>(0, j) = computeSpatialRelation(oBlob.getPos(), oBlob.getMass());
         j++;
     }
 }
@@ -94,7 +94,7 @@ std::string Structure2::toString()
         // matrix elements
         for (int j=0; j<matStructure.cols; j++)
         {
-            cv::Vec3f& structure = matStructure.at<cv::Vec3f>(1, j);
+            cv::Vec3f& structure = matStructure.at<cv::Vec3f>(0, j);
             desc += std::to_string(structure[0]) + "," + std::to_string(structure[1]) + "," + std::to_string(structure[2]) + "\n";
         }
     }    

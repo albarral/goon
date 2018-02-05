@@ -39,24 +39,24 @@ void Characterization::checkObjectDetails(Object& oObject)
     // compute shapes of all object's components
     for (Body& oBody : oObject.getSubBodies())
     {
-        oBody.computeBlob();
+        //oBody.computeBlob(); // blobs computed during retinal vision
         oBody.computeShape();
     }
 
-//    // and compute object structure ...
-//    Structure2& oStructure = oObject.getStructure();
-//    // set object as structure reference
-//    oStructure.setReferenceBlob(oObject);    
-//    // get list of elements for the structure
-//    std::vector<Blob> listBlobs;
-//    for (Body& oBody : oObject.getSubBodies())
-//    {
-//        listBlobs.push_back(oBody);
-//    }        
-//    // compute structure
-//    oStructure.computeStructure(listBlobs);
+    // and compute object structure ...
+    Structure2& oStructure = oObject.getStructure();
+    // set object as structure reference
+    oStructure.setReferenceBlob(oObject);    
+    // get list of elements for the structure
+    std::vector<Blob> listBlobs;
+    for (Body& oBody : oObject.getSubBodies())
+    {
+        listBlobs.push_back(oBody);
+    }        
+    // compute structure
+    oStructure.computeStructure(listBlobs);
     
-//    listBlobs.clear();
+    listBlobs.clear();
 }
 				 
 }

@@ -6,7 +6,11 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <vector>
 #include <log4cxx/logger.h>
+
+#include "goon/features/Body.h"
+
 
 namespace goon
 {    
@@ -18,6 +22,12 @@ private:
 public:
         //TestObjects();                
         void test();                      
+        
+private:
+    void createBodies(std::vector<Body>& listBodies);
+    
+    void createObject(std::vector<Body>& listBodies);
+
 };
 
 }    
