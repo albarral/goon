@@ -12,66 +12,71 @@
 #include <opencv2/core/core.hpp>
 
 #include "goon/cortex/recognition/matches.h"			
+#include "goon/data/cortex/Model.h"
+#include "goon/data/cortex/Object.h"
+#include "goon/data/cortex/ObjectModel.h"
+#include "goon/features/Body.h"
 #include "goon/features/color/HSVEssence.h"
 
 namespace goon
 {
 class Matching2
 {
+public:
+    typedef cv::Vec<float, 5> Vec5f;    // for similarity vectors
+
+    enum eSimilarity
+    {
+        eSIM_COLOR,
+        eSIM_SHAPE,
+        eSIM_WEIGHT,
+        eSIM_ANGLE,
+        eSIM_TOTAL,
+        eSIM_DIM
+    };
 private:
     static log4cxx::LoggerPtr logger;
-    HSVEssence oHSVEssence;
+    // params
     float max_dist_color;
-    bool bmark_regions;
-    cv::Mat mat_similarity;
-    std::vector<st_match> seq_candidate_matches;
+    float maxRotation;
+    float reqSimilarity;
+    float reqQuality;       // minimum required quality to consider a feasible matching
+    // logic
+    HSVEssence oHSVEssence;
+    cv::Mat mat_similarity;     // eSIM_DIM depth
+    std::vector<cv::Vec2i> seq_correspondences;     // region correspondences
+    std::vector<st_match> seq_candidate_matches;    
     
 public:
     Matching2();
     //~Matching2();
 
-    // this performs a matching process between the given object and the given list of object models.
-    // It returns true if there are matching candidates, otherwise false.
+    // Performs a matching process between the given object and the given list of object models.
+    // It returns true if there are matching candidates, false otherwise
     bool doMatching(Object& oObject, std::vector<ObjectModel>& listObjectModels);
 
-    CvSeq* getListCandidateMatches ();
-    // This function returns a pointer to the sequence of candidate matches.
+    // get access to the sequence of candidate matches.
+    std::vector<st_match>& getListCandidateMatches() {return seq_candidate_matches;};
 
 private:
-    // this compares an object with a model in a region-region basis. It returns true if they are matched, or false otherwise.
-    // The matching result is returned through the match structure.
-    bool compareObject2Model(Object& oObject, ObjectModel& oObjectModel, st_match& match);
+    // compare an object with a model in a region-region basis
+    // it returns the matching quality and informs the given match data
+    float compareObject2Model(Object& oObject, ObjectModel& oObjectModel, st_match& match);
 
-    // compares two regions (body and model) based on weight, color and shape. It returns true if the regions are similar, otherwise returns false.
-    bool compareRegions(Body& oBody, Model& oModel, st_anchor_match& anchor_match);
+    // compares two regions (body and model) based on color, shape, weight and orientation. It returns a vector with those four similarities.
+    Vec5f compareRegions(Body& oBody, Model& oModel);
     
-    // checks the local coherence of two matched regions through an exhaustive comparison of their corresponding neighbours.
-    // It returns a matrix with all the obtained similarities to be used for finding region correspondences.
-    void checkLocalCoherence(Body& oBody, Model& oModel, st_anchor_match& anchor_match);
+    // establish region correspondences between object regions and model regions (using the similarity matrix)
+    void findCorrespondences();
+    
+    // computes a quality measure for the object-model comparison
+    float computeMatchingQuality(Object& oObject, ObjectModel& oObjectModel);
 
-    bool compareNeighbours (st_neighbour* lmk_neighbour, st_neighbour* model_neighbour, float anchor_rotation, float* similarities);
-    // This function compares a pair of neighbours based on position, color and scale. It returns true if the neighbours are similar, otherwise returns false.
-    // Filter: 			module, angle, scale
-    // Similarity: 		color, shape
-
-    // establish region correspondences between two landmarks through a nearest neighbours process (using their similarities)
-    void findCorrespondences(std::vector<cv::Vec2i>& seq_correspondences);
-
-    bool findRegionInList (CvSeq* seq_avoid_regions, int search_id);
-    // This function searches for a specif region ID in a given list. It returns true if found or false otherwise.
-    // When found, the item is removed from the list.
-
-    void computeMatchedWeights (st_model* model, float* plmk_matched_weight, float* pmod_matched_weight);
-    // This function computes the matched weights of a landmark and a model from their correspondences
-
-    void unmarkLandmarkRegions ();
-    // This function unmarks all landmark regions (for debugging purpose)
-
-    void markLandmarkRegions (CvSeq* seq_aux);
-    // This function marks matched landmark regions (for debugging purpose)
+    // computes the matched fractions of the object and the model
+    cv::Vec2f computeMatchedFractions(Object& oObject, ObjectModel& oObjectModel);
 
     // selects best candidate matches from the given list
-    void getBestCandidates(std::vector<st_match>& seq_matches);
+    //void filterCandidates();
 };
 }
 #endif

@@ -9,7 +9,9 @@
 #include <vector>
 #include <log4cxx/logger.h>
 
+#include "goon/data/cortex/Object.h"
 #include "goon/features/Body.h"
+#include "goon/data/VisualMemory.h"
 
 
 namespace goon
@@ -26,7 +28,9 @@ public:
 private:
     void createBodies(std::vector<Body>& listBodies);
     
-    void createObject(std::vector<Body>& listBodies);
+    void createObject(Object& oObject, std::vector<Body>& listBodies);
+    
+    void identifyObject(Object& oObject, VisualMemory& oVisualMemory);        
 
 };
 

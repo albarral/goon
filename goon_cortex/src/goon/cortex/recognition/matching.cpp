@@ -95,7 +95,7 @@ bool Matching::doMatching ()
                 // if matched, the model is added to the list of candidate matches for this landmark
                 if (bmatched)
                 {
-                        match.matched_object = model->object_ID;
+                        match.modelID = model->object_ID;
                         match.matched_view = model->view_ID;
                         cvSeqPush (seq_matches, &match);
                 }
@@ -251,8 +251,8 @@ bool Matching::compareLandmark2Model (st_model* model, st_match* match)
         }
 	
 	match->quality = best_quality;
-	match->lmk_matched_weight = best_lmk_weight;
-	match->mod_matched_weight = best_mod_weight;
+	match->objectMatchedFraction = best_lmk_weight;
+	match->modelMatchedFraction = best_mod_weight;
 	match->lowest_similarity = MIN (best_anchor_match.color_similarity, best_anchor_match.shape_similarity);
 	
 #ifdef DEBUG_MODE
@@ -662,7 +662,7 @@ void Matching::getBestCandidates ()
 	{
 		match = (st_match*)cvGetSeqElem (seq_matches, i);		
 		
-		matched_object = match->matched_object;
+		matched_object = match->modelID;
 		
 		// check if matched object is already a candidate
 		bcandidate_found = false;

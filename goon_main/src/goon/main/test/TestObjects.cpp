@@ -7,8 +7,8 @@
 //#include <opencv2/opencv.hpp> // for imshow
 
 #include "goon/main/test/TestObjects.h"
-#include "goon/data/cortex/Object.h"
 #include "goon/cortex/analysis/characterization.h"
+#include "goon/cortex/recognition/Recognition2.h"
 #include "goon/features/structure/Structure2.h"
 
 using namespace log4cxx;
@@ -21,14 +21,17 @@ void TestObjects::test()
 {        
     LOG4CXX_INFO(logger, "TEST OBJECTS ..."); 
     
+    VisualMemory oVisualMemory;
+    Object oObject;                    
     std::vector<Body> listBodies;
     
-    for (int i=0; i<5; i++)
+//    for (int i=0; i<5; i++)
     {
-        LOG4CXX_INFO(logger, "i = " << std::to_string(i)); 
+//        LOG4CXX_INFO(logger, "i = " << std::to_string(i)); 
      
         createBodies(listBodies);
-        createObject(listBodies);
+        createObject(oObject, listBodies);
+        identifyObject(oObject, oVisualMemory);
     }
     
     listBodies.clear();    
@@ -84,10 +87,11 @@ void TestObjects::createBodies(std::vector<Body>& listBodies)
 
 // this method creates an object with the given list of bodies
 // and computes its structure
-void TestObjects::createObject(std::vector<Body>& listBodies)
+void TestObjects::createObject(Object& oObject, std::vector<Body>& listBodies)
 {                
+    oObject.clear();
+
     // create object with the bodies
-    Object oObject;                    
     int counter = 0;
     for (Body& oBody : listBodies)
     {
@@ -116,4 +120,9 @@ void TestObjects::createObject(std::vector<Body>& listBodies)
 //    cv::waitKey(0); // wait for keyb interaction
 }
 
+void TestObjects::identifyObject(Object& oObject, VisualMemory& oVisualMemory)
+{
+    Recognition2 oRecognition;
+    oRecognition.recogniseObject(oObject, oVisualMemory);
+}
 }

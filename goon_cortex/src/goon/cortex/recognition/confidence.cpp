@@ -128,7 +128,7 @@ bool Confidence::findConfidentMatches (CvSeq* seq_candidate_matches)
 	{
             cvSeqPush (seq_confident_matches, best_match);
 
-            LOG4CXX_INFO(logger, "      matched -> " << best_match->matched_object);
+            LOG4CXX_INFO(logger, "      matched -> " << best_match->modelID);
 	} 
 									  			
 #ifdef DEBUG_MODE
@@ -238,7 +238,7 @@ void Confidence::showMatchesConfidence (CvSeq* seq_candidate_matches)
 	{
             match = (st_match*)cvGetSeqElem (seq_candidate_matches, j);
 
-            LOG4CXX_DEBUG(logger, "        vs. model " << match->matched_object << "." << match->matched_view);
+            LOG4CXX_DEBUG(logger, "        vs. model " << match->modelID << "." << match->matched_view);
             LOG4CXX_DEBUG(logger, "= " << match->quality << " (" << match->self_evidence << ", " << match->context_evidence << ") " << match->confidence);
 	}		
 	  
@@ -256,7 +256,7 @@ int Confidence::getIdentifiedObject ()
 		
 	match = (st_match*)cvGetSeqElem (seq_confident_matches, 0);
 	   
-	return (match->matched_object);
+	return (match->modelID);
 }
 
 
@@ -303,7 +303,7 @@ bool Confidence::isRecognitionSafe ()
 		
 	match = (st_match*)cvGetSeqElem (seq_confident_matches, 0);
 
-	if (match->lmk_matched_weight < SAFE_RECOGNITION_WEIGHT || match->lowest_similarity < (SIMILARITY + SIMILARITY_MARGIN))
+	if (match->objectMatchedFraction < SAFE_RECOGNITION_WEIGHT || match->lowest_similarity < (SIMILARITY + SIMILARITY_MARGIN))
 		bsafe = false;							
 	else
 		bsafe = true;

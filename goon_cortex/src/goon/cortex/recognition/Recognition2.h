@@ -21,8 +21,8 @@ class Recognition2
 private:
     static log4cxx::LoggerPtr logger;
     Matching2 oMatching2;
-    Coherence2 oCoherence2;
-    Confidence2 oConfidence2;
+//    Coherence2 oCoherence2;
+//    Confidence2 oConfidence2;
   
 public:
     Recognition2();

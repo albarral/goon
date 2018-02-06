@@ -30,7 +30,7 @@ bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
 //    int *lmkPosition = mVisualCenter->getLandmarkPosition();
 //    CvSeq* seqLmkContext = mVisualCenter->getLandmarkContext();
 
-    if (oMatching2->doMatching(oObject, oVisualMemory.getListModels())) 
+    if (oMatching2.doMatching(oObject, oVisualMemory.getListModels())) 
     {
 //        seq_candidate_matches = oMatching->getListCandidateMatches();
 //
@@ -43,7 +43,7 @@ bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
 //        bool bpositive = oConfidence2->findConfidentMatches(seq_candidate_matches);
 
         //*matched_object = oConfidence2->getIdentifiedObject();
-        return bpositive;
+        return true;
     }		
     else 
         return false;
@@ -52,6 +52,7 @@ bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
 
 bool Recognition2::isModelGood ()
 {
-    return (oConfidence2.isRecognitionSafe());
+//    return (oConfidence2.isRecognitionSafe());
+    return false;
 }
 }

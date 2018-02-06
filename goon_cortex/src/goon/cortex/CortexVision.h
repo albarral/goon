@@ -15,7 +15,7 @@
 #include "goon/data/cortex/Scene.h"
 #include "goon/cortex/analysis/binding.h"
 #include "goon/cortex/analysis/characterization.h"
-//#include "goon/cortex/recognition/recognition.h"
+//#include "goon/cortex/recognition/Recognition2.h"
 
 namespace goon
 {
@@ -30,7 +30,7 @@ private:
     VisualMemory oVisualMemory;
     Binding oBinding;
     Characterization oCharacterization;
-    //Recognition oRecognition;
+    //Recognition2 oRecognition;
 
 public:
     CortexVision();

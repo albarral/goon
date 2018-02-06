@@ -50,7 +50,7 @@ void Coherence::checkSelfCoherence (int lmk_size, int* lmk_global_position, CvSe
 	for (int i=0; i < seq_candidate_matches->total; i++)
 	{
 		match = (st_match*)cvGetSeqElem (seq_candidate_matches, i);
-                object = mMemoryCenter->getObject(match->matched_object);
+                object = mMemoryCenter->getObject(match->modelID);
 
 		object_size = object->last_size;
 
@@ -148,7 +148,7 @@ void Coherence::checkGlobalCoherence (CvSeq* seq_lmk_context, CvSeq* seq_candida
 	{
 		match = (st_match*)cvGetSeqElem (seq_candidate_matches, i);	
 		
-                object = mMemoryCenter->getObject(match->matched_object);
+                object = mMemoryCenter->getObject(match->modelID);
 			
 		// CompareContexts () 
 		match->context_evidence = compareContexts (seq_lmk_context, object);
