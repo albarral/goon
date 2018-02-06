@@ -8,15 +8,15 @@
 
 #include <string>
 
-#include "goon/features/Blob.h"
+#include "goon/features/ColorBlob.h"
 #include "goon/features/nature/Nature.h"
 
 namespace goon 
 {
 // Class used to represent a body model, the symbolic representation of a visual body.
 // It's the basic unit of object models.
-// It extends from Blob (like Body class).
-class Model : public Blob
+// It extends from ColorBlob (like Body class).
+class Model : public ColorBlob
 {
 protected:
     int ID;

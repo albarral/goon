@@ -25,7 +25,7 @@ std::string Model::toString()
     std::string desc = "Model [ID = " + std::to_string(ID) + 
             ", window = (" + std::to_string(window.x) + "," + std::to_string(window.y) + "," + std::to_string(window.width) + "," + std::to_string(window.height) + ") " + 
             ", " + oNature.toString() +
-            "\n" + Blob::toString();
+            "\n" + ColorBlob::toString();
     return desc;
 }
 

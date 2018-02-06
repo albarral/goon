@@ -10,7 +10,7 @@
 #include <vector>
 
 #include "goon/data/cortex/Object.h"
-#include "goon/features/structure/Structure.h"
+#include "goon/features/structure/Structure2.h"
 
 namespace goon 
 {
@@ -19,7 +19,7 @@ class Scene
 {
 private:
     std::vector<Object> listObjects;       // list of objects composing the scene
-    Structure oStructure;                   // scene structure (distribution of objects)                    
+    Structure2 oStructure;                   // scene structure (distribution of objects)                    
 
 public:    
     Scene();
@@ -28,7 +28,7 @@ public:
     std::vector<Object>& getObjects() {return listObjects;};
     void addObject(Object& oObject);
     
-    Structure& getStructure() {return oStructure;};   
+    Structure2& getStructure() {return oStructure;};   
     // compute scene structure
     //void computeStructure();
     

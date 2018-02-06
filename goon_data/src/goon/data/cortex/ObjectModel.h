@@ -10,7 +10,7 @@
 #include <vector>
 
 #include "goon/data/cortex/Model.h"
-#include "goon/features/structure/Structure.h"
+#include "goon/features/structure/Structure2.h"
 
 namespace goon 
 {
@@ -20,7 +20,7 @@ class ObjectModel : public Model
 {
 private:
     std::vector<Model> listModels;     // list of submodels composing the object
-    Structure oStructure;                   // object structure (distribution of submodels)                    
+    Structure2 oStructure;                   // object structure (distribution of submodels)                    
 
 public:    
     ObjectModel();
@@ -29,7 +29,7 @@ public:
     std::vector<Model>& getSubModels() {return listModels;};
     void addSubModel(Model& oModel);
     
-    Structure& getStructure() {return oStructure;};   
+    Structure2& getStructure() {return oStructure;};   
     // compute object structure
     //void computeStructure();
     
