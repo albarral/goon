@@ -13,13 +13,13 @@
 
 namespace goon 
 {
-// This class represents a real body: a visual body that has exists in the real world. 
-// Therefore it has a motion and a historical existence.
+// This class represents a real body: a visual body that exists in the real world. 
+// Therefore it has identity, motion and age.
 class RealBody : public Body
 {
 protected:
+    int ID;
     int age;
-//    int stability;
     TransMotion oMotion;
 
 public:    
@@ -29,12 +29,11 @@ public:
     // set body part
     void setBody(Body& oBody);
 
+    int getID() {return ID;};
+    void setID(int value) {ID = value;};
     int getAge() {return age;};
     void increaseAge() {age++;};
-    
-//    int getStability() {return stability;};
-//    void setStability(int value) {stability = value;};
-    
+        
     TransMotion& getMotion() {return oMotion;};    
     void updateMotion(int millis);
     
