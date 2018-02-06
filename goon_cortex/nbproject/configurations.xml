@@ -29,6 +29,15 @@
           <itemPath>src/goon/cortex/config/vision_times.h</itemPath>
         </logicalFolder>
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
+          <itemPath>src/goon/cortex/recognition/Coherence2.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Coherence2.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/Confidence2.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Confidence2.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/Matching2.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Matching2.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/Recognition2.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Recognition2.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/matches.h</itemPath>
         </logicalFolder>
         <itemPath>src/goon/cortex/CortexVision.cpp</itemPath>
         <itemPath>src/goon/cortex/CortexVision.h</itemPath>
@@ -165,6 +174,51 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/cortex/recognition/Coherence2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Coherence2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Confidence2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Confidence2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Matching2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Matching2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Recognition2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Recognition2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/matches.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="2">
       <toolsSet>
@@ -238,6 +292,51 @@
             flavor2="0">
       </item>
       <item path="src/goon/cortex/config/vision_times.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Coherence2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Coherence2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Confidence2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Confidence2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Matching2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Matching2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Recognition2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Recognition2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/matches.h"
             ex="false"
             tool="3"
             flavor2="0">

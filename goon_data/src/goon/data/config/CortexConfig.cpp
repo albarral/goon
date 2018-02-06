@@ -12,6 +12,8 @@ CortexConfig::CortexConfig()
 {
     // binding
     BINDING_OVERLAP_FRACTION = 0.50;
+    // recognition        
+    MATCHING_HSV_SIMILARITY = 1.0;   
 }
 
 

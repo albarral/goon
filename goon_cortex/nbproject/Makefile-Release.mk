@@ -37,7 +37,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/cortex/CortexVision.o \
 	${OBJECTDIR}/src/goon/cortex/analysis/binding.o \
-	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o
+	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o \
+	${OBJECTDIR}/src/goon/cortex/recognition/Coherence2.o \
+	${OBJECTDIR}/src/goon/cortex/recognition/Confidence2.o \
+	${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o \
+	${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o
 
 
 # C Compiler Flags
@@ -78,6 +82,26 @@ ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o: src/goon/cortex/analys
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o src/goon/cortex/analysis/characterization.cpp
+
+${OBJECTDIR}/src/goon/cortex/recognition/Coherence2.o: src/goon/cortex/recognition/Coherence2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Coherence2.o src/goon/cortex/recognition/Coherence2.cpp
+
+${OBJECTDIR}/src/goon/cortex/recognition/Confidence2.o: src/goon/cortex/recognition/Confidence2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Confidence2.o src/goon/cortex/recognition/Confidence2.cpp
+
+${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o: src/goon/cortex/recognition/Matching2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o src/goon/cortex/recognition/Matching2.cpp
+
+${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o: src/goon/cortex/recognition/Recognition2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o src/goon/cortex/recognition/Recognition2.cpp
 
 # Subprojects
 .build-subprojects:

@@ -27,15 +27,15 @@ namespace goon
 // data structure to store matching info
 typedef struct st_match
 {
-	int matched_object;
-	int matched_view;
-	float quality;
-	float self_evidence;
-	float context_evidence;
-	float confidence;
-	float lmk_matched_weight;
-	float mod_matched_weight;
-	float lowest_similarity;
+    int matched_object;
+//    int matched_view;
+    float quality;
+    float self_evidence;
+    float context_evidence;
+    float confidence;
+    float lmk_matched_weight;
+    float mod_matched_weight;
+    float lowest_similarity;
 }
 st_match;	
 

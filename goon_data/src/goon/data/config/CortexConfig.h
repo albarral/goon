@@ -14,7 +14,8 @@ class CortexConfig
 private:
     // binding
     float BINDING_OVERLAP_FRACTION;      
-
+    // recognition        
+    float MATCHING_HSV_SIMILARITY;                   // HSV distance used for color comparisons between a pixel and the region's color essence.
 
 public:
     CortexConfig();
@@ -22,6 +23,8 @@ public:
 
     // binding
     float getBINDING_OVERLAP_FRACTION() {return BINDING_OVERLAP_FRACTION;}    
+    // recognition        
+    float getMATCHING_HSV_SIMILARITY() {return MATCHING_HSV_SIMILARITY;}
 };
 }
 
