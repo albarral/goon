@@ -29,8 +29,12 @@
           <itemPath>src/goon/cortex/config/vision_times.h</itemPath>
         </logicalFolder>
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
+          <itemPath>src/goon/cortex/recognition/Compare.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Compare.h</itemPath>
           <itemPath>src/goon/cortex/recognition/Matching2.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Matching2.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/Modeling.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Modeling.h</itemPath>
           <itemPath>src/goon/cortex/recognition/Recognition2.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Recognition2.h</itemPath>
           <itemPath>src/goon/cortex/recognition/matches.h</itemPath>
@@ -170,12 +174,32 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/cortex/recognition/Compare.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Compare.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/cortex/recognition/Matching2.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/goon/cortex/recognition/Matching2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Modeling.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Modeling.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -272,12 +296,32 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/cortex/recognition/Compare.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Compare.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/cortex/recognition/Matching2.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/goon/cortex/recognition/Matching2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Modeling.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Modeling.h"
             ex="false"
             tool="3"
             flavor2="0">
