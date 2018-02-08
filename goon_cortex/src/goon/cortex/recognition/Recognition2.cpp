@@ -26,15 +26,25 @@ bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
 {
     LOG4CXX_TRACE(logger, "Recognition2.recogniseObject");
 
-//    CvSeq* seq_candidate_matches;
-//    int *lmkPosition = mVisualCenter->getLandmarkPosition();
-//    CvSeq* seqLmkContext = mVisualCenter->getLandmarkContext();
-
-    if (oMatching2.doMatching(oObject, oVisualMemory.getListModels())) 
+    // get model of the object
+    oModeling.modelObject(oObject, oObjectModel);
+    
+    //LOG4CXX_DEBUG(logger, oObjectModel.toString());
+    
+    if (oVisualMemory.getListModels().empty())
     {
-//        seq_candidate_matches = oMatching->getListCandidateMatches();
-//
-//        oCoherence2->checkSelfCoherence(mVisualCenter->getLandmarkV2()->getArea(), lmkPosition, seq_candidate_matches);
+        LOG4CXX_WARN(logger, "Recognition2: no models in visual memory, skip recognition");
+        return false;
+    }
+
+    // match object model against models in visual memory
+    if (oMatching2.doMatching(oObjectModel, oVisualMemory.getListModels())) 
+    {
+        oMatching2.showCandidates();
+        
+        //std::vector<st_match>& listCandidateMatches = oMatching2.getListCandidateMatches();
+
+        //        oCoherence2->checkSelfCoherence(mVisualCenter->getLandmarkV2()->getArea(), lmkPosition, seq_candidate_matches);
 //
 //        oCoherence2->getLandmarkContext(seqLmkContext, lmkPosition, seq_scene_objects);
 //

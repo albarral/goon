@@ -41,6 +41,7 @@ private:
     float reqSimilarity;    // required similarity to consider a region correspondence
     // result        
     float quality;
+    float maxQuality;
     float matchedFraction1;
     float matchedFraction2;
     // logic
@@ -58,11 +59,14 @@ public:
     //void setWeightSensitivity(float value) {weightSense = value;}
     
     float getQuality() {return quality;};
+    float getMaxPossibleQuality() {return maxQuality;};
     float getMatchedFration1() {return matchedFraction1;}
     float getMatchedFration2() {return matchedFraction2;}
 
     // compares two object models in a region-region basis, it returns the matching quality
     float compareObjectModels(ObjectModel& oObjectModel1, ObjectModel& oObjectModel2);
+            
+    void showCorrespondences();
     
 private:
     // compares two models (regions) based on color, shape, weight and orientation

@@ -14,7 +14,7 @@ LoggerPtr Matching2::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Matching2::Matching2()
 {
-    reqQuality = 100;    
+//    reqQuality = 100;    
 }
 
 //Matching2::~Matching2 ()
@@ -22,27 +22,25 @@ Matching2::Matching2()
 //}
 
 
-// This function performs a matching process between the given object and a list of object models.
-// It returns true if there are matching candidates, or false otherwise.
-bool Matching2::doMatching(Object& oObject, std::vector<ObjectModel>& listObjectModels)
+bool Matching2::doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& listObjectModels)
 {
     LOG4CXX_TRACE(logger, "Matching2.doMatching");
     
+    // clear candidates
     seq_candidate_matches.clear();
     st_match match;					
-	
-    // transform object to model
-    ObjectModel oObjectModel;
-    oModeling.modelObject(oObject, oObjectModel);
-    
+	    
     // for each candidate model 
     for (ObjectModel& oObjectModel2 : listObjectModels)
     {		
+        LOG4CXX_DEBUG(logger, "Matching2: object vs model " << oObjectModel2.getID());
         // compare modeled object and candidate model
         float quality = oCompare.compareObjectModels(oObjectModel, oObjectModel2);
         
+        float reqQuality = oCompare.getMaxPossibleQuality();
+        
         // if matching quality is high enough, add new match candidate 
-        if (quality >= reqQuality)
+        if (quality >= 0.8*reqQuality)
         {                
             match.modelID = oObjectModel2.getID();
             match.quality = quality;
@@ -50,6 +48,8 @@ bool Matching2::doMatching(Object& oObject, std::vector<ObjectModel>& listObject
             match.modelMatchedFraction = oCompare.getMatchedFration2();
 
             seq_candidate_matches.push_back(match);
+                        
+            oCompare.showCorrespondences();
         }
     } 
 
@@ -57,9 +57,20 @@ bool Matching2::doMatching(Object& oObject, std::vector<ObjectModel>& listObject
 //    if (seq_candidate_matches.size() > 1)
 //        filterCandidates();
 
-    LOG4CXX_DEBUG(logger, "best_candidates = " << seq_candidate_matches.size());
-
     return (!seq_candidate_matches.empty());
+}
+
+void Matching2::showCandidates()
+{
+    LOG4CXX_INFO(logger, "matching candidates = " << seq_candidate_matches.size());
+    for (st_match& match : seq_candidate_matches)
+    {
+        std::string text = "model " + std::to_string(match.modelID)          
+                + ": quality = " + std::to_string(match.quality)
+                + ", object matched fraction = " + std::to_string(match.objectMatchedFraction)
+                + ", model matched fraction = " + std::to_string(match.modelMatchedFraction);
+       LOG4CXX_INFO(logger, text);        
+    }
 }
 
 //

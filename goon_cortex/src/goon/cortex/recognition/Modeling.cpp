@@ -16,6 +16,8 @@ LoggerPtr Modeling::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Modeling::Modeling()
 {
+    refWidth = 100;
+    refMass = 100;
 }
 
 //Modeling::~Modeling ()
@@ -50,26 +52,27 @@ void Modeling::modelObject(Object& oObject, ObjectModel& oObjectModel)
     }
 }
 
-
 void Modeling::modelBody(Body& oBody, Model& oModel)
 {
     LOG4CXX_TRACE(logger, "Modeling.modelBody");
 
     // translation & scaling
-    cv::Point newPos = (oBody.getPos() - trans) * scaling;
-    cv::Rect newWindow = oBody.getWindow() - trans;
-    newWindow.width *= scaling;    
-    newWindow.height *= scaling;    
+    cv::Point pos2 = (oBody.getPos() - trans) * scaling;
+    cv::Rect window2 = oBody.getWindow() - trans;
+    window2.width *= scaling;    
+    window2.height *= scaling;    
     // normalization
-    int newMass = oBody.getMass() * normalization;
+    int mass2 = oBody.getMass() * normalization;
     
-    // assign color blob part
-    //oModel = (ColorBlob)oBody;
+    // assign color blob part of body to model
+    ColorBlob& oColorBlob1 = oBody;
+    ColorBlob& oColorBlob2 = oModel;
+    oColorBlob2 = oColorBlob1;
     
     // assign new position, window & mass
-    oModel.setPos(newPos.x, newPos.y);
-    oModel.setWindow(newWindow);    
-    oModel.setMass(newMass);    
+    oModel.setPos(pos2.x, pos2.y);
+    oModel.setWindow(window2);    
+    oModel.setMass(mass2);    
 } 
 
 }

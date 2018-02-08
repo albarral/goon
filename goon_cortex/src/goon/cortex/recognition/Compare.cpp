@@ -64,6 +64,8 @@ float Compare::compareObjectModels(ObjectModel& oObjectModel1, ObjectModel& oObj
     // compute matched fractions 
     computeMatchedFractions(oObjectModel1, oObjectModel2);    
     
+    maxQuality = oObjectModel1.getSubModels().size() * eSIM_TOTAL;
+    
     return quality;
 } 
 
@@ -148,7 +150,7 @@ void Compare::computeMatchingQuality()
         Vec5f& similarities = mat_similarity.at<Vec5f>(correspondence[0], correspondence[1]);        
         // add total similarities of all correspondences
         quality += similarities[eSIM_TOTAL];        
-    }
+    }    
 }
  
 void Compare::computeMatchedFractions(ObjectModel& oObjectModel1, ObjectModel& oObjectModel2)
@@ -171,4 +173,23 @@ void Compare::computeMatchedFractions(ObjectModel& oObjectModel1, ObjectModel& o
     matchedFraction1 = matchedFraction1 / oObjectModel1.getMass();
     matchedFraction2 = matchedFraction2 / oObjectModel2.getMass();
 }
+
+void Compare::showCorrespondences()
+{
+    LOG4CXX_INFO(logger, "model correspondences = " << seq_correspondences.size());
+    for (cv::Vec2i& correspondence : seq_correspondences)
+    {
+        Vec5f& similarities = mat_similarity.at<Vec5f>(correspondence[0], correspondence[1]);
+
+        std::string text1 = "regions " + std::to_string(correspondence[0]) + " & " + std::to_string(correspondence[1]) + 
+                ": similarities = "; 
+        
+        std::string text2;
+        for (int i=0; i<eSIM_DIM; i++)
+            text2 += std::to_string(similarities[i]) + ", ";
+
+        LOG4CXX_INFO(logger, text1 + text2);        
+    }
+}
+
 }

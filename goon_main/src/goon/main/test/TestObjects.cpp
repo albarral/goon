@@ -25,9 +25,9 @@ void TestObjects::test()
     Object oObject;                    
     std::vector<Body> listBodies;
     
-//    for (int i=0; i<5; i++)
+    for (int i=0; i<2; i++)
     {
-//        LOG4CXX_INFO(logger, "i = " << std::to_string(i)); 
+        LOG4CXX_INFO(logger, "i = " << std::to_string(i)); 
      
         createBodies(listBodies);
         createObject(oObject, listBodies);
@@ -123,6 +123,14 @@ void TestObjects::createObject(Object& oObject, std::vector<Body>& listBodies)
 void TestObjects::identifyObject(Object& oObject, VisualMemory& oVisualMemory)
 {
     Recognition2 oRecognition;
-    oRecognition.recogniseObject(oObject, oVisualMemory);
+    if (oRecognition.recogniseObject(oObject, oVisualMemory))
+    {
+        LOG4CXX_INFO(logger, "object recognized"); 
+    }
+    else
+    {
+        LOG4CXX_INFO(logger, "object not recognized, add to visual memory"); 
+        oVisualMemory.addObjectModel(oRecognition.getObjectModel());
+    }
 }
 }
