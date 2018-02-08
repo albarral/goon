@@ -17,6 +17,8 @@
 
 namespace goon
 {
+// This class performs appearance based comparisons between objects and models.
+// The quality of the matchings is used to filter the real matching candidates.
 class Matching2
 {
 private:
@@ -24,9 +26,9 @@ private:
     // params
     float reqQuality;       // minimum required quality to consider a feasible matching
     // logic
-    Modeling oModeling;
-    Compare oCompare;   // aux class for models comparison
-    std::vector<st_match> seq_candidate_matches;    
+    Modeling oModeling;     // class for modeling objects
+    Compare oCompare;   // class for models comparison
+    std::vector<st_match> seq_candidate_matches;    // list of candidate matches
     
 public:
     Matching2();

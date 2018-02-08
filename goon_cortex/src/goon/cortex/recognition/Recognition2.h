@@ -16,6 +16,8 @@
 
 namespace goon
 {
+// This class performs the object recognition funcionality.
+// It uses appearance and context cues to identify objects by comparing them against memorized models.    
 class Recognition2
 {
 private:

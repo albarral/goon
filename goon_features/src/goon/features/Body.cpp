@@ -32,6 +32,7 @@ Body& Body::operator=(const Body& oBody)
     // mask is cloned, not just assigned
     if (!oBody.mask.empty())
         mask = oBody.mask.clone(); 
+    
     return *this;    
 }
 

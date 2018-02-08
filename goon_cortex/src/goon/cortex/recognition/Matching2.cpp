@@ -22,8 +22,8 @@ Matching2::Matching2()
 //}
 
 
-// This function performs a matching process between the specified landmark & the database models 
-// It returns true if there are matching candidates, otherwise it returns false.		
+// This function performs a matching process between the given object and a list of object models.
+// It returns true if there are matching candidates, or false otherwise.
 bool Matching2::doMatching(Object& oObject, std::vector<ObjectModel>& listObjectModels)
 {
     LOG4CXX_TRACE(logger, "Matching2.doMatching");
@@ -31,13 +31,14 @@ bool Matching2::doMatching(Object& oObject, std::vector<ObjectModel>& listObject
     seq_candidate_matches.clear();
     st_match match;					
 	
+    // transform object to model
     ObjectModel oObjectModel;
     oModeling.modelObject(oObject, oObjectModel);
     
-    // for each model
+    // for each candidate model 
     for (ObjectModel& oObjectModel2 : listObjectModels)
     {		
-        // compare object and model
+        // compare modeled object and candidate model
         float quality = oCompare.compareObjectModels(oObjectModel, oObjectModel2);
         
         // if matching quality is high enough, add new match candidate 

@@ -16,6 +16,10 @@
 
 namespace goon
 {
+// This class performs the object modeling. 
+// It transforms objects into models for their comparison to other models.
+// All models have a reference width and reference mass.   
+// So, the transformation involves 3 operations: translation, scaling and mass normalization.
 class Modeling
 {
 private:
@@ -32,9 +36,11 @@ public:
     Modeling();
     //~Modeling();
 
+    // models an object including its subbodies
     void modelObject(Object& oObject, ObjectModel& oObjectModel);
 
 private:
+    // models a simple body
     void modelBody(Body& oBody, Model& oModel);
 };
 }
