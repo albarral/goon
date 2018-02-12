@@ -39,7 +39,7 @@ void Characterization::checkObjectDetails(Object& oObject)
     // compute shapes of all object's components
     for (Body& oBody : oObject.getSubBodies())
     {
-        //oBody.computeBlob(); // blobs computed during retinal vision
+        //oBody.computeBlob(); // blobs already computed in the retinal vision stage
         oBody.computeShape();
     }
 

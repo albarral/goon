@@ -22,7 +22,7 @@ class Matching2
 private:
     static log4cxx::LoggerPtr logger;
     // params
-    //float reqQuality;       // minimum required quality to consider a feasible matching
+    float sensitivity;       // matching sensitivity [0, 1] affects the matching qualities required to accept matchings
     // logic
     Compare oCompare;   // class for models comparison
     std::vector<st_match> seq_candidate_matches;    // list of candidate matches
@@ -38,7 +38,7 @@ public:
     // get access to the sequence of candidate matches.
     std::vector<st_match>& getListCandidateMatches() {return seq_candidate_matches;};
 
-    void showCandidates();
+    std::string showCandidates();
 
 private:
     // selects best candidate matches from the given list

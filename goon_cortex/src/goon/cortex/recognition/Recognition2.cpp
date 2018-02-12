@@ -26,21 +26,21 @@ bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
 {
     LOG4CXX_TRACE(logger, "Recognition2.recogniseObject");
 
-    // get model of the object
+    // first model the object to allow its comparison with stored models
     oModeling.modelObject(oObject, oObjectModel);
     
-    //LOG4CXX_DEBUG(logger, oObjectModel.toString());
+    LOG4CXX_DEBUG(logger, oObjectModel.toString());
     
     if (oVisualMemory.getListModels().empty())
     {
-        LOG4CXX_WARN(logger, "Recognition2: no models in visual memory, skip recognition");
+        LOG4CXX_WARN(logger, "Recognition2: empty visual memory, skip");
         return false;
     }
 
-    // match object model against models in visual memory
+    // match the object model against models in visual memory
     if (oMatching2.doMatching(oObjectModel, oVisualMemory.getListModels())) 
     {
-        oMatching2.showCandidates();
+        LOG4CXX_DEBUG(logger, "Matching2: " + oMatching2.showCandidates());
         
         //std::vector<st_match>& listCandidateMatches = oMatching2.getListCandidateMatches();
 

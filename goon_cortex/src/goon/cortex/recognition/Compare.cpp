@@ -17,10 +17,8 @@ LoggerPtr Compare::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Compare::Compare()
 {
-    colorSense = 30.0;
-    //shapeSense = 1.0;
-    angleSense = 45.0;
-    //weightSense = 30.0;
+    colorTolerance = 30.0;
+    angleTolerance = 45.0;
     
     reqSimilarity = 3.0;    
 }
@@ -64,6 +62,7 @@ float Compare::compareObjectModels(ObjectModel& oObjectModel1, ObjectModel& oObj
     // compute matched fractions 
     computeMatchedFractions(oObjectModel1, oObjectModel2);    
     
+    // compute the maximum possible quality (case: all regions matched with maximum similarity)
     maxQuality = oObjectModel1.getSubModels().size() * eSIM_TOTAL;
     
     return quality;
@@ -92,31 +91,38 @@ Compare::Vec5f Compare::compareModels(Model& oModel1, Model& oModel2)
     else
         rotation = 0.0;
     
-    float angleSim = 1.0 - fabs(rotation)/angleSense;
-    if (angleSim < 0)
-        angleSim = 0.0;
+    float angleSim = 1.0 - std::fabs(rotation)/angleTolerance;
     
     // color similarity
     oHSVEssence.update(oModel1.getHSV());
     float dist_color = oHSVEssence.compare(oModel2.getHSV());
-    float colorSim = 1.0 - dist_color/colorSense;
-    if (colorSim < 0)
-        colorSim = 0.0;
+    // no abs needed (dist_color always positive)
+    float colorSim = 1.0 - dist_color/colorTolerance;
 
-    // shape similarity
+    // shape similarity 
+    // sim = 1 - |dif|/min (allows negative similarities)
     float shape1 = oModel1.getShapeFactor();
     float shape2 = oModel2.getShapeFactor();
-    // shape sim = smaller factor / bigger factor
-    float shapeSim = (shape1 > shape2 ? shape2/shape1 : shape1/shape2);
+    float minShape = shape1 > shape2 ? shape2 : shape1;
+    float shapeSim = 1.0 - std::fabs(shape2 - shape1)/minShape;
 
-    // weight similarity ( 1 - increase factor * max fraction)
+    // weight similarity
+    // sim = 1 - |dif|/min (allows negative similarities)
     int mass1 = oModel1.getMass();
     int mass2 = oModel2.getMass();
-    bool bgrow = (mass2 > mass1);
-    float increaseFactor = bgrow ? (float)mass2/mass1 : (float)mass1/mass2;
-    float maxFraction = bgrow ? (float)mass2/100 : (float)mass1/100;
-    float weightSim = 1.0 - increaseFactor * maxFraction;
-        
+    float minMass = mass1 > mass2 ? mass2 : mass1;
+    float weightSim = 1.0 - std::fabs(mass2 - mass1)/minMass;
+
+    // limit negative similarities
+//    if (angleSim < 0)
+//        angleSim = 0.0;
+//    if (colorSim < 0)
+//        colorSim = 0.0;
+//    if (shapeSim < 0)
+//        shapeSim = 0.0;
+//    if (weightSim < 0)
+//        weightSim = 0.0;
+    
     // total similarity (sum of similarities)
     float totalSim = angleSim + colorSim + shapeSim + weightSim;
        
@@ -174,22 +180,23 @@ void Compare::computeMatchedFractions(ObjectModel& oObjectModel1, ObjectModel& o
     matchedFraction2 = matchedFraction2 / oObjectModel2.getMass();
 }
 
-void Compare::showCorrespondences()
+std::string Compare::showCorrespondences()
 {
-    LOG4CXX_INFO(logger, "model correspondences = " << seq_correspondences.size());
+    std::string text = "correspondences = " + std::to_string(seq_correspondences.size());
     for (cv::Vec2i& correspondence : seq_correspondences)
     {
         Vec5f& similarities = mat_similarity.at<Vec5f>(correspondence[0], correspondence[1]);
 
-        std::string text1 = "regions " + std::to_string(correspondence[0]) + " & " + std::to_string(correspondence[1]) + 
-                ": similarities = "; 
+        std::string text1 = "region " + std::to_string(correspondence[0]) + " & " + std::to_string(correspondence[1]) + 
+                ": sim = "; 
         
         std::string text2;
         for (int i=0; i<eSIM_DIM; i++)
             text2 += std::to_string(similarities[i]) + ", ";
 
-        LOG4CXX_INFO(logger, text1 + text2);        
+        text += text1 + text2 + "\n";        
     }
+    return text;
 }
 
 }

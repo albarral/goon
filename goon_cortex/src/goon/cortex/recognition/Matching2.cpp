@@ -14,7 +14,7 @@ LoggerPtr Matching2::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Matching2::Matching2()
 {
-//    reqQuality = 100;    
+    sensitivity = 0.8;
 }
 
 //Matching2::~Matching2 ()
@@ -34,13 +34,15 @@ bool Matching2::doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& 
     for (ObjectModel& oObjectModel2 : listObjectModels)
     {		
         LOG4CXX_DEBUG(logger, "Matching2: object vs model " << oObjectModel2.getID());
-        // compare modeled object and candidate model
-        float quality = oCompare.compareObjectModels(oObjectModel, oObjectModel2);
-        
-        float reqQuality = oCompare.getMaxPossibleQuality();
+        // compare object model and candidate model
+        float quality = oCompare.compareObjectModels(oObjectModel, oObjectModel2);        
+        float maxQuality = oCompare.getMaxPossibleQuality();
+
+        LOG4CXX_DEBUG(logger, "Matching2: " << oCompare.showCorrespondences());
+        LOG4CXX_DEBUG(logger, "Matching2: quality = " + std::to_string(quality) + ", max quality = " + std::to_string(maxQuality));
         
         // if matching quality is high enough, add new match candidate 
-        if (quality >= 0.8*reqQuality)
+        if (quality >= sensitivity*maxQuality)
         {                
             match.modelID = oObjectModel2.getID();
             match.quality = quality;
@@ -60,17 +62,17 @@ bool Matching2::doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& 
     return (!seq_candidate_matches.empty());
 }
 
-void Matching2::showCandidates()
+std::string Matching2::showCandidates()
 {
-    LOG4CXX_INFO(logger, "matching candidates = " << seq_candidate_matches.size());
+    std::string text = "matching candidates = " +  std::to_string(seq_candidate_matches.size());
     for (st_match& match : seq_candidate_matches)
     {
-        std::string text = "model " + std::to_string(match.modelID)          
+        text += "model " + std::to_string(match.modelID)          
                 + ": quality = " + std::to_string(match.quality)
                 + ", object matched fraction = " + std::to_string(match.objectMatchedFraction)
-                + ", model matched fraction = " + std::to_string(match.modelMatchedFraction);
-       LOG4CXX_INFO(logger, text);        
+                + ", model matched fraction = " + std::to_string(match.modelMatchedFraction) + "\n";
     }
+    return text;
 }
 
 //

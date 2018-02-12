@@ -34,9 +34,9 @@ int main(int argc, char** argv)
 //    log4cxx::xml::DOMConfigurator::configure(configFile);    
     log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
         
-    //runGoon();
+    runGoon();
     //oneShotTest();
-    test();
+    //test();
       
     return 0;
 }
@@ -92,8 +92,8 @@ int test()
     goon::TestObjects oTestObjects;
     oTestObjects.test();
 
-    //goon::TestRegions oTestRegions;
-    //oTestRegions.testMerge();
+//    goon::TestRegions oTestRegions;
+//    oTestRegions.testMerge();
 
 //    goon::Test oTest;
 //    oTest.testSegmentation();

@@ -34,28 +34,26 @@ public:
 private:
     static log4cxx::LoggerPtr logger;
     // params
-    float colorSense;
-    //float shapeSense;
-    float angleSense;
-    //float weightSense;
+    float colorTolerance;   // tolerance for color similarity (degrees)
+    float angleTolerance;   // tolerance for orientation similarity (degrees)
     float reqSimilarity;    // required similarity to consider a region correspondence
     // result        
-    float quality;
-    float maxQuality;
-    float matchedFraction1;
-    float matchedFraction2;
+    float quality;              // quality of the matching 
+    float maxQuality;        // max possible value of the quality (depends on compared models)   
+    float matchedFraction1;     // matched fraction of model 1
+    float matchedFraction2;     // matched fraction of model 2
     // logic
-    HSVEssence oHSVEssence;
-    cv::Mat mat_similarity;     // eSIM_DIM depth
-    std::vector<cv::Vec2i> seq_correspondences;     // region correspondences
+    HSVEssence oHSVEssence; // utility for color similarity
+    cv::Mat mat_similarity;     // similarity matrix (with depth = eSIM_DIM)
+    std::vector<cv::Vec2i> seq_correspondences;     // region correspondences between models
     
 public:
     Compare();
     ~Compare();
     
-    void setColorSensitivity(float value) {colorSense = value;}
+    void setColorSensitivity(float value) {colorTolerance = value;}
     //void setShapeSensitivity(float value) {shapeSense = value;}
-    void setOrientationSensitivity(float value)  {angleSense = value;}
+    void setOrientationSensitivity(float value)  {angleTolerance = value;}
     //void setWeightSensitivity(float value) {weightSense = value;}
     
     float getQuality() {return quality;};
@@ -66,7 +64,7 @@ public:
     // compares two object models in a region-region basis, it returns the matching quality
     float compareObjectModels(ObjectModel& oObjectModel1, ObjectModel& oObjectModel2);
             
-    void showCorrespondences();
+    std::string showCorrespondences();
     
 private:
     // compares two models (regions) based on color, shape, weight and orientation

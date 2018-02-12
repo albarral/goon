@@ -21,6 +21,8 @@ void TestObjects::test()
 {        
     LOG4CXX_INFO(logger, "TEST OBJECTS ..."); 
     
+    // simulate an object detection with 3 sub-bodies and its recognition
+    // the visual memory is initially empty, so 2 iterations are needed (first for object memorization, second for recognition)
     VisualMemory oVisualMemory;
     Object oObject;                    
     std::vector<Body> listBodies;
@@ -29,8 +31,11 @@ void TestObjects::test()
     {
         LOG4CXX_INFO(logger, "i = " << std::to_string(i)); 
      
+        // create 3 sub-bodies
         createBodies(listBodies);
+        // create an object with the sub-bodies
         createObject(oObject, listBodies);
+        // recognize object
         identifyObject(oObject, oVisualMemory);
     }
     
@@ -71,27 +76,27 @@ void TestObjects::createBodies(std::vector<Body>& listBodies)
     oBody2.setMaskAndWindow(mask, window2);
     oBody3.setMaskAndWindow(mask, window3);   
 
-    // put them in the list
+    // add them to the list
     listBodies.push_back(oBody1);
     listBodies.push_back(oBody2);
     listBodies.push_back(oBody3);    
             
-    // and compute their mass & shapes
+    // compute their masses & shapes (as done in the goon segmentation)
     for (Body& oBody : listBodies)
     {
         oBody.computeMass();
         oBody.computeBlob();    
     }
-
 }
 
 // this method creates an object with the given list of bodies
 // and computes its structure
 void TestObjects::createObject(Object& oObject, std::vector<Body>& listBodies)
-{                
+{              
+    // clear the object
     oObject.clear();
 
-    // create object with the bodies
+    // build the object with the sub-bodies
     int counter = 0;
     for (Body& oBody : listBodies)
     {
@@ -106,10 +111,9 @@ void TestObjects::createObject(Object& oObject, std::vector<Body>& listBodies)
         counter++;
     }
     
+    // compute object's global & local details (shape)
     Characterization oCharacterization;    
-    // compute object's shape
     oCharacterization.checkGlobalObject(oObject);
-    // compute object's details
     oCharacterization.checkObjectDetails(oObject);
 
     LOG4CXX_INFO(logger, oObject.toString()); 
