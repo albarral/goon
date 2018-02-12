@@ -29,6 +29,9 @@ void Modeling::modelObject(Object& oObject, ObjectModel& oObjectModel)
 {
     LOG4CXX_TRACE(logger, "Modeling.modelObject");
     
+    // first clear the model
+    oObjectModel.clear();
+    
     // compute the translation, scaling and normalization to be applied
     cv::Rect& window = oObject.getWindow();
     trans.x = window.x;

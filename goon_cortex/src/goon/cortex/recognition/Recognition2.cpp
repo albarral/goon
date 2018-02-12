@@ -29,7 +29,7 @@ bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
     // first model the object to allow its comparison with stored models
     oModeling.modelObject(oObject, oObjectModel);
     
-    LOG4CXX_DEBUG(logger, oObjectModel.toString());
+    LOG4CXX_DEBUG(logger, oObjectModel.shortDesc());
     
     if (oVisualMemory.getListModels().empty())
     {

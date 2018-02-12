@@ -81,7 +81,7 @@ void Look::loop()
         case Look::eSTATE_IDENTIFY:
 
             bindObject();
-            //identifyObject();        
+            identifyObject();        
             LOG4CXX_TRACE(logger, "clone object ... ");
             pVisualData->updateObject2(oCortexVision.getObject());
 
@@ -127,7 +127,9 @@ void Look::bindObject()
 
 void Look::identifyObject()
 {
-    LOG4CXX_DEBUG(logger, "identify object -> TO DO");
+    LOG4CXX_DEBUG(logger, "identify object");
+    oCortexVision.identifyObject();
+    
     // get identified object ID 
     lookedObject = oCortexVision.getObject().getID();
 }

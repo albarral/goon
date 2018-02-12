@@ -14,7 +14,7 @@ LoggerPtr Matching2::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Matching2::Matching2()
 {
-    sensitivity = 0.8;
+    sensitivity = 0.5;
 }
 
 //Matching2::~Matching2 ()
@@ -49,9 +49,7 @@ bool Matching2::doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& 
             match.objectMatchedFraction = oCompare.getMatchedFration1();
             match.modelMatchedFraction = oCompare.getMatchedFration2();
 
-            seq_candidate_matches.push_back(match);
-                        
-            oCompare.showCorrespondences();
+            seq_candidate_matches.push_back(match);                        
         }
     } 
 
@@ -64,7 +62,7 @@ bool Matching2::doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& 
 
 std::string Matching2::showCandidates()
 {
-    std::string text = "matching candidates = " +  std::to_string(seq_candidate_matches.size());
+    std::string text = "matching candidates = " +  std::to_string(seq_candidate_matches.size()) + "\n";
     for (st_match& match : seq_candidate_matches)
     {
         text += "model " + std::to_string(match.modelID)          

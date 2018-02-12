@@ -69,6 +69,15 @@ void CortexVision::identifyObject()
 
     if (oObject.getMass() > 0)
     {
+        if (oRecognition.recogniseObject(oObject, oVisualMemory))
+        {
+            LOG4CXX_INFO(logger, "object recognized"); 
+        }
+        else
+        {
+            LOG4CXX_INFO(logger, "new object"); 
+            oVisualMemory.addObjectModel(oRecognition.getObjectModel());
+        }        
     }
     // skip if empty object
     else

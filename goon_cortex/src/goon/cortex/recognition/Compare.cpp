@@ -182,7 +182,7 @@ void Compare::computeMatchedFractions(ObjectModel& oObjectModel1, ObjectModel& o
 
 std::string Compare::showCorrespondences()
 {
-    std::string text = "correspondences = " + std::to_string(seq_correspondences.size());
+    std::string text = "correspondences = " + std::to_string(seq_correspondences.size()) + "\n";
     for (cv::Vec2i& correspondence : seq_correspondences)
     {
         Vec5f& similarities = mat_similarity.at<Vec5f>(correspondence[0], correspondence[1]);
