@@ -66,6 +66,9 @@ void Modeling::modelBody(Body& oBody, Model& oModel)
     window2.height *= scaling;    
     // normalization
     int mass2 = oBody.getMass() * normalization;
+    // prevent zero masses
+    if (mass2 == 0)
+        mass2 = 1;
     
     // assign color blob part of body to model
     ColorBlob& oColorBlob1 = oBody;
