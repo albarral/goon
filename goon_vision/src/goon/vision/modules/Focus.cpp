@@ -33,7 +33,9 @@ void Focus::first()
         LOG4CXX_INFO(logger, "started");  
         setState(Focus::eSTATE_SEARCH);
  
-        wait4SeeBeat();
+        // connect led to See beat sensor
+        oSeeBeatLed.init(pGoonBus->getSO_SEE_BEAT());
+       wait4SeeBeat();
         // default search mode ...
         // by saliency
         mode = Focus::eSEARCH_SALIENCY;
@@ -59,13 +61,17 @@ void Focus::bye()
 void Focus::loop()
 {   
     senseBus();
-    
+        
     // skip if module is inhibited
 //    if (binhibited)            
 //        return;
 
     if (isStateChanged())
         showState();
+    
+    // if See beat not changed, skip
+    if (!oSeeBeatLed.check())
+        return;
 
     switch (getState())
     {
@@ -238,8 +244,9 @@ void Focus::writeBus()
 
 void Focus::wait4SeeBeat()
 {
-    LOG4CXX_INFO(logger, "wait first see beat");     
-    while (pGoonBus->getSO_SEE_BEAT().getValue() == 0)            
+    LOG4CXX_INFO(logger, "wait first see beat");  
+    // wait while See beat not changed
+    while (!oSeeBeatLed.check())            
         usleep(50000);  // 50 ms
 }
 

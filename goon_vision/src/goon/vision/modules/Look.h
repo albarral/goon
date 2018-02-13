@@ -13,7 +13,7 @@
 #include "goon/core/GoonModule.h"
 #include "goon/cortex/CortexVision.h"
 #include "goon/data/base/roi.h"
-
+#include "tuly/control/SensorLed.h"
 
 namespace goon
 {    
@@ -35,6 +35,7 @@ private:
     CortexVision oCortexVision;
     int focusedROI;      // ID of focused ROI
     int lookedObject;   // ID of identified object
+    tuly::SensorLed oFocusBeatLed;   // sensor led for Focus module's beat
 
 public:
     Look();

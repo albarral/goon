@@ -14,6 +14,7 @@
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/PeripheralVision.h"
 #include "maty/math/Click.h"
+#include "tuly/control/SensorLed.h"
 
 namespace goon
 {    
@@ -36,6 +37,7 @@ private:
     cv::Mat imageCam;     
     float fps;     // processing speed
     maty::Click oClick;
+    tuly::SensorLed oGrabBeatLed;   // sensor led for Grab module's beat
 
 public:
     See();

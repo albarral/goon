@@ -34,6 +34,8 @@ void Look::first()
         LOG4CXX_INFO(logger, "started");  
         setState(Look::eSTATE_WAIT);
         
+        // connect led to Focus beat sensor
+        oFocusBeatLed.init(pGoonBus->getSO_FOCUS_BEAT());        
         wait4FocusBeat();
         oCortexVision.init(pVisualData->getScene());
         focusedROI = -1;
@@ -55,13 +57,17 @@ void Look::bye()
 void Look::loop()
 {   
     senseBus();
-    
+        
     // skip if module is inhibited
 //    if (binhibited)            
 //        return;
 
     if (isStateChanged())
         showState();
+
+    // if Focus beat not changed, skip
+    if (!oFocusBeatLed.check())
+        return;
 
     switch (getState())
     {
@@ -156,7 +162,8 @@ void Look::writeBus()
 void Look::wait4FocusBeat()
 {
     LOG4CXX_INFO(logger, "wait first focus beat");     
-    while (pGoonBus->getSO_FOCUS_BEAT().getValue() == 0)            
+    // wait while Focus beat not changed
+    while (!oFocusBeatLed.check())            
         usleep(50000);  // 50 ms
 }
 

@@ -34,6 +34,8 @@ void See::first()
         LOG4CXX_INFO(logger, "started");  
         setState(See::eSTATE_ON);
         
+        // connect led to Grab beat sensor
+        oGrabBeatLed.init(pGoonBus->getSO_GRAB_BEAT());
         wait4GrabBeat();
         // set sizes for retinal vision
         pVisualData->getCameraFrameCopy(imageCam);
@@ -56,7 +58,11 @@ void See::bye()
 
 void See::loop()
 {   
-    // get last camera capture (don't need to wait, grab is much faster than see)
+    // if grab beat not changed, skip
+    if (!oGrabBeatLed.check())
+        return;
+        
+    // get camera capture 
     pVisualData->getCameraFrameCopy(imageCam);            
 
     // clock measure
@@ -95,7 +101,8 @@ void See::writeBus()
 void See::wait4GrabBeat()
 {
     LOG4CXX_INFO(logger, "wait first grab beat");     
-    while (pGoonBus->getSO_GRAB_BEAT().getValue() == 0)            
+    // wait while Grab beat not changed
+    while (!oGrabBeatLed.check())            
         usleep(50000);  // 50 ms
 }
 

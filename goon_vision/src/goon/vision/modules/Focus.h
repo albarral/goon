@@ -16,6 +16,7 @@
 #include "goon/data/rois.h"
 #include "goon/data/base/roi.h"
 #include "goon/peripheral/Saliency.h"
+#include "tuly/control/SensorLed.h"
 
 namespace goon
 {    
@@ -48,6 +49,7 @@ private:
     int targetROI;              // ID of target ROI
     Rois oROIs3;
     Saliency oSaliency;      // saliency computation for target selection
+    tuly::SensorLed oSeeBeatLed;   // sensor led for See module's beat
 
 public:
     Focus();
