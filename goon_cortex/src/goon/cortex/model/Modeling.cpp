@@ -3,7 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 				
-#include "goon/cortex/recognition/Modeling.h"
+#include "goon/cortex/model/Modeling.h"
 #include "goon/features/ColorBlob.h"
 							
 using namespace log4cxx;

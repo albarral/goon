@@ -13,11 +13,9 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="cortex" displayName="cortex" projectFiles="true">
-        <logicalFolder name="analysis" displayName="analysis" projectFiles="true">
-          <itemPath>src/goon/cortex/analysis/binding.cpp</itemPath>
-          <itemPath>src/goon/cortex/analysis/binding.h</itemPath>
-          <itemPath>src/goon/cortex/analysis/characterization.cpp</itemPath>
-          <itemPath>src/goon/cortex/analysis/characterization.h</itemPath>
+        <logicalFolder name="bind" displayName="bind" projectFiles="true">
+          <itemPath>src/goon/cortex/bind/binding.cpp</itemPath>
+          <itemPath>src/goon/cortex/bind/binding.h</itemPath>
         </logicalFolder>
         <logicalFolder name="config" displayName="config" projectFiles="true">
           <itemPath>src/goon/cortex/config/attention_defines.h</itemPath>
@@ -28,13 +26,19 @@
           <itemPath>src/goon/cortex/config/vision_defines.h</itemPath>
           <itemPath>src/goon/cortex/config/vision_times.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="model" displayName="model" projectFiles="true">
+          <itemPath>src/goon/cortex/model/Modeling.cpp</itemPath>
+          <itemPath>src/goon/cortex/model/Modeling.h</itemPath>
+          <itemPath>src/goon/cortex/model/characterization.cpp</itemPath>
+          <itemPath>src/goon/cortex/model/characterization.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
           <itemPath>src/goon/cortex/recognition/Compare.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Compare.h</itemPath>
           <itemPath>src/goon/cortex/recognition/Matching2.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Matching2.h</itemPath>
-          <itemPath>src/goon/cortex/recognition/Modeling.cpp</itemPath>
-          <itemPath>src/goon/cortex/recognition/Modeling.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/Recall.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Recall.h</itemPath>
           <itemPath>src/goon/cortex/recognition/Recognition2.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Recognition2.h</itemPath>
           <itemPath>src/goon/cortex/recognition/matches.h</itemPath>
@@ -122,22 +126,9 @@
       </item>
       <item path="src/goon/cortex/CortexVision.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/cortex/analysis/binding.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
+      <item path="src/goon/cortex/bind/binding.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/cortex/analysis/binding.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/analysis/characterization.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/analysis/characterization.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
+      <item path="src/goon/cortex/bind/binding.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/cortex/config/attention_defines.h"
             ex="false"
@@ -174,6 +165,20 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/cortex/model/Modeling.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/model/Modeling.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/model/characterization.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/model/characterization.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/cortex/recognition/Compare.cpp"
             ex="false"
             tool="1"
@@ -194,12 +199,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/goon/cortex/recognition/Modeling.cpp"
+      <item path="src/goon/cortex/recognition/Recall.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="src/goon/cortex/recognition/Modeling.h"
+      <item path="src/goon/cortex/recognition/Recall.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -244,22 +249,9 @@
       </item>
       <item path="src/goon/cortex/CortexVision.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/goon/cortex/analysis/binding.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
+      <item path="src/goon/cortex/bind/binding.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/cortex/analysis/binding.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/cortex/analysis/characterization.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/goon/cortex/analysis/characterization.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
+      <item path="src/goon/cortex/bind/binding.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/cortex/config/attention_defines.h"
             ex="false"
@@ -296,6 +288,20 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/cortex/model/Modeling.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/model/Modeling.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/cortex/model/characterization.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/model/characterization.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/cortex/recognition/Compare.cpp"
             ex="false"
             tool="1"
@@ -316,12 +322,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/goon/cortex/recognition/Modeling.cpp"
+      <item path="src/goon/cortex/recognition/Recall.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="src/goon/cortex/recognition/Modeling.h"
+      <item path="src/goon/cortex/recognition/Recall.h"
             ex="false"
             tool="3"
             flavor2="0">

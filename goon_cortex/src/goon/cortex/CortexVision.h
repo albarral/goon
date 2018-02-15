@@ -10,11 +10,12 @@
 
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
-#include "goon/data/VisualMemory.h"
+//#include "goon/data/VisualMemory.h"
 #include "goon/data/cortex/Object.h"
-#include "goon/data/cortex/Scene.h"
-#include "goon/cortex/analysis/binding.h"
-#include "goon/cortex/analysis/characterization.h"
+#include "goon/data/cortex/ObjectModel.h"
+#include "goon/cortex/bind/binding.h"
+#include "goon/cortex/model/characterization.h"
+#include "goon/cortex/model/Modeling.h"
 #include "goon/cortex/recognition/Recognition2.h"
 
 namespace goon
@@ -25,11 +26,12 @@ private:
     static log4cxx::LoggerPtr logger;
     Retina oRetina3;
     Rois oROIs3;
-//    Scene* pScene;
     Object oObject;
-    VisualMemory oVisualMemory;
+    ObjectModel oObjectModel;   // result of modeling the object
+//    VisualMemory oVisualMemory;
     Binding oBinding;
     Characterization oCharacterization;
+    Modeling oModeling;     // class for modeling objects    
     Recognition2 oRecognition;
 
 public:
@@ -40,9 +42,6 @@ public:
     Rois& getROIs() {return oROIs3;};    
     Object& getObject() {return oObject;}
     
-    // Initializes the module 
-    void init(Scene& oScene);
-
     // it does the object binding process starting from the given focused ROI
     void formObject(int focusedROI);
        

@@ -37,7 +37,6 @@ void Look::first()
         // connect led to Focus beat sensor
         oFocusBeatLed.init(pGoonBus->getSO_FOCUS_BEAT());        
         wait4FocusBeat();
-        oCortexVision.init(pVisualData->getScene());
         focusedROI = -1;
         lookedObject = -1;
     }

@@ -14,18 +14,11 @@ LoggerPtr CortexVision::logger(Logger::getLogger("goon.cortex"));
 // constructor
 CortexVision::CortexVision()
 {
-//    pScene = 0;
 }
 
 //CortexVision::~CortexVision ()
 //{
 //}
-
-void CortexVision::init(Scene& oScene)
-{
-//    pScene = &oScene;
-}
-
 
 void CortexVision::formObject(int focusedROI)
 {
@@ -69,14 +62,18 @@ void CortexVision::identifyObject()
 
     if (oObject.getMass() > 0)
     {
-        if (oRecognition.recogniseObject(oObject, oVisualMemory))
+        // first model the object to allow its recognition
+        oModeling.modelObject(oObject, oObjectModel);    
+        LOG4CXX_DEBUG(logger, oObjectModel.shortDesc());
+
+        if (oRecognition.recogniseObject(oObjectModel))
         {
             LOG4CXX_INFO(logger, "object recognized"); 
         }
         else
         {
             LOG4CXX_INFO(logger, "new object"); 
-            oVisualMemory.addObjectModel(oRecognition.getObjectModel());
+//            oVisualMemory.addObjectModel(oObjectModel);
         }        
     }
     // skip if empty object

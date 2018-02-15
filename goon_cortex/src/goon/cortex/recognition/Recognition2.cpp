@@ -22,23 +22,26 @@ Recognition2::Recognition2()
 //}
 
 
-bool Recognition2::recogniseObject(Object& oObject, VisualMemory& oVisualMemory)
+void Recognition2::newRecognition()
+{
+    // reset iteration counter
+    iteration = 0;
+}
+
+bool Recognition2::recogniseObject(ObjectModel& oObjectModel)
 {
     LOG4CXX_TRACE(logger, "Recognition2.recogniseObject");
+    
+    oRecall.fetchModels(oObjectModel, 0);
 
-    // first model the object to allow its comparison with stored models
-    oModeling.modelObject(oObject, oObjectModel);
-    
-    LOG4CXX_DEBUG(logger, oObjectModel.shortDesc());
-    
-    if (oVisualMemory.getListModels().empty())
+    if (oRecall.getRecalledModels().empty())
     {
-        LOG4CXX_WARN(logger, "Recognition2: empty visual memory, skip");
+        LOG4CXX_WARN(logger, "Recognition2: no recalled models, skip");
         return false;
     }
 
     // match the object model against models in visual memory
-    if (oMatching2.doMatching(oObjectModel, oVisualMemory.getListModels())) 
+    if (oMatching2.doMatching(oObjectModel, oRecall.getRecalledModels())) 
     {
         LOG4CXX_DEBUG(logger, "Matching2: " + oMatching2.showCandidates());
         

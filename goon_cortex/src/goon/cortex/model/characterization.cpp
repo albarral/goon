@@ -6,7 +6,7 @@
 #include <vector>
 #include <opencv2/core/core.hpp>
 
-#include "goon/cortex/analysis/characterization.h"
+#include "goon/cortex/model/characterization.h"
 #include "goon/features/Body.h"
 #include "goon/features/structure/Structure2.h"
 

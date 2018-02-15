@@ -36,11 +36,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/cortex/CortexVision.o \
-	${OBJECTDIR}/src/goon/cortex/analysis/binding.o \
-	${OBJECTDIR}/src/goon/cortex/analysis/characterization.o \
+	${OBJECTDIR}/src/goon/cortex/bind/binding.o \
+	${OBJECTDIR}/src/goon/cortex/model/Modeling.o \
+	${OBJECTDIR}/src/goon/cortex/model/characterization.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Compare.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o \
-	${OBJECTDIR}/src/goon/cortex/recognition/Modeling.o \
+	${OBJECTDIR}/src/goon/cortex/recognition/Recall.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o
 
 
@@ -73,15 +74,20 @@ ${OBJECTDIR}/src/goon/cortex/CortexVision.o: src/goon/cortex/CortexVision.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/CortexVision.o src/goon/cortex/CortexVision.cpp
 
-${OBJECTDIR}/src/goon/cortex/analysis/binding.o: src/goon/cortex/analysis/binding.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
+${OBJECTDIR}/src/goon/cortex/bind/binding.o: src/goon/cortex/bind/binding.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/bind
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/binding.o src/goon/cortex/analysis/binding.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/bind/binding.o src/goon/cortex/bind/binding.cpp
 
-${OBJECTDIR}/src/goon/cortex/analysis/characterization.o: src/goon/cortex/analysis/characterization.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/analysis
+${OBJECTDIR}/src/goon/cortex/model/Modeling.o: src/goon/cortex/model/Modeling.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/model
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/analysis/characterization.o src/goon/cortex/analysis/characterization.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/model/Modeling.o src/goon/cortex/model/Modeling.cpp
+
+${OBJECTDIR}/src/goon/cortex/model/characterization.o: src/goon/cortex/model/characterization.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/model/characterization.o src/goon/cortex/model/characterization.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Compare.o: src/goon/cortex/recognition/Compare.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
@@ -93,10 +99,10 @@ ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o: src/goon/cortex/recognitio
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o src/goon/cortex/recognition/Matching2.cpp
 
-${OBJECTDIR}/src/goon/cortex/recognition/Modeling.o: src/goon/cortex/recognition/Modeling.cpp 
+${OBJECTDIR}/src/goon/cortex/recognition/Recall.o: src/goon/cortex/recognition/Recall.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Modeling.o src/goon/cortex/recognition/Modeling.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Recall.o src/goon/cortex/recognition/Recall.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o: src/goon/cortex/recognition/Recognition2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition

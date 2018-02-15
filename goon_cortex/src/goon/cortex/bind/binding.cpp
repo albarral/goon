@@ -5,7 +5,7 @@
 
 #include <list>
 
-#include "goon/cortex/analysis/binding.h"
+#include "goon/cortex/bind/binding.h"
 #include "goon/data/base/region.h"
 #include "goon/data/config/CortexConfig.h"
 #include "maty/math/area.h"
