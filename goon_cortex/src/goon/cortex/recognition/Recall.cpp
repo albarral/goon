@@ -5,12 +5,18 @@
 
 #include "goon/cortex/recognition/Recall.h"
 
+using namespace log4cxx;
+
 namespace goon 
 {
+LoggerPtr Recall::logger(Logger::getLogger("goon.cortex.recognition"));
+
 // Constructor
 Recall::Recall ()
 {    
     ID = 0;    
+    searchFrom = 0;    
+    searchSize = 20;    // default size of search range 20 
 }
 
 // Destructor
@@ -21,44 +27,63 @@ Recall::~Recall ()
 
 void Recall::clear()
 {  
-    listRecalledModels.clear();
-    listNewModels.clear();
     ID = 0;
+    searchFrom = 0;    
+    listRecalledModels.clear();
+    listLearnedModels.clear();
 }
 
-void Recall::addNewModel(ObjectModel& oObjectModel)
+void Recall::resetSearch()
 {
+    LOG4CXX_TRACE(logger, "Recall::resetSearch");
+    // reset search range
+    searchFrom = 0;    
+    // clear recalled models
+    listRecalledModels.clear();
+}
+
+void Recall::addLearnedModel(ObjectModel& oObjectModel)
+{
+    LOG4CXX_TRACE(logger, "Recall::addLearnedModel");
     oObjectModel.setID(ID++);
-    listNewModels.push_back(oObjectModel);
+    listLearnedModels.push_back(oObjectModel);
 }  
 
-void Recall::fetchModels(ObjectModel& oObjectModel, int start)
+void Recall::recallModels(ObjectModel& oObjectModel)
 {
-    listRecalledModels.clear();
+    LOG4CXX_TRACE(logger, "Recall::recallModels");
     
-    std::vector<ObjectModel>& listModels = oVisualMemory.getListModels();
-    // fetch 20 
-    int end = start + 20;
-    int top = listModels.size();
-    std::vector<ObjectModel>::iterator it_model = listRecalledModels.begin();
-    // walk list
-    for (int i=start; i<end; i++) 
+    // access LT memory (temporally simulated by VisualMemory)
+    std::vector<ObjectModel>& listLTModels = oVisualMemory.getListModels();
+    int sizeLT = listLTModels.size();
+    // set fetch range
+    int end = searchFrom + searchSize;
+    if (end > sizeLT)
+        end = sizeLT;
+    
+    // skip if end of LT memory reached
+    if (searchFrom >= sizeLT)            
+    {
+        LOG4CXX_WARN(logger, "Recall.fetchModels: no recall, LT memory end reached");
+        return;
+    }
+
+    LOG4CXX_DEBUG(logger, "fetch models: " << searchFrom << " - " << end);
+
+    // fetch LT models and add them to recalled list
+    for (int i=searchFrom; i<end; i++) 
     {            
-        if (i < top)
-        {
-            ObjectModel& oRecalledModel = listModels.at(i);
-            listRecalledModels.push_back(oRecalledModel);
-        }
-        else
-            break;
+        ObjectModel& oRecalledModel = listLTModels.at(i);
+        listRecalledModels.push_back(oRecalledModel);
     }    
 }
 
-void Recall::fixModels()
+void Recall::storeModels()
 {
-    // push all new models to visual memory
-    std::vector<ObjectModel>& listModels = oVisualMemory.getListModels();
-    listModels.insert(listModels.end(), listNewModels.begin(), listNewModels.end());    
+    LOG4CXX_TRACE(logger, "Recall::storeModels");
+    // stores all learned models in LT memory
+    std::vector<ObjectModel>& listLTModels = oVisualMemory.getListModels();
+    listLTModels.insert(listLTModels.end(), listLearnedModels.begin(), listLearnedModels.end());    
 }
 
 
@@ -74,10 +99,10 @@ std::string Recall::toString()
         it_model++;
     }
     
-    desc += "new models ...\n";
-    it_model = listNewModels.begin();
+    desc += "learned models ...\n";
+    it_model = listLearnedModels.begin();
     // walk list
-    while (it_model != listNewModels.end())
+    while (it_model != listLearnedModels.end())
     {            
         desc += it_model->toString() + "\n";
         it_model++;
@@ -97,10 +122,10 @@ std::string Recall::shortDesc()
         it_model++;
     }
     
-    desc += "new models ...\n";
-    it_model = listNewModels.begin();
+    desc += "learned models ...\n";
+    it_model = listLearnedModels.begin();
     // walk list
-    while (it_model != listNewModels.end())
+    while (it_model != listLearnedModels.end())
     {            
         desc += it_model->shortDesc() + "\n";
         it_model++;

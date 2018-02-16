@@ -85,10 +85,10 @@ void Look::loop()
 
         case Look::eSTATE_IDENTIFY:
 
-            bindObject();
+            formObject();
             identifyObject();        
             LOG4CXX_TRACE(logger, "clone object ... ");
-            pVisualData->updateObject2(oCortexVision.getObject());
+            pVisualData->updateObject2(oObject);
 
             break;
     }   // end switch        
@@ -110,33 +110,36 @@ void Look::clearObject()
     // clear object if not done before
     if (lookedObject != -1)
     {
-        oCortexVision.getObject().clear();
+        oObject.clear();
         lookedObject = -1;
     }    
 }
 
-void Look::bindObject()
+void Look::formObject()
 {  
     // get updated copy of retina & rois
     pVisualData->getRetinaCopy(oCortexVision.getRetina());
     pVisualData->getROIsCopy(oCortexVision.getROIs());
     
-    LOG4CXX_DEBUG(logger, "binding ... ");    
-    oCortexVision.formObject(focusedROI);
+    LOG4CXX_DEBUG(logger, "bind ... ");    
+    oCortexVision.formObject(oObject, focusedROI);
     
-    LOG4CXX_DEBUG(logger, "characterization ... ");    
-    oCortexVision.analyseObject();
+    LOG4CXX_DEBUG(logger, "model ... ");    
+    oCortexVision.modelObject(oObject);
     
     //LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
 }
 
 void Look::identifyObject()
 {
-    LOG4CXX_DEBUG(logger, "identify object");
-    oCortexVision.identifyObject();
+    LOG4CXX_DEBUG(logger, "identify ...");
+    // identify 
+    if (!oCortexVision.identifyObject(oObject))
+        // memorize object if identification fails    
+        oCortexVision.memorizeObject();
     
     // get identified object ID 
-    lookedObject = oCortexVision.getObject().getID();
+    lookedObject = oObject.getID();
 }
 
 void Look::senseBus()

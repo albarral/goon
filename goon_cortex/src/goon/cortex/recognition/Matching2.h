@@ -31,19 +31,16 @@ public:
     Matching2();
     //~Matching2();
 
-    // performs a matching process between an object model and a list of object models.
+    // Performs a matching process between an object model and a list of object models.
+    // In default mode (bappend = false) the list of candidates is reset in each call.
+    // In append mode (bappend = true) the new candidates are appended to the existing candidates list..
     // It returns true if there are matching candidates, false otherwise
-    bool doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& listObjectModels);
+    bool doMatching(ObjectModel& oObjectModel, std::vector<ObjectModel>& listObjectModels, bool bappend = false);
 
     // get access to the sequence of candidate matches.
     std::vector<st_match>& getListCandidateMatches() {return seq_candidate_matches;};
 
-    std::string showCandidates();
-
-private:
-    // selects best candidate matches from the given list
-    //void filterCandidates();
-    
+    std::string showCandidates();    
 };
 }
 #endif

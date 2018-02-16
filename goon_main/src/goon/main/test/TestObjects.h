@@ -11,7 +11,7 @@
 
 #include "goon/data/cortex/Object.h"
 #include "goon/features/Body.h"
-#include "goon/data/VisualMemory.h"
+#include "goon/cortex/CortexVision.h"
 
 
 namespace goon
@@ -30,7 +30,7 @@ private:
     
     void createObject(Object& oObject, std::vector<Body>& listBodies);
     
-    void identifyObject(Object& oObject, VisualMemory& oVisualMemory);        
+    void identifyObject(CortexVision& oCortexVision, Object& oObject);        
 
 };
 

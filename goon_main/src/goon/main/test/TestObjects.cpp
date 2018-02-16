@@ -7,8 +7,6 @@
 //#include <opencv2/opencv.hpp> // for imshow
 
 #include "goon/main/test/TestObjects.h"
-#include "goon/cortex/analysis/characterization.h"
-#include "goon/cortex/recognition/Recognition2.h"
 #include "goon/features/structure/Structure2.h"
 
 using namespace log4cxx;
@@ -23,8 +21,8 @@ void TestObjects::test()
     
     // simulate an object detection with 3 sub-bodies and its recognition
     // the visual memory is initially empty, so 2 iterations are needed (first for object memorization, second for recognition)
-    VisualMemory oVisualMemory;
-    Object oObject;                    
+    CortexVision oCortexVision;
+    Object oObject;                        
     std::vector<Body> listBodies;
     
     for (int i=0; i<2; i++)
@@ -35,8 +33,9 @@ void TestObjects::test()
         createBodies(listBodies);
         // create an object with the sub-bodies
         createObject(oObject, listBodies);
+        
         // recognize object
-        identifyObject(oObject, oVisualMemory);
+        identifyObject(oCortexVision, oObject);
     }
     
     listBodies.clear();    
@@ -110,11 +109,6 @@ void TestObjects::createObject(Object& oObject, std::vector<Body>& listBodies)
         oObject.addSubBody(oBody);        
         counter++;
     }
-    
-    // compute object's global & local details (shape)
-    Characterization oCharacterization;    
-    oCharacterization.checkGlobalObject(oObject);
-    oCharacterization.checkObjectDetails(oObject);
 
     LOG4CXX_INFO(logger, oObject.toString()); 
     LOG4CXX_INFO(logger, oObject.getStructure().toString()); 
@@ -124,17 +118,21 @@ void TestObjects::createObject(Object& oObject, std::vector<Body>& listBodies)
 //    cv::waitKey(0); // wait for keyb interaction
 }
 
-void TestObjects::identifyObject(Object& oObject, VisualMemory& oVisualMemory)
+void TestObjects::identifyObject(CortexVision& oCortexVision, Object& oObject)
 {
-    Recognition2 oRecognition;
-    if (oRecognition.recogniseObject(oObject, oVisualMemory))
+    // model object
+    oCortexVision.modelObject(oObject);
+    
+    // identify 
+    if (oCortexVision.identifyObject(oObject))
     {
         LOG4CXX_INFO(logger, "object recognized"); 
     }
     else
     {
         LOG4CXX_INFO(logger, "object not recognized, add to visual memory"); 
-        oVisualMemory.addObjectModel(oRecognition.getObjectModel());
+        // memorize object if identification fails    
+        oCortexVision.memorizeObject();
     }
 }
 }

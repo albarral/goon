@@ -10,7 +10,6 @@
 
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
-//#include "goon/data/VisualMemory.h"
 #include "goon/data/cortex/Object.h"
 #include "goon/data/cortex/ObjectModel.h"
 #include "goon/cortex/bind/binding.h"
@@ -26,12 +25,10 @@ private:
     static log4cxx::LoggerPtr logger;
     Retina oRetina3;
     Rois oROIs3;
-    Object oObject;
-    ObjectModel oObjectModel;   // result of modeling the object
-//    VisualMemory oVisualMemory;
+    ObjectModel oObjectModel;    // modeled object
     Binding oBinding;
     Characterization oCharacterization;
-    Modeling oModeling;     // class for modeling objects    
+    Modeling oModeling;     
     Recognition2 oRecognition;
 
 public:
@@ -40,16 +37,18 @@ public:
 
     Retina& getRetina() {return oRetina3;};
     Rois& getROIs() {return oROIs3;};    
-    Object& getObject() {return oObject;}
     
-    // it does the object binding process starting from the given focused ROI
-    void formObject(int focusedROI);
+    // if forms the object binding regions around the given ROI
+    void formObject(Object& oObject, int focusedROI);
        
-    // it performs a characterization of the formed object, analyzing it in detail
-    void analyseObject();    
+    // it models the object doing a characterization (global & local) and modeling process
+    void modelObject(Object& oObject);    
     
-    // if performs the object recognition process (comparing it with a all stored models in memory)
-    void identifyObject();        
+    // if performs the object recognition process (comparing it models in memory)
+    bool identifyObject(Object& oObject);        
+
+    // if memorizes the object storing its model in visual memory
+    void memorizeObject();        
 };
 
 }  	

@@ -13,6 +13,7 @@
 #include "goon/core/GoonModule.h"
 #include "goon/cortex/CortexVision.h"
 #include "goon/data/base/roi.h"
+#include "goon/data/cortex/Object.h"
 #include "tuly/control/SensorLed.h"
 
 namespace goon
@@ -32,6 +33,7 @@ public:
 private:
     static log4cxx::LoggerPtr logger;
     // logic
+    Object oObject;    // looked object    
     CortexVision oCortexVision;
     int focusedROI;      // ID of focused ROI
     int lookedObject;   // ID of identified object
@@ -61,7 +63,7 @@ private:
     // clear object
     void clearObject();
     // do object binding
-    void bindObject();
+    void formObject();
     // do object identification
     void identifyObject();
 

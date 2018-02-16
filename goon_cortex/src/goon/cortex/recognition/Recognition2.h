@@ -12,7 +12,6 @@
 #include "goon/cortex/recognition/Confidence2.h"
 #include "goon/cortex/recognition/Matching2.h"
 #include "goon/cortex/recognition/Recall.h"
-//#include "goon/data/VisualMemory.h"
 #include "goon/data/cortex/ObjectModel.h"
 
 namespace goon
@@ -42,7 +41,12 @@ public:
     // It returns true if the recognition was positive, or false otherwise.
     bool recogniseObject(ObjectModel& oObjectModel);
 
-    bool isModelGood ();
+    // learns given model
+    bool learnModel(ObjectModel& oObjectModel);
+    // updates model1 with model2 data
+    //bool updateModel(ObjectModel& oObjectModel1, ObjectModel& oObjectModel2);
+    
+    //bool isModelGood ();
     // This function checks the validity of the identified model.
     // If the landmark was matched partially or matched with low similarity, the model is not safe and should be updated.
     

@@ -26,22 +26,33 @@ void Recognition2::newRecognition()
 {
     // reset iteration counter
     iteration = 0;
+    // and reset recall search
+    oRecall.resetSearch();
 }
 
 bool Recognition2::recogniseObject(ObjectModel& oObjectModel)
 {
     LOG4CXX_TRACE(logger, "Recognition2.recogniseObject");
     
-    oRecall.fetchModels(oObjectModel, 0);
+    iteration++;
+    
+    // recall new models
+    oRecall.recallModels(oObjectModel);
 
-    if (oRecall.getRecalledModels().empty())
+    // if no models to compare, skip
+    if (oRecall.getRecalledModels().empty() && oRecall.getLearnedModels().empty())
     {
-        LOG4CXX_WARN(logger, "Recognition2: no recalled models, skip");
+        LOG4CXX_WARN(logger, "Recognition2: no models to compare, skip");
         return false;
     }
 
-    // match the object model against models in visual memory
-    if (oMatching2.doMatching(oObjectModel, oRecall.getRecalledModels())) 
+    // match the object against the recalled models 
+    bool bmatched = oMatching2.doMatching(oObjectModel, oRecall.getRecalledModels());
+        
+    // and also match it against the learned ones (adding the candidates)
+    bmatched = bmatched || oMatching2.doMatching(oObjectModel, oRecall.getLearnedModels(), true);
+    
+    if (bmatched) 
     {
         LOG4CXX_DEBUG(logger, "Matching2: " + oMatching2.showCandidates());
         
@@ -62,10 +73,23 @@ bool Recognition2::recogniseObject(ObjectModel& oObjectModel)
         return false;
 }
 	
-
-bool Recognition2::isModelGood ()
+bool Recognition2::learnModel(ObjectModel& oObjectModel)
 {
-//    return (oConfidence2.isRecognitionSafe());
-    return false;
+    // add new model to LT memory
+    oRecall.addLearnedModel(oObjectModel);    
+    
+    return true;
 }
+
+//bool Recognition2::updateModel(ObjectModel& oObjectModel1, ObjectModel& oObjectModel2)
+//{
+//    // TO DO ...
+//    return false;
+//}
+
+//bool Recognition2::isModelGood ()
+//{
+//    return (oConfidence2.isRecognitionSafe());
+//    return false;
+//}
 }

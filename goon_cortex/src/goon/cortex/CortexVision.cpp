@@ -20,7 +20,7 @@ CortexVision::CortexVision()
 //{
 //}
 
-void CortexVision::formObject(int focusedROI)
+void CortexVision::formObject(Object& oObject, int focusedROI)
 {
     LOG4CXX_TRACE(logger, "CortexVision.formObject");
     
@@ -42,43 +42,56 @@ void CortexVision::formObject(int focusedROI)
 }
 
 
-void CortexVision::analyseObject()
+void CortexVision::modelObject(Object& oObject)
 {
-    LOG4CXX_TRACE(logger, "CortexVision.analyseObject");
+    LOG4CXX_TRACE(logger, "CortexVision.modelObject");
 
     if (oObject.getMass() > 0)
     {
+        // global & local characterization
         oCharacterization.checkGlobalObject(oObject);    
         oCharacterization.checkObjectDetails(oObject);
+        
+        // object modelling
+        oModeling.modelObject(oObject, oObjectModel);    
+        LOG4CXX_DEBUG(logger, oObjectModel.shortDesc());
     }
     // skip if empty object
     else
         LOG4CXX_WARN(logger, "analyseObject skipped, no object detected");            
 }
 
-void CortexVision::identifyObject()
+bool CortexVision::identifyObject(Object& oObject)
 {
     LOG4CXX_TRACE(logger, "CortexVision.identifyObject");
 
     if (oObject.getMass() > 0)
     {
-        // first model the object to allow its recognition
-        oModeling.modelObject(oObject, oObjectModel);    
-        LOG4CXX_DEBUG(logger, oObjectModel.shortDesc());
-
         if (oRecognition.recogniseObject(oObjectModel))
         {
             LOG4CXX_INFO(logger, "object recognized"); 
+            return true;
         }
         else
         {
-            LOG4CXX_INFO(logger, "new object"); 
-//            oVisualMemory.addObjectModel(oObjectModel);
-        }        
+            LOG4CXX_INFO(logger, "object not recognized"); 
+            return false;            
+        }
     }
-    // skip if empty object
     else
-        LOG4CXX_WARN(logger, "identifyObject skipped, no object detected");            
+        return false;
 }
+
+void CortexVision::memorizeObject()
+{
+    LOG4CXX_TRACE(logger, "CortexVision.memorizeObject");
+
+    if (oObjectModel.getMass() > 0)
+    {
+        LOG4CXX_INFO(logger, "new object"); 
+        oRecognition.learnModel(oObjectModel);        
+    }        
+}
+
 }
 
