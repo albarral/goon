@@ -35,6 +35,8 @@
         <logicalFolder name="recognition" displayName="recognition" projectFiles="true">
           <itemPath>src/goon/cortex/recognition/Compare.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Compare.h</itemPath>
+          <itemPath>src/goon/cortex/recognition/Evidence.cpp</itemPath>
+          <itemPath>src/goon/cortex/recognition/Evidence.h</itemPath>
           <itemPath>src/goon/cortex/recognition/Matching2.cpp</itemPath>
           <itemPath>src/goon/cortex/recognition/Matching2.h</itemPath>
           <itemPath>src/goon/cortex/recognition/Recall.cpp</itemPath>
@@ -189,6 +191,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/cortex/recognition/Evidence.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Evidence.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/goon/cortex/recognition/Matching2.cpp"
             ex="false"
             tool="1"
@@ -308,6 +320,16 @@
             flavor2="0">
       </item>
       <item path="src/goon/cortex/recognition/Compare.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Evidence.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/cortex/recognition/Evidence.h"
             ex="false"
             tool="3"
             flavor2="0">

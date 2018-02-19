@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/goon/cortex/model/Modeling.o \
 	${OBJECTDIR}/src/goon/cortex/model/characterization.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Compare.o \
+	${OBJECTDIR}/src/goon/cortex/recognition/Evidence.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Recall.o \
 	${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o
@@ -99,6 +100,11 @@ ${OBJECTDIR}/src/goon/cortex/recognition/Compare.o: src/goon/cortex/recognition/
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Compare.o src/goon/cortex/recognition/Compare.cpp
+
+${OBJECTDIR}/src/goon/cortex/recognition/Evidence.o: src/goon/cortex/recognition/Evidence.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Evidence.o src/goon/cortex/recognition/Evidence.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o: src/goon/cortex/recognition/Matching2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition

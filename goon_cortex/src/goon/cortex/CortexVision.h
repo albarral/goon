@@ -15,6 +15,7 @@
 #include "goon/cortex/bind/binding.h"
 #include "goon/cortex/model/characterization.h"
 #include "goon/cortex/model/Modeling.h"
+#include "goon/cortex/recognition/Evidence.h"
 #include "goon/cortex/recognition/Recognition2.h"
 
 namespace goon
@@ -29,6 +30,7 @@ private:
     Binding oBinding;
     Characterization oCharacterization;
     Modeling oModeling;     
+    Evidence oEvidence;
     Recognition2 oRecognition;
 
 public:
@@ -38,16 +40,19 @@ public:
     Retina& getRetina() {return oRetina3;};
     Rois& getROIs() {return oROIs3;};    
     
-    // if forms the object binding regions around the given ROI
+    // forms the object binding regions around the given ROI
     void formObject(Object& oObject, int focusedROI);
        
-    // it models the object doing a characterization (global & local) and modeling process
+    // models the object doing a characterization (global & local) and modeling process
     void modelObject(Object& oObject);    
     
-    // if performs the object recognition process (comparing it models in memory)
+    // checks that the looked object is still the same
+    bool checkEvidence(Object& oObject);        
+
+    // performs the object recognition process (comparing it models in memory)
     bool identifyObject(Object& oObject);        
 
-    // if memorizes the object storing its model in visual memory
+    // memorizes the object storing its model in visual memory
     void memorizeObject();        
 };
 

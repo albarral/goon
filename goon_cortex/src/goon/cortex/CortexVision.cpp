@@ -61,6 +61,27 @@ void CortexVision::modelObject(Object& oObject)
         LOG4CXX_WARN(logger, "analyseObject skipped, no object detected");            
 }
 
+bool CortexVision::checkEvidence(Object& oObject)
+{
+    LOG4CXX_TRACE(logger, "CortexVision.checkEvidence");
+
+    if (oObject.getMass() > 0)
+    {
+        if (oEvidence.checkSelfEvidence(oObjectModel))
+        {
+            LOG4CXX_INFO(logger, "evidence ok"); 
+            return true;
+        }
+        else
+        {
+            LOG4CXX_INFO(logger, "evidence failed"); 
+            return false;            
+        }
+    }
+    else
+        return false;
+}
+
 bool CortexVision::identifyObject(Object& oObject)
 {
     LOG4CXX_TRACE(logger, "CortexVision.identifyObject");

@@ -130,6 +130,13 @@ void Look::formObject()
     //LOG4CXX_DEBUG(logger, oCortexVision.getObject().shortDesc());    
 }
 
+void Look::checkEvidence()
+{
+    LOG4CXX_DEBUG(logger, "check evidence ...");
+    
+    oCortexVision.checkEvidence(oObject);
+}
+
 void Look::identifyObject()
 {
     LOG4CXX_DEBUG(logger, "identify ...");

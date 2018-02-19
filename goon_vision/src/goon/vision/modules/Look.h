@@ -64,6 +64,8 @@ private:
     void clearObject();
     // do object binding
     void formObject();
+    // check object evidence
+    void checkEvidence();
     // do object identification
     void identifyObject();
 
