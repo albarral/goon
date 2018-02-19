@@ -4,6 +4,7 @@
  ***************************************************************************/
 				
 #include "goon/cortex/recognition/Compare.h"
+#include "goon/data/config/CortexConfig.h"
 #include "goon/features/shape/shape.h"
 #include "maty/math/Angle.h"
 #include "maty/utils/Matrix.h"
@@ -17,10 +18,10 @@ LoggerPtr Compare::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Compare::Compare()
 {
-    colorTolerance = 30.0;
-    angleTolerance = 45.0;
-    
-    reqSimilarity = 3.0;    
+    CortexConfig oCortexConfig;    
+    colorTolerance = oCortexConfig.getCOMPARE_COLOR_TOLERANCE();
+    angleTolerance = oCortexConfig.getCOMPARE_ANGLE_TOLERANCE();    
+    reqSimilarity = oCortexConfig.getCOMPARE_REQUIRED_SIMILARITY();
 }
 
 Compare::~Compare ()

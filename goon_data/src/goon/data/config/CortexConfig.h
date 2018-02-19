@@ -15,7 +15,11 @@ private:
     // binding
     float BINDING_OVERLAP_FRACTION;      
     // recognition        
-    float MATCHING_HSV_SIMILARITY;                   // HSV distance used for color comparisons between a pixel and the region's color essence.
+    float EVIDENCE_SENSITIVITY;                  // sensitivity of evidence process
+    float MATCHING_SENSITIVITY;                  // sensitivity of matching process
+    float COMPARE_COLOR_TOLERANCE;        // tolerance for color similarity (degrees)
+    float COMPARE_ANGLE_TOLERANCE;         // tolerance for for orientation similarity (degrees)
+    float COMPARE_REQUIRED_SIMILARITY;      // required similarity to consider a region correspondence
 
 public:
     CortexConfig();
@@ -24,7 +28,11 @@ public:
     // binding
     float getBINDING_OVERLAP_FRACTION() {return BINDING_OVERLAP_FRACTION;}    
     // recognition        
-    float getMATCHING_HSV_SIMILARITY() {return MATCHING_HSV_SIMILARITY;}
+    float getEVIDENCE_SENSITIVITY () {return EVIDENCE_SENSITIVITY;}
+    float getMATCHING_SENSITIVITY() {return MATCHING_SENSITIVITY;}
+    float getCOMPARE_COLOR_TOLERANCE() {return COMPARE_COLOR_TOLERANCE;}
+    float getCOMPARE_ANGLE_TOLERANCE() {return COMPARE_ANGLE_TOLERANCE;}
+    float getCOMPARE_REQUIRED_SIMILARITY() {return COMPARE_REQUIRED_SIMILARITY;}
 };
 }
 

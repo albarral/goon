@@ -4,7 +4,8 @@
  ***************************************************************************/
 				
 #include "goon/cortex/recognition/Matching2.h"
-							
+#include "goon/data/config/CortexConfig.h"
+
 using namespace log4cxx;
 
 namespace goon
@@ -14,7 +15,8 @@ LoggerPtr Matching2::logger(Logger::getLogger("goon.cortex.recognition"));
 // Constructor
 Matching2::Matching2()
 {
-    sensitivity = 0.5;
+    CortexConfig oCortexConfig;
+    sensitivity = oCortexConfig.getMATCHING_SENSITIVITY();
 }
 
 //Matching2::~Matching2 ()

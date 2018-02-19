@@ -13,7 +13,11 @@ CortexConfig::CortexConfig()
     // binding
     BINDING_OVERLAP_FRACTION = 0.50;
     // recognition        
-    MATCHING_HSV_SIMILARITY = 1.0;   
+    EVIDENCE_SENSITIVITY = 0.8;   
+    MATCHING_SENSITIVITY = 0.5;   
+    COMPARE_COLOR_TOLERANCE = 30.0;   
+    COMPARE_ANGLE_TOLERANCE = 45.0;   
+    COMPARE_REQUIRED_SIMILARITY = 3.0;   
 }
 
 
