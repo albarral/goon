@@ -6,8 +6,8 @@
 #include "log4cxx/ndc.h"
 
 #include "goon/coms/modules/GoonListener.h"
-#include "talky/Topics.h"
-#include "talky/topics/VisionTopic.h"
+#include "tron2/talky/Topics.h"
+#include "tron2/talky/topics/VisionTopic.h"
 #include "tuly/utils/IntegerQueue.h"
 
 using namespace log4cxx;
@@ -25,10 +25,10 @@ GoonListener::GoonListener()
 
 void GoonListener::init(GoonBus& oGoonBus)
 {
-    int topic = talky::Topics::eTOPIC_VISION;
+    int topic = tron2::Topics::eTOPIC_VISION;
     // prepare communication servers
-    oNetyServerFocus.init(topic, talky::VisionTopic::eCAT_VISION_FOCUS);    
-    oNetyServerExtra.init(topic, talky::VisionTopic::eCAT_VISION_EXTRA);    
+    oNetyServerFocus.init(topic, tron2::VisionTopic::eCAT_VISION_FOCUS);    
+    oNetyServerExtra.init(topic, tron2::VisionTopic::eCAT_VISION_EXTRA);    
     
     oCIGoonControl.connect2Arm(&oGoonBus);
     
@@ -58,7 +58,7 @@ void GoonListener::loop()
 
 void GoonListener::checkServer(nety::NetNodeServer& oNetyServer)
 {
-    talky::Command oCommand;
+    tron2::Command oCommand;
 
     // get received messages
     oNetyServer.absorb();

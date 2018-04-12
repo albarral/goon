@@ -8,13 +8,13 @@
 
 #include "goon/core/GoonBus.h"
 #include "goon/core/VisualData.h"
-#include <tuly/control/module3.h>
+#include <tron/control/module3.h>
 
 namespace goon
 {
 // Base class for goon modules.
 // It has access pointers to goon bus and goon visual data.
-class GoonModule : public tuly::Module3
+class GoonModule : public tron::Module3
 {
 protected:
     bool benabled;

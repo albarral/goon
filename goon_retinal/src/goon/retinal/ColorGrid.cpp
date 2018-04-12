@@ -7,7 +7,7 @@
 #include <cmath>
 
 #include "goon/retinal/ColorGrid.h"
-#include <maty/math/average.h>
+#include <tron/cv/average.h>
 
 namespace goon
 {
@@ -104,7 +104,7 @@ void ColorGrid::updateLocalColor (const cv::Vec3b& rgb_color)
     short& local_samples = oColorNode.getSamples();
     
     local_samples++;
-    maty::Average::updateWithSample(oColorNode.getColor(), rgb_color, local_samples);
+    tron::Average::updateWithSample(oColorNode.getColor(), rgb_color, local_samples);
 }
 
 

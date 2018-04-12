@@ -14,7 +14,7 @@
 #include "goon/retinal/ColorGrid.h"   
 #include "goon/features/color/ColorSimilarity.h"
 #include "goon/features/color/HSVEssence.h"
-#include "maty/math/Trigger.h"
+#include "tron/math/Trigger.h"
 
 // This class extracts a color homogenous region from an image beginning with a single seed pixel.
 // It works doing a floodfill process (an expansion to adjacent pixels with similar color) from the specified seed. 
@@ -34,7 +34,7 @@ private:
     ColorGrid oColorGrid;        // class for handling the region's local color
     HSVEssence oHSVEssence; // class for handling the region's central color
     ColorSimilarity oColorSimilarity;
-    maty::Trigger oSizeTrigger;
+    tron::Trigger oSizeTrigger;
     std::deque<cv::Point> deq_floodfill;  // list of pixels to which the region may expand (starts with only the seed)
     int num_pixels;
 

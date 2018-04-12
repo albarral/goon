@@ -6,6 +6,7 @@
 #include <stdio.h> 		
 
 #include "goon/peripheral/RoisDetection.h"
+#include "goon/features/BodyOverlap.h"
 
 using namespace log4cxx;
 
@@ -98,6 +99,56 @@ void RoisDetection::matchROIs2Regions()
         findBestMatches();
 }
 
+
+// try to match ROIs and regions (based on overlap & color)
+//void RoisDetection::matchROIs2Regions2()
+//{
+//    LOG4CXX_DEBUG(logger, "RoisDetection::matchROIs2Regions2");
+//        
+//    float HSV_SAME = oHSVColor.getDistSameColor();    
+//    std::list<Region>& listRegions = pRetina->getListRegions();
+//    std::list<ROI>& listROIs = pROIs->getList();
+//    
+//    // clear matches list
+//    listMatches2.clear();
+//    
+//    BodyOverlap oBodyUtils;
+//    // compute overlaps (rois vs regions)
+//    oBodyUtils.computeBodiesOverlaps(listROIs, listRegions);
+//    // find overlap correspondences
+//    int numCorrepondences = oBodyUtils.findOverlapCorrespondences();
+//    
+//    // if found, check matching colors
+//    if (numCorrepondences > 0)
+//    {
+//        LOG4CXX_DEBUG(logger, "RoisDetection::matchROIs2Regions2: overlap correspondences = " << numCorrepondences);        
+//        std::vector<cv::Vec2i>& listCorrespondences = oBodyUtils.getCorrespondences();
+//        // for each correspondence
+//        for (cv::Vec2i& correspondence : listCorrespondences)
+//        {
+//            // check color similarity
+//            ROI* pROI = pROIs->getROIByIndex(correspondence[0]);
+//            Region* pRegion = pRetina->getRegionByIndex(correspondence[1]);
+//            // if both elements exist (the normal thing)
+//            if (pROI != 0 && pRegion != 0)
+//            {
+//                // if region and ROI have same color, they match
+//                if (oHSVColor.getDistance(pROI->getHSV(), pRegion->getHSV(), HSVColor::eSAME_COLOR) < HSV_SAME)
+//                {
+//                    pROI->setMatched(true);
+//                    pRegion->setMatched(true);                    
+//                    // add new match (roi ID, region ID)
+//                    cv::Vec2i match(pROI->getID(), pRegion->getID()); 
+//                    listMatches2.push_back(match);
+//                }                
+//            }
+//            else
+//                LOG4CXX_ERROR(logger, "RoisDetection::matchROIs2Regions2: roi-region correspondence not found");                        
+//        }        
+//    }
+//    else
+//        LOG4CXX_WARN(logger, "RoisDetection::matchROIs2Regions2: no correspondences");        
+//}
 
 // Checks how the given ROI responds to regions. 
 // A ROI responds to a region if it has its same color and its mask is overlapped by the region (minimum of 10% required)
@@ -248,5 +299,23 @@ void RoisDetection::updateMatchedROIs(int millis)
     }        
 }
 
+//void RoisDetection::updateMatchedROIs2(int millis)
+//{
+//    // walk matches list (roi ID, region ID)
+//    for (cv::Vec2i& match : listMatches2)
+//    {
+//        ROI* pROI = pROIs->getROIByID(match[0]);        
+//        Region* pRegion = pRetina->getRegionByID(match[1]);
+//        // if both elements exist
+//        if (pROI != 0 && pRegion != 0)
+//        {
+//            // update ROIS's body with its perceived region
+//            pROI->setBody(*pRegion);
+//            // update ROI's motion & age
+//            pROI->updateMotion(millis);
+//            pROI->increaseAge();
+//        }
+//    }        
+//}
 
 }

@@ -6,8 +6,8 @@
 #include "goon/cortex/recognition/Compare.h"
 #include "goon/data/config/CortexConfig.h"
 #include "goon/features/shape/shape.h"
-#include "maty/math/Angle.h"
-#include "maty/utils/Matrix.h"
+#include "tron/math/Angle.h"
+#include "tron/cv/Matrix.h"
 							
 using namespace log4cxx;
 
@@ -83,7 +83,7 @@ Compare::Vec5f Compare::compareModels(Model& oModel1, Model& oModel2)
     // both oriented, compute rotation    
     if (boriented1 && boriented2)
     {
-        rotation = maty::Angle::cyclicDifference(angle1 - angle2);
+        rotation = tron::Angle::cyclicDifference(angle1 - angle2);
     }
     // if only one oriented, set max rotation
     else if (boriented1 != boriented2)            
@@ -143,7 +143,7 @@ void Compare::findCorrespondences()
     cv::split(mat_similarity, matChannels);    
 
     // establish correspondences between the most similar region-region pairs
-    maty::Matrix::getCorrespondences(matChannels[eSIM_TOTAL], reqSimilarity, seq_correspondences);
+    tron::Matrix::getCorrespondences(matChannels[eSIM_TOTAL], reqSimilarity, seq_correspondences);
 }  
 
 

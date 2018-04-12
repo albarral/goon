@@ -9,11 +9,11 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects>
-                <make-dep-project>../../tron/tuly</make-dep-project>
+                <make-dep-project>../../tron/tron_util</make-dep-project>
                 <make-dep-project>../goon_core</make-dep-project>
-                <make-dep-project>../../tron/maty</make-dep-project>
                 <make-dep-project>../goon_features</make-dep-project>
-                <make-dep-project>../../tron/tivy</make-dep-project>
+                <make-dep-project>../../tron/tron_display</make-dep-project>
+                <make-dep-project>../../tron2/tron2_tivy</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
             </make-dep-projects>
             <sourceRootList>

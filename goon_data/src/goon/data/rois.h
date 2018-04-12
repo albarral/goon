@@ -10,7 +10,7 @@
 #include <map>
 
 #include "goon/data/base/roi.h"
-#include "maty/utils/Pool.h"
+#include "tron/util/Pool.h"
 
 namespace goon 
 {
@@ -19,7 +19,7 @@ class Rois
 private:
     std::list<ROI> listROIs;      // list of ROIS (lists allow fast sorting & removals, not as vectors)
     std::map<int, int> mapROIs;     // map: ROI.ID - ROI position in listROIs
-    maty::Pool oIDPool;              // pool of IDs
+    tron::Pool oIDPool;              // pool of IDs
     
 public:
     Rois ();

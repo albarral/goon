@@ -9,10 +9,10 @@
 #include <string>
 #include <opencv2/core/core.hpp>
 
-#include "tuly/control/brooks/control.h"
-#include "tuly/control/brooks/controlT.h"
-#include "tuly/control/brooks/sensor.h"
-#include "tuly/control/brooks/sensorT.h"
+#include "tron/control/brooks/control.h"
+#include "tron/control/brooks/controlT.h"
+#include "tron/control/brooks/sensor.h"
+#include "tron/control/brooks/sensorT.h"
 
 namespace goon 
 {
@@ -22,46 +22,46 @@ class GoonBus
     private:        
         // CONTROLS
         // Focus
-        tuly::Control CO_FOCUS_SHIFT;
-        tuly::ControlT<int> CO_FOCUS_MODE;
-        tuly::ControlT<cv::Vec3f> CO_FOCUS_SEARCH_VALUE;
+        tron::Control CO_FOCUS_SHIFT;
+        tron::ControlT<int> CO_FOCUS_MODE;
+        tron::ControlT<cv::Vec3f> CO_FOCUS_SEARCH_VALUE;
 
         // SENSORS
         // Look
-        tuly::SensorT<int> SO_LOOK_BEAT;  // Look module beat
-        tuly::SensorT<int> SO_LOOK_OBJECT;  // identified object
+        tron::SensorT<int> SO_LOOK_BEAT;  // Look module beat
+        tron::SensorT<int> SO_LOOK_OBJECT;  // identified object
         // Focus
-        tuly::SensorT<int> SO_FOCUS_BEAT;  // Focus module beat
-        tuly::Sensor SO_FOCUS_FOCUSED;  // target focused flag
-        tuly::SensorT<int> SO_FOCUS_ROI;  // target focused ROI
+        tron::SensorT<int> SO_FOCUS_BEAT;  // Focus module beat
+        tron::Sensor SO_FOCUS_FOCUSED;  // target focused flag
+        tron::SensorT<int> SO_FOCUS_ROI;  // target focused ROI
         // See
-        tuly::SensorT<int> SO_SEE_BEAT;  // See module beat
-        tuly::SensorT<float> SO_SEE_FPS;  // frequency of See module
+        tron::SensorT<int> SO_SEE_BEAT;  // See module beat
+        tron::SensorT<float> SO_SEE_FPS;  // frequency of See module
         // Grab
-        tuly::SensorT<int> SO_GRAB_BEAT;  // Grab module beat
+        tron::SensorT<int> SO_GRAB_BEAT;  // Grab module beat
         
     public:
         GoonBus();
 
         // CONTROLS        
-        tuly::Control& getCO_FOCUS_SHIFT() {return CO_FOCUS_SHIFT;};
-        tuly::ControlT<int>& getCO_FOCUS_MODE() {return CO_FOCUS_MODE;};
-        tuly::ControlT<cv::Vec3f>& getCO_FOCUS_SEARCH_VALUE() {return CO_FOCUS_SEARCH_VALUE;};
+        tron::Control& getCO_FOCUS_SHIFT() {return CO_FOCUS_SHIFT;};
+        tron::ControlT<int>& getCO_FOCUS_MODE() {return CO_FOCUS_MODE;};
+        tron::ControlT<cv::Vec3f>& getCO_FOCUS_SEARCH_VALUE() {return CO_FOCUS_SEARCH_VALUE;};
 
         
         // SENSORS
         // Look
-        tuly::SensorT<int>& getSO_LOOK_BEAT() {return SO_LOOK_BEAT;};  
-        tuly::SensorT<int>& getSO_LOOK_OBJECT() {return SO_LOOK_OBJECT;};  
+        tron::SensorT<int>& getSO_LOOK_BEAT() {return SO_LOOK_BEAT;};  
+        tron::SensorT<int>& getSO_LOOK_OBJECT() {return SO_LOOK_OBJECT;};  
         // Focus
-        tuly::SensorT<int>& getSO_FOCUS_BEAT() {return SO_FOCUS_BEAT;};  
-        tuly::Sensor& getSO_FOCUS_FOCUSED() {return SO_FOCUS_FOCUSED;};  
-        tuly::SensorT<int>& getSO_FOCUS_ROI() {return SO_FOCUS_ROI;};  
+        tron::SensorT<int>& getSO_FOCUS_BEAT() {return SO_FOCUS_BEAT;};  
+        tron::Sensor& getSO_FOCUS_FOCUSED() {return SO_FOCUS_FOCUSED;};  
+        tron::SensorT<int>& getSO_FOCUS_ROI() {return SO_FOCUS_ROI;};  
         // See
-        tuly::SensorT<int>& getSO_SEE_BEAT() {return SO_SEE_BEAT;};  
-        tuly::SensorT<float>& getSO_SEE_FPS() {return SO_SEE_FPS;};
+        tron::SensorT<int>& getSO_SEE_BEAT() {return SO_SEE_BEAT;};  
+        tron::SensorT<float>& getSO_SEE_FPS() {return SO_SEE_FPS;};
         // Grab
-        tuly::SensorT<int>& getSO_GRAB_BEAT() {return SO_GRAB_BEAT;};  
+        tron::SensorT<int>& getSO_GRAB_BEAT() {return SO_GRAB_BEAT;};  
 };
 
 }

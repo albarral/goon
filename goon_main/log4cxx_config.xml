@@ -43,7 +43,7 @@
         <appender-ref ref="dailyAppender"/>
   </category>
   <category name="goon.cortex">
-        <priority value ="info" />
+        <priority value ="debug" />
         <appender-ref ref="consoleAppender"/>
         <appender-ref ref="dailyAppender"/>
   </category>
