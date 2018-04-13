@@ -7,7 +7,7 @@
 
 #include "goon/main/test/TestImage.h"
 #include "goon/camera/Grabber.h"
-#include "tuly/utils/Environment.h"
+#include "tron/util/Environment.h"
 
 namespace goon
 {        
@@ -48,7 +48,7 @@ void TestImage::createImage(int w, int h)
 bool TestImage::loadImage()
 {
     Grabber oGrabber;   // utility class used for frame grabbing from any source    
-    oGrabber.connect2Image(tuly::Environment::getHomePath() + "/TESTS/images/image_orange3.jpg");
+    oGrabber.connect2Image(tron::Environment::getHomePath() + "/TESTS/images/image_orange3.jpg");
     if (oGrabber.grab())            
     {
         imageCam = oGrabber.getCapture();
