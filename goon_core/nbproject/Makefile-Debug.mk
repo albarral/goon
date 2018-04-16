@@ -73,17 +73,17 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_core.${CND_DLIB_EXT}: ${OBJEC
 ${OBJECTDIR}/src/goon/core/GoonBus.o: src/goon/core/GoonBus.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/core
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tron_control/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/GoonBus.o src/goon/core/GoonBus.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tron_control/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/GoonBus.o src/goon/core/GoonBus.cpp
 
 ${OBJECTDIR}/src/goon/core/GoonModule.o: src/goon/core/GoonModule.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/core
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tron_control/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/GoonModule.o src/goon/core/GoonModule.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tron_control/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/GoonModule.o src/goon/core/GoonModule.cpp
 
 ${OBJECTDIR}/src/goon/core/VisualData.o: src/goon/core/VisualData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/core
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tron_control/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/VisualData.o src/goon/core/VisualData.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_features/src -I../goon_data/src -I../../tron/tron_control/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/core/VisualData.o src/goon/core/VisualData.cpp
 
 # Subprojects
 .build-subprojects:

@@ -52,6 +52,7 @@
             <pElem>../goon_features/src</pElem>
             <pElem>../goon_data/src</pElem>
             <pElem>../../tron/tron_control/src</pElem>
+            <pElem>../../tron/tron_util/src</pElem>
           </incDir>
         </ccTool>
         <linkerTool>

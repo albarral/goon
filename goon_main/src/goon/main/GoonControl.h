@@ -11,7 +11,7 @@
 #include "goon/core/GoonBus.h"
 #include "goon/core/VisualData.h"
 #include "goon/vision/VisionManager.h"
-#include "goon/coms/GoonComs.h"
+#include "goon/coms/VisionComs.h"
 #include "goon/show/GoonShow.h"
 
 namespace goon
@@ -26,7 +26,7 @@ private:
     GoonBus oGoonBus;                            // arm bus
     VisualData oVisualData;    
     VisionManager oVisionManager;
-    GoonComs oGoonComs;
+    VisionComs oVisionComs;
     GoonShow oGoonShow;
 
 public:

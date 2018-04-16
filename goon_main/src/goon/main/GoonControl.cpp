@@ -29,7 +29,7 @@ bool GoonControl::launch()
     LOG4CXX_INFO(logger, "Launch goon control");
     
     // launch coms
-    bok = oGoonComs.launch(oGoonBus);        
+    bok = oVisionComs.launch(oGoonBus);        
 
     if (bok)
         // launch vision manager
@@ -48,7 +48,7 @@ bool GoonControl::end()
     oVisionManager.end();
 
     // end coms
-    oGoonComs.end();
+    oVisionComs.end();
 
     // end gui
     oGoonShow.end();
@@ -62,7 +62,7 @@ void GoonControl::oneShot()
 
 bool GoonControl::checkEndRequested()
 {
-    return oGoonComs.checkGoonEndRequested();
+    return oVisionComs.checkGoonEndRequested();
 }
 
 }
