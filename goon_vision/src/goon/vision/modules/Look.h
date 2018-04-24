@@ -14,7 +14,7 @@
 #include "goon/cortex/CortexVision.h"
 #include "goon/data/base/roi.h"
 #include "goon/data/cortex/Object.h"
-#include "tron/control/SensorLed.h"
+#include "tron/control/Sensor2Led.h"
 
 namespace goon
 {    
@@ -37,7 +37,7 @@ private:
     CortexVision oCortexVision;
     int focusedROI;      // ID of focused ROI
     int lookedObject;   // ID of identified object
-    tron::SensorLed oFocusBeatLed;   // sensor led for Focus module's beat
+    tron::Sensor2Led oFocusBeatLed;   // sensor led for Focus module's beat
 
 public:
     Look();

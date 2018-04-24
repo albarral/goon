@@ -16,7 +16,7 @@
 #include "goon/data/rois.h"
 #include "goon/data/base/roi.h"
 #include "goon/peripheral/Saliency.h"
-#include "tron/control/SensorLed.h"
+#include "tron/control/Sensor2Led.h"
 
 namespace goon
 {    
@@ -49,7 +49,7 @@ private:
     int targetROI;              // ID of target ROI
     Rois oROIs3;
     Saliency oSaliency;      // saliency computation for target selection
-    tron::SensorLed oSeeBeatLed;   // sensor led for See module's beat
+    tron::Sensor2Led oSeeBeatLed;   // sensor led for See module's beat
 
 public:
     Focus();

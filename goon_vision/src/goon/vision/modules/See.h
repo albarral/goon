@@ -14,7 +14,7 @@
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/PeripheralVision.h"
 #include "tron/util/Click.h"
-#include "tron/control/SensorLed.h"
+#include "tron/control/Sensor2Led.h"
 
 namespace goon
 {    
@@ -37,7 +37,7 @@ private:
     cv::Mat imageCam;     
     float fps;     // processing speed
     tron::Click oClick;
-    tron::SensorLed oGrabBeatLed;   // sensor led for Grab module's beat
+    tron::Sensor2Led oGrabBeatLed;   // sensor led for Grab module's beat
 
 public:
     See();
