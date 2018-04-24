@@ -10,7 +10,7 @@
 #include "goon/data/config/RetinalConfig.h"
 #include "goon/features/color/HSVEssence.h"
 #include "goon/features/color/rgb_color.h"
-#include "maty/math/Distance2.h"
+#include "tron/cv/Distance2.h"
 
 using namespace log4cxx;
 
@@ -82,7 +82,7 @@ void Merge::checkMergeRelations(Retina& oRetina)
         it_region2++;        
         while (it_region2 != list_end)
         {	
-            float separation = maty::Distance2::getWindowsSeparation(window1, it_region2->getWindow());
+            float separation = tron::Distance2::getWindowsSeparation(window1, it_region2->getWindow());
 
             // if windows are bordering
             if (separation < 2)

@@ -8,7 +8,7 @@
 
 #include "goon/show/modules/ShowRetina.h"
 #include "goon/show/monitor/RetinaSaver.h"
-#include "tuly/utils/Environment.h"
+#include "tron/util/Environment.h"
 
 namespace goon
 {  
@@ -126,10 +126,10 @@ void ShowRetina::oneShot()
     bye();
     
     // finally save individual images of retinal regions 
-    std::string folder = tuly::Environment::getHomePath() + "/TESTS/VISION";    
+    std::string folder = tron::Environment::getHomePath() + "/TESTS/VISION";    
 
     // clean folder
-    tuly::Environment::cleanFolder(folder);
+    tron::Environment::cleanFolder(folder);
     // save region images
     RetinaSaver oRetinaSaver;
     oRetinaSaver.setDestinationFolder(folder);           

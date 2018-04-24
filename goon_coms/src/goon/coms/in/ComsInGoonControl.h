@@ -9,7 +9,7 @@
 #include <log4cxx/logger.h>
 
 #include "goon/core/GoonBus.h"
-#include "talky/coms/Command.h"
+#include "tron2/talky/coms/Command.h"
 #include "tuly/utils/IntegerQueue.h"
 
 namespace goon
@@ -37,15 +37,15 @@ public:
     void connect2Arm(GoonBus* pGoonBus);
 
    // transforms command into proper call to arm interface
-    bool processCommand(talky::Command& oCommand);
+    bool processCommand(tron2::Command& oCommand);
     
     tuly::IntegerQueue& getQueueSpecialActions() {return oQueueSpecialActions;}
     
 private:
     // process command of focus category
-    bool processFocusCommand(talky::Command& oCommand);
+    bool processFocusCommand(tron2::Command& oCommand);
     // process command of extra category
-    bool processExtraCommand(talky::Command& oCommand);
+    bool processExtraCommand(tron2::Command& oCommand);
 
     // dummy method for to do commands
     void toDoCommand(float value);

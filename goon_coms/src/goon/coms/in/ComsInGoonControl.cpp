@@ -6,7 +6,7 @@
 #include <string>
 
 #include "goon/coms/in/ComsInGoonControl.h"
-#include "talky/topics/VisionTopic.h"
+#include "tron2/talky/topics/VisionTopic.h"
 
 namespace goon
 {
@@ -23,7 +23,7 @@ void ComsInGoonControl::connect2Arm(GoonBus* pGoonBus)
 }
 
 
-bool ComsInGoonControl::processCommand(talky::Command& oCommand)
+bool ComsInGoonControl::processCommand(tron2::Command& oCommand)
 {
     bool bret = true;
 
@@ -36,11 +36,11 @@ bool ComsInGoonControl::processCommand(talky::Command& oCommand)
 
     switch (oCommand.getCategory())
     {
-        case talky::VisionTopic::eCAT_VISION_FOCUS:
+        case tron2::VisionTopic::eCAT_VISION_FOCUS:
             bret = processFocusCommand(oCommand);
             break;
 
-        case talky::VisionTopic::eCAT_VISION_EXTRA:
+        case tron2::VisionTopic::eCAT_VISION_EXTRA:
             bret = processExtraCommand(oCommand);
             break;
 
@@ -51,19 +51,19 @@ bool ComsInGoonControl::processCommand(talky::Command& oCommand)
     return bret;
 }
 
-bool ComsInGoonControl::processFocusCommand(talky::Command& oCommand)
+bool ComsInGoonControl::processFocusCommand(tron2::Command& oCommand)
 {
     bool bret = true;
     float quantity = oCommand.getQuantity();
     
     switch (oCommand.getConcept())
     {            
-        case talky::VisionTopic::eFOCUS_SHIFT:
+        case tron2::VisionTopic::eFOCUS_SHIFT:
             LOG4CXX_INFO(logger, "> focus shift");  
             pGoonBus->getCO_FOCUS_SHIFT().request();
             break;
 
-        case talky::VisionTopic::eFOCUS_MODE:
+        case tron2::VisionTopic::eFOCUS_MODE:
             LOG4CXX_INFO(logger, "> focus mode" << (int)quantity);  
             pGoonBus->getCO_FOCUS_MODE().request((int)quantity);
             break;
@@ -75,14 +75,14 @@ bool ComsInGoonControl::processFocusCommand(talky::Command& oCommand)
     return bret;
 }
 
-bool ComsInGoonControl::processExtraCommand(talky::Command& oCommand)
+bool ComsInGoonControl::processExtraCommand(tron2::Command& oCommand)
 {
     bool bret = true;
     float quantity = oCommand.getQuantity();
     
     switch (oCommand.getConcept())
     {            
-        case talky::VisionTopic::eEXTRA_VISION_END:
+        case tron2::VisionTopic::eEXTRA_VISION_END:
             LOG4CXX_INFO(logger, "> end goon");  
             oQueueSpecialActions.add(ComsInGoonControl::eACTION_GOON_END);
             break;

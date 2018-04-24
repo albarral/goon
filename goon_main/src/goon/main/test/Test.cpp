@@ -12,7 +12,7 @@
 #include <goon/data/retina.h>
 #include "goon/retinal/merge.h"
 #include "goon/show/monitor/RetinaSaver.h"
-#include "tuly/utils/Environment.h"
+#include "tron/util/Environment.h"
 
 using namespace log4cxx;
 
@@ -140,9 +140,9 @@ void Test::waitSegmenterFinished(Segmenter& oSegmenter)
 
 void Test::showRetina(cv::Mat& imageCam, Retina& oRetina)
 {
-    std::string folder = tuly::Environment::getHomePath() + "/TESTS/VISION";    
+    std::string folder = tron::Environment::getHomePath() + "/TESTS/VISION";    
     // clean folder
-    tuly::Environment::cleanFolder(folder);
+    tron::Environment::cleanFolder(folder);
     // save region images
     RetinaSaver oRetinaSaver;
     oRetinaSaver.setDestinationFolder(folder);           

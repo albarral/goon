@@ -65,8 +65,9 @@
             <pElem>src</pElem>
             <pElem>../goon_data/src</pElem>
             <pElem>../goon_features/src</pElem>
-            <pElem>../../tron/tuly/src</pElem>
-            <pElem>../../tron/maty/src</pElem>
+            <pElem>../../tron/tron_control/src</pElem>
+            <pElem>../../tron/tron_cv/src</pElem>
+            <pElem>../../tron/tron_math/src</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
@@ -97,27 +98,39 @@
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/maty"
+              <makeArtifact PL="../../tron/tron_control"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/maty"
+                            WD="../../tron/tron_control"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_maty.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_control.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/tuly"
+              <makeArtifact PL="../../tron/tron_cv"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/tuly"
+                            WD="../../tron/tron_cv"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_tuly.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_cv.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../../tron/tron_math"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../../tron/tron_math"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_math.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibLibItem>opencv_core</linkerLibLibItem>

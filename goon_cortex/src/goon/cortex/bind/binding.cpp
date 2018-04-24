@@ -8,7 +8,7 @@
 #include "goon/cortex/bind/binding.h"
 #include "goon/data/base/region.h"
 #include "goon/data/config/CortexConfig.h"
-#include "maty/math/area.h"
+#include "tron/cv/area.h"
 
 using namespace log4cxx;
 
@@ -42,7 +42,7 @@ void Binding::formObject(Retina& oRetina, cv::Rect& window, Object& oObject)
     // walk all retina regions 
     while (it_region != it_end)
     {                         
-        overlap = maty::Area::getWindowOverlap(window, it_region->getWindow());
+        overlap = tron::Area::getWindowOverlap(window, it_region->getWindow());
 
         // adding regions that lay inside the specified window to object
         if (overlap > bindObjectFraction)

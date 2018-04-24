@@ -43,7 +43,7 @@ private:
     HSVColor oHSVColor;
     cv::Mat matOverlaps;    // matrix of ROI overlaps (ROIS x regions), stores overlap amounts (in pixels) 
     std::vector<st_match> listMatches;  // list of ROI-Region matchings 
-
+    //std::vector<cv::Vec2i> listMatches2; // list of ROI-Region matchings (roi ID, region ID)     
 
 public:
     RoisDetection();
@@ -61,9 +61,11 @@ private:
     
     // try to match ROIs and regions (based on color & overlap)
     void matchROIs2Regions();
+    //void matchROIs2Regions2();
     
     // update matched ROIs to follow their regions
     void updateMatchedROIs(int millis);
+    //void updateMatchedROIs2(int millis);
     
     // Checks how the given ROI responds to regions. 
     // The number of positive responses is returned

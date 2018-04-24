@@ -18,7 +18,7 @@
 #include "goon/show/monitor/RetinaMonitor.h"
 #include "goon/show/monitor/ROIsMonitor.h"
 #include "goon/show/monitor/RetinaSaver.h"
-#include "tivy/DualWindow.h"
+#include "tron2/tivy/DualWindow.h"
 
 namespace goon
 {
@@ -33,7 +33,7 @@ private:
     cv::Mat imageROIs;
     RetinaMonitor oRetinaMonitor;
     ROIsMonitor oROIsMonitor;
-    tivy::DualWindow oDualWindow; 
+    tron2::DualWindow oDualWindow; 
     std::string windowName;
     Retina oRetina3;
     Rois oROIs3;

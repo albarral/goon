@@ -54,7 +54,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../goon_core/dist/Debug/GNU-Linux -L../goon_core/dist/Debug/GNU-Linux -lgoon_core -Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../../tron/nety/dist/Debug/GNU-Linux -L../../tron/nety/dist/Debug/GNU-Linux -ltron_nety -Wl,-rpath,../../tron/talky/dist/Debug/GNU-Linux -L../../tron/talky/dist/Debug/GNU-Linux -ltron_talky -Wl,-rpath,../../tron/comy/dist/Debug/GNU-Linux -L../../tron/comy/dist/Debug/GNU-Linux -ltron_comy -Wl,-rpath,../../tron/tuly/dist/Debug/GNU-Linux -L../../tron/tuly/dist/Debug/GNU-Linux -ltron_tuly
+LDLIBSOPTIONS=-Wl,-rpath,../goon_core/dist/Debug/GNU-Linux -L../goon_core/dist/Debug/GNU-Linux -lgoon_core -Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -65,14 +65,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../goon
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../goon_data/dist/Debug/GNU-Linux/libgoon_data.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../goon_features/dist/Debug/GNU-Linux/libgoon_features.so
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../../tron/nety/dist/Debug/GNU-Linux/libtron_nety.so
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../../tron/talky/dist/Debug/GNU-Linux/libtron_talky.so
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../../tron/comy/dist/Debug/GNU-Linux/libtron_comy.so
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ../../tron/tuly/dist/Debug/GNU-Linux/libtron_tuly.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -98,10 +90,6 @@ ${OBJECTDIR}/src/goon/coms/modules/GoonListener.o: src/goon/coms/modules/GoonLis
 	cd ../goon_core && ${MAKE}  -f Makefile CONF=Debug
 	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug
 	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug
-	cd ../../tron/nety && ${MAKE}  -f Makefile CONF=Debug
-	cd ../../tron/talky && ${MAKE}  -f Makefile CONF=Debug
-	cd ../../tron/comy && ${MAKE}  -f Makefile CONF=Debug
-	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -113,10 +101,6 @@ ${OBJECTDIR}/src/goon/coms/modules/GoonListener.o: src/goon/coms/modules/GoonLis
 	cd ../goon_core && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../../tron/nety && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../../tron/talky && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../../tron/comy && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../../tron/tuly && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

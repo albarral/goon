@@ -6,7 +6,7 @@
 #include <math.h>
 
 #include "goon/features/structure/Structure2.h"
-#include "maty/math/distance.h"
+#include "tron/cv/distance.h"
 
 namespace goon
 {
@@ -73,7 +73,7 @@ cv::Vec3f Structure2::computeSpatialRelation(cv::Point& position, int mass)
     int xdif = position.x - refPos.x;
     int ydif = position.y - refPos.y;
     // affine invariant module
-    float affineModule = sqrt(maty::Distance::getMahalanobis2s(position, refPos, oRefBlob.getCovariances())); 
+    float affineModule = sqrt(tron::Distance::getMahalanobis2s(position, refPos, oRefBlob.getCovariances())); 
     float relativeAngle = atan2(-ydif, xdif)*180/M_PI; // sign of y changed because image Y axis faces down
     
     return cv::Vec3f(affineModule, relativeAngle, relativeWeight);

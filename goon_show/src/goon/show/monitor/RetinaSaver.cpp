@@ -51,26 +51,28 @@ void RetinaSaver::saveRegions (cv::Mat& imageCam, std::list<Region>& listRegions
 
 void RetinaSaver::saveBody(cv::Mat& imageCam, Body& oBody, cv::Vec3f& rgbColor, std::string name, int ID, bool bdrawCentroid)
 {
-    oDraw.setSize(imageCam);
+    oDraw.setSize(imageCam.cols, imageCam.rows);
     
-    oDraw.clearBackGround();
+    oDraw.clear();
     // draw mask
     oDraw.setExactColor(rgbColor);
     oDraw.drawMask(oBody.getMask(), oBody.getWindow());
-    //oDraw.drawWindow(oBody.getWindow());
+    //oDraw.drawRectangle(oBody.getWindow());
 
     // draw centroid
     if (bdrawCentroid)
     {
-        oDraw.drawPoint(oBody.getPos(), tivy::Draw::eRED, 3);
+        oDraw.setDefaultColor(tron::Draw::eRED);
+        oDraw.drawPoint(oBody.getPos(), 3);
         // draw ID
         oDraw.drawNumber(ID, oBody.getPos());                        
     }
 
     std::string filePath = path + "/" + name + imgExtension;
-    cv::imwrite(filePath, oDraw.getOutput()); 
+    cv::imwrite(filePath, oDraw.getImage()); 
 
-    //      cv::Point& seed = oBody.getSeed();
-    //      oDrawRet.drawPoint(seed, tivy::Draw::eYELLOW);    
+    // draw seed
+    // oDraw.setDefaultColor(tron::Draw::eYELLOW);
+    // oDrawRet.drawPoint(oBody.getSeed());    
 }
 }

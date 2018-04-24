@@ -10,7 +10,7 @@
 #include <log4cxx/logger.h>
 #include "opencv2/core/core.hpp"
 
-#include "tivy/Draw.h"
+#include "tron/display/Draw.h"
 #include "goon/data/base/roi.h"
 
 namespace goon 
@@ -21,7 +21,7 @@ public:
    
 private:
     static log4cxx::LoggerPtr logger;
-    tivy::Draw oDraw;
+    tron::Draw oDraw;
 
 public:
 //    ROIsMonitor();
@@ -33,7 +33,7 @@ public:
     // draws the given fps value
     void drawFPS(float fps);
     
-    cv::Mat& getOutput() {return (oDraw.getOutput());};        
+    cv::Mat& getOutput() {return (oDraw.getImage());};        
 };
 }    
 #endif

@@ -11,7 +11,7 @@
 #include "opencv2/core/core.hpp"
 #include <log4cxx/logger.h>
 
-#include "tuly/control/module3.h"
+#include "tron/control/module3.h"
 #include <goon/data/retina.h>
 #include "goon/retinal/Floodfiller.h"
 
@@ -27,7 +27,7 @@
 // MIN_SIZE: regions under this size are considered irrelevant
 namespace goon
 {
-class Segmenter: public tuly::Module3
+class Segmenter: public tron::Module3
 {
 public:
     enum eState

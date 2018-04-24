@@ -65,13 +65,13 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty
+LDLIBSOPTIONS=-Wl,-rpath,../../tron/tron_cv/dist/Debug/GNU-Linux -L../../tron/tron_cv/dist/Debug/GNU-Linux -ltron_cv -lopencv_core
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ../../tron/tron_cv/dist/Debug/GNU-Linux/libtron_cv.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -80,76 +80,76 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${O
 ${OBJECTDIR}/src/goon/features/Blob.o: src/goon/features/Blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Blob.o src/goon/features/Blob.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Blob.o src/goon/features/Blob.cpp
 
 ${OBJECTDIR}/src/goon/features/Body.o: src/goon/features/Body.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Body.o src/goon/features/Body.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Body.o src/goon/features/Body.cpp
 
 ${OBJECTDIR}/src/goon/features/BodyOverlap.o: src/goon/features/BodyOverlap.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlap.o src/goon/features/BodyOverlap.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlap.o src/goon/features/BodyOverlap.cpp
 
 ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o: src/goon/features/BodyOverlapFraction.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o src/goon/features/BodyOverlapFraction.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o src/goon/features/BodyOverlapFraction.cpp
 
 ${OBJECTDIR}/src/goon/features/ColorBlob.o: src/goon/features/ColorBlob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/ColorBlob.o src/goon/features/ColorBlob.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/ColorBlob.o src/goon/features/ColorBlob.cpp
 
 ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o src/goon/features/color/ColorSimilarity.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o src/goon/features/color/ColorSimilarity.cpp
 
 ${OBJECTDIR}/src/goon/features/color/HSVEssence.o: src/goon/features/color/HSVEssence.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/HSVEssence.o src/goon/features/color/HSVEssence.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/HSVEssence.o src/goon/features/color/HSVEssence.cpp
 
 ${OBJECTDIR}/src/goon/features/color/hsv_color.o: src/goon/features/color/hsv_color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/hsv_color.o src/goon/features/color/hsv_color.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/hsv_color.o src/goon/features/color/hsv_color.cpp
 
 ${OBJECTDIR}/src/goon/features/color/rgb_color.o: src/goon/features/color/rgb_color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/rgb_color.o src/goon/features/color/rgb_color.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/color/rgb_color.o src/goon/features/color/rgb_color.cpp
 
 ${OBJECTDIR}/src/goon/features/motion/TransMotion.o: src/goon/features/motion/TransMotion.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/motion
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/TransMotion.o src/goon/features/motion/TransMotion.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/TransMotion.o src/goon/features/motion/TransMotion.cpp
 
 ${OBJECTDIR}/src/goon/features/nature/Nature.o: src/goon/features/nature/Nature.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/nature
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/nature/Nature.o src/goon/features/nature/Nature.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/nature/Nature.o src/goon/features/nature/Nature.cpp
 
 ${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/shape
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
 
 ${OBJECTDIR}/src/goon/features/structure/Structure.o: src/goon/features/structure/Structure.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure.o src/goon/features/structure/Structure.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure.o src/goon/features/structure/Structure.cpp
 
 ${OBJECTDIR}/src/goon/features/structure/Structure2.o: src/goon/features/structure/Structure2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure2.o src/goon/features/structure/Structure2.cpp
+	$(COMPILE.cc) -g -Isrc -I../../tron/tron_cv/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure2.o src/goon/features/structure/Structure2.cpp
 
 # Subprojects
 .build-subprojects:
-	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/tron_cv && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -158,7 +158,7 @@ ${OBJECTDIR}/src/goon/features/structure/Structure2.o: src/goon/features/structu
 
 # Subprojects
 .clean-subprojects:
-	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/tron_cv && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

@@ -9,22 +9,27 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects>
-                <make-dep-project>../../tron/comy</make-dep-project>
                 <make-dep-project>../goon_show</make-dep-project>
                 <make-dep-project>../goon_vision</make-dep-project>
-                <make-dep-project>../../tron/maty</make-dep-project>
+                <make-dep-project>../../tron/tron_control</make-dep-project>
+                <make-dep-project>../../tron/tron_wire2</make-dep-project>
                 <make-dep-project>../goon_features</make-dep-project>
-                <make-dep-project>../goon_coms</make-dep-project>
+                <make-dep-project>../../tron2/tron2_robot</make-dep-project>
+                <make-dep-project>../../tron/tron_display</make-dep-project>
+                <make-dep-project>../../tron/tron_math</make-dep-project>
+                <make-dep-project>../goon_coms2</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
+                <make-dep-project>../../tron2/tron2_talky</make-dep-project>
+                <make-dep-project>../../tron/tron_cv</make-dep-project>
                 <make-dep-project>../goon_peripheral</make-dep-project>
-                <make-dep-project>../../tron/tuly</make-dep-project>
                 <make-dep-project>../goon_retinal</make-dep-project>
+                <make-dep-project>../../tron/tron_util</make-dep-project>
                 <make-dep-project>../goon_core</make-dep-project>
+                <make-dep-project>../../tron/tron_wire</make-dep-project>
                 <make-dep-project>../goon_cortex</make-dep-project>
-                <make-dep-project>../../tron/talky</make-dep-project>
-                <make-dep-project>../../tron/tivy</make-dep-project>
+                <make-dep-project>../../tron/tron_tools</make-dep-project>
+                <make-dep-project>../../tron2/tron2_tivy</make-dep-project>
                 <make-dep-project>../goon_camera</make-dep-project>
-                <make-dep-project>../../tron/nety</make-dep-project>
             </make-dep-projects>
             <sourceRootList>
                 <sourceRootElem>src/goon/main</sourceRootElem>

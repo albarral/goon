@@ -10,7 +10,7 @@
 #include <list>
 #include "opencv2/core/core.hpp"
 
-#include "tivy/Draw.h"
+#include "tron/display/Draw.h"
 #include "goon/features/Body.h"
 #include "goon/data/base/region.h"
 
@@ -21,7 +21,7 @@ class RetinaSaver
 public:    
    
 private:
-    tivy::Draw oDraw;
+    tron::Draw oDraw;
     std::string path;
     std::string imgExtension;
 

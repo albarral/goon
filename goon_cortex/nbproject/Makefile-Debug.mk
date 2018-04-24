@@ -60,7 +60,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../../tron/maty/dist/Debug/GNU-Linux -L../../tron/maty/dist/Debug/GNU-Linux -ltron_maty
+LDLIBSOPTIONS=-Wl,-rpath,../goon_data/dist/Debug/GNU-Linux -L../goon_data/dist/Debug/GNU-Linux -lgoon_data -Wl,-rpath,../goon_features/dist/Debug/GNU-Linux -L../goon_features/dist/Debug/GNU-Linux -lgoon_features -Wl,-rpath,../../tron/tron_cv/dist/Debug/GNU-Linux -L../../tron/tron_cv/dist/Debug/GNU-Linux -ltron_cv -Wl,-rpath,../../tron/tron_math/dist/Debug/GNU-Linux -L../../tron/tron_math/dist/Debug/GNU-Linux -ltron_math
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -70,7 +70,9 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../go
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../goon_features/dist/Debug/GNU-Linux/libgoon_features.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../../tron/maty/dist/Debug/GNU-Linux/libtron_maty.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../../tron/tron_cv/dist/Debug/GNU-Linux/libtron_cv.so
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ../../tron/tron_math/dist/Debug/GNU-Linux/libtron_math.so
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -79,53 +81,54 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}: ${OBJ
 ${OBJECTDIR}/src/goon/cortex/CortexVision.o: src/goon/cortex/CortexVision.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/CortexVision.o src/goon/cortex/CortexVision.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/CortexVision.o src/goon/cortex/CortexVision.cpp
 
 ${OBJECTDIR}/src/goon/cortex/bind/binding.o: src/goon/cortex/bind/binding.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/bind
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/bind/binding.o src/goon/cortex/bind/binding.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/bind/binding.o src/goon/cortex/bind/binding.cpp
 
 ${OBJECTDIR}/src/goon/cortex/model/Modeling.o: src/goon/cortex/model/Modeling.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/model
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/model/Modeling.o src/goon/cortex/model/Modeling.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/model/Modeling.o src/goon/cortex/model/Modeling.cpp
 
 ${OBJECTDIR}/src/goon/cortex/model/characterization.o: src/goon/cortex/model/characterization.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/model
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/model/characterization.o src/goon/cortex/model/characterization.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/model/characterization.o src/goon/cortex/model/characterization.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Compare.o: src/goon/cortex/recognition/Compare.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Compare.o src/goon/cortex/recognition/Compare.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Compare.o src/goon/cortex/recognition/Compare.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Evidence.o: src/goon/cortex/recognition/Evidence.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Evidence.o src/goon/cortex/recognition/Evidence.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Evidence.o src/goon/cortex/recognition/Evidence.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o: src/goon/cortex/recognition/Matching2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o src/goon/cortex/recognition/Matching2.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Matching2.o src/goon/cortex/recognition/Matching2.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Recall.o: src/goon/cortex/recognition/Recall.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Recall.o src/goon/cortex/recognition/Recall.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Recall.o src/goon/cortex/recognition/Recall.cpp
 
 ${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o: src/goon/cortex/recognition/Recognition2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/cortex/recognition
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/maty/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o src/goon/cortex/recognition/Recognition2.cpp
+	$(COMPILE.cc) -g -Isrc -I../goon_data/src -I../goon_features/src -I../../tron/tron_cv/src -I../../tron/tron_math/src -I../../tron/tron_util/src -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o src/goon/cortex/recognition/Recognition2.cpp
 
 # Subprojects
 .build-subprojects:
 	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug
 	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug
-	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/tron_cv && ${MAKE}  -f Makefile CONF=Debug
+	cd ../../tron/tron_math && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
@@ -136,7 +139,8 @@ ${OBJECTDIR}/src/goon/cortex/recognition/Recognition2.o: src/goon/cortex/recogni
 .clean-subprojects:
 	cd ../goon_data && ${MAKE}  -f Makefile CONF=Debug clean
 	cd ../goon_features && ${MAKE}  -f Makefile CONF=Debug clean
-	cd ../../tron/maty && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/tron_cv && ${MAKE}  -f Makefile CONF=Debug clean
+	cd ../../tron/tron_math && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
