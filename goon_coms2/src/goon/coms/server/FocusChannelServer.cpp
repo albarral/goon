@@ -12,8 +12,9 @@ using namespace log4cxx;
 
 namespace goon
 {
-FocusChannelServer::FocusChannelServer() : ChannelServer(tron2::RobotNodes::eNODE_VISION, tron2::VisionTopics::eVISION_FOCUS)
+FocusChannelServer::FocusChannelServer() 
 {    
+    tron2::ChannelServer::tune4NodeAndTopic(tron2::RobotNodes::eNODE_VISION, tron2::VisionTopics::eVISION_FOCUS);
 }
 
 //FocusChannelServer::~FocusChannelServer()

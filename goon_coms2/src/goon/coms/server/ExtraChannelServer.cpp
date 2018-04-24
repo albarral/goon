@@ -12,9 +12,10 @@ using namespace log4cxx;
 
 namespace goon
 {
-ExtraChannelServer::ExtraChannelServer() : ChannelServer(tron2::RobotNodes::eNODE_VISION, tron2::VisionTopics::eVISION_EXTRA)
+ExtraChannelServer::ExtraChannelServer()
 {    
     bEndRequested = false;
+    tron2::ChannelServer::tune4NodeAndTopic(tron2::RobotNodes::eNODE_VISION, tron2::VisionTopics::eVISION_EXTRA);
 }
 
 //ExtraChannelServer::~ExtraChannelServer()
