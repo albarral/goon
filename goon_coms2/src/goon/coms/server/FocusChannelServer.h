@@ -6,7 +6,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include "tron2/talky/channel/ChannelServer.h"
+#include "tron2/coms/ChannelServer.h"
 #include "goon/coms/VisionConnector.h"
 
 namespace goon

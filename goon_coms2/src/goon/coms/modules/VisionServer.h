@@ -11,7 +11,7 @@
 
 #include "goon/coms/server/FocusChannelServer.h"
 #include "goon/coms/server/ExtraChannelServer.h"
-#include "tron2/talky/channel/ChannelServer.h"
+#include "tron2/coms/ChannelServer.h"
 #include "goon/core/GoonBus.h"
 #include "tron/control/module3.h"
 

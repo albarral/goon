@@ -4,9 +4,9 @@
  ***************************************************************************/
 
 #include "goon/coms/server/FocusChannelServer.h"
-#include "tron2/talky/vision/FocusTalker.h"
-#include "tron2/robot/RobotNodes.h"
-#include "tron2/robot/topics/VisionTopics.h"
+#include "tron2/robot/RobotSystem.h"
+#include "tron2/robot/vision/VisionNode.h"
+#include "tron2/robot/vision/FocusTopic.h"
 
 using namespace log4cxx;
 
@@ -14,7 +14,7 @@ namespace goon
 {
 FocusChannelServer::FocusChannelServer() 
 {    
-    tron2::ChannelServer::tune4NodeAndTopic(tron2::RobotNodes::eNODE_VISION, tron2::VisionTopics::eVISION_FOCUS);
+    tron2::ChannelServer::tune4NodeAndTopic(tron2::RobotSystem::eNODE_VISION, tron2::VisionNode::eVISION_FOCUS);
 }
 
 //FocusChannelServer::~FocusChannelServer()
@@ -43,12 +43,12 @@ void FocusChannelServer::processCommands()
             {
                 switch (code)
                 {
-                    case tron2::FocusTalker::eFOCUS_SHIFT:
+                    case tron2::FocusTopic::eFOCUS_SHIFT:
                         LOG4CXX_INFO(logger, "> shift focus ");                        
                         pGoonBus->getCO_FOCUS_SHIFT().request();
                         break;
 
-                    case tron2::FocusTalker::eFOCUS_MODE:
+                    case tron2::FocusTopic::eFOCUS_MODE:
                         LOG4CXX_INFO(logger, "> focus mode " << value);                        
                         pGoonBus->getCO_FOCUS_MODE().request((int)value);
                         break;

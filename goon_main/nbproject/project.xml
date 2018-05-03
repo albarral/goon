@@ -18,6 +18,7 @@
                 <make-dep-project>../../tron/tron_display</make-dep-project>
                 <make-dep-project>../../tron/tron_math</make-dep-project>
                 <make-dep-project>../goon_coms2</make-dep-project>
+                <make-dep-project>../../tron2/tron2_coms</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
                 <make-dep-project>../../tron2/tron2_talky</make-dep-project>
                 <make-dep-project>../../tron/tron_cv</make-dep-project>
