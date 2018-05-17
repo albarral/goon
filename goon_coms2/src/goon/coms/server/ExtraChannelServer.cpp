@@ -4,6 +4,7 @@
  ***************************************************************************/
 
 #include "goon/coms/server/ExtraChannelServer.h"
+#include "tron2/robot/RobotNetwork.h"
 #include "tron2/robot/RobotSystem.h"
 #include "tron2/robot/Node.h"
 #include "tron2/robot/common/ExtraTopic.h"
@@ -15,7 +16,7 @@ namespace goon
 ExtraChannelServer::ExtraChannelServer()
 {    
     bEndRequested = false;
-    tron2::ChannelServer::tune4NodeAndTopic(tron2::RobotSystem::eNODE_VISION, tron2::Node::eEXTRA_TOPIC);
+    tron2::ChannelServer::connect2Channel(tron2::RobotSystem::eNODE_VISION, tron2::RobotNetwork::eVISION_EXTRA_CHANNEL, tron2::Node::eEXTRA_TOPIC);
 }
 
 //ExtraChannelServer::~ExtraChannelServer()
@@ -40,7 +41,7 @@ void ExtraChannelServer::processCommands()
         {
             LOG4CXX_TRACE(logger, "ExtraChannelServer: check msg " << message);
             // if message interpreted, call proper bus action
-            if (pTalker->interpretMessage(message, code, value))
+            if (oTalker.interpretMessage(message, code, value))
             {
                 switch (code)
                 {

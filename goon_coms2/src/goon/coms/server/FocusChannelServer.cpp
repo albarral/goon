@@ -4,6 +4,7 @@
  ***************************************************************************/
 
 #include "goon/coms/server/FocusChannelServer.h"
+#include "tron2/robot/RobotNetwork.h"
 #include "tron2/robot/RobotSystem.h"
 #include "tron2/robot/vision/VisionNode.h"
 #include "tron2/robot/vision/FocusTopic.h"
@@ -14,7 +15,7 @@ namespace goon
 {
 FocusChannelServer::FocusChannelServer() 
 {    
-    tron2::ChannelServer::tune4NodeAndTopic(tron2::RobotSystem::eNODE_VISION, tron2::VisionNode::eVISION_FOCUS);
+    tron2::ChannelServer::connect2Channel(tron2::RobotSystem::eNODE_VISION, tron2::RobotNetwork::eVISION_FOCUS_CHANNEL, tron2::VisionNode::eVISION_FOCUS);
 }
 
 //FocusChannelServer::~FocusChannelServer()
@@ -39,7 +40,7 @@ void FocusChannelServer::processCommands()
         {
             LOG4CXX_TRACE(logger, "FocusChannelServer: check msg " << message);
             // if message interpreted, call proper bus action
-            if (pTalker->interpretMessage(message, code, value))
+            if (oTalker.interpretMessage(message, code, value))
             {
                 switch (code)
                 {
