@@ -6,14 +6,17 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
+#include <list>
 #include <string>
 #include <log4cxx/logger.h>
+
 #include <opencv2/core/core.hpp>
 
 #include "goon/core/GoonModule.h"
+#include "goon/data/rois.h"
 #include "goon/data/base/roi.h"
 #include "goon/peripheral/Saliency.h"
-#include "tuly/control/module3.h"
+#include "tron/control/Sensor2Led.h"
 
 namespace goon
 {    
@@ -21,7 +24,7 @@ namespace goon
 class Focus : public GoonModule
 {
 public:
-    // states of Focus module
+    // module states
     enum eState
     {
         eSTATE_SEARCH,
@@ -32,18 +35,21 @@ public:
     enum eMode
     {
         eSEARCH_POSITION,
-        eSEARCH_COLOR,
-        eSEARCH_MOVEMENT,
+//        eSEARCH_COLOR,
+//        eSEARCH_MOVEMENT,
+        eSEARCH_SALIENCY,
         eSEARCH_DIM
     };
 
 private:
     static log4cxx::LoggerPtr logger;
     // logic
-    int mode;   // search mode
+    int mode;                  // search mode for target selection
     cv::Vec3f features;    // feature values to be searched 
-    int targetROI;      // ID of target ROI
-    Saliency oSaliency;         // saliency computation
+    int targetROI;              // ID of target ROI
+    Rois oROIs3;
+    Saliency oSaliency;      // saliency computation for target selection
+    tron::Sensor2Led oSeeBeatLed;   // sensor led for See module's beat
 
 public:
     Focus();
@@ -71,9 +77,12 @@ private:
     bool followTarget();
     // try to detect a lost target
     bool detectTarget();
-    // compute interest value 
-    float computeInterest(ROI& oROI);
-
+    
+    // select target by position
+    int selectTargetByPosition(std::list<ROI>& listROIs);
+            
+    // waits first beat from see module
+    void wait4SeeBeat();
 };
 
 }

@@ -35,13 +35,20 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/features/Time.o \
+	${OBJECTDIR}/src/goon/features/Blob.o \
+	${OBJECTDIR}/src/goon/features/Body.o \
+	${OBJECTDIR}/src/goon/features/BodyOverlap.o \
+	${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o \
+	${OBJECTDIR}/src/goon/features/ColorBlob.o \
 	${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o \
 	${OBJECTDIR}/src/goon/features/color/HSVEssence.o \
 	${OBJECTDIR}/src/goon/features/color/hsv_color.o \
 	${OBJECTDIR}/src/goon/features/color/rgb_color.o \
 	${OBJECTDIR}/src/goon/features/motion/TransMotion.o \
-	${OBJECTDIR}/src/goon/features/shape/shape.o
+	${OBJECTDIR}/src/goon/features/nature/Nature.o \
+	${OBJECTDIR}/src/goon/features/shape/shape.o \
+	${OBJECTDIR}/src/goon/features/structure/Structure.o \
+	${OBJECTDIR}/src/goon/features/structure/Structure2.o
 
 
 # C Compiler Flags
@@ -68,10 +75,30 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}: ${O
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
-${OBJECTDIR}/src/goon/features/Time.o: src/goon/features/Time.cpp 
+${OBJECTDIR}/src/goon/features/Blob.o: src/goon/features/Blob.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Time.o src/goon/features/Time.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Blob.o src/goon/features/Blob.cpp
+
+${OBJECTDIR}/src/goon/features/Body.o: src/goon/features/Body.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/Body.o src/goon/features/Body.cpp
+
+${OBJECTDIR}/src/goon/features/BodyOverlap.o: src/goon/features/BodyOverlap.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlap.o src/goon/features/BodyOverlap.cpp
+
+${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o: src/goon/features/BodyOverlapFraction.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/BodyOverlapFraction.o src/goon/features/BodyOverlapFraction.cpp
+
+${OBJECTDIR}/src/goon/features/ColorBlob.o: src/goon/features/ColorBlob.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/ColorBlob.o src/goon/features/ColorBlob.cpp
 
 ${OBJECTDIR}/src/goon/features/color/ColorSimilarity.o: src/goon/features/color/ColorSimilarity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/color
@@ -98,10 +125,25 @@ ${OBJECTDIR}/src/goon/features/motion/TransMotion.o: src/goon/features/motion/Tr
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/motion/TransMotion.o src/goon/features/motion/TransMotion.cpp
 
+${OBJECTDIR}/src/goon/features/nature/Nature.o: src/goon/features/nature/Nature.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/nature
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/nature/Nature.o src/goon/features/nature/Nature.cpp
+
 ${OBJECTDIR}/src/goon/features/shape/shape.o: src/goon/features/shape/shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/features/shape
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/shape/shape.o src/goon/features/shape/shape.cpp
+
+${OBJECTDIR}/src/goon/features/structure/Structure.o: src/goon/features/structure/Structure.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure.o src/goon/features/structure/Structure.cpp
+
+${OBJECTDIR}/src/goon/features/structure/Structure2.o: src/goon/features/structure/Structure2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/features/structure
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/features/structure/Structure2.o src/goon/features/structure/Structure2.cpp
 
 # Subprojects
 .build-subprojects:

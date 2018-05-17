@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/peripheral/IDPool.o \
 	${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o \
 	${OBJECTDIR}/src/goon/peripheral/RoisDetection.o \
 	${OBJECTDIR}/src/goon/peripheral/Saliency.o
@@ -64,11 +63,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_peripheral.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
-
-${OBJECTDIR}/src/goon/peripheral/IDPool.o: src/goon/peripheral/IDPool.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/peripheral/IDPool.o src/goon/peripheral/IDPool.cpp
 
 ${OBJECTDIR}/src/goon/peripheral/PeripheralVision.o: src/goon/peripheral/PeripheralVision.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/peripheral

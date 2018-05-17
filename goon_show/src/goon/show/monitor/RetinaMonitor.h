@@ -10,8 +10,9 @@
 #include <log4cxx/logger.h>
 #include "opencv2/core/core.hpp"
 
-#include "tivy/Draw.h"
+#include "tron/display/Draw.h"
 #include "goon/data/base/region.h"
+#include "goon/data/cortex/Object.h"
 
 namespace goon 
 {
@@ -21,16 +22,17 @@ public:
    
 private:
     static log4cxx::LoggerPtr logger;
-    tivy::Draw oDraw;
+    tron::Draw oDraw;
 
 public:
 //    RetinaMonitor();
 //    ~RetinaMonitor();
     
     // Draws an image with the given list of regions 
-    void drawRegions (cv::Mat& image_cam, std::list<Region>& listRegions);
+    void drawRegions(cv::Mat& image_cam, std::list<Region>& listRegions);
+    void drawObject(cv::Mat& image_cam, Object& oObject);
     
-    cv::Mat& getOutput() {return (oDraw.getOutput());};    
+    cv::Mat& getOutput() {return (oDraw.getImage());};    
 
 private:
     // obtains the border of a given mask

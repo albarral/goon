@@ -35,13 +35,17 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/goon/data/base/Body.o \
-	${OBJECTDIR}/src/goon/data/base/BodyUtils.o \
+	${OBJECTDIR}/src/goon/data/VisualMemory.o \
 	${OBJECTDIR}/src/goon/data/base/ColorBody.o \
 	${OBJECTDIR}/src/goon/data/base/RealBody.o \
-	${OBJECTDIR}/src/goon/data/base/blob.o \
 	${OBJECTDIR}/src/goon/data/base/region.o \
 	${OBJECTDIR}/src/goon/data/base/roi.o \
+	${OBJECTDIR}/src/goon/data/config/CortexConfig.o \
+	${OBJECTDIR}/src/goon/data/config/RetinalConfig.o \
+	${OBJECTDIR}/src/goon/data/cortex/Model.o \
+	${OBJECTDIR}/src/goon/data/cortex/Object.o \
+	${OBJECTDIR}/src/goon/data/cortex/ObjectModel.o \
+	${OBJECTDIR}/src/goon/data/cortex/Scene.o \
 	${OBJECTDIR}/src/goon/data/retina.o \
 	${OBJECTDIR}/src/goon/data/rois.o
 
@@ -70,15 +74,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}: ${OBJEC
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
-${OBJECTDIR}/src/goon/data/base/Body.o: src/goon/data/base/Body.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
+${OBJECTDIR}/src/goon/data/VisualMemory.o: src/goon/data/VisualMemory.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/Body.o src/goon/data/base/Body.cpp
-
-${OBJECTDIR}/src/goon/data/base/BodyUtils.o: src/goon/data/base/BodyUtils.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/BodyUtils.o src/goon/data/base/BodyUtils.cpp
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/VisualMemory.o src/goon/data/VisualMemory.cpp
 
 ${OBJECTDIR}/src/goon/data/base/ColorBody.o: src/goon/data/base/ColorBody.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
@@ -90,11 +89,6 @@ ${OBJECTDIR}/src/goon/data/base/RealBody.o: src/goon/data/base/RealBody.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/RealBody.o src/goon/data/base/RealBody.cpp
 
-${OBJECTDIR}/src/goon/data/base/blob.o: src/goon/data/base/blob.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/blob.o src/goon/data/base/blob.cpp
-
 ${OBJECTDIR}/src/goon/data/base/region.o: src/goon/data/base/region.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
@@ -104,6 +98,36 @@ ${OBJECTDIR}/src/goon/data/base/roi.o: src/goon/data/base/roi.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data/base
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/base/roi.o src/goon/data/base/roi.cpp
+
+${OBJECTDIR}/src/goon/data/config/CortexConfig.o: src/goon/data/config/CortexConfig.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/config
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/config/CortexConfig.o src/goon/data/config/CortexConfig.cpp
+
+${OBJECTDIR}/src/goon/data/config/RetinalConfig.o: src/goon/data/config/RetinalConfig.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/config
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/config/RetinalConfig.o src/goon/data/config/RetinalConfig.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/Model.o: src/goon/data/cortex/Model.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Model.o src/goon/data/cortex/Model.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/Object.o: src/goon/data/cortex/Object.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Object.o src/goon/data/cortex/Object.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/ObjectModel.o: src/goon/data/cortex/ObjectModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/ObjectModel.o src/goon/data/cortex/ObjectModel.cpp
+
+${OBJECTDIR}/src/goon/data/cortex/Scene.o: src/goon/data/cortex/Scene.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/goon/data/cortex
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/data/cortex/Scene.o src/goon/data/cortex/Scene.cpp
 
 ${OBJECTDIR}/src/goon/data/retina.o: src/goon/data/retina.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/data

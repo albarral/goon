@@ -27,12 +27,30 @@
           <itemPath>src/goon/features/motion/TransMotion.cpp</itemPath>
           <itemPath>src/goon/features/motion/TransMotion.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="f2" displayName="nature" projectFiles="true">
+          <itemPath>src/goon/features/nature/Nature.cpp</itemPath>
+          <itemPath>src/goon/features/nature/Nature.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="shape" displayName="shape" projectFiles="true">
           <itemPath>src/goon/features/shape/shape.cpp</itemPath>
           <itemPath>src/goon/features/shape/shape.h</itemPath>
         </logicalFolder>
-        <itemPath>src/goon/features/Time.cpp</itemPath>
-        <itemPath>src/goon/features/Time.h</itemPath>
+        <logicalFolder name="f1" displayName="structure" projectFiles="true">
+          <itemPath>src/goon/features/structure/Structure.cpp</itemPath>
+          <itemPath>src/goon/features/structure/Structure.h</itemPath>
+          <itemPath>src/goon/features/structure/Structure2.cpp</itemPath>
+          <itemPath>src/goon/features/structure/Structure2.h</itemPath>
+        </logicalFolder>
+        <itemPath>src/goon/features/Blob.cpp</itemPath>
+        <itemPath>src/goon/features/Blob.h</itemPath>
+        <itemPath>src/goon/features/Body.cpp</itemPath>
+        <itemPath>src/goon/features/Body.h</itemPath>
+        <itemPath>src/goon/features/BodyOverlap.cpp</itemPath>
+        <itemPath>src/goon/features/BodyOverlap.h</itemPath>
+        <itemPath>src/goon/features/BodyOverlapFraction.cpp</itemPath>
+        <itemPath>src/goon/features/BodyOverlapFraction.h</itemPath>
+        <itemPath>src/goon/features/ColorBlob.cpp</itemPath>
+        <itemPath>src/goon/features/ColorBlob.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -63,30 +81,53 @@
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
-            <pElem>../../tron/maty/src</pElem>
+            <pElem>../../tron/tron_cv/src</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}</output>
           <linkerLibItems>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/maty"
+              <makeArtifact PL="../../tron/tron_cv"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/maty"
+                            WD="../../tron/tron_cv"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_maty.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_cv.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
+            <linkerLibLibItem>opencv_core</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="src/goon/features/Time.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/Blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/Blob.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"
@@ -138,9 +179,36 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/features/nature/Nature.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/nature/Nature.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/features/shape/shape.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/shape/shape.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="2">
@@ -163,9 +231,31 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/goon/features/Time.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/goon/features/Blob.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/goon/features/Time.h" ex="false" tool="3" flavor2="0">
+      <item path="src/goon/features/Blob.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/Body.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/BodyOverlapFraction.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/features/ColorBlob.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/features/color/ColorSimilarity.cpp"
             ex="false"
@@ -217,9 +307,36 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/goon/features/nature/Nature.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/nature/Nature.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/goon/features/shape/shape.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/features/shape/shape.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/goon/features/structure/Structure2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
     </conf>
   </confs>

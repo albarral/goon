@@ -37,7 +37,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/goon/retinal/ColorGrid.o \
 	${OBJECTDIR}/src/goon/retinal/ColorNode.o \
-	${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o \
 	${OBJECTDIR}/src/goon/retinal/Exploration.o \
 	${OBJECTDIR}/src/goon/retinal/Floodfiller.o \
 	${OBJECTDIR}/src/goon/retinal/Grid.o \
@@ -80,11 +79,6 @@ ${OBJECTDIR}/src/goon/retinal/ColorNode.o: src/goon/retinal/ColorNode.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ColorNode.o src/goon/retinal/ColorNode.cpp
-
-${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o: src/goon/retinal/ConfigRetinal.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/goon/retinal/ConfigRetinal.o src/goon/retinal/ConfigRetinal.cpp
 
 ${OBJECTDIR}/src/goon/retinal/Exploration.o: src/goon/retinal/Exploration.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/goon/retinal

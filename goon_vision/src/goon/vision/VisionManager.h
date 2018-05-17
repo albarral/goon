@@ -11,6 +11,7 @@
 #include "goon/vision/modules/Grab.h"
 #include "goon/vision/modules/See.h"
 #include "goon/vision/modules/Focus.h"
+#include "goon/vision/modules/Look.h"
 #include "goon/core/GoonBus.h"
 #include "goon/core/VisualData.h"
 
@@ -26,6 +27,7 @@ private:
     Grab oGrab; // grab module (grabs images from camera)    
     See oSee;    // see module (retinal & peripheral vision)
     Focus oFocus;    // see module (retinal & peripheral vision)
+    Look oLook;    // look module (binding & identification)
     // logic
     int workingCamera;      // type of camera used
     

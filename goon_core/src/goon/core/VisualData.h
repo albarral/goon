@@ -11,6 +11,8 @@
 #include "opencv2/core/core.hpp"
 #include "goon/data/retina.h"
 #include "goon/data/rois.h"
+#include "goon/data/cortex/Object.h"
+#include "goon/data/cortex/Scene.h"
 
 namespace goon 
 {
@@ -20,13 +22,14 @@ class VisualData
         std::mutex mutexCam;        
         std::mutex mutexRetina;        
         std::mutex mutexRois;        
+        std::mutex mutexObject;        
         cv::Mat imageCam;       // image from camera
-        // dynamic data (in constant change)
-        Retina oRetina;             // retinal data (output of retinal vision)
-        Rois oROIs;                  // regions of interest (output of peripheral vision)
-        // static copy of the dynamic data (updated after each visual iteration)
+        // retinal & peripheral section
         Retina oRetina2;          // copy of the dynamic retina
         Rois oROIs2;               // copy of the dynamic rois 
+        // cortex section
+        Object oObject2;        // copy of the dynamic object
+        Scene oScene;
         
     public:
         VisualData();
@@ -37,16 +40,16 @@ class VisualData
         // gets copy of camera image
         void getCameraFrameCopy(cv::Mat& imageOut);
                 
-        Retina& getRetina() {return oRetina;};
-        Rois& getROIs() {return oROIs;};
-        
         // store static copies of the dynamic data
-        void cloneRetina();
-        void cloneROIs();
-        
-        Retina& getRetina2();
-        Rois& getROIs2();
-        
+        void updateRetina2(Retina& oRetina);
+        void updateROIs2(Rois& oROIs);
+        void updateObject2(Object& oObject);
+
+        void getRetinaCopy(Retina& oRetina3);
+        void getROIsCopy(Rois& oROIs3);
+        void getObjectCopy(Object& oObject3);        
+                
+        Scene& getScene() {return oScene;};
 };
 }    
 #endif

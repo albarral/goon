@@ -9,19 +9,28 @@ namespace goon
 {
 Retina::Retina ()
 {
-    ID = -1;
+    ID = 0;
 }
 
 Retina::~Retina()
 {
-    listRegions.clear();
+    clear();
 }
 
-// assignment operator
+// assignment operator (necessary due to mutex existence)
 Retina& Retina::operator= (const Retina& oRetina)
 {
     ID = oRetina.ID;
     listRegions = oRetina.listRegions;
+    mapRegions = oRetina.mapRegions;
+}
+
+void Retina::clear()
+{  
+    std::lock_guard<std::mutex> locker(mutex);
+    ID = 0;   
+    listRegions.clear();
+    mapRegions.clear();
 }
 
 std::list<Region>& Retina::getListRegions() 
@@ -33,17 +42,54 @@ std::list<Region>& Retina::getListRegions()
 void Retina::addRegion(Region& oRegion)
 {
     std::lock_guard<std::mutex> locker(mutex);
-    ID++;
-    oRegion.setID(ID);
+    oRegion.setID(ID++);
     listRegions.push_back(oRegion);
 }  
+
+void Retina::updateRegionsMap()
+{
+    // clear map
+    mapRegions.clear();
+    
+    // walk list and create associated map
+    std::list<Region>::iterator it_Region = listRegions.begin();
+    std::list<Region>::iterator it_end = listRegions.end();    
+    int pos = 0;
+    while (it_Region != it_end)
+    {
+        mapRegions.emplace(it_Region->getID(), pos);        
+        it_Region++;
+        pos++;
+    }    
+}
+
+Region* Retina::getRegionByID(int ID)
+{
+    // first we get the mapped position
+    int pos = getRegionPosition(ID);
+    // then we access the Region
+    return getRegionByIndex(pos);
+}
+
+Region* Retina::getRegionByIndex(int pos)
+{
+    // if position exists, return Region pointer
+    if (pos >= 0 && pos < listRegions.size())
+    {
+        std::list<Region>::iterator it_Region = listRegions.begin();
+        std::advance(it_Region, pos);
+        return &(*it_Region);    
+    }
+    // otherwise, return 0
+    else
+        return 0;
+}
 
 // remove the invalid (merged) regions from list, reassigning ID's in the new list
 void Retina::removeInvalidRegions()
 {
     std::lock_guard<std::mutex> locker(mutex);
 
-    ID = 0; // reassign IDs
     std::list<Region>::iterator it_region = listRegions.begin();
     // remove merged regions from list
     while (it_region != listRegions.end())
@@ -51,10 +97,7 @@ void Retina::removeInvalidRegions()
         if (it_region->isMerged())
             it_region = listRegions.erase(it_region);
         else 
-        {
-            it_region->setID(ID++);
             it_region++;
-        }
     }
 }
 
@@ -62,24 +105,20 @@ int Retina::getNumRegions()
 {
    std::lock_guard<std::mutex> locker(mutex);
    return listRegions.size();
-};
-
-
-void Retina::clear()
-{  
-    std::lock_guard<std::mutex> locker(mutex);
-    listRegions.clear();
-    ID = -1;    // first region ID is 0
 }
-   
-Region& Retina::getRegion(int ID)
+
+int Retina::getRegionPosition(int regionID)
 {
-    std::lock_guard<std::mutex> locker(mutex);
-    // regions are ordered by ID
-    std::list<Region>::iterator it_region = listRegions.begin();
-    std::advance(it_region, ID);
-    
-    return *it_region;
+    try
+    {
+        // get mapped position of given Region
+        return mapRegions.at(regionID);
+    }    
+    catch (const std::out_of_range& oor) 
+    {
+        // not found
+        return -1;
+    }
 }
 
 std::string Retina::toString()

@@ -1,5 +1,5 @@
-#ifndef __GOON_UTILS_SHAPE_H
-#define __GOON_UTILS_SHAPE_H
+#ifndef __GOON_FEATURES_SHAPE_H
+#define __GOON_FEATURES_SHAPE_H
 
 /***************************************************************************
  *   Copyright (C) 2010 by Migtron Robotics   *
@@ -32,7 +32,7 @@ class Shape
      static const int UNDEFINED_ORIENTATION;
 
  private:
-        int centroid[2];		// (x, y)
+        cv::Point centroid;		// (x, y)
         cv::Vec3f covs; 		// (cov_xx, cov_yy, cov_xy)
         float width;
         float height;
@@ -41,27 +41,31 @@ class Shape
 
  public:
      Shape ();
-     ~Shape();
+     //~Shape();
 
+    cv::Point& getCentroid() {return centroid;};
+    cv::Vec3f& getCovariances() {return covs;};
+    float getWidth() {return width;};
+    float getHeight() {return height;};
+    float getAngle() {return angle;};
+    float getShapeFactor() {return shape_factor;};
+    
+    // computes shape from given mask & window
     void computeShape(cv::Mat& mask, cv::Rect& window);
 
-    static void computeCovariances(cv::Mat& mask, cv::Rect& window, int* centroid, cv::Vec3f& covs);
-    // This function calculates the centroid (x, y) and covariances (cxx, cyy, cxy) of a region
+    // computes shape from given covariances
+    void computeShapeFromCovs(cv::Vec3f& covs);
 
+    // compute centroid (x, y) and covariances (cxx, cyy, cxy) of a given mask & window
+    static void computeCovariances(cv::Mat& mask, cv::Rect& window, cv::Point& centroid, cv::Vec3f& covs);
+    
     static void computeEllipse(float cxx, float cyy, float cxy, float& width, float& height, float &angle);
     // This function calculates the principal axes of a main ellipse from its given covariances.
     // Resulting angle (in counter clockwise direction) is always inside [-90, 90]
 
-    static void mergeEllipses(int (&pos1)[2], cv::Vec3f& covs1, int (&pos2)[2], cv::Vec3f& covs2, int m1, int m2);
+    static void mergeEllipses(cv::Point& pos1, cv::Vec3f& covs1, cv::Point& pos2, cv::Vec3f& covs2, int m1, int m2);
     // This function merges two ellipses by combining their covariances and centroids.
     // The function returns the resulting ellipse in the first position and covariances values.
-
-    int* getCentroid();
-    cv::Vec3f& getCovariances();
-    float getWidth();
-    float getHeight();
-    float getAngle();
-    float getShapeFactor();
       
  private:
      // Calculates the spatial and central moments of a mask up to order 2

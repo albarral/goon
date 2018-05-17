@@ -3,8 +3,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <unistd.h>
-
 #include "goon/vision/VisionManager.h"
 
 namespace goon 
@@ -14,10 +12,10 @@ log4cxx::LoggerPtr VisionManager::logger(log4cxx::Logger::getLogger("goon.vision
 VisionManager::VisionManager() 
 {
     blaunched = false;    
-    workingCamera = goon::Grab::eCAM_WEBCAM;        
+//    workingCamera = goon::Grab::eCAM_WEBCAM;        
 //    workingCamera = goon::Grab::eCAM_IPCAM;
 //    workingCamera = goon::Grab::eVIDEO_CAMPUS_HALL;
-//    workingCamera = goon::Grab::eIMAGE_ORANGE1;
+    workingCamera = goon::Grab::eIMAGE_ORANGE1;
 }
 
 VisionManager::~VisionManager() 
@@ -47,10 +45,15 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
         oFocus.init(oGoonBus, oVisualData);
         oFocus.setFrequency(freq);    
         
+        // look module 
+        oLook.init(oGoonBus, oVisualData);
+        oLook.setFrequency(freq);    
+
         // launch modules
         oGrab.on();
         oSee.on();    
         oFocus.on();    
+        oLook.on();    
         
         blaunched = true;    
     }
@@ -64,6 +67,12 @@ bool VisionManager::launch(GoonBus& oGoonBus, VisualData& oVisualData)
 void VisionManager::end()
 {
     LOG4CXX_INFO(logger, "stopping VisionManager ..."); 
+
+    if (oLook.isOn())
+    {    
+        oLook.off();
+        oLook.wait();
+    }
 
     if (oFocus.isOn())
     {    
@@ -95,12 +104,15 @@ void VisionManager::oneShot(GoonBus& oGoonBus, VisualData& oVisualData)
     oGrab.setFrequency(20.0);
     oSee.init(oGoonBus, oVisualData);
     oFocus.init(oGoonBus, oVisualData);
+    oLook.init(oGoonBus, oVisualData);
     
     oGrab.on();        
+    
     oSee.oneShot();    
     oFocus.oneShot();    
-    oGrab.off();
+    oLook.oneShot();    
     
+    oGrab.off();    
     oGrab.wait();        
 }
 

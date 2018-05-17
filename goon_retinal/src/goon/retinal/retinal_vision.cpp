@@ -6,10 +6,8 @@
 #include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
 
 #include "goon/retinal/retinal_vision.h"
-#include <goon/data/goon_version.h>
 #include <goon/data/base/region.h>
 #include <goon/features/color/rgb_color.h>
-#include <goon/features/shape/shape.h>
 
 using namespace log4cxx;
 
@@ -17,20 +15,16 @@ namespace goon
 {
 LoggerPtr RetinalVision::logger(Logger::getLogger("goon.retinal"));
 
-
 RetinalVision::RetinalVision()
 {  
-    LOG4CXX_INFO(logger, "goon " << GOON_VERSION << " - Retinal vision");
-    pRetina = 0;
 }
 
 RetinalVision::~RetinalVision()
 {
 }
 
-void RetinalVision::init(Retina& oRetina, int img_w, int img_h)
+void RetinalVision::init(int img_w, int img_h)
 {
-    pRetina = &oRetina;
     oSegmentation4.init(oRetina, img_w, img_h);
     oMerge.init(img_w, img_h);
 }
@@ -49,49 +43,36 @@ void RetinalVision::update (cv::Mat& image_cam)
 {
     LOG4CXX_TRACE(logger, "update - init");
 
-    pRetina->clear();
+    // clear retina on every update
+    oRetina.clear();
     
     // convert to HSV space
     cv::Mat image_hsv;        
     cv::cvtColor(image_cam, image_hsv, CV_BGR2HSV);
 
+    // segment regions
     oSegmentation4.extractRegions(image_cam, image_hsv);
     
     // show retina description
-    LOG4CXX_DEBUG(logger, pRetina->shortDesc());
-//    cv::Vec3b hsvColor(8, 230, 180); 
-//    cv::Vec3b hsvDev(3, 30, 60); 
-//    LOG4CXX_DEBUG(logger, pRetina->showFilterByColor(hsvColor, hsvDev));
+    LOG4CXX_DEBUG(logger, oRetina.shortDesc());
 
-    oMerge.doMerge(*pRetina);
+    // merge regions
+    oMerge.doMerge(oRetina);
 
-    pRetina->removeInvalidRegions();
+    LOG4CXX_TRACE(logger, "compute covariances");
 
-    //LOG4CXX_DEBUG(logger, "final regions = " << mRetina.getNumFinalIDs());
-    //describeRegions();
+    // compute region blobs (covariances & centroids)
+    for (Region& oRegion : oRetina.getListRegions())
+        oRegion.computeBlob();
+
     LOG4CXX_TRACE(logger, "update - end");
 }
 
 
-void RetinalVision::computeCovariances()
-{    
-    LOG4CXX_TRACE(logger, "computeCovariances - init");
-
-    // walk the list of final regions
-    for (Region& oRegion : pRetina->getListRegions())
-    {
-        LOG4CXX_TRACE(logger, "region = " << oRegion.toString());
-        
-        Shape::computeCovariances(oRegion.getMask(), oRegion.getWindow(), oRegion.getPos(), oRegion.getCovariances());
-    }    
-    
-    LOG4CXX_TRACE(logger, "computeCovariances - end");
-}
-
 void RetinalVision::describeRegions()
 {
     LOG4CXX_DEBUG(logger, "regions description ...");
-    for (Region& oRegion : pRetina->getListRegions()) 
+    for (Region& oRegion : oRetina.getListRegions()) 
     {
         LOG4CXX_DEBUG(logger, oRegion.shortDesc());
     } 

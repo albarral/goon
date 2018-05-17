@@ -22,6 +22,9 @@ void TestRegions::testMerge()
 {        
     std::cout << "TEST REGIONS ..." << std::endl;
 
+    // this method creates 3 rectangular regions (2 of them overlapping) and puts them into a retina 
+    // it then tries to merge the regions, but will not succeed due to the absence of their color grids
+
     int w = 640;
     int h = 480;
 
@@ -32,27 +35,28 @@ void TestRegions::testMerge()
     cv::Mat imageRegions, imageMerge;
 
     // windows
-    int base = 50; 
-    int alt = 50;     
-    cv::Rect window1 = cv::Rect (0, 0, base, alt);
-    cv::Rect window2 = cv::Rect (0, 25, base, alt);
-    cv::Rect window3 = cv::Rect (100, 0, base*2, alt);
+    int w2 = 50; 
+    int h2 = 50;     
+    int x1 = 0;
+    int x2 = 0;
+    int x3 = 100;
+    int y1 = 0;
+    int y2 = 25;
+    int y3 = 0;
+    cv::Rect window1 = cv::Rect (x1, y1, w2, h2);
+    cv::Rect window2 = cv::Rect (x2, y2, w2, h2);
+    cv::Rect window3 = cv::Rect (x3, y3, 2*w2, h2);
 
-    // masks
-    cv::Mat mask1 = cv::Mat (h, w, CV_8U);
-    cv::Mat mask2 = cv::Mat (h, w, CV_8U);
-    cv::Mat mask3 = cv::Mat (h, w, CV_8U);
-    cv::Mat grid = cv::Mat::ones(h/10, w/10, CV_16U);
-   
-    // paint masks
-    cv::Mat maskROI = mask1(window1);    
-    maskROI.setTo(255);
-    maskROI = mask2(window2);    
-    maskROI.setTo(255);
-    maskROI = mask3(window3);    
-    maskROI.setTo(255);
-    
-    // create regions, assign ID/mask/window/grid
+    // 3 rectangular masks
+    cv::Mat mask = cv::Mat::zeros(h, w, CV_8U);
+    cv::Mat mask1 = mask.clone();
+    cv::Mat mask2 = mask.clone();
+    cv::Mat mask3 = mask.clone();
+    mask1(window1).setTo(255);
+    mask2(window2).setTo(255);
+    mask3(window3).setTo(255);
+       
+    // create 3 regions 
     Region oRegion1, oRegion2, oRegion3;
     oRegion1.setID(0);
     oRegion1.setMaskAndWindow(mask1, window1);
@@ -61,45 +65,36 @@ void TestRegions::testMerge()
     oRegion3.setID(2);
     oRegion3.setMaskAndWindow(mask3, window3);
 
-    // compute blobs
-    oRegion1.computeMass();
-    oRegion1.computeBlob();
-    oRegion2.computeMass();
-    oRegion2.computeBlob();
-    oRegion3.computeMass();
-    oRegion3.computeBlob();
+    // create regions list
+    std::list<Region> listRegions;
+    listRegions.push_back(oRegion1);
+    listRegions.push_back(oRegion2);
+    listRegions.push_back(oRegion3);
 
-    // set colors
+    // build retina with the 3 regions
     cv::Vec3f redColor = {255, 0, 0};
-    oRegion1.setRGB(redColor);
-    oRegion1.setHSV(RGBColor::toHSV(oRegion1.getRGB()));
-    oRegion2.setRGB(redColor);
-    oRegion2.setHSV(RGBColor::toHSV(oRegion2.getRGB()));
-    oRegion3.setRGB(redColor);
-    oRegion3.setHSV(RGBColor::toHSV(oRegion3.getRGB()));
-                
-    oRetina.addRegion(oRegion1);
-    oRetina.addRegion(oRegion2);
-    oRetina.addRegion(oRegion3);
-
+    for (Region& oRegion : listRegions)
+    {    
+        // compute blobs
+        oRegion.computeMass();
+        oRegion.computeBlob();
+        // set colors
+        oRegion.setRGB(redColor);
+        oRegion.setHSV(RGBColor::toHSV(oRegion1.getRGB()));
+        // and add to retina
+        oRetina.addRegion(oRegion);
+    }
     
-    // Retina2
+    // clone retina to retina2
     oRetina2 = oRetina;
-    
+    // merge regions in retina2 (won't merge anything without informed color grids)
     Merge oMerge;
     oMerge.doMerge(oRetina2);
     
-//    Region oRegion4;
-//    oRegion4 = oRegion3;
-//    oRegion4.merge(oRegion2);
-//    oRegion4.merge(oRegion1);
-    
-//    std::list<Region> listRegions2;
-//    listRegions2.push_back(oRegion4);
-
-    // draw
+    // draw retina1
     oRetinaMonitor.drawRegions(imageCam, oRetina.getListRegions());               
     imageRegions = oRetinaMonitor.getOutput();   
+    // draw retina2
     oRetinaMonitor2.drawRegions(imageCam, oRetina2.getListRegions());               
     imageMerge = oRetinaMonitor2.getOutput();   
 

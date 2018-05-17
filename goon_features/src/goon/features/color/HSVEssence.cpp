@@ -3,11 +3,7 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <cmath>
-#include "opencv2/imgproc/imgproc.hpp"          // for cvtColor
-
 #include "goon/features/color/HSVEssence.h"
-#include "goon/features/color/rgb_color.h"
 
 namespace goon
 {

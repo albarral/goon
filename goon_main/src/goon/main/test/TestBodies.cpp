@@ -4,13 +4,15 @@
  ***************************************************************************/
 
 #include <iostream> 
+#include <list>
 #include <vector>   
 
+#include "opencv2/core/core.hpp"
 #include <opencv2/opencv.hpp>
 
 #include "goon/main/test/TestBodies.h"
-#include "goon/data/base/Body.h"
-#include "goon/data/base/BodyUtils.h"
+#include "goon/features/Body.h"
+#include "goon/features/BodyOverlapFraction.h"
 
 namespace goon
 {    
@@ -61,7 +63,7 @@ void TestBodies::test()
     oBody5.setMaskAndWindow(mask5, window);
     oBody6.setMaskAndWindow(mask6, window);
 
-    std::vector<Body> listBodies;
+    std::list<Body> listBodies;
     listBodies.push_back(oBody1);
     listBodies.push_back(oBody2);
     //listBodies.push_back(oBody3);
@@ -75,10 +77,23 @@ void TestBodies::test()
     }
     oBody3.computeMass(); 
 
-    // get which body best overlaps Body3
-    goon::st_bodyOverlap bestOverlap = goon::BodyUtils::getBestOverlap(oBody3, listBodies);
+    std::list<Body> listBodies1; 
+    listBodies1.push_back(oBody3);
+    
+    // compute overlaps to Body3
+    BodyOverlapFraction oBodyOverlapFraction;
+    oBodyOverlapFraction.computeOverlaps(listBodies1, listBodies);
+    std::vector<cv::Vec2i>& listCorrespondences = oBodyOverlapFraction.getCorrespondences();
 
-    std::cout << bestOverlap.body2 << " - " << bestOverlap.overlap1 << ", " << bestOverlap.overlap2 << std::endl;
+    int matchedBody = -1; 
+    if (listCorrespondences.size() > 0)
+    {
+        cv::Vec2i& correspondence = listCorrespondences.at(0);
+        matchedBody = correspondence[1];
+    }
+    
+    // get which body best overlaps Body3
+    std::cout << "best overlap: " << matchedBody << std::endl;
     
 //    /*
     cv::namedWindow("mask1");         

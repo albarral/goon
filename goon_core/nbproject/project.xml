@@ -9,7 +9,7 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects>
-                <make-dep-project>../../tron/tuly</make-dep-project>
+                <make-dep-project>../../tron/tron_control</make-dep-project>
                 <make-dep-project>../goon_features</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
             </make-dep-projects>

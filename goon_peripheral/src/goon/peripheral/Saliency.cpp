@@ -4,8 +4,8 @@
  ***************************************************************************/
 
 #include "goon/peripheral/Saliency.h"
-#include "maty/math/average.h"
-#include "maty/math/Coordinates.h"
+#include "tron/cv/average.h"
+#include "tron/math/Coordinates.h"
 
 using namespace log4cxx;
 
@@ -47,8 +47,8 @@ void Saliency::computeSaliency(std::list<ROI>& listROIs)
         sample++;
         
         cv::Vec3f& hsv = it_roi->getHSV();
-        maty::Average::updateWithSample(avgSat, (int)hsv[1], sample);
-        maty::Average::updateWithSample(avgValue, (int)hsv[2], sample);
+        tron::Average::updateWithSample(avgSat, (int)hsv[1], sample);
+        tron::Average::updateWithSample(avgValue, (int)hsv[2], sample);
                 
         it_roi++;
     }    
@@ -77,7 +77,7 @@ void Saliency::computeSaliency(std::list<ROI>& listROIs)
 //{
 //        cv::Vec2f& speed = oROI.getMotion().getSpeed();
 //        float absSpeed, angle;
-//        maty::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
+//        tron::Coordinates::cartesian2polar(speed[0], speed[1], absSpeed, angle);
 //        // speed > 0.1 pixels/ms (100 pixels/s))
 //        int color = tivy::Draw::eYELLOW;
 //        if (absSpeed > 0.01)

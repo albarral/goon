@@ -18,8 +18,6 @@
           <itemPath>src/goon/retinal/ColorGrid.h</itemPath>
           <itemPath>src/goon/retinal/ColorNode.cpp</itemPath>
           <itemPath>src/goon/retinal/ColorNode.h</itemPath>
-          <itemPath>src/goon/retinal/ConfigRetinal.cpp</itemPath>
-          <itemPath>src/goon/retinal/ConfigRetinal.h</itemPath>
           <itemPath>src/goon/retinal/Exploration.cpp</itemPath>
           <itemPath>src/goon/retinal/Exploration.h</itemPath>
           <itemPath>src/goon/retinal/Floodfiller.cpp</itemPath>
@@ -65,29 +63,16 @@
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
-            <pElem>../goon_features/src</pElem>
             <pElem>../goon_data/src</pElem>
-            <pElem>../../tron/tuly/src</pElem>
-            <pElem>../../tron/maty/src</pElem>
-            <pElem>/usr/include</pElem>
-            <pElem>../show/src</pElem>
+            <pElem>../goon_features/src</pElem>
+            <pElem>../../tron/tron_control/src</pElem>
+            <pElem>../../tron/tron_cv/src</pElem>
+            <pElem>../../tron/tron_math/src</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_retinal.${CND_DLIB_EXT}</output>
           <linkerLibItems>
-            <linkerLibProjectItem>
-              <makeArtifact PL="../goon_features"
-                            CT="2"
-                            CN="Debug"
-                            AC="true"
-                            BL="true"
-                            WD="../goon_features"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
-              </makeArtifact>
-            </linkerLibProjectItem>
             <linkerLibProjectItem>
               <makeArtifact PL="../goon_data"
                             CT="2"
@@ -101,27 +86,51 @@
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/tuly"
+              <makeArtifact PL="../goon_features"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/tuly"
+                            WD="../goon_features"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_tuly.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/maty"
+              <makeArtifact PL="../../tron/tron_control"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/maty"
+                            WD="../../tron/tron_control"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_maty.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_control.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../../tron/tron_cv"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../../tron/tron_cv"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_cv.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../../tron/tron_math"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../../tron/tron_math"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_math.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibLibItem>opencv_core</linkerLibLibItem>
@@ -136,10 +145,6 @@
       <item path="src/goon/retinal/ColorNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/ColorNode.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/Exploration.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -200,10 +205,6 @@
       <item path="src/goon/retinal/ColorNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/retinal/ColorNode.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/goon/retinal/ConfigRetinal.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/retinal/Exploration.cpp" ex="false" tool="1" flavor2="0">
       </item>

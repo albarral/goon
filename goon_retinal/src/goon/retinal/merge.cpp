@@ -6,11 +6,11 @@
 #include <list>
 
 #include "goon/retinal/merge.h"
-#include "goon/retinal/ConfigRetinal.h"
 #include <goon/data/base/region.h>
+#include "goon/data/config/RetinalConfig.h"
 #include "goon/features/color/HSVEssence.h"
 #include "goon/features/color/rgb_color.h"
-#include "maty/math/Distance2.h"
+#include "tron/cv/Distance2.h"
 
 using namespace log4cxx;
 
@@ -21,11 +21,11 @@ LoggerPtr Merge::logger(Logger::getLogger("goon.retinal"));
 // Constructor
 Merge::Merge()
 {        
-    ConfigRetinal oConfigRetinal;
-    proximityGAP = oConfigRetinal.getMergeProximityGap();   // default gap = 10 pixels
+    RetinalConfig oRetinalConfig;
+    proximityGAP = oRetinalConfig.getMergeProximityGap();   // default gap = 10 pixels
     // same similarity values as in retinal segmentation
     oColorSimilarity.setRGBSimilarity(RGBColor::getSqrSameDist());
-    oColorSimilarity.setHSVSimilarity(oConfigRetinal.getColorEssenceHSVSimilarity());    
+    oColorSimilarity.setHSVSimilarity(oRetinalConfig.getColorEssenceHSVSimilarity());    
 }
 
 
@@ -36,19 +36,25 @@ Merge::~Merge()
 
 void Merge::init(int img_w, int img_h)
 {        
-    ConfigRetinal oConfigRetinal;
-    oGrid.setSize(img_w, img_h, oConfigRetinal.getGridStep());    
+    RetinalConfig oRetinalConfig;
+    oGrid.setSize(img_w, img_h, oRetinalConfig.getGridStep());    
 }
 
 // This function merges all adjacent regions with similar color.
 int Merge::doMerge(Retina& oRetina)
 {
     // check which regions can be merged
-    checkProximityMerge(oRetina);
+    checkMergeRelations(oRetina);
 
-    // Merge all mergeable regions by proximity
+    // merge all mergeable regions by proximity
     int collections = mergeRegions(oRetina);
-
+    
+    // remove merged regions 
+    oRetina.removeInvalidRegions();
+    
+    // remap regions after merging
+    oRetina.updateRegionsMap();
+    
     LOG4CXX_DEBUG(logger, "final collections = " << collections);
 
     return collections;
@@ -56,10 +62,10 @@ int Merge::doMerge(Retina& oRetina)
 					
 
 // This function checks if there are nearby regions with similar color that can be merged. 
-void Merge::checkProximityMerge(Retina& oRetina)
+void Merge::checkMergeRelations(Retina& oRetina)
 {    
     int num_regions = oRetina.getNumRegions();
-    mat_proximity = cv::Mat::zeros(num_regions, num_regions, CV_8UC1);    
+    mat2Merge = cv::Mat::zeros(num_regions, num_regions, CV_8UC1);    
 
     std::list<Region>::iterator it_region1 = oRetina.getListRegions().begin();
     std::list<Region>::iterator list_end = oRetina.getListRegions().end();
@@ -76,7 +82,7 @@ void Merge::checkProximityMerge(Retina& oRetina)
         it_region2++;        
         while (it_region2 != list_end)
         {	
-            float separation = maty::Distance2::getWindowsSeparation(window1, it_region2->getWindow());
+            float separation = tron::Distance2::getWindowsSeparation(window1, it_region2->getWindow());
 
             // if windows are bordering
             if (separation < 2)
@@ -94,8 +100,8 @@ void Merge::checkProximityMerge(Retina& oRetina)
                         it_region2->setMerge(true);
 
                         // make a cross in the proximity matrix (with symmetry)
-                        mat_proximity.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
-                        mat_proximity.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;                    
+                        mat2Merge.at<uchar>(it_region1->getID(), it_region2->getID()) = 1;
+                        mat2Merge.at<uchar>(it_region2->getID(), it_region1->getID()) = 1;                    
                         LOG4CXX_DEBUG(logger, "merged " << it_region1->getID() << " + " << it_region2->getID());
                         //LOG4CXX_DEBUG(logger, "border size = " << borderSize);
                     }
@@ -184,24 +190,21 @@ void Merge::createCollection2(Region& oBaseRegion, Retina& oRetina)
     setCollectionRegions.insert(oBaseRegion.getID()); 
     checkRegions2Merge(oBaseRegion.getID());
 
-   // for each region in the list
-    int i = 0;
+    // remove base region from set (not needed anymore)
+    setCollectionRegions.erase(setCollectionRegions.begin());
+
+    // for each region to merge
     for (int regionID: setCollectionRegions) 
     {
-        // skip base region
-        if (i==0) 
+        Region* pRegion = oRetina.getRegionByID(regionID);
+        if (pRegion != 0)
         {
-            i++;
-            continue;
+            LOG4CXX_TRACE(logger, "add region " << pRegion->getID());
+            // merge it 
+            oBaseRegion.merge(*pRegion);
+            // and mark it as merged
+            pRegion->setType(Region::eREG_MERGED);        
         }
-        
-        Region& oRegion = oRetina.getRegion(regionID);                       
-        LOG4CXX_TRACE(logger, "add region " << oRegion.getID());
-        // merge it 
-        oBaseRegion.merge(oRegion);
-        // and mark it as merged
-        oRegion.setType(Region::eREG_MERGED);        
-        i++;
     }
     
     //LOG4CXX_TRACE(logger, "collection \n" << oBaseRegion.toString());
@@ -211,10 +214,10 @@ void Merge::createCollection2(Region& oBaseRegion, Retina& oRetina)
 void Merge::checkRegions2Merge(int baseID)
 {      
     int presize;
-    cv::Mat matRow = mat_proximity.row(baseID);      
+    cv::Mat matRow = mat2Merge.row(baseID);      
     
     // check which regions are to be merged with the base one
-    for (int j=0; j<mat_proximity.cols; j++)
+    for (int j=0; j<mat2Merge.cols; j++)
     {
         if (matRow.at<uchar>(j) == 1)
         {

@@ -58,13 +58,18 @@ void TransMotion::computeSpeed()
 
 std::string TransMotion::toString()
 {
-    std::string desc = "TransMotion: speed=(" + std::to_string(speed[0]) + ", " + std::to_string(speed[1]) + ")\n";
-            
+    std::string desc = "TransMotion: speed=(" + std::to_string(speed[0]) + ", " + std::to_string(speed[1]) + ")\n";            
     for (cv::Vec3i& pos : trajectory)
     {
-        desc += "pos = " + std::to_string(pos[0]) + ", " + std::to_string(pos[1]) + " - " + std::to_string(pos[2]) + "\n";
+        desc += "pos = " + std::to_string(pos[0]) + ", " + std::to_string(pos[1]) + ", t = " + std::to_string(pos[2]) + "\n";
     }
 
+    return desc;
+}
+
+std::string TransMotion::shortDesc()
+{
+    std::string desc = "TransMotion: speed=(" + std::to_string(speed[0]) + ", " + std::to_string(speed[1]) + ")";
     return desc;
 }
 

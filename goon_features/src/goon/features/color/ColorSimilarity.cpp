@@ -4,7 +4,7 @@
   ***************************************************************************/
 
 #include "goon/features/color/ColorSimilarity.h"
-#include <maty/math/distance.h>
+#include <tron/cv/distance.h>
 
 namespace goon
 {
@@ -24,12 +24,12 @@ ColorSimilarity::~ColorSimilarity()
 
 bool ColorSimilarity::checkSameColor(cv::Vec3f& rgb1, cv::Vec3b& rgb2, HSVEssence& oHSVEssence, cv::Vec3i& hsv2)
 {
-    return ((maty::Distance::getEuclidean3s(rgb1, rgb2) < SAME_RGB_LOCAL) && oHSVEssence.compare(hsv2) < SAME_HSV_GLOBAL);
+    return ((tron::Distance::getEuclidean3s(rgb1, rgb2) < SAME_RGB_LOCAL) && oHSVEssence.compare(hsv2) < SAME_HSV_GLOBAL);
 }
 
 bool ColorSimilarity::checkSameColor(cv::Vec3f& rgb1, cv::Vec3f& rgb2, HSVEssence& oHSVEssence, cv::Vec3f& hsv2)
 {
-    return ((maty::Distance::getEuclidean3s(rgb1, rgb2) < SAME_RGB_LOCAL) && oHSVEssence.compare(hsv2) < SAME_HSV_GLOBAL);
+    return ((tron::Distance::getEuclidean3s(rgb1, rgb2) < SAME_RGB_LOCAL) && oHSVEssence.compare(hsv2) < SAME_HSV_GLOBAL);
 }
 
 }

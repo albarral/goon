@@ -12,10 +12,12 @@
 #include <log4cxx/xml/domconfigurator.h>
 
 #include "goon/main/GoonControl.h"
+#include "goon/main/GoonVersion.h"
 #include "goon/main/test/TestBodies.h"
+#include "goon/main/test/TestObjects.h"
 #include "goon/main/test/TestRegions.h"
 #include "goon/main/test/Test.h"
-//#include "tuly/utils/Environment.h"
+//#include "tron/util/Environment.h"
 
 using namespace goon;
 
@@ -28,12 +30,10 @@ log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.main"));
 // main program
 int main(int argc, char** argv) 
 {
-//    std::string configFile = tuly::Environment::getHomePath() + "/.tron/log4cxx_config_body.xml";
+//    std::string configFile = tron::Environment::getHomePath() + "/.tron/log4cxx_config_body.xml";
 //    log4cxx::xml::DOMConfigurator::configure(configFile);    
     log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
         
-    LOG4CXX_INFO(logger, "\n\nSTART goon\n");
-
     runGoon();
     //oneShotTest();
     //test();
@@ -44,6 +44,11 @@ int main(int argc, char** argv)
 // runs the body control
 void runGoon()
 {        
+    LOG4CXX_INFO(logger, "\ngoon STARTED\n");
+    
+    GoonVersion oGoonVersion;
+    LOG4CXX_INFO(logger, oGoonVersion.toString());
+
     GoonControl oGoonControl; 
 
     // TEST SECTION
@@ -71,7 +76,7 @@ void runGoon()
 
 void oneShotTest() 
 {        
-    LOG4CXX_INFO(logger, "\n\nONE SHOT TEST goon VISION ...\n");
+    LOG4CXX_INFO(logger, "\ngoon STARTED (one shot test)\n");
 
     GoonControl oGoonControl; 
     oGoonControl.oneShot();
@@ -84,11 +89,14 @@ int test()
 //    goon::TestBodies oTestBodies;
 //    oTestBodies.test();
     
-    //goon::TestRegions oTestRegions;
-    //oTestRegions.testMerge();
+    goon::TestObjects oTestObjects;
+    oTestObjects.test();
 
-    goon::Test oTest;
-    oTest.testSegmentation();
+//    goon::TestRegions oTestRegions;
+//    oTestRegions.testMerge();
+
+//    goon::Test oTest;
+//    oTest.testSegmentation();
 
     return 0;
 }

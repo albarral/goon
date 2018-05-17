@@ -37,6 +37,7 @@ namespace goon
      cv::Vec2f& getSpeed() {return speed;};
      
      std::string toString(); 
+     std::string shortDesc(); 
      
  private: 
     // computes motion features (average speed & acceleration ...) 

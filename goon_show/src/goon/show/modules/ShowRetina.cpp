@@ -8,7 +8,7 @@
 
 #include "goon/show/modules/ShowRetina.h"
 #include "goon/show/monitor/RetinaSaver.h"
-#include "tuly/utils/Environment.h"
+#include "tron/util/Environment.h"
 
 namespace goon
 {  
@@ -46,6 +46,7 @@ void ShowRetina::first()
     // reset beats
     grabBeat = 0;
     seeBeat = 0;
+    lookBeat = 0;
 }
 
 void ShowRetina::bye()
@@ -72,13 +73,18 @@ void ShowRetina::loop()
     {
         seeBeat = pGoonBus->getSO_SEE_BEAT().getValue();       
         
+        // get updated copy of retina & rois
+        pVisualData->getRetinaCopy(oRetina3);
+        pVisualData->getROIsCopy(oROIs3);
+        
         // draw regions obtained by the retinal vision 
-        oRetinaMonitor.drawRegions(imageCam, pVisualData->getRetina2().getListRegions());            
+        oRetinaMonitor.drawRegions(imageCam, oRetina3.getListRegions());            
+        oRetinaMonitor.drawObject(imageCam, oObject3);
         imageRetina = oRetinaMonitor.getOutput();
         
         // draw ROIs obtained by the peripheral vision 
         int focusedROI = pGoonBus->getSO_FOCUS_ROI().getValue();
-        oROIsMonitor.drawRois(imageCam, pVisualData->getROIs2().getList(), focusedROI);                
+        oROIsMonitor.drawRois(imageCam, oROIs3.getList(), focusedROI);                
         oROIsMonitor.drawFPS(pGoonBus->getSO_SEE_FPS().getValue());
         imageROIs = oROIsMonitor.getOutput();                                
 
@@ -86,6 +92,15 @@ void ShowRetina::loop()
         oDualWindow.setImageRight(imageRetina);
     }            
 
+    if (pGoonBus->getSO_LOOK_BEAT().getValue() != lookBeat)
+    {
+        lookBeat = pGoonBus->getSO_LOOK_BEAT().getValue();
+        
+        // get updated copy of looked object
+        pVisualData->getObjectCopy(oObject3);
+    }
+    
+    
     // show dual window
     cv::imshow(windowName, oDualWindow.getImage());   
     cv::waitKey(10);            
@@ -111,14 +126,14 @@ void ShowRetina::oneShot()
     bye();
     
     // finally save individual images of retinal regions 
-    std::string folder = tuly::Environment::getHomePath() + "/TESTS/VISION";    
+    std::string folder = tron::Environment::getHomePath() + "/TESTS/VISION";    
 
     // clean folder
-    tuly::Environment::cleanFolder(folder);
+    tron::Environment::cleanFolder(folder);
     // save region images
     RetinaSaver oRetinaSaver;
     oRetinaSaver.setDestinationFolder(folder);           
-    oRetinaSaver.saveRegions(imageCam, pVisualData->getRetina2().getListRegions(), true);
+    oRetinaSaver.saveRegions(imageCam, oRetina3.getListRegions(), true);
 }
 
 }

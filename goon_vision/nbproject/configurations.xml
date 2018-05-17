@@ -18,6 +18,8 @@
           <itemPath>src/goon/vision/modules/Focus.h</itemPath>
           <itemPath>src/goon/vision/modules/Grab.cpp</itemPath>
           <itemPath>src/goon/vision/modules/Grab.h</itemPath>
+          <itemPath>src/goon/vision/modules/Look.cpp</itemPath>
+          <itemPath>src/goon/vision/modules/Look.h</itemPath>
           <itemPath>src/goon/vision/modules/See.cpp</itemPath>
           <itemPath>src/goon/vision/modules/See.h</itemPath>
         </logicalFolder>
@@ -54,13 +56,15 @@
           <incDir>
             <pElem>src</pElem>
             <pElem>../goon_core/src</pElem>
-            <pElem>../goon_features/src</pElem>
             <pElem>../goon_data/src</pElem>
+            <pElem>../goon_features/src</pElem>
             <pElem>../goon_camera/src</pElem>
             <pElem>../goon_retinal/src</pElem>
             <pElem>../goon_peripheral/src</pElem>
-            <pElem>../../tron/tuly/src</pElem>
-            <pElem>../../tron/maty/src</pElem>
+            <pElem>../goon_cortex/src</pElem>
+            <pElem>../../tron/tron_control/src</pElem>
+            <pElem>../../tron/tron_util/src</pElem>
+            <pElem>../../tron/tron_math/src</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
@@ -78,18 +82,6 @@
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../goon_features"
-                            CT="2"
-                            CN="Debug"
-                            AC="true"
-                            BL="true"
-                            WD="../goon_features"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
-              </makeArtifact>
-            </linkerLibProjectItem>
-            <linkerLibProjectItem>
               <makeArtifact PL="../goon_data"
                             CT="2"
                             CN="Debug"
@@ -99,6 +91,18 @@
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_data.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_features"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_features"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_features.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
@@ -138,27 +142,39 @@
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/tuly"
+              <makeArtifact PL="../goon_cortex"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/tuly"
+                            WD="../goon_cortex"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_tuly.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_cortex.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../../tron/maty"
+              <makeArtifact PL="../../tron/tron_control"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../../tron/maty"
+                            WD="../../tron/tron_control"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_maty.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_control.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../../tron/tron_util"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../../tron/tron_util"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libtron_util.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibLibItem>log4cxx</linkerLibLibItem>
@@ -179,6 +195,10 @@
       <item path="src/goon/vision/modules/Grab.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/vision/modules/Grab.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/vision/modules/Look.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/vision/modules/Look.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/vision/modules/See.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -216,6 +236,10 @@
       <item path="src/goon/vision/modules/Grab.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/goon/vision/modules/Grab.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/goon/vision/modules/Look.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/goon/vision/modules/Look.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/goon/vision/modules/See.cpp" ex="false" tool="1" flavor2="0">
       </item>

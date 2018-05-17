@@ -13,8 +13,8 @@
 #include "goon/core/GoonModule.h"
 #include "goon/retinal/retinal_vision.h"
 #include "goon/peripheral/PeripheralVision.h"
-#include "tuly/control/module3.h"
-#include "maty/math/Click.h"
+#include "tron/util/Click.h"
+#include "tron/control/Sensor2Led.h"
 
 namespace goon
 {    
@@ -36,7 +36,8 @@ private:
     PeripheralVision oPeripheralVision;
     cv::Mat imageCam;     
     float fps;     // processing speed
-    maty::Click oClick;
+    tron::Click oClick;
+    tron::Sensor2Led oGrabBeatLed;   // sensor led for Grab module's beat
 
 public:
     See();
@@ -54,9 +55,11 @@ private:
     virtual void loop();             
     // last action before thread ends
     virtual void bye();
-    
-    // waits till there's a valid image in the shared visual data (used for retinal vision size initialization)
-    void wait4FirstCapture();
+
+    void writeBus();
+
+    // waits first beat from grab module
+    void wait4GrabBeat();
 };
 
 }

@@ -3,10 +3,12 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-#include <unistd.h>
+#include <unistd.h> // for sleep
 #include "log4cxx/ndc.h"
 
 #include "goon/vision/modules/See.h"
+#include "goon/data/retina.h"
+#include "goon/data/rois.h"
 
 namespace goon
 {    
@@ -32,19 +34,20 @@ void See::first()
         LOG4CXX_INFO(logger, "started");  
         setState(See::eSTATE_ON);
         
+        // connect led to Grab beat sensor
+        oGrabBeatLed.init(pGoonBus->getSO_GRAB_BEAT());
+        wait4GrabBeat();
         // set sizes for retinal vision
-        wait4FirstCapture();
         pVisualData->getCameraFrameCopy(imageCam);
         LOG4CXX_INFO(logger, "IMAGE SIZE " << imageCam.cols << "x" << imageCam.rows);    
-        oRetinalVision.init(pVisualData->getRetina(), imageCam.cols, imageCam.rows); // w, h
-        oPeripheralVision.init(pVisualData->getRetina(), pVisualData->getROIs());
+        oRetinalVision.init(imageCam.cols, imageCam.rows); // w, h
         oClick.start();
     }
     // if not initialized -> OFF
     else
     {
         LOG4CXX_WARN(logger, "NOT initialized Going off ... ");  
-        tuly::Module3::off();        
+        tron::Module3::off();        
     }
 }
 
@@ -55,7 +58,11 @@ void See::bye()
 
 void See::loop()
 {   
-    // get last camera capture (don't need to wait, grab is much faster than see)
+    // if grab beat not changed, skip
+    if (!oGrabBeatLed.check())
+        return;
+        
+    // get camera capture 
     pVisualData->getCameraFrameCopy(imageCam);            
 
     // clock measure
@@ -65,32 +72,38 @@ void See::loop()
     // processes it 
     LOG4CXX_DEBUG(logger, "retinal ... ");
     oRetinalVision.update(imageCam);    
-    oRetinalVision.computeCovariances();         
+    Retina& oRetina = oRetinalVision.getRetina();
+    
     LOG4CXX_DEBUG(logger, "peripheral ... ");
-    oPeripheralVision.update(oClick.getMillis());    
+    oPeripheralVision.update(oRetina, oClick.getMillis());    
+    Rois& oROIs = oPeripheralVision.getROIs();
     
     // stores dynamic visual data into static one 
     LOG4CXX_TRACE(logger, "clone retina ... ");
-    pVisualData->cloneRetina();
+    pVisualData->updateRetina2(oRetina);
     LOG4CXX_TRACE(logger, "clone ROIS ... ");
-    pVisualData->cloneROIs();
+    pVisualData->updateROIs2(oROIs);
 
     // measure processing speed
     fps = 1000.0/oClick.getMillis();
+    
     // produce new beat
     newBeat();
-    
-    // write bus - SO
-    pGoonBus->getSO_SEE_BEAT().setValue(beat);
-    pGoonBus->getSO_SEE_FPS().setValue(fps);
+    writeBus();    
 }
 
-void See::wait4FirstCapture()
+void See::writeBus()
 {
-    LOG4CXX_INFO(logger, "waiting for first image");     
-    // wait for new grabbed frame (50ms waits)
-    while (pGoonBus->getSO_GRAB_BEAT().getValue() == 0)            
-        usleep(50000);
+    pGoonBus->getSO_SEE_FPS().setValue(fps);
+    pGoonBus->getSO_SEE_BEAT().setValue(beat);
+}
+
+void See::wait4GrabBeat()
+{
+    LOG4CXX_INFO(logger, "wait first grab beat");     
+    // wait while Grab beat not changed
+    while (!oGrabBeatLed.check())            
+        usleep(50000);  // 50 ms
 }
 
 // just one loop execution (for testing)

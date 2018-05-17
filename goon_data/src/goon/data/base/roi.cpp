@@ -9,24 +9,19 @@ namespace goon
 {
 ROI::ROI ()
 {
-    ID = -1;
     bmatched = false;
-}
-
-bool ROI::sortByID (const ROI& oROI1, const ROI& oROI2)
-{
-    return (oROI1.ID < oROI2.ID);
 }
 
 std::string ROI::toString()
 {
-    std::string desc = "ROI [ID = " + std::to_string(ID) + RealBody::toString() + "]";
+    std::string desc = "ROI [" + RealBody::toString() + "]";
     return desc;
 }
 
 std::string ROI::shortDesc()
 {
-    return (std::to_string(ID) + RealBody::shortDesc());
+    std::string desc = "ROI [" + RealBody::shortDesc() + "]";
+    return desc;
 }
 
 }

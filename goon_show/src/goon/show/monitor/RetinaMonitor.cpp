@@ -13,12 +13,11 @@ LoggerPtr RetinaMonitor::logger(Logger::getLogger("goon.show"));
 
 void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::list<Region>& listRegions)
 {    
-    //LOG4CXX_DEBUG(logger, "draw regions = " << listRegions.size());
     std::list<Region>::iterator it_region = listRegions.begin();
     std::list<Region>::iterator it_end = listRegions.end();
 
-    oDraw.setSize(image_cam);
-    oDraw.clearBackGround();
+    oDraw.setSize(image_cam.cols, image_cam.rows);
+    oDraw.clear();
     
     // walk the list of regions (merged ones are invalid)
     while (it_region != it_end)
@@ -31,21 +30,25 @@ void RetinaMonitor::drawRegions (cv::Mat& image_cam, std::list<Region>& listRegi
             oDraw.setExactColor(it_region->getRGB());
             oDraw.drawMask (it_region->getMask(), it_region->getWindow());
             // draw centroids
-            int* pos = it_region->getPos();
-            cv::Point centroid(pos[0], pos[1]);            
-            if (it_region->is2Merge())
-                oDraw.drawPoint(centroid, tivy::Draw::eRED, 3);
-            else
-                oDraw.drawPoint(centroid);
+            int color = it_region->is2Merge() ? tron::Draw::eRED : tron::Draw::eYELLOW;
+            oDraw.setDefaultColor(color);
+            oDraw.drawPoint(it_region->getPos(), 3);
             // draw ID's
-//            int ID = it_region->getID();
-//            oDrawRet.drawNumber(ID, centroid);                        
-                        
-//            cv::Point& seed = it_region->getSeed();
-//            oDrawRet.drawPoint(seed, tivy::Draw::eYELLOW);
+//            oDraw.drawNumber(it_region->getID(), it_region->getPos());                        
+
+            // draw seed
+//            oDraw.setDefaultColor(tron::Draw::eYELLOW);
+//            oDraw.drawPoint(it_region->getSeed());
         }
         it_region++;
     }
+}
+
+
+void RetinaMonitor::drawObject(cv::Mat& image_cam, Object& oObject)
+{        
+    oDraw.setDefaultColor(tron::Draw::eYELLOW);
+    oDraw.drawRectangle(oObject.getWindow());
 }
 
 /*

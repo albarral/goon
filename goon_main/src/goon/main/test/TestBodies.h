@@ -6,7 +6,6 @@
  *   albarral@migtron.com   *
  ***************************************************************************/
 
-
 namespace goon
 {    
 class TestBodies
@@ -14,9 +13,8 @@ class TestBodies
 private:
 
 public:
-        //TestBodies();
-                
-        void test();                    
+        //TestBodies();                
+        void test();                      
 };
 
 }    
