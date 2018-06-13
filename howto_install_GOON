@@ -1,0 +1,68 @@
+
+*** HOW TO INSTALL GOON
+
+last update: 13/6/2018
+
+This document explains how to install goon program for robot vision.
+
+Software requirements:
+- Linux environment
+- Netbeans 8.1 for C++
+- git
+
+Components to be installed:
+- tron libs	(libraries used for robotic communication & control)
+- tron2 libs	(libraries used for robotic communication & control)
+- dady		(program to externally control amy from CLI)
+
+
+
+*** INSTALL REQUIREMENTS ***
+
+> log4cxx:
+
+sudo apt-get install liblog4cxx10-dev
+
+
+
+*** INSTALL TRON & TRON2 LIBS ***
+
+> download tron & tron2 repos:
+
+git clone https://github.com/albarral/tron.git
+git clone https://github.com/albarral/tron2.git
+
+> build tron & tron2 libs
+
+follow instructions in howto_install_tron 
+follow instructions in howto_install_tron2 
+
+
+> INSTALLATION
+
+
+1. Download goon repo
+
+git clone https://github.com/albarral/goon.git
+
+
+2. Build goon_main project (in Netbeans)
+
+
+3. Make goon libs accessible from everywhere:
+
+cd <goon_installation_path>
+gedit goon.conf
+change paths to meet real goon installation 
+
+sudo cp goon.conf /etc/ld.so.conf.d
+sudo /sbin/ldconfig
+
+
+4. Prepare config files for goon logging:
+
+see instructions in file logging/README_goon_logging
+located in <goon_installation_path>
+
+
+
