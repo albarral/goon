@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=goon_coms2
+PROJECTNAME=goon_coms
 
 # Active Configuration
 DEFAULTCONF=Debug

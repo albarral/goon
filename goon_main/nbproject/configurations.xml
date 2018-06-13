@@ -62,6 +62,8 @@
           <standard>8</standard>
           <incDir>
             <pElem>src</pElem>
+            <pElem>../goon_coms/src</pElem>
+            <pElem>../goon_interface/src</pElem>
             <pElem>../goon_core/src</pElem>
             <pElem>../goon_data/src</pElem>
             <pElem>../goon_features/src</pElem>
@@ -70,7 +72,6 @@
             <pElem>../goon_peripheral/src</pElem>
             <pElem>../goon_cortex/src</pElem>
             <pElem>../goon_vision/src</pElem>
-            <pElem>../goon_coms2/src</pElem>
             <pElem>../goon_show/src</pElem>
             <pElem>../../tron2/tron2_coms/src</pElem>
             <pElem>../../tron2/tron2_robot/src</pElem>
@@ -185,15 +186,27 @@
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>
-              <makeArtifact PL="../goon_coms2"
+              <makeArtifact PL="../goon_coms"
                             CT="2"
                             CN="Debug"
                             AC="true"
                             BL="true"
-                            WD="../goon_coms2"
+                            WD="../goon_coms"
                             BC="${MAKE}  -f Makefile CONF=Debug"
                             CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms2.${CND_DLIB_EXT}">
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_coms.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../goon_interface"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../goon_interface"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libgoon_interface.${CND_DLIB_EXT}">
               </makeArtifact>
             </linkerLibProjectItem>
             <linkerLibProjectItem>

@@ -17,7 +17,7 @@
 #include "goon/main/test/TestObjects.h"
 #include "goon/main/test/TestRegions.h"
 #include "goon/main/test/Test.h"
-//#include "tron/util/Environment.h"
+#include "tron/util/Environment.h"
 
 using namespace goon;
 
@@ -30,9 +30,9 @@ log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("goon.main"));
 // main program
 int main(int argc, char** argv) 
 {
-//    std::string configFile = tron::Environment::getHomePath() + "/.tron/log4cxx_config_body.xml";
-//    log4cxx::xml::DOMConfigurator::configure(configFile);    
-    log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
+    std::string configFile = tron::Environment::getHomePath() + "/.tron/log4cxx_config_goon.xml";
+    log4cxx::xml::DOMConfigurator::configure(configFile);    
+//    log4cxx::xml::DOMConfigurator::configure("log4cxx_config.xml");
         
     runGoon();
     //oneShotTest();

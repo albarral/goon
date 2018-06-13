@@ -9,6 +9,7 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects>
+                <make-dep-project>../goon_interface</make-dep-project>
                 <make-dep-project>../goon_show</make-dep-project>
                 <make-dep-project>../goon_vision</make-dep-project>
                 <make-dep-project>../../tron/tron_control</make-dep-project>
@@ -17,7 +18,7 @@
                 <make-dep-project>../../tron2/tron2_robot</make-dep-project>
                 <make-dep-project>../../tron/tron_display</make-dep-project>
                 <make-dep-project>../../tron/tron_math</make-dep-project>
-                <make-dep-project>../goon_coms2</make-dep-project>
+                <make-dep-project>../goon_coms</make-dep-project>
                 <make-dep-project>../../tron2/tron2_coms</make-dep-project>
                 <make-dep-project>../goon_data</make-dep-project>
                 <make-dep-project>../../tron/tron_cv</make-dep-project>

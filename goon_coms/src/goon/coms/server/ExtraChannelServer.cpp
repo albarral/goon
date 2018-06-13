@@ -4,10 +4,9 @@
  ***************************************************************************/
 
 #include "goon/coms/server/ExtraChannelServer.h"
-#include "tron2/robot/RobotNetwork.h"
-#include "tron2/robot/RobotSystem.h"
-#include "tron2/robot/Node.h"
+#include "goon/interface/VisionNode.h"
 #include "tron2/robot/common/ExtraTopic.h"
+#include "tron2/robot/RobotSystem.h"
 
 using namespace log4cxx;
 
@@ -16,7 +15,8 @@ namespace goon
 ExtraChannelServer::ExtraChannelServer()
 {    
     bEndRequested = false;
-    tron2::ChannelServer::connect2Channel(tron2::RobotSystem::eNODE_VISION, tron2::RobotNetwork::eVISION_EXTRA_CHANNEL, tron2::Node::eEXTRA_TOPIC);
+    int channel = VisionNode::eVISION_EXTRA_CHANNEL;
+    tron2::ChannelServer::connect2Channel(tron2::RobotSystem::eNODE_VISION, channel, VisionNode::getTopic4Channel(channel));
 }
 
 //ExtraChannelServer::~ExtraChannelServer()
